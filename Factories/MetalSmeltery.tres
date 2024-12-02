@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://btbmbtexp3hb1"]
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=4 format=3 uid="uid://btbmbtexp3hb1"]
 
 [ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_8nf82"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="1_ilhyx"]
+[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="1_ku3pr"]
 
 [resource]
 script = ExtResource("1_8nf82")
 input_materials = Array[int]([0])
-inputs_per_day = Array[int]([5])
+inputs_per_day = Array[int]([10])
+input_icon = ExtResource("1_ilhyx")
 output_material = 1
-output_amount = 10
-days_per_output = 2
+output_per_day = 5
+outout_icon = ExtResource("1_ku3pr")

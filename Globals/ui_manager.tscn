@@ -1,7 +1,104 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=6 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="2_rsax2"]
+[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/PlaceholderArrow.png" id="3_a3n6d"]
+[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="4_fpb2q"]
+[ext_resource type="Script" path="res://Scripts/material_counter.gd" id="5_1d2iv"]
 
 [node name="UIManager" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_g5gy1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FactoryTest" type="GridContainer" parent="TextureRect"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+texture = ExtResource("2_rsax2")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+texture = ExtResource("3_a3n6d")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+texture = ExtResource("4_fpb2q")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "32"
+
+[node name="Control" type="Control" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TextureRect/FactoryTest"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "64"
+
+[node name="TimeLabel" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 2.0
+offset_right = 469.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 32
+text = "2 Years, 11 Months, 29 Days"
+
+[node name="MaterialTest" type="HFlowContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 75.0
+offset_right = 102.0
+offset_bottom = 125.0
+script = ExtResource("5_1d2iv")
+
+[node name="Icon" type="TextureRect" parent="TextureRect/MaterialTest"]
+layout_mode = 2
+texture = ExtResource("2_rsax2")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="TextureRect/MaterialTest"]
+layout_mode = 2
+text = "10"
+
+[node name="GainLabel" type="Label" parent="TextureRect/MaterialTest"]
+layout_mode = 2
+text = "+10/d"
+
+[node name="MaterialTest2" type="HFlowContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 75.0
+offset_right = 161.0
+offset_bottom = 125.0
+script = ExtResource("5_1d2iv")
+represented_material = 1
+
+[node name="Icon" type="TextureRect" parent="TextureRect/MaterialTest2"]
+layout_mode = 2
+texture = ExtResource("2_rsax2")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="TextureRect/MaterialTest2"]
+layout_mode = 2
+text = "10"
+
+[node name="GainLabel" type="Label" parent="TextureRect/MaterialTest2"]
+layout_mode = 2
+text = "+10/d"
