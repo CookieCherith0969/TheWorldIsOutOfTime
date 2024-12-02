@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://btbmbtexp3hb1"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_8nf82"]
+
+[resource]
+script = ExtResource("1_8nf82")
+input_materials = Array[int]([0])
+inputs_per_day = Array[int]([5])
+output_material = 1
+output_per_day = 1

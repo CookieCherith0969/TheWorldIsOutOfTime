@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="The World is Out of Time"
+run/main_scene="res://Scenes/title_screen.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://Globals/game_manager.gd"
+UIManager="*res://Globals/ui_manager.tscn"
+SoundManager="*res://Globals/sound_manager.tscn"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=600
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.158475, 0.135357, 0.377297, 1)

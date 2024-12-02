@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5w4ww0w8kvcd"]
+
+[ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
+
+[node name="UIManager" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_g5gy1")
