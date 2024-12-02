@@ -9,7 +9,9 @@ var inputs_per_day : Array[int]
 @export
 var output_material : GameManager.Materials
 @export
-var output_per_day : int
+var output_amount : int
+@export
+var days_per_output : int
 
 @export
 var icon : Texture
