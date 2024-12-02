@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="2_rsax2"]
 [ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/PlaceholderArrow.png" id="3_a3n6d"]
 [ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="4_fpb2q"]
-[ext_resource type="Script" path="res://Scripts/material_counter.gd" id="5_1d2iv"]
+[ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="5_sm2qj"]
 
 [node name="UIManager" type="CanvasLayer"]
 script = ExtResource("1_g5gy1")
@@ -60,45 +60,17 @@ offset_bottom = 47.0
 theme_override_font_sizes/font_size = 32
 text = "2 Years, 11 Months, 29 Days"
 
-[node name="MaterialTest" type="HFlowContainer" parent="TextureRect"]
+[node name="MaterialCounter" parent="TextureRect" instance=ExtResource("5_sm2qj")]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 75.0
-offset_right = 102.0
-offset_bottom = 125.0
-script = ExtResource("5_1d2iv")
+offset_left = 45.0
+offset_top = 76.0
+offset_right = 135.0
+offset_bottom = 126.0
 
-[node name="Icon" type="TextureRect" parent="TextureRect/MaterialTest"]
-layout_mode = 2
-texture = ExtResource("2_rsax2")
-stretch_mode = 3
-
-[node name="AmountLabel" type="Label" parent="TextureRect/MaterialTest"]
-layout_mode = 2
-text = "10"
-
-[node name="GainLabel" type="Label" parent="TextureRect/MaterialTest"]
-layout_mode = 2
-text = "+10/d"
-
-[node name="MaterialTest2" type="HFlowContainer" parent="TextureRect"]
+[node name="MaterialCounter2" parent="TextureRect" instance=ExtResource("5_sm2qj")]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 75.0
-offset_right = 161.0
-offset_bottom = 125.0
-script = ExtResource("5_1d2iv")
+offset_left = 139.0
+offset_top = 76.0
+offset_right = 229.0
+offset_bottom = 126.0
 represented_material = 1
-
-[node name="Icon" type="TextureRect" parent="TextureRect/MaterialTest2"]
-layout_mode = 2
-texture = ExtResource("2_rsax2")
-stretch_mode = 3
-
-[node name="AmountLabel" type="Label" parent="TextureRect/MaterialTest2"]
-layout_mode = 2
-text = "10"
-
-[node name="GainLabel" type="Label" parent="TextureRect/MaterialTest2"]
-layout_mode = 2
-text = "+10/d"

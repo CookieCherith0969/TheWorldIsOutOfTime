@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://4b0rsfr4udam"]
+
+[ext_resource type="Script" path="res://Scripts/material_counter.gd" id="1_nlbnh"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="2_3l76j"]
+
+[node name="MaterialCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 58.0
+offset_top = 75.0
+offset_right = 148.0
+offset_bottom = 125.0
+script = ExtResource("1_nlbnh")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 2.0
+offset_right = 18.0
+offset_bottom = 23.0
+texture = ExtResource("2_3l76j")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 88.0
+offset_bottom = 23.0
+text = "999.9M"
+horizontal_alignment = 2
+
+[node name="GainLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 27.0
+offset_right = 88.0
+offset_bottom = 50.0
+text = "+999.9M /d"
+horizontal_alignment = 2

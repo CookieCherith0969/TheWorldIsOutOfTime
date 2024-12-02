@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=3 format=3 uid="uid://bvsimgdg8n248"]
+
+[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="1_ko6vx"]
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_q4pln"]
+
+[resource]
+script = ExtResource("1_q4pln")
+input_materials = Array[int]([1])
+inputs_per_day = Array[int]([2])
+input_icon = ExtResource("1_ko6vx")
+output_material = 1
+output_per_day = 1
+outout_icon = ExtResource("1_ko6vx")
