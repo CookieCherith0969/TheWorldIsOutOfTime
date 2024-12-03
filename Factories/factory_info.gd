@@ -15,3 +15,6 @@ var output_material : GameManager.Materials
 var output_per_day : int
 @export
 var outout_icon : Texture
+
+@export
+var build_days : int

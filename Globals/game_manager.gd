@@ -4,10 +4,12 @@ signal day_ended
 signal timeskip_started(number_of_days : int)
 signal timeskip_ended(number_of_days : int)
 
-enum Materials {STONE, METALS, PARTS, ELECTRONICS, FUEL}
+enum Materials {STONE, METALS, PARTS, ELECTRONICS}
 var material_icons : Array[Texture] = [
 	preload("res://Sprites/PlaceholderRock.png"),
-	preload("res://Sprites/PlaceholderMetal.png")
+	preload("res://Sprites/PlaceholderMetal.png"),
+	preload("res://Sprites/PlaceholderPart.png"),
+	preload("res://Sprites/PlaceholderElectronics.png")
 ]
 
 const process_delay : float = 1.0/15.0

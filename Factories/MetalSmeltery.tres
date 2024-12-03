@@ -12,3 +12,4 @@ input_icon = ExtResource("1_ilhyx")
 output_material = 1
 output_per_day = 5
 outout_icon = ExtResource("1_ku3pr")
+build_days = 5
