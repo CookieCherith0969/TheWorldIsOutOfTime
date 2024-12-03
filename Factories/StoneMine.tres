@@ -6,6 +6,8 @@
 script = ExtResource("1_mpusp")
 input_materials = Array[int]([])
 inputs_per_day = Array[int]([])
-output_material = 0
-output_per_day = 10
+output_materials = Array[int]([0])
+outputs_per_day = Array[int]([10])
 build_days = 2
+build_materials = Array[int]([0, 1])
+build_amounts = Array[int]([100, 20])

@@ -30,7 +30,7 @@ func update_time_label():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugProgress"):
-		GameManager.process_days(10)
+		GameManager.process_days(5)
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""

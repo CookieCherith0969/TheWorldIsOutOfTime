@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=5 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
-[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="2_rsax2"]
-[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/PlaceholderArrow.png" id="3_a3n6d"]
-[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="4_fpb2q"]
+[ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="3_rm6jl"]
+[ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="4_ih3j8"]
 [ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="5_sm2qj"]
 
 [node name="UIManager" type="CanvasLayer"]
@@ -15,41 +14,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="FactoryTest" type="GridContainer" parent="TextureRect"]
-visible = false
-layout_mode = 0
-offset_right = 32.0
-offset_bottom = 32.0
-columns = 3
-
-[node name="TextureRect" type="TextureRect" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-texture = ExtResource("2_rsax2")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-texture = ExtResource("3_a3n6d")
-stretch_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-texture = ExtResource("4_fpb2q")
-stretch_mode = 2
-
-[node name="Label" type="Label" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "32"
-
-[node name="Control" type="Control" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="TextureRect/FactoryTest"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "64"
 
 [node name="TimeLabel" type="Label" parent="TextureRect"]
 layout_mode = 0
@@ -74,3 +38,12 @@ offset_top = 76.0
 offset_right = 229.0
 offset_bottom = 126.0
 represented_material = 1
+
+[node name="FactoryCounter" parent="TextureRect" instance=ExtResource("3_rm6jl")]
+represented_factory = ExtResource("4_ih3j8")
+
+[node name="FactoryCounter2" parent="TextureRect" instance=ExtResource("3_rm6jl")]
+offset_left = 133.0
+offset_top = 180.0
+offset_right = 209.0
+offset_bottom = 235.0

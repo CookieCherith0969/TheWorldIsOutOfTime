@@ -3,6 +3,8 @@ extends Node
 signal day_ended
 signal timeskip_started(number_of_days : int)
 signal timeskip_ended(number_of_days : int)
+signal factory_amount_updated(factory : FactoryInfo)
+signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 
 enum Materials {STONE, METALS, PARTS, ELECTRONICS}
 var material_icons : Array[Texture] = [
@@ -39,23 +41,26 @@ var prev_day_gains : Array[int] = []
 
 var factories : Array[FactoryInfo] = [
 	preload("res://Factories/StoneMine.tres"),
-	preload("res://Factories/MetalSmeltery.tres"),
-	preload("res://Factories/DebugMetalRemover.tres")
+	preload("res://Factories/MetalSmeltery.tres")
 ]
 
-var total_factory_amounts : Array[int] = []
+#var total_factory_amounts : Array[int] = []
 var active_factory_amounts : Array[int] = []
+var planned_factory_amounts : Array[int] = []
+var factory_build_progress : Array[int] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
-		total_factory_amounts.append(0)
 		active_factory_amounts.append(0)
+		planned_factory_amounts.append(0)
+		factory_build_progress.append(0)
 	
-	active_factory_amounts[0] = 2000
+	active_factory_amounts[0] = 2
 	active_factory_amounts[1] = 1
-	#active_factory_amounts[2] = 1
+	planned_factory_amounts[0] = 5
+	planned_factory_amounts[1] = 3
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
@@ -93,11 +98,17 @@ func get_material_icon(material : Materials):
 func get_prev_day_material_gain(material : Materials):
 	return prev_day_gains[material]
 
-func get_factory_total_amount(factory_index : int):
-	return total_factory_amounts[factory_index]
+func get_total_factory_amount(factory_index : int):
+	return active_factory_amounts[factory_index] + planned_factory_amounts[factory_index]
 
-func get_factory_active_amount(factory_index : int):
+func get_active_factory_amount(factory_index : int):
 	return active_factory_amounts[factory_index]
+
+func get_planned_factory_amount(factory_index : int):
+	return planned_factory_amounts[factory_index]
+
+func get_factory_index(factory : FactoryInfo):
+	return factories.find(factory)
 
 func process_days(number_of_days : int):
 	timeskip_started.emit(number_of_days)
@@ -105,12 +116,17 @@ func process_days(number_of_days : int):
 	for i in range(number_of_days):
 		prev_day_gains.fill(0)
 		for f in range(factories.size()):
+			if planned_factory_amounts[f] > 0:
+				build_factory(f)
+			else:
+				factory_build_progress[f] = 0
+			
 			if active_factory_amounts[f] == 0:
 				continue
-			var factory : FactoryInfo = factories[f]
 			
 			var prev_material_amounts = material_amounts.duplicate()
-			process_factory(factory, active_factory_amounts[f])
+			process_factory(f)
+			
 			for j in range(material_amounts.size()):
 				prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
 		
@@ -120,8 +136,21 @@ func process_days(number_of_days : int):
 	
 	timeskip_ended.emit(number_of_days)
 
-func process_factory(factory : FactoryInfo, max_runs : int):
+func build_factory(factory_index : int):
+	factory_build_progress[factory_index] += 1
+	var factory : FactoryInfo = factories[factory_index]
+	
+	if factory_build_progress[factory_index] >= factory.build_days:
+		factory_build_progress[factory_index] = 0
+		planned_factory_amounts[factory_index] -= 1
+		active_factory_amounts[factory_index] += 1
+		factory_amount_updated.emit(factory)
+	
+	factory_build_progressed.emit(factory, factory_build_progress[factory_index])
+
+func process_factory(factory_index : int):
 	var min_possible_runs : int = starting_days
+	var factory : FactoryInfo = factories[factory_index]
 	for i in range(factory.input_materials.size()):
 		var material : Materials = factory.input_materials[i]
 		var input_amount : int = factory.inputs_per_day[i]
@@ -134,12 +163,55 @@ func process_factory(factory : FactoryInfo, max_runs : int):
 		if possible_runs < min_possible_runs:
 			min_possible_runs = possible_runs
 	
-	var actual_runs : int = min(min_possible_runs, max_runs)
+	var actual_runs : int = min(min_possible_runs, active_factory_amounts[factory_index])
 	
 	for i in range(factory.input_materials.size()):
 		var material : Materials = factory.input_materials[i]
 		var input_amount : int = factory.inputs_per_day[i]
-		# Return early if any input material doesn't meet requirements
+		
 		material_amounts[material] -= input_amount * actual_runs
 	
-	material_amounts[factory.output_material] += factory.output_per_day * actual_runs
+	for i in range(factory.output_materials.size()):
+		var material : Materials = factory.output_materials[i]
+		var output_amount : int = factory.outputs_per_day[i]
+		
+		material_amounts[material] += output_amount * actual_runs
+
+func plan_factory(factory_index : int) -> bool:
+	var factory : FactoryInfo = factories[factory_index]
+	# Return early if any materials are lacking
+	for i in range(factory.build_materials.size()):
+		var material : Materials = factory.build_materials[i]
+		var build_amount : Materials = factory.build_amounts[i]
+		
+		if material_amounts[material] < build_amount:
+			return false
+	
+	# Invest materials immediately
+	for i in range(factory.build_materials.size()):
+		var material : Materials = factory.build_materials[i]
+		var build_amount : Materials = factory.build_amounts[i]
+		
+		material_amounts[material] -= build_amount
+	
+	planned_factory_amounts[factory_index] += 1
+	factory_amount_updated.emit(factory)
+	return true
+
+func unplan_factory(factory_index : int) -> bool:
+	# Cannot unplan if there are no plans
+	if planned_factory_amounts[factory_index] <= 0:
+		return false
+	
+	var factory : FactoryInfo = factories[factory_index]
+	# Refund invested materials
+	for i in range(factory.build_materials.size()):
+		var material : Materials = factory.build_materials[i]
+		var build_amount : Materials = factory.build_amounts[i]
+		
+		material_amounts[material] += build_amount
+	
+	planned_factory_amounts[factory_index] -= 1
+	
+	factory_amount_updated.emit(factory)
+	return true

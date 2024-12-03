@@ -5,16 +5,15 @@ class_name FactoryInfo
 var input_materials : Array[GameManager.Materials]
 @export
 var inputs_per_day : Array[int]
-@export
-var input_icon : Texture
-
 
 @export
-var output_material : GameManager.Materials
+var output_materials : Array[GameManager.Materials]
 @export
-var output_per_day : int
-@export
-var outout_icon : Texture
+var outputs_per_day : Array[int]
 
 @export
 var build_days : int
+@export
+var build_materials : Array[GameManager.Materials]
+@export
+var build_amounts : Array[int]

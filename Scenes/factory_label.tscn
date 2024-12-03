@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://n01k6less0tr"]
+
+[node name="FactoryLabel" type="Label"]
+size_flags_horizontal = 6
+horizontal_alignment = 1

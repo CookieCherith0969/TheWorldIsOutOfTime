@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://3622lee72wb6"]
+[gd_scene load_steps=2 format=3 uid="uid://3622lee72wb6"]
+
+[ext_resource type="Script" path="res://Globals/sound_manager.gd" id="1_dbxqp"]
 
 [node name="SoundManager" type="Node"]
+script = ExtResource("1_dbxqp")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+autoplay = true
