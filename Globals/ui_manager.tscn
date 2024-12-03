@@ -43,7 +43,7 @@ represented_material = 1
 represented_factory = ExtResource("4_ih3j8")
 
 [node name="FactoryCounter2" parent="TextureRect" instance=ExtResource("3_rm6jl")]
-offset_left = 133.0
-offset_top = 180.0
-offset_right = 209.0
+offset_left = 168.0
+offset_top = 179.0
+offset_right = 259.0
 offset_bottom = 235.0

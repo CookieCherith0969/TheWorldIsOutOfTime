@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v7avvi7kk7ug"
-path="res://.godot/imported/PlaceholderWrench.png-f44a79829cd7ae2046059b0fdc93a40f.ctex"
+uid="uid://b4h4lk5quokm6"
+path="res://.godot/imported/PlaceholderWindowGreen.png-8b3178af47ee240315f97baf61a00906.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/PlaceholderWrench.png"
-dest_files=["res://.godot/imported/PlaceholderWrench.png-f44a79829cd7ae2046059b0fdc93a40f.ctex"]
+source_file="res://Sprites/PlaceholderWindowGreen.png"
+dest_files=["res://.godot/imported/PlaceholderWindowGreen.png-8b3178af47ee240315f97baf61a00906.ctex"]
 
 [params]
 
