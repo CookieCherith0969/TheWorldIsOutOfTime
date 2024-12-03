@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=16 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
+[ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/PlaceholderWindowSpace.png" id="3_m06nq"]
 [ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="3_rm6jl"]
 [ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="4_ih3j8"]
-[ext_resource type="Texture2D" uid="uid://6ir83anb2kjk" path="res://Sprites/PlaceholderWindowBlue.png" id="5_2lwo4"]
+[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="5_pbje1"]
 [ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="5_sm2qj"]
 [ext_resource type="Script" path="res://Scripts/solar_system_map.gd" id="6_lgs1q"]
+[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="8_1ov75"]
+[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="8_7cik5"]
+[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="9_d34ou"]
+[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="9_l6yfa"]
+[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="10_g8q5a"]
+[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="11_4fuur"]
+[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="12_qjyca"]
+[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="13_knqsy"]
 
 [node name="UIManager" type="CanvasLayer"]
 script = ExtResource("1_g5gy1")
@@ -40,6 +49,8 @@ offset_bottom = 126.0
 represented_material = 1
 
 [node name="SolarSystemMap" type="NinePatchRect" parent="TextureRect"]
+z_index = -1
+y_sort_enabled = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -47,12 +58,47 @@ anchor_right = 1.0
 offset_left = -200.0
 offset_bottom = 200.0
 grow_horizontal = 0
-texture = ExtResource("5_2lwo4")
+texture = ExtResource("3_m06nq")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 script = ExtResource("6_lgs1q")
+
+[node name="Sun" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+
+[node name="Mercury" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("8_1ov75")
+
+[node name="Venus" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("9_l6yfa")
+
+[node name="Earth" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("8_7cik5")
+
+[node name="Mars" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("9_d34ou")
+
+[node name="Jupiter" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("10_g8q5a")
+
+[node name="Saturn" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("11_4fuur")
+
+[node name="Uranus" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("12_qjyca")
+
+[node name="Neptune" parent="TextureRect/SolarSystemMap" instance=ExtResource("5_pbje1")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("13_knqsy")
 
 [node name="FactoryCounter" parent="TextureRect" instance=ExtResource("3_rm6jl")]
 offset_left = 48.0

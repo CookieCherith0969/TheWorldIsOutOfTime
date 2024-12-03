@@ -30,7 +30,7 @@ func update_time_label():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugProgress"):
-		GameManager.process_days(5)
+		GameManager.process_days(365)
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""
@@ -40,7 +40,7 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	if num == 0:
 		return plus_string + "0"
 	
-	var magnitude : int = log(abs(num)) / log(10) + round_up_leniency
+	var magnitude : int = int(log(abs(num)) / log(10) + round_up_leniency)
 	var suffix_index = min(magnitude/3, simplification_suffixes.size()-1)
 	
 	var simplified_num : float = num/float(pow(1000,suffix_index))

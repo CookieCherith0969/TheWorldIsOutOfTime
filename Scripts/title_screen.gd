@@ -6,13 +6,8 @@ var unregistered_time : float = 0.0
 var registered_seconds : int = 0
 var previous_time : float = 0.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var current_time = SoundManager.get_menu_music_position()
 	var time_diff = current_time - previous_time
 	unregistered_time += time_diff

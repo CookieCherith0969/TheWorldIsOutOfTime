@@ -1,6 +1,7 @@
 extends Node
 
 signal day_ended
+signal hour_passed
 signal timeskip_started(number_of_days : int)
 signal timeskip_ended(number_of_days : int)
 signal factory_amount_updated(factory : FactoryInfo)
@@ -14,7 +15,7 @@ var material_icons : Array[Texture] = [
 	preload("res://Sprites/PlaceholderElectronics.png")
 ]
 
-const process_delay : float = 1.0/15.0
+const day_length : float = 0.000000000000001
 
 const starting_days : int = 1095
 var days_left : int = starting_days
@@ -130,9 +131,12 @@ func process_days(number_of_days : int):
 			for j in range(material_amounts.size()):
 				prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
 		
+		for h in range(24):
+			await get_tree().create_timer(day_length/24).timeout
+			hour_passed.emit()
 		days_left -= 1
 		day_ended.emit()
-		await get_tree().create_timer(process_delay).timeout
+		#await get_tree().create_timer(process_delay).timeout
 	
 	timeskip_ended.emit(number_of_days)
 
@@ -182,7 +186,7 @@ func plan_factory(factory_index : int) -> bool:
 	# Return early if any materials are lacking
 	for i in range(factory.build_materials.size()):
 		var material : Materials = factory.build_materials[i]
-		var build_amount : Materials = factory.build_amounts[i]
+		var build_amount : int = factory.build_amounts[i]
 		
 		if material_amounts[material] < build_amount:
 			return false
@@ -190,7 +194,7 @@ func plan_factory(factory_index : int) -> bool:
 	# Invest materials immediately
 	for i in range(factory.build_materials.size()):
 		var material : Materials = factory.build_materials[i]
-		var build_amount : Materials = factory.build_amounts[i]
+		var build_amount : int = factory.build_amounts[i]
 		
 		material_amounts[material] -= build_amount
 	
@@ -207,7 +211,7 @@ func unplan_factory(factory_index : int) -> bool:
 	# Refund invested materials
 	for i in range(factory.build_materials.size()):
 		var material : Materials = factory.build_materials[i]
-		var build_amount : Materials = factory.build_amounts[i]
+		var build_amount : int = factory.build_amounts[i]
 		
 		material_amounts[material] += build_amount
 	

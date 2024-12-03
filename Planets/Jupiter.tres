@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="PlanetInfo" load_steps=12 format=3 uid="uid://dhirbl62gx8up"]
+
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="1_bxyc7"]
+[ext_resource type="Texture2D" uid="uid://baq6piyfy4ays" path="res://Sprites/Solar System Objects/solar-system-jupiter.png" id="2_lek71"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uf56"]
+atlas = ExtResource("2_lek71")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8e8p"]
+atlas = ExtResource("2_lek71")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bo1v"]
+atlas = ExtResource("2_lek71")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iipit"]
+atlas = ExtResource("2_lek71")
+region = Rect2(66, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu5fq"]
+atlas = ExtResource("2_lek71")
+region = Rect2(88, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1huxc"]
+atlas = ExtResource("2_lek71")
+region = Rect2(110, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odolx"]
+atlas = ExtResource("2_lek71")
+region = Rect2(132, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frxlb"]
+atlas = ExtResource("2_lek71")
+region = Rect2(154, 0, 22, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q2mop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uf56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8e8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bo1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iipit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu5fq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1huxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odolx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frxlb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_bxyc7")
+spriteframes = SubResource("SpriteFrames_q2mop")
+sprite_offset = Vector2(0, 0)
+orbital_period_hours = 103992.0
+rotational_period_hours = 10.5
+orbit_distance = 54.5

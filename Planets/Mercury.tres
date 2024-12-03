@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="PlanetInfo" load_steps=12 format=3 uid="uid://cbftq03u2wxje"]
+
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="1_cl0yf"]
+[ext_resource type="Texture2D" uid="uid://dgfg1j44w7kx6" path="res://Sprites/Solar System Objects/solar-system-mercury.png" id="2_bwwxi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdv7a"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icm8u"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p6el"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgoms"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(21, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unmwj"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(28, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfw6p"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(35, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l48t"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(42, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_175xd"]
+atlas = ExtResource("2_bwwxi")
+region = Rect2(49, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yeamv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdv7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icm8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p6el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgoms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unmwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfw6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l48t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_175xd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_cl0yf")
+spriteframes = SubResource("SpriteFrames_yeamv")
+sprite_offset = Vector2(-0.5, -0.5)
+orbital_period_hours = 2112.0
+rotational_period_hours = 50.0
+orbit_distance = 24.5
