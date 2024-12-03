@@ -16,7 +16,7 @@ var amount_label : Label = $AmountLabel
 @onready
 var build_progress_bar : ProgressBar = $BuildProgressBar
 @onready
-var building_wrench : TextureRect = $BuildingWrench
+var building_wrench : AnimatedSprite2D = $BuildingWrench
 @onready
 var arrow_texture : Texture = preload("res://Sprites/PlaceholderArrow.png")
 
@@ -46,10 +46,10 @@ func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : i
 		update_progress(day_progress)
 
 func on_timeskip_started(_num_days : int):
-	building_wrench.texture.pause = false
+	building_wrench.play()
 	
 func on_timeskip_ended(_num_days : int):
-	building_wrench.texture.pause = true
+	building_wrench.stop()
 
 func populate_icons():
 	# Remove any existing icons
@@ -103,8 +103,9 @@ func populate_nums():
 		output_label.text = UIManager.simplify_number(output_num)
 		num_box.add_child(output_label)
 	
-	num_box.size.x = 16 * num_box.get_child_count() + 4 * (num_box.get_child_count()-1)
-	num_box.set_anchors_preset(Control.PRESET_CENTER_TOP, true)
+	#num_box.size.x = 16 * num_box.get_child_count() + 4 * (num_box.get_child_count()-1)
+	#num_box.set_anchors_preset(Control.PRESET_CENTER_TOP, true)
+	#num_box.position.x = 16
 
 func update_amounts():
 	amount_label.text = "%s/%s" % [GameManager.get_active_factory_amount(factory_index), GameManager.get_total_factory_amount(factory_index)]

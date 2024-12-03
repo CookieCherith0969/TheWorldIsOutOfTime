@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://n01k6less0tr"]
 
 [node name="FactoryLabel" type="Label"]
-size_flags_horizontal = 6
+custom_minimum_size = Vector2(16, 0)
+offset_right = 1.0
+offset_bottom = 23.0
+size_flags_horizontal = 4
 horizontal_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=14 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="4_5vlrj"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
-[ext_resource type="Texture2D" uid="uid://cdvjgy205c3sn" path="res://Sprites/PlaceholderWrench0.png" id="5_l4dhc"]
-[ext_resource type="Texture2D" uid="uid://5x2fj26kbmrv" path="res://Sprites/PlaceholderWrench1.png" id="6_muqsl"]
+[ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/PlaceholderWrench.png" id="5_igpy1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0.270588)
@@ -16,20 +15,34 @@ bg_color = Color(0.6, 0.6, 0.6, 0.270588)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw4a4"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_lxcyl"]
-frames = 2
-pause = true
-frame_0/texture = ExtResource("5_l4dhc")
-frame_0/duration = 0.1
-frame_1/texture = ExtResource("6_muqsl")
-frame_1/duration = 0.1
+[sub_resource type="AtlasTexture" id="AtlasTexture_5anxt"]
+atlas = ExtResource("5_igpy1")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1gfs"]
+atlas = ExtResource("5_igpy1")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hokrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5anxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1gfs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="FactoryCounter" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 41.0
+offset_left = 33.0
 offset_top = 178.0
-offset_right = 132.0
+offset_right = 141.0
 offset_bottom = 234.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_2ei53")
@@ -39,8 +52,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6.0
-offset_right = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_h5fub")
@@ -56,9 +67,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
+offset_left = -48.0
 offset_top = -8.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -76,10 +87,6 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("3_s4axq")
 
-[node name="FactoryIcon5" parent="IconBox" instance=ExtResource("4_nkejt")]
-layout_mode = 2
-texture = ExtResource("3_s4axq")
-
 [node name="FactoryIcon6" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 texture = ExtResource("4_5vlrj")
@@ -89,9 +96,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -47.5
+offset_left = -48.0
 offset_top = -1.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 26.0
 grow_horizontal = 2
 theme_override_constants/separation = 4
@@ -105,10 +112,6 @@ text = "2"
 layout_mode = 2
 
 [node name="FactoryLabel3" parent="NumBox" instance=ExtResource("4_ojxxd")]
-layout_mode = 2
-text = "3"
-
-[node name="FactoryLabel4" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
 text = "3"
 
@@ -149,15 +152,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_iw4a4")
 value = 50.0
 show_percentage = false
 
-[node name="BuildingWrench" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 1.0
-offset_right = 6.0
-offset_bottom = 9.0
-grow_vertical = 0
-texture = SubResource("AnimatedTexture_lxcyl")
-stretch_mode = 3
+[node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
+position = Vector2(9, 61)
+sprite_frames = SubResource("SpriteFrames_hokrf")
+frame_progress = 0.282955
