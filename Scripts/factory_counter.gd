@@ -48,6 +48,7 @@ func on_factory_amount_updated(updated_factory : FactoryInfo):
 			building_wrench.show()
 		else:
 			building_wrench.hide()
+	update_buttons()
 
 func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : int):
 	if updated_factory == represented_factory:
