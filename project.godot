@@ -26,7 +26,6 @@ SoundManager="*res://Globals/sound_manager.tscn"
 window/size/viewport_width=600
 window/size/viewport_height=600
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [input]
 

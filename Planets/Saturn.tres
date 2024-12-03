@@ -71,6 +71,6 @@ animations = [{
 script = ExtResource("1_iqtlo")
 spriteframes = SubResource("SpriteFrames_jhuas")
 sprite_offset = Vector2(0, -0.5)
-orbital_period_hours = 258144.0
+orbital_period_hours = 35814.0
 rotational_period_hours = 10.7
 orbit_distance = 67.0

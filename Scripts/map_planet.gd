@@ -5,7 +5,7 @@ var represented_planet : PlanetInfo
 
 const map_size : Vector2 = Vector2(200,100)
 const map_offset : Vector2 = Vector2(0,50)
-const rotation_divisor : float = 32 # Ideally a power of 2
+const rotation_divisor : float = 32.0 # Ideally a power of 2
 #const rotation_multiplier : float = 1/rotation_divisor
 
 var orbit_angle : float = randf_range(0.0, 360.0)

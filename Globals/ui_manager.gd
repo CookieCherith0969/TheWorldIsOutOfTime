@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready
-var time_label : Label = $TextureRect/TimeLabel
+var time_label : RichTextLabel = $TextureRect/TimeLabel
 
 const simplification_suffixes = [
 	"",
@@ -26,11 +26,7 @@ func on_day_ended():
 func update_time_label():
 	var mixed_time : Array[int] = GameManager.get_mixed_time()
 	
-	time_label.text = "%s Years, %s Months, %s Days" % mixed_time
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("DebugProgress"):
-		GameManager.process_days(365)
+	time_label.text = "%s[font_size=16] Years [/font_size]%s[font_size=16] Months [/font_size]%s[font_size=16] Days [/font_size]" % mixed_time
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""

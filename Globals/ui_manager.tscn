@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=26 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
 [ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/PlaceholderWindowSpace.png" id="3_m06nq"]
@@ -15,6 +15,16 @@
 [ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="11_4fuur"]
 [ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="12_qjyca"]
 [ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="13_knqsy"]
+[ext_resource type="Script" path="res://Scripts/time_control.gd" id="16_nk04m"]
+[ext_resource type="Texture2D" uid="uid://pavs2233hkpn" path="res://Sprites/PlaceholderWindowPurple.png" id="17_v8dwm"]
+[ext_resource type="Texture2D" uid="uid://dthf21hipu62o" path="res://Sprites/PlaceholderTimeNormal.png" id="18_87gq4"]
+[ext_resource type="Texture2D" uid="uid://bhxeff0mk3rfh" path="res://Sprites/PlaceholderTimePressed.png" id="19_n3am6"]
+[ext_resource type="Texture2D" uid="uid://d386w3in6d14n" path="res://Sprites/PlaceholderTimeHover.png" id="20_ahnni"]
+[ext_resource type="Texture2D" uid="uid://20n54c6e2y5n" path="res://Sprites/PlaceholderTimeDisabled.png" id="21_48jxa"]
+[ext_resource type="Texture2D" uid="uid://cjiava0wkwcum" path="res://Sprites/PlaceholderArrowNormal.png" id="22_uc1t2"]
+[ext_resource type="Texture2D" uid="uid://cecmycvanxigw" path="res://Sprites/PlaceholderArrowPressed.png" id="23_mfefo"]
+[ext_resource type="Texture2D" uid="uid://becv0hdlw2q07" path="res://Sprites/PlaceholderArrowHover.png" id="24_muauk"]
+[ext_resource type="Texture2D" uid="uid://dph1gxboiu1m1" path="res://Sprites/PlaceholderArrowDisabled.png" id="25_knudr"]
 
 [node name="UIManager" type="CanvasLayer"]
 script = ExtResource("1_g5gy1")
@@ -26,12 +36,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TimeLabel" type="Label" parent="TextureRect"]
+[node name="TimeLabel" type="RichTextLabel" parent="TextureRect"]
 layout_mode = 0
-offset_right = 428.0
+offset_left = 20.0
+offset_right = 448.0
 offset_bottom = 45.0
-theme_override_font_sizes/font_size = 32
-text = "2 Years 11 Months 29 Days"
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "2[font_size=16] Years [/font_size]11[font_size=16] Months [/font_size]29[font_size=16] Days [/font_size]"
+scroll_active = false
 
 [node name="MaterialCounter" parent="TextureRect" instance=ExtResource("5_sm2qj")]
 layout_mode = 0
@@ -112,3 +125,70 @@ offset_left = 162.0
 offset_top = 208.0
 offset_right = 270.0
 offset_bottom = 264.0
+
+[node name="TimeControl" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_left = 304.0
+offset_top = 52.0
+offset_right = 389.0
+offset_bottom = 76.0
+script = ExtResource("16_nk04m")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TextureRect/TimeControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_v8dwm")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="TimeskipButton" type="TextureButton" parent="TextureRect/TimeControl"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 4.0
+offset_right = 82.0
+offset_bottom = 20.0
+texture_normal = ExtResource("18_87gq4")
+texture_pressed = ExtResource("19_n3am6")
+texture_hover = ExtResource("20_ahnni")
+texture_disabled = ExtResource("21_48jxa")
+
+[node name="HalveButton" type="TextureButton" parent="TextureRect/TimeControl"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 16.0
+offset_bottom = 20.0
+disabled = true
+texture_normal = ExtResource("22_uc1t2")
+texture_pressed = ExtResource("23_mfefo")
+texture_hover = ExtResource("24_muauk")
+texture_disabled = ExtResource("25_knudr")
+
+[node name="DoubleButton" type="TextureButton" parent="TextureRect/TimeControl"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 20.0
+texture_normal = ExtResource("22_uc1t2")
+texture_pressed = ExtResource("23_mfefo")
+texture_hover = ExtResource("24_muauk")
+texture_disabled = ExtResource("25_knudr")
+flip_h = true
+
+[node name="DurationLabel" type="Label" parent="TextureRect/TimeControl"]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 52.0
+offset_bottom = 23.0
+text = "1"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureRect/TimeControl/TimeskipButton" to="TextureRect/TimeControl" method="_on_timeskip_button_pressed"]
+[connection signal="pressed" from="TextureRect/TimeControl/HalveButton" to="TextureRect/TimeControl" method="_on_halve_button_pressed"]
+[connection signal="pressed" from="TextureRect/TimeControl/DoubleButton" to="TextureRect/TimeControl" method="_on_double_button_pressed"]

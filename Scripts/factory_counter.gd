@@ -3,22 +3,30 @@ extends Control
 @export
 var represented_factory : FactoryInfo
 var factory_index : int
+
 @onready
 var icon_box : HBoxContainer = $IconBox
 @onready
 var icon_scene : PackedScene = preload("res://Scenes/factory_icon.tscn")
 @onready
+var arrow_texture : Texture = preload("res://Sprites/PlaceholderArrow.png")
+
+@onready
 var num_box : HBoxContainer = $NumBox
 @onready
 var num_scene : PackedScene = preload("res://Scenes/factory_label.tscn")
+
 @onready
 var amount_label : Label = $AmountLabel
 @onready
 var build_progress_bar : ProgressBar = $BuildProgressBar
 @onready
 var building_wrench : AnimatedSprite2D = $BuildingWrench
+
 @onready
-var arrow_texture : Texture = preload("res://Sprites/PlaceholderArrow.png")
+var unplan_button : TextureButton = $UnplanButton
+@onready
+var plan_button : TextureButton = $PlanButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,9 +55,11 @@ func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : i
 
 func on_timeskip_started(_num_days : int):
 	building_wrench.play()
+	update_buttons()
 	
-func on_timeskip_ended(_num_days : int):
+func on_timeskip_ended():
 	building_wrench.stop()
+	update_buttons()
 
 func populate_icons():
 	# Remove any existing icons
@@ -109,7 +119,30 @@ func populate_nums():
 
 func update_amounts():
 	amount_label.text = "%s/%s" % [GameManager.get_active_factory_amount(factory_index), GameManager.get_total_factory_amount(factory_index)]
+	update_buttons()
 
 func update_progress(day_progress : int):
 	var progress_ratio : float = float(day_progress)/float(represented_factory.build_days)
 	build_progress_bar.value = progress_ratio*100.0
+
+func update_buttons():
+	if GameManager.is_timeskipping():
+		unplan_button.disabled = true
+		plan_button.disabled = true
+		return
+	
+	if GameManager.get_planned_factory_amount(factory_index) <= 0:
+		unplan_button.disabled = true
+	else:
+		unplan_button.disabled = false
+	
+	if GameManager.can_build_factory(factory_index):
+		plan_button.disabled = false
+	else:
+		plan_button.disabled = true
+
+func _on_plan_button_pressed() -> void:
+	GameManager.plan_factory(factory_index)
+
+func _on_unplan_button_pressed() -> void:
+	GameManager.unplan_factory(factory_index)

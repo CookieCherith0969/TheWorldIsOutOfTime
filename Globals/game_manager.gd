@@ -3,7 +3,7 @@ extends Node
 signal day_ended
 signal hour_passed
 signal timeskip_started(number_of_days : int)
-signal timeskip_ended(number_of_days : int)
+signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 
@@ -15,9 +15,10 @@ var material_icons : Array[Texture] = [
 	preload("res://Sprites/PlaceholderElectronics.png")
 ]
 
-const day_length : float = 0.000000000000001
+const day_length : float = 1.0/15.0
+const hour_length : float = day_length/24.0
 
-const starting_days : int = 1095
+const starting_days : int = 365#1095
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -50,6 +51,11 @@ var active_factory_amounts : Array[int] = []
 var planned_factory_amounts : Array[int] = []
 var factory_build_progress : Array[int] = []
 
+var timeskip_days : int = 0
+var elapsed_timeskip_time : float = 0.0
+var last_day_time : float = 0.0
+var last_hour_time : float = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialise factory amounts to automatically match size of factories array
@@ -60,15 +66,33 @@ func _ready() -> void:
 	
 	active_factory_amounts[0] = 2
 	active_factory_amounts[1] = 1
-	planned_factory_amounts[0] = 5
-	planned_factory_amounts[1] = 3
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
 		material_amounts.append(0)
 		prev_day_gains.append(0)
+
+func _process(delta: float) -> void:
+	if timeskip_days <= 0:
+		return
 	
-	material_amounts[0] = 100
+	elapsed_timeskip_time += delta
+	
+	while elapsed_timeskip_time - last_day_time >= day_length && timeskip_days > 0:
+		last_day_time += day_length
+		process_day()
+		day_ended.emit()
+		timeskip_days -= 1
+	
+	while elapsed_timeskip_time - last_hour_time >= hour_length:
+		last_hour_time += hour_length
+		hour_passed.emit()
+	
+	if timeskip_days <= 0:
+		elapsed_timeskip_time = 0.0
+		last_day_time = 0.0
+		last_hour_time = 0.0
+		timeskip_ended.emit()
 
 func get_mixed_time() -> Array[int]:
 	# A copy of the number of days left, so the following calculations don't change the underlying days left
@@ -89,6 +113,11 @@ func get_mixed_time() -> Array[int]:
 		months += 1
 	
 	return [years, months, working_days]
+
+func is_timeskipping() -> bool:
+	if timeskip_days > 0:
+		return true
+	return false
 
 func get_material_amount(material : Materials):
 	return material_amounts[material]
@@ -111,34 +140,42 @@ func get_planned_factory_amount(factory_index : int):
 func get_factory_index(factory : FactoryInfo):
 	return factories.find(factory)
 
-func process_days(number_of_days : int):
-	timeskip_started.emit(number_of_days)
-	
-	for i in range(number_of_days):
-		prev_day_gains.fill(0)
-		for f in range(factories.size()):
-			if planned_factory_amounts[f] > 0:
-				build_factory(f)
-			else:
-				factory_build_progress[f] = 0
-			
-			if active_factory_amounts[f] == 0:
-				continue
-			
-			var prev_material_amounts = material_amounts.duplicate()
-			process_factory(f)
-			
-			for j in range(material_amounts.size()):
-				prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
+func can_build_factory(factory_index : int):
+	var factory : FactoryInfo = factories[factory_index]
+	# Return early if any materials are lacking
+	for i in range(factory.build_materials.size()):
+		var material : Materials = factory.build_materials[i]
+		var build_amount : int = factory.build_amounts[i]
 		
-		for h in range(24):
-			await get_tree().create_timer(day_length/24).timeout
-			hour_passed.emit()
-		days_left -= 1
-		day_ended.emit()
-		#await get_tree().create_timer(process_delay).timeout
+		if material_amounts[material] < build_amount:
+			return false
 	
-	timeskip_ended.emit(number_of_days)
+	return true
+
+func process_days(number_of_days : int):
+	timeskip_days += number_of_days
+	timeskip_started.emit(number_of_days)
+
+func process_day():
+	prev_day_gains.fill(0)
+	
+	for f in range(factories.size()):
+		if planned_factory_amounts[f] > 0:
+			build_factory(f)
+		else:
+			factory_build_progress[f] = 0
+		
+		if active_factory_amounts[f] == 0:
+			continue
+		
+		var prev_material_amounts = material_amounts.duplicate()
+		process_factory(f)
+		
+		for j in range(material_amounts.size()):
+			prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
+	
+	days_left -= 1
+	day_ended.emit()
 
 func build_factory(factory_index : int):
 	factory_build_progress[factory_index] += 1
@@ -182,14 +219,10 @@ func process_factory(factory_index : int):
 		material_amounts[material] += output_amount * actual_runs
 
 func plan_factory(factory_index : int) -> bool:
+	if !can_build_factory(factory_index):
+		return false
+	
 	var factory : FactoryInfo = factories[factory_index]
-	# Return early if any materials are lacking
-	for i in range(factory.build_materials.size()):
-		var material : Materials = factory.build_materials[i]
-		var build_amount : int = factory.build_amounts[i]
-		
-		if material_amounts[material] < build_amount:
-			return false
 	
 	# Invest materials immediately
 	for i in range(factory.build_materials.size()):

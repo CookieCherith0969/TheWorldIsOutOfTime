@@ -16,8 +16,12 @@ func _ready() -> void:
 	update_labels()
 	
 	GameManager.day_ended.connect(on_day_ended)
+	GameManager.factory_amount_updated.connect(on_factory_amount_updated)
 
 func on_day_ended():
+	update_labels()
+
+func on_factory_amount_updated(factory : FactoryInfo):
 	update_labels()
 
 func update_labels():
