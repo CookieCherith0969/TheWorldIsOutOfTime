@@ -70,7 +70,6 @@ animations = [{
 [resource]
 script = ExtResource("1_cl0yf")
 planet_name = "Mercury"
-spriteframes = SubResource("SpriteFrames_yeamv")
 sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_yeamv")])
 sprite_offset = Vector2(-0.5, -0.5)
 orbital_period_hours = 2112.0

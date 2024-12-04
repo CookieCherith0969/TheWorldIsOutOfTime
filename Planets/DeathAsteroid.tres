@@ -70,7 +70,6 @@ animations = [{
 [resource]
 script = ExtResource("1_dyw4w")
 planet_name = "DEATH ASTEROID"
-spriteframes = SubResource("SpriteFrames_iyj7c")
 sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_iyj7c")])
 sprite_offset = Vector2(1.5, 4)
 orbital_period_hours = 6000.0
