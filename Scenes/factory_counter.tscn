@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
-[ext_resource type="Texture2D" uid="uid://b4h4lk5quokm6" path="res://Sprites/Placeholder/PlaceholderWindowGreen.png" id="3_h5fub"]
 [ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/Placeholder/PlaceholderMetal.png" id="3_s4axq"]
 [ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="4_5vlrj"]
 [ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/Placeholder/PlaceholderArrow.png" id="4_27xpf"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
+[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="5_ao6k5"]
 [ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/Placeholder/PlaceholderWrench.png" id="5_igpy1"]
 [ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
 [ext_resource type="Texture2D" uid="uid://dai4ysitmliuc" path="res://Sprites/Buttons/add-prod-button-pressed.png" id="11_2akyy"]
@@ -54,14 +54,14 @@ animations = [{
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wd7"]
-bg_color = Color(0.247059, 0.247059, 0.247059, 0.831373)
+bg_color = Color(0.25, 0.25, 0.25, 0.356863)
 
 [node name="FactoryCounter" type="Control"]
-custom_minimum_size = Vector2(132, 56)
+custom_minimum_size = Vector2(132, 65)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 132.0
-offset_bottom = 56.0
+offset_bottom = 65.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_2ei53")
 icon_scene = ExtResource("4_nkejt")
@@ -74,7 +74,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_h5fub")
+texture = ExtResource("5_ao6k5")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -88,9 +88,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -48.0
-offset_top = -11.0
+offset_top = -12.5
 offset_right = 48.0
-offset_bottom = 5.0
+offset_bottom = 3.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -123,9 +123,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
-offset_top = -5.0
+offset_top = -3.0
 offset_right = 48.0
-offset_bottom = 22.0
+offset_bottom = 24.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
@@ -153,8 +153,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = -23.0
-offset_right = 86.0
+offset_top = -26.0
+offset_right = 82.0
+offset_bottom = -3.0
 grow_vertical = 0
 text = "0/0"
 horizontal_alignment = 2
@@ -180,16 +181,23 @@ show_percentage = false
 
 [node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(7, 61)
+position = Vector2(7, 70)
 sprite_frames = SubResource("SpriteFrames_hokrf")
 
 [node name="PlanButton" type="TextureButton" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 108.0
-offset_top = 32.0
-offset_right = 132.0
-offset_bottom = 56.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
 focus_neighbor_left = NodePath("../UnplanButton")
 mouse_filter = 1
 disabled = true
@@ -202,11 +210,18 @@ stretch_mode = 3
 
 [node name="UnplanButton" type="TextureButton" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 86.0
-offset_top = 32.0
-offset_right = 110.0
-offset_bottom = 56.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -28.0
+offset_right = -27.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
 focus_neighbor_right = NodePath("../PlanButton")
 mouse_filter = 1
 disabled = true

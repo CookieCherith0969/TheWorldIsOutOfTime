@@ -78,9 +78,9 @@ func update_position():
 	if orbital_period_hours <= 0:
 		return
 	if orbit_angle < 180:
-		z_index = 2
+		z_index = 3
 	else:
-		z_index = 0
+		z_index = 1
 		
 
 func update_rotation():

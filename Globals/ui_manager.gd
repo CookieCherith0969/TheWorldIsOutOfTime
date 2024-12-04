@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+enum Screens {TITLE, GAME, SCREENSAVER}
+
+@export
+var current_screen_type : Screens = Screens.TITLE
+
 @export
 var tooltip : Tooltip
 const tooltip_hold_time : float = 1
@@ -15,18 +20,18 @@ const simplification_suffixes = [
 ]
 const round_up_leniency = 0.025
 
-var current_game_screen : Control
+var current_screen : Control
 @export
-var game_screen_scene : PackedScene
+var screen_scenes : Array[PackedScene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_window().min_size = get_viewport().size
-	make_new_game_screen()
+	make_new_screen()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugReset"):
-		make_new_game_screen()
+		make_new_screen()
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""
@@ -67,10 +72,16 @@ func fade_tooltip():
 
 
 
-func make_new_game_screen():
-	if is_instance_valid(current_game_screen):
-		remove_child(current_game_screen)
-		current_game_screen.queue_free()
-	var new_game_screen = game_screen_scene.instantiate()
-	add_child(new_game_screen)
-	current_game_screen = new_game_screen
+func make_new_screen():
+	if is_instance_valid(current_screen):
+		remove_child(current_screen)
+		current_screen.queue_free()
+	
+	if current_screen_type == Screens.SCREENSAVER:
+		GameManager.screensaver_mode = true
+	else:
+		GameManager.screensaver_mode = false
+	
+	var new_screen = screen_scenes[current_screen_type].instantiate()
+	add_child(new_screen)
+	current_screen = new_screen

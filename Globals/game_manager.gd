@@ -19,10 +19,10 @@ enum Materials {
 var material_icons : Array[Texture] = []
 
 const hours_per_day : float = 24.0
-const day_length : float = 1.0/60.0
+const day_length : float = 1.0/10.0
 #const hour_length : float = day_length/hours_per_day
 
-const starting_days : int = 365*3
+const starting_days : int = 365*9
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -59,7 +59,12 @@ var unlocked_factories : Array[bool] = []
 
 var timeskip_days : int = 0
 var elapsed_timeskip_time : float = 0.0
+var elapsed_timeskip_days : int = 0
 var last_day_time : float = 0.0
+
+var screensaver_mode : bool = false
+var day_speed_multiplier : float = 1.0
+var max_speed_multiplier : float = 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -92,23 +97,48 @@ func _ready() -> void:
 	material_amounts[Materials.METALS] = 100
 
 func _physics_process(delta: float) -> void:
+	if screensaver_mode:
+		timeskip_days = 365
 	if timeskip_days <= 0:
 		return
 	
 	elapsed_timeskip_time += delta
 	
-	while elapsed_timeskip_time - last_day_time >= day_length && timeskip_days > 0:
-		last_day_time += day_length
+	var effective_day_length = day_length
+	effective_day_length /= day_speed_multiplier
+	
+	while elapsed_timeskip_time - last_day_time >= effective_day_length && timeskip_days > 0:
+		last_day_time += effective_day_length
 		for h in range(int(hours_per_day)):
 			hour_passed.emit()
 		process_day()
 		day_ended.emit()
+		
+		elapsed_timeskip_days += 1
 		timeskip_days -= 1
+		if !screensaver_mode:
+			update_speed_multiplier()
 	
 	if timeskip_days <= 0:
 		elapsed_timeskip_time = 0.0
+		elapsed_timeskip_days = 0
 		last_day_time = 0.0
 		timeskip_ended.emit()
+
+func in_out_sine_ease(progress : float):
+	return -(cos(PI*progress) - 1) / 2
+
+func out_quad_ease(progress : float):
+	return 1 - (1 - progress) * (1 - progress);
+
+func update_speed_multiplier():
+	var total_days : float = elapsed_timeskip_days + timeskip_days
+	var elapsed_ratio = elapsed_timeskip_days/total_days
+	var remaining_ratio = timeskip_days/total_days
+	
+	var speed_progress : float = min(2*elapsed_ratio, 2*remaining_ratio)
+	
+	day_speed_multiplier = 1.0 + out_quad_ease(speed_progress)*(max_speed_multiplier-1)
 
 func get_mixed_time() -> Array[int]:
 	# A copy of the number of days left, so the following calculations don't change the underlying days left
@@ -194,9 +224,13 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 
 func process_days(number_of_days : int):
 	timeskip_days += number_of_days
-	timeskip_started.emit(number_of_days)
+	if timeskip_days == number_of_days:
+		timeskip_started.emit(number_of_days)
 
 func process_day():
+	if screensaver_mode:
+		return
+	
 	prev_day_gains.fill(0)
 	
 	for f in range(factories.size()):

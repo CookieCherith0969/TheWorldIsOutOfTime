@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The World is Out of Time"
-run/main_scene="res://Scenes/title_screen.tscn"
+run/main_scene="res://Scenes/Screens/title_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://Sprites/Placeholder/PlaceholderTrayIcon.png"
 
@@ -40,5 +40,5 @@ DebugReset={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.139294, 0.0922117, 0.309375, 1)
+environment/defaults/default_clear_color=Color(0.819608, 0.87451, 0.909804, 1)
 2d/snap/snap_2d_transforms_to_pixel=true

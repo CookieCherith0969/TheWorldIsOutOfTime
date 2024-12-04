@@ -20,12 +20,16 @@ var timeskip_button : TextureButton = $TimeskipButton
 func _ready() -> void:
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
+	GameManager.day_ended.connect(on_day_ended)
 
 func on_timeskip_started(_num_days):
 	update_buttons()
 
 func on_timeskip_ended():
 	update_buttons()
+	update_label()
+
+func on_day_ended():
 	update_label()
 
 func _on_halve_button_pressed() -> void:
@@ -44,6 +48,7 @@ func _on_double_button_pressed() -> void:
 
 func _on_timeskip_button_pressed() -> void:
 	GameManager.process_days(pow(2, selected_exponent))
+	selected_exponent = 0
 
 func update_buttons():
 	if GameManager.is_timeskipping():
@@ -65,6 +70,10 @@ func update_buttons():
 	timeskip_button.disabled = false
 
 func update_label():
+	if GameManager.is_timeskipping():
+		duration_label.text = str(GameManager.timeskip_days)
+		return
+	
 	var duration = pow(2, selected_exponent)
 	duration_label.text = str(duration)
 	if duration >= GameManager.days_left:

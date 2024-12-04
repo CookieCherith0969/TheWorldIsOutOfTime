@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cl14wpff1ow2s" path="res://Sprites/Placeholder/PlaceholderTime.png" id="4_7wui5"]
 [ext_resource type="Texture2D" uid="uid://ccx2m3jms0433" path="res://Sprites/Placeholder/PlaceholderHammer.png" id="4_yl0p1"]
 [ext_resource type="Texture2D" uid="uid://po5bke1uwm7f" path="res://Sprites/Placeholder/PlaceholderSmallLock.png" id="5_oh7nk"]
-[ext_resource type="Texture2D" uid="uid://1kx70nlah83q" path="res://Sprites/Placeholder/PlaceholderWindowDarkPurple.png" id="6_benyt"]
+[ext_resource type="Texture2D" uid="uid://wfpsmcjs2ses" path="res://Sprites/Placeholder/PlaceholderWindowLightTooltip.png" id="7_lvobm"]
 
 [node name="Tooltip" type="MarginContainer"]
 z_index = 2
@@ -22,7 +22,7 @@ lock_icon = ExtResource("5_oh7nk")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("6_benyt")
+texture = ExtResource("7_lvobm")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2

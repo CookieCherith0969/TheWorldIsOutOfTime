@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://j48kbuc5aeum"]
 
 [ext_resource type="Script" path="res://Scripts/time_control.gd" id="1_6fb1j"]
-[ext_resource type="Texture2D" uid="uid://pavs2233hkpn" path="res://Sprites/Placeholder/PlaceholderWindowPurple.png" id="2_nf30l"]
+[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="2_xdf6k"]
 [ext_resource type="Texture2D" uid="uid://bsqhd2xh70ole" path="res://Sprites/Buttons/clock-button-normal.png" id="3_3kf5r"]
 [ext_resource type="Texture2D" uid="uid://fdfpj2awc2lr" path="res://Sprites/Buttons/clock-button-pressed.png" id="4_ubg5d"]
 [ext_resource type="Texture2D" uid="uid://cw2ib1yo6uoj1" path="res://Sprites/Buttons/clock-button-hover.png" id="5_6iinn"]
@@ -27,14 +27,14 @@ offset_right = 395.0
 offset_bottom = 40.0
 script = ExtResource("1_6fb1j")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_nf30l")
+texture = ExtResource("2_xdf6k")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
