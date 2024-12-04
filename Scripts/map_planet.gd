@@ -28,7 +28,7 @@ var rotational_period_hours : float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.hour_passed.connect(on_hour_passed)
-	sprite_frames = represented_planet.spriteframes
+	sprite_frames = represented_planet.sprite_frame_list.pick_random()
 	
 	if should_randomise_position:
 		orbit_angle = randf_range(0.0, 360.0)

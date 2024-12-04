@@ -71,6 +71,7 @@ animations = [{
 script = ExtResource("1_h53tj")
 planet_name = "Venus"
 spriteframes = SubResource("SpriteFrames_e8okp")
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_e8okp")])
 sprite_offset = Vector2(-0.5, -0.5)
 orbital_period_hours = 5400.0
 orbit_variation = 0.0

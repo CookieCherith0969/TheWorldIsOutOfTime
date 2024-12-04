@@ -71,6 +71,7 @@ animations = [{
 script = ExtResource("1_a51mx")
 planet_name = "Uranus"
 spriteframes = SubResource("SpriteFrames_h3wbk")
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_h3wbk")])
 sprite_offset = Vector2(0, 0)
 orbital_period_hours = 43648.0
 orbit_variation = 0.0

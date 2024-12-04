@@ -71,6 +71,7 @@ animations = [{
 script = ExtResource("1_iqtlo")
 planet_name = "Saturn"
 spriteframes = SubResource("SpriteFrames_jhuas")
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_jhuas")])
 sprite_offset = Vector2(0, -0.5)
 orbital_period_hours = 35814.0
 orbit_variation = 0.0

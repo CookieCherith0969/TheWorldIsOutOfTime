@@ -5,7 +5,7 @@ class_name PlanetInfo
 var planet_name : String
 
 @export
-var spriteframes : SpriteFrames
+var sprite_frame_list : Array[SpriteFrames]
 @export
 var sprite_offset : Vector2 = Vector2.ZERO
 

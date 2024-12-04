@@ -11,3 +11,5 @@ outputs_per_day = Array[int]([10])
 build_days = 2
 build_materials = Array[int]([2])
 build_amounts = Array[int]([50])
+research_materials = Array[int]([])
+research_amounts = Array[int]([])
