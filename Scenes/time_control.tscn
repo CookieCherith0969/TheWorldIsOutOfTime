@@ -87,7 +87,7 @@ offset_left = 21.0
 offset_top = 8.0
 offset_right = 60.0
 offset_bottom = 31.0
-text = "2048"
+text = "1"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="TimeskipButton" to="." method="_on_timeskip_button_pressed"]
