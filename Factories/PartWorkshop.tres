@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_evidb")
 factory_name = &"Part Workshop"
+output_on_build = false
 input_materials = Array[int]([2])
 inputs_per_day = Array[int]([30])
 output_materials = Array[int]([3])
@@ -14,3 +15,5 @@ build_materials = Array[int]([1, 2])
 build_amounts = Array[int]([20, 60])
 research_materials = Array[int]([2])
 research_amounts = Array[int]([500])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

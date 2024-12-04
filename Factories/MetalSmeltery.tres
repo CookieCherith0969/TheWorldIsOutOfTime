@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_8nf82")
 factory_name = &"Metal Smeltery"
+output_on_build = false
 input_materials = Array[int]([0])
 inputs_per_day = Array[int]([10])
 output_materials = Array[int]([2])
@@ -14,3 +15,5 @@ build_materials = Array[int]([1, 0])
 build_amounts = Array[int]([20, 50])
 research_materials = Array[int]([])
 research_amounts = Array[int]([])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

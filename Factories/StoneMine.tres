@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_mpusp")
 factory_name = &"Stone Mine"
+output_on_build = false
 input_materials = Array[int]([])
 inputs_per_day = Array[int]([])
 output_materials = Array[int]([0])
@@ -14,3 +15,5 @@ build_materials = Array[int]([2])
 build_amounts = Array[int]([50])
 research_materials = Array[int]([])
 research_amounts = Array[int]([])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false
