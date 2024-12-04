@@ -1,44 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=4 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
 [ext_resource type="PackedScene" uid="uid://1rb1mnyln0nq" path="res://Scenes/game_screen.tscn" id="2_yfmhj"]
-[ext_resource type="Script" path="res://Scripts/build_tooltip.gd" id="29_fd2vs"]
-[ext_resource type="Texture2D" uid="uid://1kx70nlah83q" path="res://Sprites/Placeholder/PlaceholderWindowDarkPurple.png" id="29_yg0fe"]
-[ext_resource type="PackedScene" uid="uid://cg5mi0q0ktsog" path="res://Scenes/build_cost_icon.tscn" id="30_wfm6f"]
+[ext_resource type="PackedScene" uid="uid://esv3lpa5b5t1" path="res://Scenes/tooltip.tscn" id="3_m5j15"]
 
-[node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("build_tooltip")]
+[node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]
 script = ExtResource("1_g5gy1")
-build_tooltip = NodePath("BuildTooltip")
+tooltip = NodePath("Tooltip")
 game_screen_scene = ExtResource("2_yfmhj")
 
-[node name="BuildTooltip" type="MarginContainer" parent="."]
+[node name="Tooltip" parent="." instance=ExtResource("3_m5j15")]
 visible = false
-z_index = 2
-offset_right = 84.0
-offset_bottom = 27.0
-mouse_filter = 2
-script = ExtResource("29_fd2vs")
-cost_icon_scene = ExtResource("30_wfm6f")
-
-[node name="Background" type="NinePatchRect" parent="BuildTooltip"]
-layout_mode = 2
-texture = ExtResource("29_yg0fe")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-
-[node name="ListMargin" type="MarginContainer" parent="BuildTooltip"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 2
-
-[node name="IconList" type="VBoxContainer" parent="BuildTooltip/ListMargin"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="BuildCostIcon" parent="BuildTooltip/ListMargin/IconList" instance=ExtResource("30_wfm6f")]
-layout_mode = 2

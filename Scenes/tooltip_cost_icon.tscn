@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://diemxc36x70ej"]
+
+[ext_resource type="Script" path="res://Scripts/tooltip_cost_icon.gd" id="1_38yr7"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="2_ugv31"]
+
+[node name="TooltipCostIcon" type="HBoxContainer"]
+mouse_filter = 2
+script = ExtResource("1_38yr7")
+
+[node name="MaterialIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ugv31")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(56, 23)
+layout_mode = 2
+text = "999.9M"

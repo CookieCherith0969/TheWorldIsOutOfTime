@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export
-var build_tooltip : BuildTooltip
+var tooltip : Tooltip
 const tooltip_hold_time : float = 1
 const tooltip_fade_time : float = 1
 
@@ -50,15 +50,22 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	return plus_string + num_string + simplification_suffixes[suffix_index]
 
 func show_build_tooltip(pos : Vector2i, factory : FactoryInfo):
-	build_tooltip.set_position(pos)
-	build_tooltip.populate_costs_from_factory(factory)
-	build_tooltip.show_tooltip()
+	tooltip.set_position(pos)
+	tooltip.populate_build_costs(factory)
+	tooltip.show_tooltip()
+	
+func show_unlock_tooltip(pos : Vector2i, factory : FactoryInfo):
+	tooltip.set_position(pos)
+	tooltip.populate_unlock_costs(factory)
+	tooltip.show_tooltip()
+	
+func hide_tooltip():
+	tooltip.hide_tooltip()
 
-func hide_build_tooltip():
-	build_tooltip.hide_tooltip()
+func fade_tooltip():
+	tooltip.begin_fade(tooltip_hold_time, tooltip_fade_time)
 
-func fade_build_tooltip():
-	build_tooltip.begin_fade(tooltip_hold_time, tooltip_fade_time)
+
 
 func make_new_game_screen():
 	if is_instance_valid(current_game_screen):

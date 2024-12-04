@@ -1,7 +1,7 @@
 extends RichTextLabel
 
 @export_multiline
-var text_template : String = "%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"
+var text_template : String = "[fill]%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

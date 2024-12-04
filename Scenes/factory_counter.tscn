@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=28 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
@@ -17,6 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://cvyf4lfkcfcvb" path="res://Sprites/Placeholder/PlaceholderMinusPressed.png" id="14_qkpnw"]
 [ext_resource type="Texture2D" uid="uid://cff0bvfk1h7d3" path="res://Sprites/Placeholder/PlaceholderMinusHover.png" id="15_6dyvw"]
 [ext_resource type="Texture2D" uid="uid://c3dwuue40lihj" path="res://Sprites/Placeholder/PlaceholderMinusDisabled.png" id="16_lg7wk"]
+[ext_resource type="Texture2D" uid="uid://b3382jqxj7ysr" path="res://Sprites/Placeholder/PlaceholderLockNormal.png" id="18_xg4tv"]
+[ext_resource type="Texture2D" uid="uid://cc0wu3bfuq24s" path="res://Sprites/Placeholder/PlaceholderLockPressed.png" id="19_aly3j"]
+[ext_resource type="Texture2D" uid="uid://bcthssju3sg6c" path="res://Sprites/Placeholder/PlaceholderLockHover.png" id="20_gigtq"]
+[ext_resource type="Texture2D" uid="uid://ckti1fnm0hprw" path="res://Sprites/Placeholder/PlaceholderLockDisabled.png" id="21_ujnlk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0.270588)
@@ -46,13 +50,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wd7"]
+bg_color = Color(0.247059, 0.247059, 0.247059, 0.831373)
+
 [node name="FactoryCounter" type="Control"]
+custom_minimum_size = Vector2(124, 56)
 layout_mode = 3
 anchors_preset = 0
-offset_left = 25.0
-offset_top = 178.0
-offset_right = 149.0
-offset_bottom = 234.0
+offset_right = 124.0
+offset_bottom = 56.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_2ei53")
 icon_scene = ExtResource("4_nkejt")
@@ -79,9 +85,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -48.0
-offset_top = -8.0
+offset_top = -11.0
 offset_right = 48.0
-offset_bottom = 8.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -107,25 +113,16 @@ layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_5vlrj")
 
-[node name="FactoryIcon7" parent="IconBox" instance=ExtResource("4_nkejt")]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_5vlrj")
-
-[node name="FactoryIcon8" parent="IconBox" instance=ExtResource("4_nkejt")]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_5vlrj")
-
 [node name="NumBox" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
-offset_top = -1.0
+offset_top = -5.0
 offset_right = 48.0
-offset_bottom = 26.0
+offset_bottom = 22.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
@@ -147,13 +144,14 @@ layout_mode = 2
 text = "3"
 
 [node name="AmountLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
+offset_left = 2.0
 offset_top = -23.0
-offset_right = 74.0
+offset_right = 88.0
 grow_vertical = 0
 text = "4/6"
 horizontal_alignment = 2
@@ -165,9 +163,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -39.5
+offset_left = -50.0
 offset_top = 3.0
-offset_right = 40.5
+offset_right = 50.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -179,16 +177,16 @@ show_percentage = false
 
 [node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(9, 61)
+position = Vector2(7, 61)
 sprite_frames = SubResource("SpriteFrames_hokrf")
-frame_progress = 0.282955
 
 [node name="PlanButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 90.0
-offset_top = 37.0
-offset_right = 106.0
-offset_bottom = 53.0
+offset_left = 105.0
+offset_top = 36.0
+offset_right = 121.0
+offset_bottom = 52.0
 mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("9_i0o8u")
@@ -197,11 +195,12 @@ texture_hover = ExtResource("11_02m6e")
 texture_disabled = ExtResource("12_l4f5b")
 
 [node name="UnplanButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 74.0
-offset_top = 37.0
-offset_right = 90.0
-offset_bottom = 53.0
+offset_left = 89.0
+offset_top = 36.0
+offset_right = 105.0
+offset_bottom = 52.0
 mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("13_4yo8o")
@@ -210,9 +209,40 @@ texture_hover = ExtResource("15_6dyvw")
 texture_disabled = ExtResource("16_lg7wk")
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
-position = Vector2(108, 0)
+position = Vector2(124, 0)
+
+[node name="LockPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2wd7")
+
+[node name="UnlockButton" type="TextureButton" parent="LockPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+texture_normal = ExtResource("18_xg4tv")
+texture_pressed = ExtResource("19_aly3j")
+texture_hover = ExtResource("20_gigtq")
+texture_disabled = ExtResource("21_ujnlk")
+stretch_mode = 3
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="PlanButton" to="." method="_on_plan_button_pressed"]
 [connection signal="pressed" from="UnplanButton" to="." method="_on_unplan_button_pressed"]
+[connection signal="pressed" from="LockPanel/UnlockButton" to="." method="_on_unlock_button_pressed"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm53s1s8yyno7"]
+
+[ext_resource type="Texture2D" uid="uid://ccx2m3jms0433" path="res://Sprites/Placeholder/PlaceholderHammer.png" id="1_5t8c4"]
+
+[node name="TooltipHeaderIcon" type="TextureRect"]
+size_flags_horizontal = 8
+texture = ExtResource("1_5t8c4")
+stretch_mode = 2

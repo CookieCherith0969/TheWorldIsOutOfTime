@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://esv3lpa5b5t1"]
+
+[ext_resource type="Script" path="res://Scripts/tooltip.gd" id="1_15287"]
+[ext_resource type="PackedScene" uid="uid://diemxc36x70ej" path="res://Scenes/tooltip_cost_icon.tscn" id="2_3sm8y"]
+[ext_resource type="PackedScene" uid="uid://dm53s1s8yyno7" path="res://Scenes/tooltip_header_icon.tscn" id="3_4urou"]
+[ext_resource type="Texture2D" uid="uid://cl14wpff1ow2s" path="res://Sprites/Placeholder/PlaceholderTime.png" id="4_7wui5"]
+[ext_resource type="Texture2D" uid="uid://ccx2m3jms0433" path="res://Sprites/Placeholder/PlaceholderHammer.png" id="4_yl0p1"]
+[ext_resource type="Texture2D" uid="uid://po5bke1uwm7f" path="res://Sprites/Placeholder/PlaceholderSmallLock.png" id="5_oh7nk"]
+[ext_resource type="Texture2D" uid="uid://1kx70nlah83q" path="res://Sprites/Placeholder/PlaceholderWindowDarkPurple.png" id="6_benyt"]
+
+[node name="Tooltip" type="MarginContainer"]
+z_index = 2
+offset_right = 84.0
+offset_bottom = 27.0
+mouse_filter = 2
+script = ExtResource("1_15287")
+cost_icon_scene = ExtResource("2_3sm8y")
+header_icon_scene = ExtResource("3_4urou")
+time_icon = ExtResource("4_7wui5")
+build_icon = ExtResource("4_yl0p1")
+lock_icon = ExtResource("5_oh7nk")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("6_benyt")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="IconList" type="VBoxContainer" parent="InnerMargin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TooltipHeaderIcon" parent="InnerMargin/IconList" instance=ExtResource("3_4urou")]
+layout_mode = 2
+
+[node name="TooltipCostIcon" parent="InnerMargin/IconList" instance=ExtResource("2_3sm8y")]
+layout_mode = 2

@@ -2,7 +2,7 @@ extends NinePatchRect
 class_name LargeMap
 
 @export
-var small_map : NinePatchRect
+var small_map : Control
 @export
 var scale_factor : Vector2 = Vector2(2,2)
 #var earth : MapPlanet

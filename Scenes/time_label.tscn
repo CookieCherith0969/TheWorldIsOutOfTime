@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbj8x7k48jrb5"]
+
+[ext_resource type="Script" path="res://Scripts/time_label.gd" id="1_ccv85"]
+
+[node name="TimeLabel" type="RichTextLabel"]
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 291.0
+offset_bottom = 46.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[fill]02[font_size=16] Years [/font_size]09[font_size=16] Months [/font_size]11[font_size=16] Days [/font_size]"
+scroll_active = false
+script = ExtResource("1_ccv85")
+text_template = "[fill]%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://dib570tkj0s03"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_0mje1"]
+
+[resource]
+script = ExtResource("1_0mje1")
+input_materials = Array[int]([0])
+inputs_per_day = Array[int]([20])
+output_materials = Array[int]([1])
+outputs_per_day = Array[int]([2])
+build_days = 4
+build_materials = Array[int]([1, 2])
+build_amounts = Array[int]([50, 30])

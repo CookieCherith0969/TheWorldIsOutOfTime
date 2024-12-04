@@ -78,6 +78,7 @@ func _ready() -> void:
 		prev_day_gains.append(0)
 	
 	material_amounts[Materials.STONE] = 200
+	material_amounts[Materials.FOUNDATION] = 200
 	material_amounts[Materials.METALS] = 100
 
 func _physics_process(delta: float) -> void:
@@ -165,6 +166,18 @@ func can_build_factory(factory_index : int):
 	
 	return true
 
+func can_unlock_factory(factory_index : int):
+	var factory : FactoryInfo = factories[factory_index]
+	# Return early if any materials are lacking
+	for i in range(factory.research_materials.size()):
+		var material : Materials = factory.research_materials[i]
+		var amount : int = factory.research_amounts[i]
+		
+		if material_amounts[material] < amount:
+			return false
+	
+	return true
+
 func process_days(number_of_days : int):
 	timeskip_days += number_of_days
 	timeskip_started.emit(number_of_days)
@@ -177,6 +190,7 @@ func process_day():
 			build_factory(f)
 		else:
 			factory_build_progress[f] = 0
+			factory_build_progressed.emit(factories[f], 0)
 		
 		if active_factory_amounts[f] == 0:
 			continue

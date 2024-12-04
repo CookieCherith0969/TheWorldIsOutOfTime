@@ -31,6 +31,13 @@ var plan_button : TextureButton = $PlanButton
 @onready
 var tooltip_marker : Marker2D = $TooltipMarker
 
+@export
+var unlocked : bool = false
+@onready
+var lock_panel : Panel = $LockPanel
+@onready
+var unlock_button : TextureButton = $LockPanel/UnlockButton
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	factory_index = GameManager.get_factory_index(represented_factory)
@@ -39,6 +46,9 @@ func _ready() -> void:
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
 	
+	if unlocked:
+		unlock()
+		
 	populate_icons()
 	populate_nums()
 	update_amounts()
@@ -62,7 +72,7 @@ func on_timeskip_started(_num_days : int):
 	update_buttons()
 	
 func on_timeskip_ended():
-	building_wrench.stop()
+	building_wrench.pause()
 	update_buttons()
 
 func populate_icons():
@@ -141,6 +151,7 @@ func update_buttons():
 	if GameManager.is_timeskipping():
 		unplan_button.disabled = true
 		plan_button.disabled = true
+		unlock_button.disabled = true
 		return
 	
 	if GameManager.get_planned_factory_amount(factory_index) <= 0:
@@ -152,6 +163,11 @@ func update_buttons():
 		plan_button.disabled = false
 	else:
 		plan_button.disabled = true
+	
+	if GameManager.can_unlock_factory(factory_index):
+		unlock_button.disabled = false
+	else:
+		unlock_button.disabled = true
 
 func _on_plan_button_pressed() -> void:
 	GameManager.plan_factory(factory_index)
@@ -160,7 +176,24 @@ func _on_unplan_button_pressed() -> void:
 	GameManager.unplan_factory(factory_index)
 
 func _on_mouse_entered() -> void:
-	UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
+	if unlocked:
+		UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
+	else:
+		UIManager.show_unlock_tooltip(tooltip_marker.global_position, represented_factory)
 
 func _on_mouse_exited() -> void:
-	UIManager.hide_build_tooltip()
+	UIManager.hide_tooltip()
+
+func unlock():
+	lock_panel.hide()
+	
+	num_box.show()
+	amount_label.show()
+	unplan_button.show()
+	plan_button.show()
+	
+	unlocked = true
+
+func _on_unlock_button_pressed() -> void:
+	if GameManager.can_unlock_factory(factory_index):
+		unlock()

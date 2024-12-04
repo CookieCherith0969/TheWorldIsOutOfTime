@@ -6,8 +6,8 @@
 script = ExtResource("1_8nf82")
 input_materials = Array[int]([0])
 inputs_per_day = Array[int]([10])
-output_materials = Array[int]([1])
+output_materials = Array[int]([2])
 outputs_per_day = Array[int]([5])
-build_days = 5
-build_materials = Array[int]([0, 1])
-build_amounts = Array[int]([150, 50])
+build_days = 4
+build_materials = Array[int]([1, 0])
+build_amounts = Array[int]([20, 50])

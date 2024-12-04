@@ -17,3 +17,8 @@ var build_days : int
 var build_materials : Array[GameManager.Materials]
 @export
 var build_amounts : Array[int]
+
+@export
+var research_materials : Array[GameManager.Materials]
+@export
+var research_amounts : Array[int]
