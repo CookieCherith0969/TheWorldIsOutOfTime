@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=37 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_d86f8"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="1_ggf71"]
@@ -30,6 +30,7 @@
 [ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="20_u4d8j"]
 [ext_resource type="Resource" uid="uid://dib570tkj0s03" path="res://Factories/FoundationMixery.tres" id="21_w624j"]
 [ext_resource type="Resource" uid="uid://bfj4def3ve48o" path="res://Factories/PartWorkshop.tres" id="22_2qmtm"]
+[ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="22_jbrr0"]
 [ext_resource type="Resource" uid="uid://br52j8668p87f" path="res://Factories/ElectronicsWorkshop.tres" id="24_c3plp"]
 [ext_resource type="Texture2D" uid="uid://bkb0rswoobt66" path="res://Sprites/Placeholder/PlaceholderMinimiseNormal.png" id="30_lw25b"]
 [ext_resource type="Texture2D" uid="uid://dfmpgf8687hyv" path="res://Sprites/Placeholder/PlaceholderMinimisePressed.png" id="31_ishnu"]
@@ -55,11 +56,12 @@ minimise_button = NodePath("LargeMap/MinimiseButton")
 layout_mode = 0
 offset_left = 6.0
 offset_top = 0.0
-offset_right = 289.0
+offset_right = 287.0
 offset_bottom = 45.0
 
 [node name="TimeControl" parent="." instance=ExtResource("2_a52c7")]
-offset_top = 6.0
+offset_left = 288.0
+offset_right = 393.0
 offset_bottom = 46.0
 
 [node name="SolarSystemMap" type="TextureButton" parent="."]
@@ -69,8 +71,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 200.0
+offset_left = -206.0
+offset_bottom = 206.0
 grow_horizontal = 0
 focus_neighbor_left = NodePath("../TimeControl")
 focus_neighbor_bottom = NodePath("../FactoryWindow")
@@ -79,6 +81,7 @@ texture_pressed = ExtResource("5_p4c5s")
 texture_hover = ExtResource("6_dx7xp")
 texture_disabled = ExtResource("5_p4c5s")
 texture_focused = ExtResource("7_jehau")
+stretch_mode = 3
 
 [node name="Sun" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
 position = Vector2(117, 48)
@@ -147,12 +150,19 @@ death_asteroid_info = ExtResource("16_84j8k")
 warning_scene = ExtResource("20_mju6k")
 warning_offset = Vector2(2.5, 7)
 
+[node name="SpaceRect" parent="SolarSystemMap" instance=ExtResource("22_jbrr0")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 201.0
+offset_bottom = 201.0
+
 [node name="MaterialWindow" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 11.0
-offset_top = 61.0
-offset_right = 392.0
-offset_bottom = 178.0
+offset_left = 8.0
+offset_top = 62.0
+offset_right = 389.0
+offset_bottom = 179.0
 
 [node name="Background" type="NinePatchRect" parent="MaterialWindow"]
 layout_mode = 2
@@ -291,6 +301,14 @@ texture_pressed = ExtResource("31_ishnu")
 texture_hover = ExtResource("32_pntrx")
 texture_disabled = ExtResource("31_ishnu")
 texture_focused = ExtResource("35_2c4xp")
+
+[node name="SpaceRect" parent="LargeMap" instance=ExtResource("22_jbrr0")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 598.0
+offset_bottom = 548.0
+do_rotating = false
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]

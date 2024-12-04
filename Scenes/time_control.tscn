@@ -22,9 +22,9 @@
 layout_mode = 3
 anchors_preset = 0
 offset_left = 290.0
-offset_top = 3.0
+offset_top = 6.0
 offset_right = 395.0
-offset_bottom = 43.0
+offset_bottom = 40.0
 script = ExtResource("1_6fb1j")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -43,21 +43,22 @@ patch_margin_bottom = 2
 [node name="TimeskipButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 79.0
-offset_top = 8.0
-offset_right = 101.0
-offset_bottom = 30.0
+offset_top = 7.0
+offset_right = 103.0
+offset_bottom = 31.0
 focus_neighbor_left = NodePath("../DoubleButton")
 texture_normal = ExtResource("3_3kf5r")
 texture_pressed = ExtResource("4_ubg5d")
 texture_hover = ExtResource("5_6iinn")
 texture_disabled = ExtResource("6_fpkb2")
 texture_focused = ExtResource("7_iul2v")
+stretch_mode = 3
 
 [node name="HalveButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 12.0
-offset_right = 20.0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 22.0
 offset_bottom = 28.0
 focus_neighbor_right = NodePath("../DoubleButton")
 disabled = true
@@ -66,12 +67,13 @@ texture_pressed = ExtResource("9_8bfpu")
 texture_hover = ExtResource("10_yk32h")
 texture_disabled = ExtResource("11_62xaa")
 texture_focused = ExtResource("12_m25io")
+stretch_mode = 3
 
 [node name="DoubleButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 61.0
-offset_top = 12.0
-offset_right = 77.0
+offset_left = 59.0
+offset_top = 8.0
+offset_right = 79.0
 offset_bottom = 28.0
 focus_neighbor_left = NodePath("../HalveButton")
 focus_neighbor_right = NodePath("../TimeskipButton")
@@ -80,13 +82,14 @@ texture_pressed = ExtResource("14_7gger")
 texture_hover = ExtResource("15_oyd2v")
 texture_disabled = ExtResource("16_em3f6")
 texture_focused = ExtResource("17_i77lj")
+stretch_mode = 3
 
 [node name="DurationLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 8.0
-offset_right = 60.0
-offset_bottom = 31.0
+offset_left = 20.0
+offset_top = 6.0
+offset_right = 61.0
+offset_bottom = 29.0
 text = "1"
 horizontal_alignment = 1
 
