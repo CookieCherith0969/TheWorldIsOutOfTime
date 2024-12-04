@@ -9,21 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
 [ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/Placeholder/PlaceholderWrench.png" id="5_igpy1"]
-[ext_resource type="Texture2D" uid="uid://bcy5clhruo4i3" path="res://Sprites/Placeholder/PlaceholderPlusNormal.png" id="9_i0o8u"]
-[ext_resource type="Texture2D" uid="uid://cbktppoul7ai" path="res://Sprites/Placeholder/PlaceholderPlusPressed.png" id="10_svmsk"]
-[ext_resource type="Texture2D" uid="uid://cklgjrl2cucku" path="res://Sprites/Placeholder/PlaceholderPlusHover.png" id="11_02m6e"]
-[ext_resource type="Texture2D" uid="uid://ctafuvdyre2w5" path="res://Sprites/Placeholder/PlaceholderPlusDisabled.png" id="12_l4f5b"]
-[ext_resource type="Texture2D" uid="uid://ce06br6jg22ra" path="res://Sprites/Placeholder/PlaceholderMinusNormal.png" id="13_4yo8o"]
-[ext_resource type="Texture2D" uid="uid://cvyf4lfkcfcvb" path="res://Sprites/Placeholder/PlaceholderMinusPressed.png" id="14_qkpnw"]
-[ext_resource type="Texture2D" uid="uid://c4auakbo88drx" path="res://Sprites/Placeholder/PlaceholderPlusFocus.png" id="14_xcpib"]
-[ext_resource type="Texture2D" uid="uid://cff0bvfk1h7d3" path="res://Sprites/Placeholder/PlaceholderMinusHover.png" id="15_6dyvw"]
-[ext_resource type="Texture2D" uid="uid://c3dwuue40lihj" path="res://Sprites/Placeholder/PlaceholderMinusDisabled.png" id="16_lg7wk"]
-[ext_resource type="Texture2D" uid="uid://b3382jqxj7ysr" path="res://Sprites/Placeholder/PlaceholderLockNormal.png" id="18_xg4tv"]
-[ext_resource type="Texture2D" uid="uid://cc0wu3bfuq24s" path="res://Sprites/Placeholder/PlaceholderLockPressed.png" id="19_aly3j"]
-[ext_resource type="Texture2D" uid="uid://dv2o7ylxbyv7e" path="res://Sprites/Placeholder/PlaceholderMinusFocus.png" id="19_u1u5r"]
-[ext_resource type="Texture2D" uid="uid://bcthssju3sg6c" path="res://Sprites/Placeholder/PlaceholderLockHover.png" id="20_gigtq"]
-[ext_resource type="Texture2D" uid="uid://ckti1fnm0hprw" path="res://Sprites/Placeholder/PlaceholderLockDisabled.png" id="21_ujnlk"]
-[ext_resource type="Texture2D" uid="uid://mxvch0m5mbg8" path="res://Sprites/Placeholder/PlaceholderLockFocus.png" id="24_i2lvy"]
+[ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
+[ext_resource type="Texture2D" uid="uid://dai4ysitmliuc" path="res://Sprites/Buttons/add-prod-button-pressed.png" id="11_2akyy"]
+[ext_resource type="Texture2D" uid="uid://b0f16do1diy35" path="res://Sprites/Buttons/add-prod-button-hover.png" id="12_7ypcg"]
+[ext_resource type="Texture2D" uid="uid://jvlg7ob1568a" path="res://Sprites/Buttons/add-prod-button-disabled.png" id="13_2gq2p"]
+[ext_resource type="Texture2D" uid="uid://cgp5ks7neup20" path="res://Sprites/Buttons/add-prod-button-focus.png" id="14_6qtwy"]
+[ext_resource type="Texture2D" uid="uid://27dwksrgug0i" path="res://Sprites/Buttons/minus-prod-button-normal.png" id="15_dqyv1"]
+[ext_resource type="Texture2D" uid="uid://d4lckcjm36v6o" path="res://Sprites/Buttons/minus-prod-button-pressed.png" id="16_7o6du"]
+[ext_resource type="Texture2D" uid="uid://br0qu116lkakb" path="res://Sprites/Buttons/minus-prod-button-hover.png" id="17_dx8m8"]
+[ext_resource type="Texture2D" uid="uid://bunidpkfhuk61" path="res://Sprites/Buttons/minus-prod-button-disabled.png" id="18_sioiy"]
+[ext_resource type="Texture2D" uid="uid://bwu8p2mnn4b3e" path="res://Sprites/Buttons/minus-prod-button-focus.png" id="19_ta8fr"]
+[ext_resource type="Texture2D" uid="uid://dmiid8l8odijq" path="res://Sprites/Buttons/lock-button-normal.png" id="20_jjlxd"]
+[ext_resource type="Texture2D" uid="uid://ckmgefvvi7f66" path="res://Sprites/Buttons/lock-button-pressed.png" id="21_oplvo"]
+[ext_resource type="Texture2D" uid="uid://8fl7tysyn1s8" path="res://Sprites/Buttons/lock-button-hover.png" id="22_n62rc"]
+[ext_resource type="Texture2D" uid="uid://rpkghyfsve4v" path="res://Sprites/Buttons/lock-button-disabled.png" id="23_kjsbo"]
+[ext_resource type="Texture2D" uid="uid://24tyavjggpt5" path="res://Sprites/Buttons/lock-button-focus.png" id="24_qmq1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0.270588)
@@ -154,7 +154,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = -23.0
-offset_right = 88.0
+offset_right = 80.0
 grow_vertical = 0
 text = "4/6"
 horizontal_alignment = 2
@@ -186,32 +186,32 @@ sprite_frames = SubResource("SpriteFrames_hokrf")
 [node name="PlanButton" type="TextureButton" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 105.0
-offset_top = 36.0
-offset_right = 121.0
-offset_bottom = 52.0
+offset_left = 102.0
+offset_top = 34.0
+offset_right = 122.0
+offset_bottom = 54.0
 mouse_filter = 1
 disabled = true
-texture_normal = ExtResource("9_i0o8u")
-texture_pressed = ExtResource("10_svmsk")
-texture_hover = ExtResource("11_02m6e")
-texture_disabled = ExtResource("12_l4f5b")
-texture_focused = ExtResource("14_xcpib")
+texture_normal = ExtResource("10_xsj8s")
+texture_pressed = ExtResource("11_2akyy")
+texture_hover = ExtResource("12_7ypcg")
+texture_disabled = ExtResource("13_2gq2p")
+texture_focused = ExtResource("14_6qtwy")
 
 [node name="UnplanButton" type="TextureButton" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 89.0
-offset_top = 36.0
-offset_right = 105.0
-offset_bottom = 52.0
+offset_left = 80.0
+offset_top = 34.0
+offset_right = 100.0
+offset_bottom = 54.0
 mouse_filter = 1
 disabled = true
-texture_normal = ExtResource("13_4yo8o")
-texture_pressed = ExtResource("14_qkpnw")
-texture_hover = ExtResource("15_6dyvw")
-texture_disabled = ExtResource("16_lg7wk")
-texture_focused = ExtResource("19_u1u5r")
+texture_normal = ExtResource("15_dqyv1")
+texture_pressed = ExtResource("16_7o6du")
+texture_hover = ExtResource("17_dx8m8")
+texture_disabled = ExtResource("18_sioiy")
+texture_focused = ExtResource("19_ta8fr")
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
 position = Vector2(124, 0)
@@ -233,18 +233,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 3.0
-offset_right = 16.0
-offset_bottom = 35.0
+offset_left = -9.0
+offset_top = 7.0
+offset_right = 9.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-texture_normal = ExtResource("18_xg4tv")
-texture_pressed = ExtResource("19_aly3j")
-texture_hover = ExtResource("20_gigtq")
-texture_disabled = ExtResource("21_ujnlk")
-texture_focused = ExtResource("24_i2lvy")
+texture_normal = ExtResource("20_jjlxd")
+texture_pressed = ExtResource("21_oplvo")
+texture_hover = ExtResource("22_n62rc")
+texture_disabled = ExtResource("23_kjsbo")
+texture_focused = ExtResource("24_qmq1s")
 stretch_mode = 3
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

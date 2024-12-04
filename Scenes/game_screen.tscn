@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="2_bn0kx"]
 [ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/Placeholder/PlaceholderWindowSpace.png" id="3_aimfd"]
 [ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="4_6vkgw"]
+[ext_resource type="Texture2D" uid="uid://bu8xnim814cnm" path="res://Sprites/Buttons/solar-system-panel-normal.png" id="4_iibas"]
 [ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="5_kvu1q"]
-[ext_resource type="Texture2D" uid="uid://d2hv8fv5xd26y" path="res://Sprites/Placeholder/PlaceholderMapNormal.png" id="5_uh3ta"]
-[ext_resource type="Texture2D" uid="uid://ccjov65bd3bjt" path="res://Sprites/Placeholder/PlaceholderMapPressed.png" id="6_d65js"]
+[ext_resource type="Texture2D" uid="uid://dmv2pyg3swwo4" path="res://Sprites/Buttons/solar-system-panel-pressed.png" id="5_p4c5s"]
+[ext_resource type="Texture2D" uid="uid://c3distleqmp0c" path="res://Sprites/Buttons/solar-system-panel-hover.png" id="6_dx7xp"]
 [ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="6_scpno"]
 [ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="7_bey5w"]
-[ext_resource type="Texture2D" uid="uid://da40nx65pttmb" path="res://Sprites/Placeholder/PlaceholderMapFocus.png" id="7_hiv7l"]
-[ext_resource type="Texture2D" uid="uid://b3besvtadrjfc" path="res://Sprites/Placeholder/PlaceholderMapHover.png" id="7_xu5r2"]
+[ext_resource type="Texture2D" uid="uid://5euyktl8xhyg" path="res://Sprites/Buttons/solar-system-panel-focus.png" id="7_jehau"]
 [ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="8_kc15m"]
 [ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="9_3dj3a"]
 [ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="10_cwurn"]
@@ -59,6 +59,8 @@ offset_right = 289.0
 offset_bottom = 45.0
 
 [node name="TimeControl" parent="." instance=ExtResource("2_a52c7")]
+offset_top = 6.0
+offset_bottom = 46.0
 
 [node name="SolarSystemMap" type="TextureButton" parent="."]
 z_index = -1
@@ -72,11 +74,11 @@ offset_bottom = 200.0
 grow_horizontal = 0
 focus_neighbor_left = NodePath("../TimeControl")
 focus_neighbor_bottom = NodePath("../FactoryWindow")
-texture_normal = ExtResource("5_uh3ta")
-texture_pressed = ExtResource("6_d65js")
-texture_hover = ExtResource("7_xu5r2")
-texture_disabled = ExtResource("6_d65js")
-texture_focused = ExtResource("7_hiv7l")
+texture_normal = ExtResource("4_iibas")
+texture_pressed = ExtResource("5_p4c5s")
+texture_hover = ExtResource("6_dx7xp")
+texture_disabled = ExtResource("5_p4c5s")
+texture_focused = ExtResource("7_jehau")
 
 [node name="Sun" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
 position = Vector2(117, 48)
