@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=33 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_d86f8"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="1_ggf71"]
@@ -32,23 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://bkb0rswoobt66" path="res://Sprites/Placeholder/PlaceholderMinimiseNormal.png" id="30_lw25b"]
 [ext_resource type="Texture2D" uid="uid://dfmpgf8687hyv" path="res://Sprites/Placeholder/PlaceholderMinimisePressed.png" id="31_ishnu"]
 [ext_resource type="Texture2D" uid="uid://q06aa54hhrr" path="res://Sprites/Placeholder/PlaceholderMinimiseHover.png" id="32_pntrx"]
-[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/Placeholder/PlaceholderArrow.png" id="33_jwcak"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8vatl"]
-atlas = ExtResource("33_jwcak")
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jklg6"]
-atlas = ExtResource("33_jwcak")
-region = Rect2(8, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p1k7y"]
-atlas = ExtResource("33_jwcak")
-region = Rect2(0, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t087r"]
-atlas = ExtResource("33_jwcak")
-region = Rect2(8, 8, 8, 8)
 
 [node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("large_map", "material_window", "factory_window")]
 anchors_preset = 15
@@ -288,17 +271,6 @@ texture_normal = ExtResource("30_lw25b")
 texture_pressed = ExtResource("31_ishnu")
 texture_hover = ExtResource("32_pntrx")
 texture_disabled = ExtResource("31_ishnu")
-
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 21.0
-offset_top = 192.0
-offset_right = 61.0
-offset_bottom = 232.0
-texture_normal = SubResource("AtlasTexture_8vatl")
-texture_pressed = SubResource("AtlasTexture_jklg6")
-texture_hover = SubResource("AtlasTexture_p1k7y")
-texture_disabled = SubResource("AtlasTexture_t087r")
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]
