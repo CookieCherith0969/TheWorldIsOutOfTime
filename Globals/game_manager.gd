@@ -7,18 +7,22 @@ signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 
-enum Materials {STONE, METALS, PARTS, ELECTRONICS}
-var material_icons : Array[Texture] = [
-	preload("res://Sprites/PlaceholderRock.png"),
-	preload("res://Sprites/PlaceholderMetal.png"),
-	preload("res://Sprites/PlaceholderPart.png"),
-	preload("res://Sprites/PlaceholderElectronics.png")
-]
+enum Materials {
+	STONE,
+	FOUNDATION, 
+	METALS, 
+	PARTS, 
+	ELECTRONICS, 
+	ROCKET_PART}
 
-const day_length : float = 1.0/15.0
-const hour_length : float = day_length/24.0
+@export
+var material_icons : Array[Texture] = []
 
-const starting_days : int = 365#1095
+const hours_per_day : float = 24.0
+const day_length : float = 1.0/60.0
+#const hour_length : float = day_length/hours_per_day
+
+const starting_days : int = 365*3
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -41,10 +45,7 @@ var material_amounts : Array[int] = []
 
 var prev_day_gains : Array[int] = []
 
-var factories : Array[FactoryInfo] = [
-	preload("res://Factories/StoneMine.tres"),
-	preload("res://Factories/MetalSmeltery.tres")
-]
+var factories : Array[FactoryInfo] = []
 
 #var total_factory_amounts : Array[int] = []
 var active_factory_amounts : Array[int] = []
@@ -54,25 +55,32 @@ var factory_build_progress : Array[int] = []
 var timeskip_days : int = 0
 var elapsed_timeskip_time : float = 0.0
 var last_day_time : float = 0.0
-var last_hour_time : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Initialise factory list from Factories folder
+	for file_name in DirAccess.get_files_at("res://Factories/"):
+		if (file_name.get_extension() == "import"):
+			file_name = file_name.replace('.import', '')
+		if file_name.get_extension() != "tres":
+			continue
+		factories.append(ResourceLoader.load("res://Factories/"+file_name))
+	
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
 		active_factory_amounts.append(0)
 		planned_factory_amounts.append(0)
 		factory_build_progress.append(0)
 	
-	active_factory_amounts[0] = 2
-	active_factory_amounts[1] = 1
-	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
 		material_amounts.append(0)
 		prev_day_gains.append(0)
+	
+	material_amounts[Materials.STONE] = 200
+	material_amounts[Materials.METALS] = 100
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if timeskip_days <= 0:
 		return
 	
@@ -80,18 +88,15 @@ func _process(delta: float) -> void:
 	
 	while elapsed_timeskip_time - last_day_time >= day_length && timeskip_days > 0:
 		last_day_time += day_length
+		for h in range(int(hours_per_day)):
+			hour_passed.emit()
 		process_day()
 		day_ended.emit()
 		timeskip_days -= 1
 	
-	while elapsed_timeskip_time - last_hour_time >= hour_length:
-		last_hour_time += hour_length
-		hour_passed.emit()
-	
 	if timeskip_days <= 0:
 		elapsed_timeskip_time = 0.0
 		last_day_time = 0.0
-		last_hour_time = 0.0
 		timeskip_ended.emit()
 
 func get_mixed_time() -> Array[int]:
@@ -111,6 +116,14 @@ func get_mixed_time() -> Array[int]:
 		
 		working_days -= days_per_month[i]
 		months += 1
+	
+	if days_left < 0:
+		for i in range(0, days_per_month.size()):
+			if days_per_month[i] > abs(working_days):
+				break
+			
+			working_days += days_per_month[i]
+			months -= 1
 	
 	return [years, months, working_days]
 
@@ -175,7 +188,6 @@ func process_day():
 			prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
 	
 	days_left -= 1
-	day_ended.emit()
 
 func build_factory(factory_index : int):
 	factory_build_progress[factory_index] += 1
@@ -195,6 +207,9 @@ func process_factory(factory_index : int):
 	for i in range(factory.input_materials.size()):
 		var material : Materials = factory.input_materials[i]
 		var input_amount : int = factory.inputs_per_day[i]
+		
+		if input_amount == 0:
+			continue
 		
 		var possible_runs : int = material_amounts[material] / input_amount
 		# Return early if any material doesn't meet requirements

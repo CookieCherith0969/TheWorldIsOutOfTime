@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://Globals/game_manager.gd"
+GameManager="*res://Globals/game_manager.tscn"
 UIManager="*res://Globals/ui_manager.tscn"
 SoundManager="*res://Globals/sound_manager.tscn"
 
@@ -29,9 +29,9 @@ window/stretch/mode="viewport"
 
 [input]
 
-DebugProgress={
+DebugReset={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
 ]
 }
 
@@ -40,5 +40,5 @@ DebugProgress={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.158475, 0.135357, 0.377297, 1)
+environment/defaults/default_clear_color=Color(0.139294, 0.0922117, 0.309375, 1)
 2d/snap/snap_2d_transforms_to_pixel=true

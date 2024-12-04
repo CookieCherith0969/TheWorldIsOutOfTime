@@ -69,8 +69,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_d6dko")
+planet_name = "Mars"
 spriteframes = SubResource("SpriteFrames_f5dsn")
 sprite_offset = Vector2(0, 0)
 orbital_period_hours = 16472.2
+orbit_variation = 0.0
 rotational_period_hours = 24.6
-orbit_distance = 43.0
+rotation_variation = 0.0
+orbit_distance = 42.0
+distance_variation = 0.0

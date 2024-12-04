@@ -1,0 +1,259 @@
+[gd_scene load_steps=31 format=3 uid="uid://1rb1mnyln0nq"]
+
+[ext_resource type="Script" path="res://Scripts/time_label.gd" id="1_66dta"]
+[ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="2_bn0kx"]
+[ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/Placeholder/PlaceholderWindowSpace.png" id="3_aimfd"]
+[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="4_6vkgw"]
+[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="5_kvu1q"]
+[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="6_scpno"]
+[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="7_bey5w"]
+[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="8_kc15m"]
+[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="9_3dj3a"]
+[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="10_cwurn"]
+[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="11_58pl8"]
+[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="12_sg1iv"]
+[ext_resource type="Script" path="res://Scripts/asteroid_field_populator.gd" id="13_rpqa2"]
+[ext_resource type="Resource" uid="uid://d2jw3lpyvsj4l" path="res://Planets/FieldAsteroid.tres" id="14_rddjq"]
+[ext_resource type="Script" path="res://Scripts/death_asteroid_manager.gd" id="15_fxi8y"]
+[ext_resource type="Resource" uid="uid://pt2e3x02hbja" path="res://Planets/DeathAsteroid.tres" id="16_84j8k"]
+[ext_resource type="Script" path="res://Scripts/large_map.gd" id="17_v6jr3"]
+[ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="18_2fkbl"]
+[ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="19_m6fqu"]
+[ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="20_u4d8j"]
+[ext_resource type="Script" path="res://Scripts/time_control.gd" id="21_2u5dk"]
+[ext_resource type="Texture2D" uid="uid://pavs2233hkpn" path="res://Sprites/Placeholder/PlaceholderWindowPurple.png" id="22_w73ww"]
+[ext_resource type="Texture2D" uid="uid://dthf21hipu62o" path="res://Sprites/Placeholder/PlaceholderTimeNormal.png" id="23_ojrfk"]
+[ext_resource type="Texture2D" uid="uid://bhxeff0mk3rfh" path="res://Sprites/Placeholder/PlaceholderTimePressed.png" id="24_wsnqa"]
+[ext_resource type="Texture2D" uid="uid://d386w3in6d14n" path="res://Sprites/Placeholder/PlaceholderTimeHover.png" id="25_j07he"]
+[ext_resource type="Texture2D" uid="uid://20n54c6e2y5n" path="res://Sprites/Placeholder/PlaceholderTimeDisabled.png" id="26_cib27"]
+[ext_resource type="Texture2D" uid="uid://cjiava0wkwcum" path="res://Sprites/Placeholder/PlaceholderArrowNormal.png" id="27_4m33w"]
+[ext_resource type="Texture2D" uid="uid://cecmycvanxigw" path="res://Sprites/Placeholder/PlaceholderArrowPressed.png" id="28_yp51k"]
+[ext_resource type="Texture2D" uid="uid://becv0hdlw2q07" path="res://Sprites/Placeholder/PlaceholderArrowHover.png" id="29_jwjnj"]
+[ext_resource type="Texture2D" uid="uid://dph1gxboiu1m1" path="res://Sprites/Placeholder/PlaceholderArrowDisabled.png" id="30_r5shk"]
+
+[node name="GameScreen" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 291.0
+offset_bottom = 46.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[fill]02[font_size=16] Years [/font_size]09[font_size=16] Months [/font_size]11[font_size=16] Days [/font_size]"
+scroll_active = false
+script = ExtResource("1_66dta")
+text_template = "[fill]%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"
+
+[node name="MaterialCounter" parent="." instance=ExtResource("2_bn0kx")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 76.0
+offset_right = 135.0
+offset_bottom = 126.0
+
+[node name="MaterialCounter2" parent="." instance=ExtResource("2_bn0kx")]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 76.0
+offset_right = 229.0
+offset_bottom = 126.0
+represented_material = 1
+
+[node name="SolarSystemMap" type="NinePatchRect" parent="."]
+z_index = -1
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+texture = ExtResource("3_aimfd")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Sun" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mercury" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("5_kvu1q")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Venus" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("6_scpno")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Earth" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("7_bey5w")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mars" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("8_kc15m")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Jupiter" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("9_3dj3a")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Saturn" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("10_cwurn")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Uranus" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("11_58pl8")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Neptune" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("12_sg1iv")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="AsteroidFieldPopulator" type="Node2D" parent="SolarSystemMap"]
+script = ExtResource("13_rpqa2")
+num_asteroids = 30
+asteroid_info = ExtResource("14_rddjq")
+
+[node name="DeathAsteroidManager" type="Node2D" parent="SolarSystemMap" node_paths=PackedStringArray("earth", "large_map")]
+script = ExtResource("15_fxi8y")
+earth = NodePath("../Earth")
+large_map = NodePath("../../LargeMap")
+planet_scene = ExtResource("4_6vkgw")
+death_asteroid_info = ExtResource("16_84j8k")
+
+[node name="LargeMap" type="NinePatchRect" parent="." node_paths=PackedStringArray("small_map")]
+visible = false
+z_index = 3
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -600.0
+offset_top = 100.0
+offset_bottom = 600.0
+grow_horizontal = 0
+texture = ExtResource("3_aimfd")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+script = ExtResource("17_v6jr3")
+small_map = NodePath("../SolarSystemMap")
+scale_factor = Vector2(3, 3)
+
+[node name="FactoryCounter" parent="." instance=ExtResource("18_2fkbl")]
+offset_left = 48.0
+offset_top = 208.0
+offset_right = 156.0
+offset_bottom = 264.0
+represented_factory = ExtResource("19_m6fqu")
+
+[node name="FactoryCounter2" parent="." instance=ExtResource("18_2fkbl")]
+offset_left = 162.0
+offset_top = 208.0
+offset_right = 270.0
+offset_bottom = 264.0
+
+[node name="FactoryCounter3" parent="." instance=ExtResource("18_2fkbl")]
+offset_left = 105.0
+offset_top = 304.0
+offset_right = 213.0
+offset_bottom = 360.0
+represented_factory = ExtResource("20_u4d8j")
+
+[node name="TimeControl" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 293.0
+offset_top = 3.0
+offset_right = 391.0
+offset_bottom = 43.0
+script = ExtResource("21_2u5dk")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TimeControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_w73ww")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="TimeskipButton" type="TextureButton" parent="TimeControl"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 4.0
+offset_right = 97.0
+offset_bottom = 36.0
+texture_normal = ExtResource("23_ojrfk")
+texture_pressed = ExtResource("24_wsnqa")
+texture_hover = ExtResource("25_j07he")
+texture_disabled = ExtResource("26_cib27")
+
+[node name="HalveButton" type="TextureButton" parent="TimeControl"]
+layout_mode = 0
+offset_top = 12.0
+offset_right = 16.0
+offset_bottom = 28.0
+disabled = true
+texture_normal = ExtResource("27_4m33w")
+texture_pressed = ExtResource("28_yp51k")
+texture_hover = ExtResource("29_jwjnj")
+texture_disabled = ExtResource("30_r5shk")
+
+[node name="DoubleButton" type="TextureButton" parent="TimeControl"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 66.0
+offset_bottom = 28.0
+texture_normal = ExtResource("27_4m33w")
+texture_pressed = ExtResource("28_yp51k")
+texture_hover = ExtResource("29_jwjnj")
+texture_disabled = ExtResource("30_r5shk")
+flip_h = true
+
+[node name="DurationLabel" type="Label" parent="TimeControl"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 31.0
+text = "1
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TimeControl/TimeskipButton" to="TimeControl" method="_on_timeskip_button_pressed"]
+[connection signal="pressed" from="TimeControl/HalveButton" to="TimeControl" method="_on_halve_button_pressed"]
+[connection signal="pressed" from="TimeControl/DoubleButton" to="TimeControl" method="_on_double_button_pressed"]

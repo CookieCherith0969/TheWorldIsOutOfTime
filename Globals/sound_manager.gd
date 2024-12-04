@@ -3,6 +3,11 @@ extends Node
 @onready
 var menu_music : AudioStreamPlayer = $MenuMusic
 
+@export
+var end_game_duration : int = 365
+@export
+var mid_game_duration : int = 365
+
 func start_menu_music():
 	menu_music.play()
 

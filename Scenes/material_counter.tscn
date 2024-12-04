@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://4b0rsfr4udam"]
 
 [ext_resource type="Script" path="res://Scripts/material_counter.gd" id="1_nlbnh"]
-[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="2_3l76j"]
-[ext_resource type="Texture2D" uid="uid://cc0u6rmnhpdwn" path="res://Sprites/PlaceholderWindowYellow.png" id="2_eyvty"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="2_3l76j"]
+[ext_resource type="Texture2D" uid="uid://cc0u6rmnhpdwn" path="res://Sprites/Placeholder/PlaceholderWindowYellow.png" id="2_eyvty"]
 
 [node name="MaterialCounter" type="Control"]
 layout_mode = 3

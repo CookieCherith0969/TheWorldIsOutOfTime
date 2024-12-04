@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg5mi0q0ktsog"]
+
+[ext_resource type="Script" path="res://Scripts/build_cost_icon.gd" id="1_t6icn"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="2_8sw1w"]
+[ext_resource type="Texture2D" uid="uid://cl14wpff1ow2s" path="res://Sprites/Placeholder/PlaceholderTime.png" id="2_kks7d"]
+
+[node name="BuildCostIcon" type="HBoxContainer"]
+mouse_filter = 2
+script = ExtResource("1_t6icn")
+time_icon = ExtResource("2_kks7d")
+
+[node name="MaterialIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8sw1w")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(56, 23)
+layout_mode = 2
+text = "999.9M"

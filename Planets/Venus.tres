@@ -69,8 +69,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_h53tj")
+planet_name = "Venus"
 spriteframes = SubResource("SpriteFrames_e8okp")
 sprite_offset = Vector2(-0.5, -0.5)
 orbital_period_hours = 5400.0
+orbit_variation = 0.0
 rotational_period_hours = 100.0
-orbit_distance = 30.0
+rotation_variation = 0.0
+orbit_distance = 29.0
+distance_variation = 0.0

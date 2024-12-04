@@ -69,8 +69,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_cl0yf")
+planet_name = "Mercury"
 spriteframes = SubResource("SpriteFrames_yeamv")
 sprite_offset = Vector2(-0.5, -0.5)
 orbital_period_hours = 2112.0
+orbit_variation = 0.0
 rotational_period_hours = 50.0
-orbit_distance = 24.5
+rotation_variation = 0.0
+orbit_distance = 23.5
+distance_variation = 0.0

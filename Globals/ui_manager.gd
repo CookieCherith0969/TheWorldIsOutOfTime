@@ -1,32 +1,32 @@
 extends CanvasLayer
 
-@onready
-var time_label : RichTextLabel = $TextureRect/TimeLabel
+@export
+var build_tooltip : BuildTooltip
+const tooltip_hold_time : float = 1
+const tooltip_fade_time : float = 1
 
 const simplification_suffixes = [
 	"",
 	"K",
 	"M",
 	"B",
-	"T"
+	"T",
+	"Q"
 ]
 const round_up_leniency = 0.025
+
+var current_game_screen : Control
+@export
+var game_screen_scene : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_window().min_size = get_viewport().size
-	
-	update_time_label()
-	
-	GameManager.day_ended.connect(on_day_ended)
+	make_new_game_screen()
 
-func on_day_ended():
-	update_time_label()
-
-func update_time_label():
-	var mixed_time : Array[int] = GameManager.get_mixed_time()
-	
-	time_label.text = "%s[font_size=16] Years [/font_size]%s[font_size=16] Months [/font_size]%s[font_size=16] Days [/font_size]" % mixed_time
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("DebugReset"):
+		make_new_game_screen()
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""
@@ -48,3 +48,22 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 		num_string = "%.01f" % truncated_num
 	
 	return plus_string + num_string + simplification_suffixes[suffix_index]
+
+func show_build_tooltip(pos : Vector2i, factory : FactoryInfo):
+	build_tooltip.set_position(pos)
+	build_tooltip.populate_costs_from_factory(factory)
+	build_tooltip.show_tooltip()
+
+func hide_build_tooltip():
+	build_tooltip.hide_tooltip()
+
+func fade_build_tooltip():
+	build_tooltip.begin_fade(tooltip_hold_time, tooltip_fade_time)
+
+func make_new_game_screen():
+	if is_instance_valid(current_game_screen):
+		remove_child(current_game_screen)
+		current_game_screen.queue_free()
+	var new_game_screen = game_screen_scene.instantiate()
+	add_child(new_game_screen)
+	current_game_screen = new_game_screen

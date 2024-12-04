@@ -69,8 +69,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_ssmw3")
+planet_name = "SUN"
 spriteframes = SubResource("SpriteFrames_gykvj")
 sprite_offset = Vector2(0, 0)
 orbital_period_hours = 0.0
+orbit_variation = 0.0
 rotational_period_hours = 12.0
+rotation_variation = 0.0
 orbit_distance = 0.0
+distance_variation = 0.0

@@ -6,10 +6,10 @@ var factory_index : int
 
 @onready
 var icon_box : HBoxContainer = $IconBox
-@onready
-var icon_scene : PackedScene = preload("res://Scenes/factory_icon.tscn")
-@onready
-var arrow_texture : Texture = preload("res://Sprites/PlaceholderArrow.png")
+@export
+var icon_scene : PackedScene
+@export
+var arrow_texture : Texture
 
 @onready
 var num_box : HBoxContainer = $NumBox
@@ -27,6 +27,9 @@ var building_wrench : AnimatedSprite2D = $BuildingWrench
 var unplan_button : TextureButton = $UnplanButton
 @onready
 var plan_button : TextureButton = $PlanButton
+
+@onready
+var tooltip_marker : Marker2D = $TooltipMarker
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -99,7 +102,11 @@ func populate_nums():
 	for input_num in represented_factory.inputs_per_day:
 		var input_label : Label = num_scene.instantiate()
 		
-		input_label.text = UIManager.simplify_number(input_num)
+		if input_num != 0:
+			input_label.text = UIManager.simplify_number(input_num)
+		else:
+			input_label.text = ""
+		
 		num_box.add_child(input_label)
 	
 	# Arrow Spacer
@@ -111,7 +118,11 @@ func populate_nums():
 	for output_num in represented_factory.outputs_per_day:
 		var output_label : Label = num_scene.instantiate()
 		
-		output_label.text = UIManager.simplify_number(output_num)
+		if output_num != 0:
+			output_label.text = UIManager.simplify_number(output_num)
+		else:
+			output_label.text = ""
+		
 		num_box.add_child(output_label)
 	
 	#num_box.size.x = 16 * num_box.get_child_count() + 4 * (num_box.get_child_count()-1)
@@ -147,3 +158,9 @@ func _on_plan_button_pressed() -> void:
 
 func _on_unplan_button_pressed() -> void:
 	GameManager.unplan_factory(factory_index)
+
+func _on_mouse_entered() -> void:
+	UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
+
+func _on_mouse_exited() -> void:
+	UIManager.hide_build_tooltip()

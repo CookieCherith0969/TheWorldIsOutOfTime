@@ -1,21 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=23 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
-[ext_resource type="Texture2D" uid="uid://b4h4lk5quokm6" path="res://Sprites/PlaceholderWindowGreen.png" id="3_h5fub"]
-[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/PlaceholderMetal.png" id="3_s4axq"]
-[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/PlaceholderRock.png" id="4_5vlrj"]
+[ext_resource type="Texture2D" uid="uid://b4h4lk5quokm6" path="res://Sprites/Placeholder/PlaceholderWindowGreen.png" id="3_h5fub"]
+[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/Placeholder/PlaceholderMetal.png" id="3_s4axq"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="4_5vlrj"]
+[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/Placeholder/PlaceholderArrow.png" id="4_27xpf"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
-[ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/PlaceholderWrench.png" id="5_igpy1"]
-[ext_resource type="Texture2D" uid="uid://bcy5clhruo4i3" path="res://Sprites/PlaceholderPlusNormal.png" id="9_i0o8u"]
-[ext_resource type="Texture2D" uid="uid://cbktppoul7ai" path="res://Sprites/PlaceholderPlusPressed.png" id="10_svmsk"]
-[ext_resource type="Texture2D" uid="uid://cklgjrl2cucku" path="res://Sprites/PlaceholderPlusHover.png" id="11_02m6e"]
-[ext_resource type="Texture2D" uid="uid://ctafuvdyre2w5" path="res://Sprites/PlaceholderPlusDisabled.png" id="12_l4f5b"]
-[ext_resource type="Texture2D" uid="uid://ce06br6jg22ra" path="res://Sprites/PlaceholderMinusNormal.png" id="13_4yo8o"]
-[ext_resource type="Texture2D" uid="uid://cvyf4lfkcfcvb" path="res://Sprites/PlaceholderMinusPressed.png" id="14_qkpnw"]
-[ext_resource type="Texture2D" uid="uid://cff0bvfk1h7d3" path="res://Sprites/PlaceholderMinusHover.png" id="15_6dyvw"]
-[ext_resource type="Texture2D" uid="uid://c3dwuue40lihj" path="res://Sprites/PlaceholderMinusDisabled.png" id="16_lg7wk"]
+[ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/Placeholder/PlaceholderWrench.png" id="5_igpy1"]
+[ext_resource type="Texture2D" uid="uid://bcy5clhruo4i3" path="res://Sprites/Placeholder/PlaceholderPlusNormal.png" id="9_i0o8u"]
+[ext_resource type="Texture2D" uid="uid://cbktppoul7ai" path="res://Sprites/Placeholder/PlaceholderPlusPressed.png" id="10_svmsk"]
+[ext_resource type="Texture2D" uid="uid://cklgjrl2cucku" path="res://Sprites/Placeholder/PlaceholderPlusHover.png" id="11_02m6e"]
+[ext_resource type="Texture2D" uid="uid://ctafuvdyre2w5" path="res://Sprites/Placeholder/PlaceholderPlusDisabled.png" id="12_l4f5b"]
+[ext_resource type="Texture2D" uid="uid://ce06br6jg22ra" path="res://Sprites/Placeholder/PlaceholderMinusNormal.png" id="13_4yo8o"]
+[ext_resource type="Texture2D" uid="uid://cvyf4lfkcfcvb" path="res://Sprites/Placeholder/PlaceholderMinusPressed.png" id="14_qkpnw"]
+[ext_resource type="Texture2D" uid="uid://cff0bvfk1h7d3" path="res://Sprites/Placeholder/PlaceholderMinusHover.png" id="15_6dyvw"]
+[ext_resource type="Texture2D" uid="uid://c3dwuue40lihj" path="res://Sprites/Placeholder/PlaceholderMinusDisabled.png" id="16_lg7wk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0.270588)
@@ -48,12 +49,14 @@ animations = [{
 [node name="FactoryCounter" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 33.0
+offset_left = 25.0
 offset_top = 178.0
-offset_right = 141.0
+offset_right = 149.0
 offset_bottom = 234.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_2ei53")
+icon_scene = ExtResource("4_nkejt")
+arrow_texture = ExtResource("4_27xpf")
 
 [node name="BackgroundRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -81,22 +84,37 @@ offset_right = 48.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 1
 
 [node name="FactoryIcon2" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_5vlrj")
 
 [node name="FactoryIcon3" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="FactoryIcon4" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_s4axq")
 
 [node name="FactoryIcon6" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_5vlrj")
+
+[node name="FactoryIcon7" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_5vlrj")
+
+[node name="FactoryIcon8" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_5vlrj")
 
 [node name="NumBox" type="HBoxContainer" parent="."]
@@ -109,6 +127,7 @@ offset_top = -1.0
 offset_right = 48.0
 offset_bottom = 26.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 1
 
@@ -132,9 +151,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
+offset_left = 3.0
 offset_top = -23.0
-offset_right = 62.0
+offset_right = 74.0
 grow_vertical = 0
 text = "4/6"
 horizontal_alignment = 2
@@ -152,6 +171,7 @@ offset_right = 40.5
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_cii6y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_iw4a4")
 value = 50.0
@@ -165,10 +185,11 @@ frame_progress = 0.282955
 
 [node name="PlanButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 90.0
 offset_top = 37.0
-offset_right = 96.0
+offset_right = 106.0
 offset_bottom = 53.0
+mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("9_i0o8u")
 texture_pressed = ExtResource("10_svmsk")
@@ -177,15 +198,21 @@ texture_disabled = ExtResource("12_l4f5b")
 
 [node name="UnplanButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 74.0
 offset_top = 37.0
-offset_right = 80.0
+offset_right = 90.0
 offset_bottom = 53.0
+mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("13_4yo8o")
 texture_pressed = ExtResource("14_qkpnw")
 texture_hover = ExtResource("15_6dyvw")
 texture_disabled = ExtResource("16_lg7wk")
 
+[node name="TooltipMarker" type="Marker2D" parent="."]
+position = Vector2(108, 0)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="PlanButton" to="." method="_on_plan_button_pressed"]
 [connection signal="pressed" from="UnplanButton" to="." method="_on_unplan_button_pressed"]

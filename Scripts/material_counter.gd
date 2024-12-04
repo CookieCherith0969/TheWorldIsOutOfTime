@@ -21,7 +21,7 @@ func _ready() -> void:
 func on_day_ended():
 	update_labels()
 
-func on_factory_amount_updated(factory : FactoryInfo):
+func on_factory_amount_updated(_factory : FactoryInfo):
 	update_labels()
 
 func update_labels():

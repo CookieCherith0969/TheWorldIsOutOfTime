@@ -1,0 +1,13 @@
+[gd_scene load_steps=8 format=3 uid="uid://cudnes87bgwwh"]
+
+[ext_resource type="Script" path="res://Globals/game_manager.gd" id="1_pi4dq"]
+[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="2_2ma4m"]
+[ext_resource type="Texture2D" uid="uid://bf7gnebq4nbjj" path="res://Sprites/Placeholder/PlaceholderFoundation.png" id="3_46v4d"]
+[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/Placeholder/PlaceholderMetal.png" id="4_j5ctj"]
+[ext_resource type="Texture2D" uid="uid://dbp1ypikxgkvy" path="res://Sprites/Placeholder/PlaceholderPart.png" id="5_jc22t"]
+[ext_resource type="Texture2D" uid="uid://wu3rvbosv6bo" path="res://Sprites/Placeholder/PlaceholderElectronics.png" id="6_wo56c"]
+[ext_resource type="Texture2D" uid="uid://ctypbekssnrml" path="res://Sprites/Placeholder/PlaceholderRocketPart.png" id="7_edppm"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_pi4dq")
+material_icons = Array[Texture]([ExtResource("2_2ma4m"), ExtResource("3_46v4d"), ExtResource("4_j5ctj"), ExtResource("5_jc22t"), ExtResource("6_wo56c"), ExtResource("7_edppm")])
