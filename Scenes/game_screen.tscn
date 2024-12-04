@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=36 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_d86f8"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="1_ggf71"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ccjov65bd3bjt" path="res://Sprites/Placeholder/PlaceholderMapPressed.png" id="6_d65js"]
 [ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="6_scpno"]
 [ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="7_bey5w"]
+[ext_resource type="Texture2D" uid="uid://da40nx65pttmb" path="res://Sprites/Placeholder/PlaceholderMapFocus.png" id="7_hiv7l"]
 [ext_resource type="Texture2D" uid="uid://b3besvtadrjfc" path="res://Sprites/Placeholder/PlaceholderMapHover.png" id="7_xu5r2"]
 [ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="8_kc15m"]
 [ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="9_3dj3a"]
@@ -25,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="18_2fkbl"]
 [ext_resource type="Texture2D" uid="uid://1kx70nlah83q" path="res://Sprites/Placeholder/PlaceholderWindowDarkPurple.png" id="19_522d0"]
 [ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="19_m6fqu"]
+[ext_resource type="PackedScene" uid="uid://65lakltc5wdh" path="res://Scenes/asteroid_warning.tscn" id="20_mju6k"]
 [ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="20_u4d8j"]
 [ext_resource type="Resource" uid="uid://dib570tkj0s03" path="res://Factories/FoundationMixery.tres" id="21_w624j"]
 [ext_resource type="Resource" uid="uid://bfj4def3ve48o" path="res://Factories/PartWorkshop.tres" id="22_2qmtm"]
@@ -32,17 +34,22 @@
 [ext_resource type="Texture2D" uid="uid://bkb0rswoobt66" path="res://Sprites/Placeholder/PlaceholderMinimiseNormal.png" id="30_lw25b"]
 [ext_resource type="Texture2D" uid="uid://dfmpgf8687hyv" path="res://Sprites/Placeholder/PlaceholderMinimisePressed.png" id="31_ishnu"]
 [ext_resource type="Texture2D" uid="uid://q06aa54hhrr" path="res://Sprites/Placeholder/PlaceholderMinimiseHover.png" id="32_pntrx"]
+[ext_resource type="Texture2D" uid="uid://73pjsux6m0pt" path="res://Sprites/Placeholder/PlaceholderMinimiseFocus.png" id="35_2c4xp"]
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("large_map", "material_window", "factory_window")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "material_window", "factory_window", "factory_grid", "minimise_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d86f8")
+small_map = NodePath("SolarSystemMap")
+time_control = NodePath("TimeControl")
 large_map = NodePath("LargeMap")
 material_window = NodePath("MaterialWindow")
 factory_window = NodePath("FactoryWindow")
+factory_grid = NodePath("FactoryWindow/InnerMargin/FactoryGrid")
+minimise_button = NodePath("LargeMap/MinimiseButton")
 
 [node name="TimeLabel" parent="." instance=ExtResource("1_ggf71")]
 layout_mode = 0
@@ -63,10 +70,13 @@ anchor_right = 1.0
 offset_left = -200.0
 offset_bottom = 200.0
 grow_horizontal = 0
+focus_neighbor_left = NodePath("../TimeControl")
+focus_neighbor_bottom = NodePath("../FactoryWindow")
 texture_normal = ExtResource("5_uh3ta")
 texture_pressed = ExtResource("6_d65js")
 texture_hover = ExtResource("7_xu5r2")
 texture_disabled = ExtResource("6_d65js")
+texture_focused = ExtResource("7_hiv7l")
 
 [node name="Sun" parent="SolarSystemMap" instance=ExtResource("4_6vkgw")]
 position = Vector2(117, 48)
@@ -132,6 +142,8 @@ earth = NodePath("../Earth")
 large_map = NodePath("../../LargeMap")
 planet_scene = ExtResource("4_6vkgw")
 death_asteroid_info = ExtResource("16_84j8k")
+warning_scene = ExtResource("20_mju6k")
+warning_offset = Vector2(2.5, 7)
 
 [node name="MaterialWindow" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -179,6 +191,11 @@ represented_material = 3
 [node name="MaterialCounter5" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("2_bn0kx")]
 layout_mode = 2
 represented_material = 4
+
+[node name="MaterialCounter6" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("2_bn0kx")]
+layout_mode = 2
+represented_material = 5
+hide_gain = true
 
 [node name="FactoryWindow" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -271,6 +288,7 @@ texture_normal = ExtResource("30_lw25b")
 texture_pressed = ExtResource("31_ishnu")
 texture_hover = ExtResource("32_pntrx")
 texture_disabled = ExtResource("31_ishnu")
+texture_focused = ExtResource("35_2c4xp")
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]

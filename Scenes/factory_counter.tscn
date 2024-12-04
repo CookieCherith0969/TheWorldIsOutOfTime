@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=31 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
@@ -15,12 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://ctafuvdyre2w5" path="res://Sprites/Placeholder/PlaceholderPlusDisabled.png" id="12_l4f5b"]
 [ext_resource type="Texture2D" uid="uid://ce06br6jg22ra" path="res://Sprites/Placeholder/PlaceholderMinusNormal.png" id="13_4yo8o"]
 [ext_resource type="Texture2D" uid="uid://cvyf4lfkcfcvb" path="res://Sprites/Placeholder/PlaceholderMinusPressed.png" id="14_qkpnw"]
+[ext_resource type="Texture2D" uid="uid://c4auakbo88drx" path="res://Sprites/Placeholder/PlaceholderPlusFocus.png" id="14_xcpib"]
 [ext_resource type="Texture2D" uid="uid://cff0bvfk1h7d3" path="res://Sprites/Placeholder/PlaceholderMinusHover.png" id="15_6dyvw"]
 [ext_resource type="Texture2D" uid="uid://c3dwuue40lihj" path="res://Sprites/Placeholder/PlaceholderMinusDisabled.png" id="16_lg7wk"]
 [ext_resource type="Texture2D" uid="uid://b3382jqxj7ysr" path="res://Sprites/Placeholder/PlaceholderLockNormal.png" id="18_xg4tv"]
 [ext_resource type="Texture2D" uid="uid://cc0wu3bfuq24s" path="res://Sprites/Placeholder/PlaceholderLockPressed.png" id="19_aly3j"]
+[ext_resource type="Texture2D" uid="uid://dv2o7ylxbyv7e" path="res://Sprites/Placeholder/PlaceholderMinusFocus.png" id="19_u1u5r"]
 [ext_resource type="Texture2D" uid="uid://bcthssju3sg6c" path="res://Sprites/Placeholder/PlaceholderLockHover.png" id="20_gigtq"]
 [ext_resource type="Texture2D" uid="uid://ckti1fnm0hprw" path="res://Sprites/Placeholder/PlaceholderLockDisabled.png" id="21_ujnlk"]
+[ext_resource type="Texture2D" uid="uid://mxvch0m5mbg8" path="res://Sprites/Placeholder/PlaceholderLockFocus.png" id="24_i2lvy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0.270588)
@@ -193,6 +196,7 @@ texture_normal = ExtResource("9_i0o8u")
 texture_pressed = ExtResource("10_svmsk")
 texture_hover = ExtResource("11_02m6e")
 texture_disabled = ExtResource("12_l4f5b")
+texture_focused = ExtResource("14_xcpib")
 
 [node name="UnplanButton" type="TextureButton" parent="."]
 visible = false
@@ -207,6 +211,7 @@ texture_normal = ExtResource("13_4yo8o")
 texture_pressed = ExtResource("14_qkpnw")
 texture_hover = ExtResource("15_6dyvw")
 texture_disabled = ExtResource("16_lg7wk")
+texture_focused = ExtResource("19_u1u5r")
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
 position = Vector2(124, 0)
@@ -239,10 +244,17 @@ texture_normal = ExtResource("18_xg4tv")
 texture_pressed = ExtResource("19_aly3j")
 texture_hover = ExtResource("20_gigtq")
 texture_disabled = ExtResource("21_ujnlk")
+texture_focused = ExtResource("24_i2lvy")
 stretch_mode = 3
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="focus_entered" from="PlanButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="PlanButton" to="." method="_on_focus_exited"]
 [connection signal="pressed" from="PlanButton" to="." method="_on_plan_button_pressed"]
+[connection signal="focus_entered" from="UnplanButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="UnplanButton" to="." method="_on_focus_exited"]
 [connection signal="pressed" from="UnplanButton" to="." method="_on_unplan_button_pressed"]
+[connection signal="focus_entered" from="LockPanel/UnlockButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="LockPanel/UnlockButton" to="." method="_on_focus_exited"]
 [connection signal="pressed" from="LockPanel/UnlockButton" to="." method="_on_unlock_button_pressed"]

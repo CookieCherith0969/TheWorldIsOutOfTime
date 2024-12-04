@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_pi4lw")
+factory_name = &"Electronics Workshop"
 input_materials = Array[int]([2, 3])
 inputs_per_day = Array[int]([30, 50])
 output_materials = Array[int]([4])

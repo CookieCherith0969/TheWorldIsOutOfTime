@@ -1,4 +1,5 @@
 extends Control
+class_name TimeControl
 
 var selected_exponent : int = 0
 var max_exponent : int = 11

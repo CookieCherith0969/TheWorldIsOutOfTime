@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://j48kbuc5aeum"]
+[gd_scene load_steps=13 format=3 uid="uid://j48kbuc5aeum"]
 
 [ext_resource type="Script" path="res://Scripts/time_control.gd" id="1_6fb1j"]
 [ext_resource type="Texture2D" uid="uid://pavs2233hkpn" path="res://Sprites/Placeholder/PlaceholderWindowPurple.png" id="2_nf30l"]
@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://d386w3in6d14n" path="res://Sprites/Placeholder/PlaceholderTimeHover.png" id="5_leqeb"]
 [ext_resource type="Texture2D" uid="uid://20n54c6e2y5n" path="res://Sprites/Placeholder/PlaceholderTimeDisabled.png" id="6_u76gj"]
 [ext_resource type="Texture2D" uid="uid://cjiava0wkwcum" path="res://Sprites/Placeholder/PlaceholderArrowNormal.png" id="7_mvenm"]
+[ext_resource type="Texture2D" uid="uid://45b5kmde1uom" path="res://Sprites/Placeholder/PlaceholderTimeFocus.png" id="7_yhjuc"]
 [ext_resource type="Texture2D" uid="uid://cecmycvanxigw" path="res://Sprites/Placeholder/PlaceholderArrowPressed.png" id="8_nyhpl"]
 [ext_resource type="Texture2D" uid="uid://becv0hdlw2q07" path="res://Sprites/Placeholder/PlaceholderArrowHover.png" id="9_5iqx7"]
 [ext_resource type="Texture2D" uid="uid://dph1gxboiu1m1" path="res://Sprites/Placeholder/PlaceholderArrowDisabled.png" id="10_2h3f0"]
+[ext_resource type="Texture2D" uid="uid://we5qp8ltl7r4" path="res://Sprites/Placeholder/PlaceholderArrowFocus.png" id="12_688h4"]
 
 [node name="TimeControl" type="Control"]
 layout_mode = 3
@@ -40,21 +42,25 @@ offset_left = 65.0
 offset_top = 4.0
 offset_right = 97.0
 offset_bottom = 36.0
+focus_neighbor_left = NodePath("../DoubleButton")
 texture_normal = ExtResource("3_vhw8u")
 texture_pressed = ExtResource("4_pbkuy")
 texture_hover = ExtResource("5_leqeb")
 texture_disabled = ExtResource("6_u76gj")
+texture_focused = ExtResource("7_yhjuc")
 
 [node name="HalveButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_top = 12.0
 offset_right = 16.0
 offset_bottom = 28.0
+focus_neighbor_right = NodePath("../DoubleButton")
 disabled = true
 texture_normal = ExtResource("7_mvenm")
 texture_pressed = ExtResource("8_nyhpl")
 texture_hover = ExtResource("9_5iqx7")
 texture_disabled = ExtResource("10_2h3f0")
+texture_focused = ExtResource("12_688h4")
 
 [node name="DoubleButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -62,10 +68,13 @@ offset_left = 50.0
 offset_top = 12.0
 offset_right = 66.0
 offset_bottom = 28.0
+focus_neighbor_left = NodePath("../HalveButton")
+focus_neighbor_right = NodePath("../TimeskipButton")
 texture_normal = ExtResource("7_mvenm")
 texture_pressed = ExtResource("8_nyhpl")
 texture_hover = ExtResource("9_5iqx7")
 texture_disabled = ExtResource("10_2h3f0")
+texture_focused = ExtResource("12_688h4")
 flip_h = true
 
 [node name="DurationLabel" type="Label" parent="."]

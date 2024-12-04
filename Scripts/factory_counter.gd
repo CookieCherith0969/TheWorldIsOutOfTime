@@ -1,4 +1,7 @@
 extends Control
+class_name FactoryCounter
+
+signal factory_unlocked(factory : FactoryInfo, counter_index : int)
 
 @export
 var represented_factory : FactoryInfo
@@ -48,7 +51,12 @@ func _ready() -> void:
 	
 	if unlocked:
 		unlock()
-		
+	
+	unlocked = GameManager.is_factory_unlocked(factory_index)
+	
+	if unlocked:
+		unlock()
+	
 	populate_icons()
 	populate_nums()
 	update_amounts()
@@ -57,7 +65,7 @@ func _ready() -> void:
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:
 		update_amounts()
-		if GameManager.get_planned_factory_amount(factory_index) > 0:
+		if GameManager.get_planned_factory_amount(factory_index) != 0:
 			building_wrench.show()
 		else:
 			building_wrench.hide()
@@ -140,11 +148,19 @@ func populate_nums():
 	#num_box.position.x = 16
 
 func update_amounts():
-	amount_label.text = "%s/%s" % [GameManager.get_active_factory_amount(factory_index), GameManager.get_total_factory_amount(factory_index)]
+	if represented_factory.keep_zero_factory_active_amount:
+		amount_label.text = "%s" % GameManager.get_planned_factory_amount(factory_index)
+	else:
+		amount_label.text = "%s/%s" % [GameManager.get_active_factory_amount(factory_index), GameManager.get_total_factory_amount(factory_index)]
 	update_buttons()
 
 func update_progress(day_progress : int):
-	var progress_ratio : float = float(day_progress)/float(represented_factory.build_days)
+	if day_progress < 0:
+		build_progress_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
+	else:
+		build_progress_bar.fill_mode = ProgressBar.FILL_BEGIN_TO_END
+	
+	var progress_ratio : float = abs(day_progress)/float(represented_factory.build_days)
 	build_progress_bar.value = progress_ratio*100.0
 
 func update_buttons():
@@ -154,12 +170,12 @@ func update_buttons():
 		unlock_button.disabled = true
 		return
 	
-	if GameManager.get_planned_factory_amount(factory_index) <= 0:
+	if GameManager.get_total_factory_amount(factory_index) <= 0:
 		unplan_button.disabled = true
 	else:
 		unplan_button.disabled = false
 	
-	if GameManager.can_build_factory(factory_index):
+	if GameManager.get_planned_factory_amount(factory_index) < 0 || GameManager.can_build_factory(factory_index):
 		plan_button.disabled = false
 	else:
 		plan_button.disabled = true
@@ -184,15 +200,39 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
+func _on_focus_entered() -> void:
+	if unlocked:
+		UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
+	else:
+		UIManager.show_unlock_tooltip(tooltip_marker.global_position, represented_factory)
+
+func _on_focus_exited() -> void:
+	UIManager.hide_tooltip()
+
+func get_right_button() -> TextureButton:
+	if unlocked:
+		return plan_button
+	else:
+		return unlock_button
+
+func get_left_button() -> TextureButton:
+	if unlocked:
+		return unplan_button
+	else:
+		return unlock_button
+
 func unlock():
 	lock_panel.hide()
 	
-	num_box.show()
+	if !represented_factory.hide_material_amounts:
+		num_box.show()
 	amount_label.show()
 	unplan_button.show()
 	plan_button.show()
 	
 	unlocked = true
+	GameManager.unlock_factory(factory_index)
+	factory_unlocked.emit(represented_factory, get_index())
 
 func _on_unlock_button_pressed() -> void:
 	if GameManager.can_unlock_factory(factory_index):

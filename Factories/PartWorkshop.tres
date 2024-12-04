@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_evidb")
+factory_name = &"Part Workshop"
 input_materials = Array[int]([2])
 inputs_per_day = Array[int]([30])
 output_materials = Array[int]([3])

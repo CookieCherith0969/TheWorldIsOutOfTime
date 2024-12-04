@@ -2,6 +2,13 @@ extends Resource
 class_name FactoryInfo
 
 @export
+var factory_name : StringName
+
+## If True, output materials are given when factory building is completed, and normal factory production doesn't occur
+@export
+var output_on_build : bool = false
+
+@export
 var input_materials : Array[GameManager.Materials]
 @export
 var inputs_per_day : Array[int]
@@ -22,3 +29,8 @@ var build_amounts : Array[int]
 var research_materials : Array[GameManager.Materials]
 @export
 var research_amounts : Array[int]
+
+@export
+var hide_material_amounts : bool = false
+@export
+var keep_zero_factory_active_amount : bool = false

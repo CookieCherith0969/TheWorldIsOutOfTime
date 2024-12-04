@@ -20,6 +20,11 @@ var death_asteroid_info : PlanetInfo
 var asteroid_start_distance : float
 var asteroid_end_distance : float
 
+@export
+var warning_scene : PackedScene
+@export
+var warning_offset : Vector2 = Vector2(0,0)
+
 func _ready():
 	GameManager.hour_passed.connect(on_hour_passed)
 	create_death_asteroid()
@@ -37,6 +42,10 @@ func create_death_asteroid():
 	var starting_hours : float = GameManager.starting_days*GameManager.hours_per_day
 	death_asteroid.orbit_angle = end_angle - 360*(starting_hours/death_asteroid_info.orbital_period_hours)
 	death_asteroid.update_position()
+	
+	var warning = warning_scene.instantiate()
+	warning.position = warning_offset
+	death_asteroid.add_child.call_deferred(warning)
 	
 	asteroid_start_distance = death_asteroid_info.orbit_distance
 	asteroid_end_distance = earth.orbit_distance

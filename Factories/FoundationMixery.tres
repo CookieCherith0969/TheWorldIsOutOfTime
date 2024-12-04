@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_0mje1")
+factory_name = &"Foundation Mixery"
 input_materials = Array[int]([0])
 inputs_per_day = Array[int]([20])
 output_materials = Array[int]([1])

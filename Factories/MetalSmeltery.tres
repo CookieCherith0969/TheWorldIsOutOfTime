@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_8nf82")
+factory_name = &"Metal Smeltery"
 input_materials = Array[int]([0])
 inputs_per_day = Array[int]([10])
 output_materials = Array[int]([2])

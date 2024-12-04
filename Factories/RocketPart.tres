@@ -4,12 +4,16 @@
 
 [resource]
 script = ExtResource("1_b1mjv")
+factory_name = &"Rocket Part"
+output_on_build = true
 input_materials = Array[int]([3, 4])
 inputs_per_day = Array[int]([0, 0])
 output_materials = Array[int]([5])
-outputs_per_day = Array[int]([0])
+outputs_per_day = Array[int]([1])
 build_days = 32
 build_materials = Array[int]([3, 4])
 build_amounts = Array[int]([400, 200])
 research_materials = Array[int]([3, 4])
 research_amounts = Array[int]([200, 100])
+hide_material_amounts = true
+keep_zero_factory_active_amount = true

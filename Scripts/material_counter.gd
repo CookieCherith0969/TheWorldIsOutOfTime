@@ -2,6 +2,8 @@ extends Control
 
 @export
 var represented_material : GameManager.Materials = GameManager.Materials.STONE : set = set_rep_material
+@export
+var hide_gain : bool = false
 
 @onready
 var icon : TextureRect = $Icon
@@ -17,6 +19,8 @@ func _ready() -> void:
 	
 	GameManager.day_ended.connect(on_day_ended)
 	GameManager.factory_amount_updated.connect(on_factory_amount_updated)
+	if hide_gain:
+		gain_label.hide()
 
 func on_day_ended():
 	update_labels()

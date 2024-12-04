@@ -11,3 +11,5 @@
 [node name="GameManager" type="Node"]
 script = ExtResource("1_pi4dq")
 material_icons = Array[Texture]([ExtResource("2_2ma4m"), ExtResource("3_46v4d"), ExtResource("4_j5ctj"), ExtResource("5_jc22t"), ExtResource("6_wo56c"), ExtResource("7_edppm")])
+starting_factory_names = Array[StringName]([&"Stone Mine", &"Foundation Mixery", &"Metal Smeltery"])
+starting_factory_amounts = Array[int]([4, 1, 1])

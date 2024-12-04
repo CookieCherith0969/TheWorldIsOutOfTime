@@ -45,12 +45,17 @@ var material_amounts : Array[int] = []
 
 var prev_day_gains : Array[int] = []
 
+@export
+var starting_factory_names : Array[StringName]
+@export
+var starting_factory_amounts : Array[int]
 var factories : Array[FactoryInfo] = []
 
 #var total_factory_amounts : Array[int] = []
 var active_factory_amounts : Array[int] = []
 var planned_factory_amounts : Array[int] = []
 var factory_build_progress : Array[int] = []
+var unlocked_factories : Array[bool] = []
 
 var timeskip_days : int = 0
 var elapsed_timeskip_time : float = 0.0
@@ -60,8 +65,9 @@ var last_day_time : float = 0.0
 func _ready() -> void:
 	# Initialise factory list from Factories folder
 	for file_name in DirAccess.get_files_at("res://Factories/"):
-		if (file_name.get_extension() == "import"):
-			file_name = file_name.replace('.import', '')
+		if (file_name.get_extension() == "remap"):
+			file_name = file_name.replace('.remap', '')
+		
 		if file_name.get_extension() != "tres":
 			continue
 		factories.append(ResourceLoader.load("res://Factories/"+file_name))
@@ -69,8 +75,12 @@ func _ready() -> void:
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
 		active_factory_amounts.append(0)
+		if factories[i].factory_name in starting_factory_names:
+			var index = starting_factory_names.find(factories[i].factory_name)
+			active_factory_amounts[i] = starting_factory_amounts[index]
 		planned_factory_amounts.append(0)
 		factory_build_progress.append(0)
+		unlocked_factories.append(false)
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
@@ -156,27 +166,31 @@ func get_factory_index(factory : FactoryInfo):
 
 func can_build_factory(factory_index : int):
 	var factory : FactoryInfo = factories[factory_index]
-	# Return early if any materials are lacking
-	for i in range(factory.build_materials.size()):
-		var material : Materials = factory.build_materials[i]
-		var build_amount : int = factory.build_amounts[i]
-		
-		if material_amounts[material] < build_amount:
+	
+	return has_material_amounts(factory.build_materials, factory.build_amounts)
+
+func can_unlock_factory(factory_index : int):
+	var factory : FactoryInfo = factories[factory_index]
+	
+	return has_material_amounts(factory.research_materials, factory.research_amounts)
+
+func is_factory_unlocked(factory_index : int):
+	return unlocked_factories[factory_index]
+
+func has_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int]) -> bool:
+	for i in range(materials.size()):
+		# Return false if any materials are inadequate
+		if material_amounts[materials[i]] < amounts[i]:
 			return false
 	
 	return true
 
-func can_unlock_factory(factory_index : int):
-	var factory : FactoryInfo = factories[factory_index]
-	# Return early if any materials are lacking
-	for i in range(factory.research_materials.size()):
-		var material : Materials = factory.research_materials[i]
-		var amount : int = factory.research_amounts[i]
-		
-		if material_amounts[material] < amount:
-			return false
-	
-	return true
+func add_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int], negate : bool = false, multiplier : int = 1):
+	for i in range(materials.size()):
+		if negate:
+			material_amounts[materials[i]] -= amounts[i] * multiplier
+		else:
+			material_amounts[materials[i]] += amounts[i] * multiplier
 
 func process_days(number_of_days : int):
 	timeskip_days += number_of_days
@@ -188,6 +202,8 @@ func process_day():
 	for f in range(factories.size()):
 		if planned_factory_amounts[f] > 0:
 			build_factory(f)
+		elif planned_factory_amounts[f] < 0:
+			unbuild_factory(f)
 		else:
 			factory_build_progress[f] = 0
 			factory_build_progressed.emit(factories[f], 0)
@@ -204,6 +220,9 @@ func process_day():
 	days_left -= 1
 
 func build_factory(factory_index : int):
+	if factory_build_progress[factory_index] < 0:
+		factory_build_progress[factory_index] = 0
+		
 	factory_build_progress[factory_index] += 1
 	var factory : FactoryInfo = factories[factory_index]
 	
@@ -211,6 +230,26 @@ func build_factory(factory_index : int):
 		factory_build_progress[factory_index] = 0
 		planned_factory_amounts[factory_index] -= 1
 		active_factory_amounts[factory_index] += 1
+		if factory.output_on_build:
+			add_material_amounts(factory.output_materials, factory.outputs_per_day)
+		factory_amount_updated.emit(factory)
+	
+	factory_build_progressed.emit(factory, factory_build_progress[factory_index])
+
+func unbuild_factory(factory_index : int):
+	if factory_build_progress[factory_index] > 0:
+		factory_build_progress[factory_index] = 0
+	
+	factory_build_progress[factory_index] -= 1
+	var factory : FactoryInfo = factories[factory_index]
+	
+	if abs(factory_build_progress[factory_index]) >= factory.build_days:
+		factory_build_progress[factory_index] = 0
+		planned_factory_amounts[factory_index] += 1
+		active_factory_amounts[factory_index] -= 1
+		
+		add_material_amounts(factory.build_materials, factory.build_amounts)
+		
 		factory_amount_updated.emit(factory)
 	
 	factory_build_progressed.emit(factory, factory_build_progress[factory_index])
@@ -218,6 +257,10 @@ func build_factory(factory_index : int):
 func process_factory(factory_index : int):
 	var min_possible_runs : int = starting_days
 	var factory : FactoryInfo = factories[factory_index]
+	
+	if factory.output_on_build:
+		return
+	
 	for i in range(factory.input_materials.size()):
 		var material : Materials = factory.input_materials[i]
 		var input_amount : int = factory.inputs_per_day[i]
@@ -233,32 +276,29 @@ func process_factory(factory_index : int):
 		if possible_runs < min_possible_runs:
 			min_possible_runs = possible_runs
 	
-	var actual_runs : int = min(min_possible_runs, active_factory_amounts[factory_index])
+	var running_factories = active_factory_amounts[factory_index]
+	if planned_factory_amounts[factory_index] < 0:
+		running_factories += planned_factory_amounts[factory_index]
+	var actual_runs : int = min(min_possible_runs, running_factories)
 	
-	for i in range(factory.input_materials.size()):
-		var material : Materials = factory.input_materials[i]
-		var input_amount : int = factory.inputs_per_day[i]
-		
-		material_amounts[material] -= input_amount * actual_runs
+	add_material_amounts(factory.input_materials, factory.inputs_per_day, true, actual_runs)
 	
-	for i in range(factory.output_materials.size()):
-		var material : Materials = factory.output_materials[i]
-		var output_amount : int = factory.outputs_per_day[i]
-		
-		material_amounts[material] += output_amount * actual_runs
+	add_material_amounts(factory.output_materials, factory.outputs_per_day, false, actual_runs)
 
 func plan_factory(factory_index : int) -> bool:
-	if !can_build_factory(factory_index):
+	if !can_build_factory(factory_index) && planned_factory_amounts[factory_index] >= 0:
 		return false
 	
 	var factory : FactoryInfo = factories[factory_index]
 	
+	# Cancelling destruction doesn't cost materials
+	if planned_factory_amounts[factory_index] < 0:
+		planned_factory_amounts[factory_index] += 1
+		factory_amount_updated.emit(factory)
+		return true
+	
 	# Invest materials immediately
-	for i in range(factory.build_materials.size()):
-		var material : Materials = factory.build_materials[i]
-		var build_amount : int = factory.build_amounts[i]
-		
-		material_amounts[material] -= build_amount
+	add_material_amounts(factory.build_materials, factory.build_amounts, true)
 	
 	planned_factory_amounts[factory_index] += 1
 	factory_amount_updated.emit(factory)
@@ -266,18 +306,34 @@ func plan_factory(factory_index : int) -> bool:
 
 func unplan_factory(factory_index : int) -> bool:
 	# Cannot unplan if there are no plans
-	if planned_factory_amounts[factory_index] <= 0:
+	
+	var planned_total = active_factory_amounts[factory_index] + planned_factory_amounts[factory_index]
+	if planned_total <= 0:
 		return false
 	
 	var factory : FactoryInfo = factories[factory_index]
+	
+	# Planning deconstruction doesn't refund materials until completion
+	if planned_factory_amounts[factory_index] <= 0:
+		planned_factory_amounts[factory_index] -= 1
+		factory_amount_updated.emit(factory)
+		return true
+	
 	# Refund invested materials
-	for i in range(factory.build_materials.size()):
-		var material : Materials = factory.build_materials[i]
-		var build_amount : int = factory.build_amounts[i]
-		
-		material_amounts[material] += build_amount
+	add_material_amounts(factory.build_materials, factory.build_amounts)
 	
 	planned_factory_amounts[factory_index] -= 1
 	
+	factory_amount_updated.emit(factory)
+	return true
+
+func unlock_factory(factory_index : int) -> bool:
+	if unlocked_factories[factory_index]:
+		return false
+	
+	var factory : FactoryInfo = factories[factory_index]
+	add_material_amounts(factory.research_materials, factory.research_amounts, true)
+	
+	unlocked_factories[factory_index] = true
 	factory_amount_updated.emit(factory)
 	return true
