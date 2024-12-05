@@ -1,10 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=37 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
 [ext_resource type="PackedScene" uid="uid://j48kbuc5aeum" path="res://Scenes/time_control.tscn" id="3_4sqxc"]
 [ext_resource type="Texture2D" uid="uid://bu8xnim814cnm" path="res://Sprites/Buttons/solar-system-panel-normal.png" id="4_01h4l"]
-[ext_resource type="PackedScene" path="res://Scenes/rocket_counter.tscn" id="4_gpwgm"]
 [ext_resource type="Texture2D" uid="uid://dmv2pyg3swwo4" path="res://Sprites/Buttons/solar-system-panel-pressed.png" id="5_trtoq"]
 [ext_resource type="Texture2D" uid="uid://c3distleqmp0c" path="res://Sprites/Buttons/solar-system-panel-hover.png" id="6_mbwtj"]
 [ext_resource type="Texture2D" uid="uid://5euyktl8xhyg" path="res://Sprites/Buttons/solar-system-panel-focus.png" id="7_5woe5"]
@@ -23,8 +22,14 @@
 [ext_resource type="Resource" uid="uid://pt2e3x02hbja" path="res://Planets/DeathAsteroid.tres" id="20_xl0mu"]
 [ext_resource type="PackedScene" uid="uid://65lakltc5wdh" path="res://Scenes/asteroid_warning.tscn" id="21_t1fxb"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="22_7g3ue"]
-[ext_resource type="PackedScene" path="res://Scenes/material_window.tscn" id="24_fqstt"]
-[ext_resource type="PackedScene" path="res://Scenes/factory_window.tscn" id="25_rre55"]
+[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="23_vl40g"]
+[ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="24_gpho0"]
+[ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="25_klrr5"]
+[ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="26_5pmor"]
+[ext_resource type="Resource" uid="uid://dib570tkj0s03" path="res://Factories/FoundationMixery.tres" id="27_oaxvn"]
+[ext_resource type="Resource" uid="uid://bfj4def3ve48o" path="res://Factories/PartWorkshop.tres" id="28_775iq"]
+[ext_resource type="Resource" uid="uid://br52j8668p87f" path="res://Factories/ElectronicsWorkshop.tres" id="29_nj5vw"]
+[ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="30_jf7e8"]
 [ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/Placeholder/PlaceholderWindowSpace.png" id="31_g8vrw"]
 [ext_resource type="Script" path="res://Scripts/large_map.gd" id="32_21avp"]
 [ext_resource type="Texture2D" uid="uid://bkb0rswoobt66" path="res://Sprites/Placeholder/PlaceholderMinimiseNormal.png" id="33_mrlk8"]
@@ -32,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://q06aa54hhrr" path="res://Sprites/Placeholder/PlaceholderMinimiseHover.png" id="35_j2xgj"]
 [ext_resource type="Texture2D" uid="uid://73pjsux6m0pt" path="res://Sprites/Placeholder/PlaceholderMinimiseFocus.png" id="36_3mr2o"]
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "rocket_counter")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "material_window", "factory_window", "minimise_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,34 +45,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dpfp6")
 small_map = NodePath("SolarSystemMap")
-time_control = NodePath("NormalTimeControl")
+time_control = NodePath("TimeControl")
 large_map = NodePath("LargeMap")
-large_time_control = NodePath("LargeTimeControl")
 material_window = NodePath("MaterialWindow")
 factory_window = NodePath("FactoryWindow")
 minimise_button = NodePath("LargeMap/MinimiseButton")
-rocket_counter = NodePath("RocketCounter")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
 offset_left = 6.0
-offset_top = -7.0
-offset_right = 283.0
-offset_bottom = 38.0
+offset_top = 0.0
+offset_right = 287.0
+offset_bottom = 45.0
 
-[node name="NormalTimeControl" parent="." instance=ExtResource("3_4sqxc")]
-layout_mode = 0
-offset_left = 167.0
-offset_top = 33.0
-offset_right = 272.0
-offset_bottom = 69.0
-
-[node name="RocketCounter" parent="." instance=ExtResource("4_gpwgm")]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 33.0
-offset_right = 131.0
-offset_bottom = 69.0
+[node name="TimeControl" parent="." instance=ExtResource("3_4sqxc")]
+offset_left = 288.0
+offset_right = 393.0
+offset_bottom = 46.0
 
 [node name="SolarSystemMap" type="TextureButton" parent="."]
 z_index = -1
@@ -79,7 +73,7 @@ anchor_right = 1.0
 offset_left = -206.0
 offset_bottom = 206.0
 grow_horizontal = 0
-focus_neighbor_left = NodePath("../NormalTimeControl")
+focus_neighbor_left = NodePath("../TimeControl")
 focus_neighbor_bottom = NodePath("../FactoryWindow")
 texture_normal = ExtResource("4_01h4l")
 texture_pressed = ExtResource("5_trtoq")
@@ -162,27 +156,111 @@ offset_top = 5.0
 offset_right = 201.0
 offset_bottom = 201.0
 
-[node name="MaterialWindow" parent="." instance=ExtResource("24_fqstt")]
+[node name="MaterialWindow" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 5.0
-offset_top = 73.0
-offset_right = 291.0
-offset_bottom = 203.0
+offset_left = 8.0
+offset_top = 62.0
+offset_right = 389.0
+offset_bottom = 179.0
 
-[node name="FactoryWindow" parent="." instance=ExtResource("25_rre55")]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 217.0
-offset_right = 421.0
-offset_bottom = 495.0
+[node name="Background" type="NinePatchRect" parent="MaterialWindow"]
+layout_mode = 2
+texture = ExtResource("23_vl40g")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
-[node name="LargeTimeControl" parent="." instance=ExtResource("3_4sqxc")]
-visible = false
+[node name="InnerMargin" type="MarginContainer" parent="MaterialWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="MaterialGrid" type="GridContainer" parent="MaterialWindow/InnerMargin"]
+layout_mode = 2
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 5
+columns = 3
+
+[node name="MaterialCounter" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+
+[node name="MaterialCounter2" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+represented_material = 1
+
+[node name="MaterialCounter3" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+represented_material = 2
+
+[node name="MaterialCounter4" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+represented_material = 3
+
+[node name="MaterialCounter5" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+represented_material = 4
+
+[node name="MaterialCounter6" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
+layout_mode = 2
+represented_material = 5
+hide_gain = true
+
+[node name="FactoryWindow" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 297.0
-offset_top = 7.0
-offset_right = 402.0
-offset_bottom = 43.0
+offset_left = 15.0
+offset_top = 268.0
+offset_right = 271.0
+offset_bottom = 400.0
+
+[node name="Background" type="NinePatchRect" parent="FactoryWindow"]
+layout_mode = 2
+texture = ExtResource("23_vl40g")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="FactoryWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 13
+
+[node name="FactoryGrid" type="GridContainer" parent="FactoryWindow/InnerMargin"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="FactoryCounter" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+represented_factory = ExtResource("26_5pmor")
+unlocked = true
+
+[node name="FactoryCounter2" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+represented_factory = ExtResource("27_oaxvn")
+unlocked = true
+
+[node name="FactoryCounter3" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+unlocked = true
+
+[node name="FactoryCounter4" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+represented_factory = ExtResource("28_775iq")
+
+[node name="FactoryCounter5" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+represented_factory = ExtResource("29_nj5vw")
+
+[node name="FactoryCounter6" parent="FactoryWindow/InnerMargin/FactoryGrid" instance=ExtResource("25_klrr5")]
+layout_mode = 2
+represented_factory = ExtResource("30_jf7e8")
 
 [node name="LargeMap" type="NinePatchRect" parent="." node_paths=PackedStringArray("small_map")]
 visible = false
@@ -192,9 +270,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -500.0
+offset_left = -600.0
 offset_top = 50.0
-offset_bottom = 500.0
+offset_bottom = 600.0
 grow_horizontal = 0
 mouse_filter = 0
 texture = ExtResource("31_g8vrw")
@@ -204,7 +282,7 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 script = ExtResource("32_21avp")
 small_map = NodePath("../SolarSystemMap")
-scale_factor = Vector2(2.5, 2.5)
+scale_factor = Vector2(3, 3)
 
 [node name="MinimiseButton" type="TextureButton" parent="LargeMap"]
 z_index = 1
@@ -227,8 +305,8 @@ texture_focused = ExtResource("36_3mr2o")
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 498.0
-offset_bottom = 448.0
+offset_right = 598.0
+offset_bottom = 548.0
 do_rotating = false
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
