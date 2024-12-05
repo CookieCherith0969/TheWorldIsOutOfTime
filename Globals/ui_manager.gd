@@ -96,11 +96,14 @@ func make_new_screen():
 		remove_child(current_screen)
 		current_screen.queue_free()
 	
-	if current_screen_type != Screens.GAME:
-		GameManager.screensaver_mode = true
-	else:
-		GameManager.screensaver_mode = false
-		GameManager.timeskip_days = 0
+	match(current_screen_type):
+		Screens.GAME:
+			GameManager.screensaver_mode = false
+			GameManager.timeskip_days = 0
+			SoundManager.start_game_music()
+		Screens.TITLE:
+			GameManager.screensaver_mode = true
+			SoundManager.start_menu_music()
 	
 	var new_screen = screen_scenes[current_screen_type].instantiate()
 	add_child(new_screen)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bacc4pkva1tju"
+path="res://.godot/imported/rocks f3.ogg-63409a22c2a951d04b50447ed79d8d4b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/rocks f3.ogg"
+dest_files=["res://.godot/imported/rocks f3.ogg-63409a22c2a951d04b50447ed79d8d4b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

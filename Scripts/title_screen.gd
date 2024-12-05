@@ -7,6 +7,27 @@ var unregistered_time : float = 0.0
 var registered_seconds : int = 0
 var previous_time : float = 0.0
 
+var debug_seconds : int = 0
+
+@export
+var second_hand_length : float = 30.0
+@export
+var minute_hand_length : float = 24.0
+#@export
+#var hour_hand_length : float = 18.0
+@export
+var second_hand : Line2D
+@export
+var minute_hand : Line2D
+#@export
+#var hour_hand : Line2D
+
+const seconds_per_minute : int = 60
+const minutes_per_hour : int = 60
+const hours_per_cycle : int = 12
+
+var loops_seen : int = 0
+
 @onready
 var hide_button : TextureButton = $HideButton
 @export
@@ -36,7 +57,6 @@ var play_button : TextureButton = $MenuBox/PlayButton
 var exit_button : TextureButton = $MenuBox/ExitButton
 
 const max_speed : int = 16
-const control_disabled_length : float = 0.1
 
 @export
 var planet_lifter : LiftManager
@@ -50,26 +70,49 @@ func _ready():
 		exit_button.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var current_time = SoundManager.get_menu_music_position()
 	var time_diff = current_time - previous_time
+	var playback : AudioStreamPlayback = SoundManager.get_menu_music_playback()
+	
+	if playback.get_loop_count() > loops_seen:
+		var length = SoundManager.get_menu_music_length()
+		time_diff = previous_time - length + current_time
+		debug_seconds += 104
+		loops_seen += 1
+	
 	unregistered_time += time_diff
-	if unregistered_time - registered_time >= 1.0:
+	
+	while registered_time - unregistered_time >= 1.0:
+		unregistered_time += 1.0
+	
+	while unregistered_time - registered_time >= 1.0:
 		registered_time += 1.0
 		registered_seconds += 1
-		registered_seconds %= 43200
-		unregistered_time -= 1.0
+		registered_seconds %= int(hours_per_cycle*minutes_per_hour*seconds_per_minute)
+		
+		update_clock_hands()
 	
 	previous_time = current_time
 
 func update_clock_hands():
-	var seconds_passed = registered_seconds
+	var seconds_passed : int = registered_seconds
 	
-	var hours_passed = seconds_passed / 3600
-	seconds_passed -= hours_passed * 3600
+	var seconds_per_hour : int = minutes_per_hour*seconds_per_minute
+	var hours_passed : int = seconds_passed / seconds_per_hour
+	seconds_passed -= hours_passed * seconds_per_hour
 	
-	var minutes_passed = seconds_passed / 60
-	seconds_passed -= minutes_passed * 60
+	var minutes_passed : int = seconds_passed / seconds_per_minute
+	seconds_passed -= minutes_passed * seconds_per_minute
+	
+	var second_ratio = float(seconds_passed)/seconds_per_minute
+	var minute_ratio = float(minutes_passed)/minutes_per_hour
+	var hour_ratio = float(hours_passed)/hours_per_cycle
+	
+	second_hand.points[1] = Vector2.UP.rotated(second_ratio*2*PI)*second_hand_length
+	minute_hand.points[1] = Vector2.UP.rotated(minute_ratio*2*PI)*minute_hand_length
+	
+	#hour_hand.points[1] = Vector2.UP.rotated(hour_ratio*2*PI)*hour_hand_length
 
 
 func _on_hide_button_pressed() -> void:

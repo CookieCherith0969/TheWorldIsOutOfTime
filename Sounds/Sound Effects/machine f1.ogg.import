@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cyrxb2h3fe0uy"
+path="res://.godot/imported/machine f1.ogg-08f9a809ccbe1a5781dea8c8e7254893.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/machine f1.ogg"
+dest_files=["res://.godot/imported/machine f1.ogg-08f9a809ccbe1a5781dea8c8e7254893.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

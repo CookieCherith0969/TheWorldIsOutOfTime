@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bmj803wai0v4d"
+path="res://.godot/imported/rocket f2.ogg-8ccf671cfe987d73903028366d5c0e65.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/rocket f2.ogg"
+dest_files=["res://.godot/imported/rocket f2.ogg-8ccf671cfe987d73903028366d5c0e65.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
