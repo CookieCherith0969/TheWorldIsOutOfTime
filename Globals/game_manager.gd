@@ -72,6 +72,10 @@ var screensaver_speed_multiplier : int = 4
 var rocket_material : Materials
 var parts_per_rocket : int = 100
 
+@export
+var rocket_material : Materials
+var parts_per_rocket : int = 100
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialise factory list from Factories folder
