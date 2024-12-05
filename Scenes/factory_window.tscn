@@ -1,18 +1,18 @@
 [gd_scene load_steps=14 format=3 uid="uid://yf4p7g6dmo68"]
 
 [ext_resource type="Script" path="res://Scripts/factory_window.gd" id="1_cgacj"]
-[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="2_3l0es"]
 [ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="2_dkht3"]
-[ext_resource type="Texture2D" uid="uid://chelway1kwbr3" path="res://Sprites/Buttons/previous-button-normal.png" id="8_rcltm"]
-[ext_resource type="Texture2D" uid="uid://bdh6hnu2f5gfv" path="res://Sprites/Buttons/previous-button-pressed.png" id="9_fcrgy"]
-[ext_resource type="Texture2D" uid="uid://ch6lcy7bou6ik" path="res://Sprites/Buttons/previous-button-hover.png" id="10_4i8ku"]
-[ext_resource type="Texture2D" uid="uid://b8dtjbf8mplnd" path="res://Sprites/Buttons/previous-button-disabled.png" id="11_0d2ck"]
-[ext_resource type="Texture2D" uid="uid://bla6lmqvtsr1u" path="res://Sprites/Buttons/previous-button-focus.png" id="12_s671f"]
-[ext_resource type="Texture2D" uid="uid://c2dkwi75v5ixw" path="res://Sprites/Buttons/next-button-normal.png" id="13_r8xck"]
-[ext_resource type="Texture2D" uid="uid://bpl2seicw046k" path="res://Sprites/Buttons/next-button-pressed.png" id="14_sjr8m"]
-[ext_resource type="Texture2D" uid="uid://dsotr6wnp6wvi" path="res://Sprites/Buttons/next-button-hover.png" id="15_akvrr"]
-[ext_resource type="Texture2D" uid="uid://bj6nk1b3b01o3" path="res://Sprites/Buttons/next-button-disabled.png" id="16_j3ukt"]
-[ext_resource type="Texture2D" uid="uid://dvl5gvuk16378" path="res://Sprites/Buttons/next-button-focus.png" id="17_ae3to"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="2_fsvpq"]
+[ext_resource type="Texture2D" uid="uid://bp5odisi6b6eq" path="res://Sprites/Buttons/prev-page-button-normal.png" id="4_b4vnu"]
+[ext_resource type="Texture2D" uid="uid://cpv52j50mgwpj" path="res://Sprites/Buttons/prev-page-button-pressed.png" id="5_bk3lg"]
+[ext_resource type="Texture2D" uid="uid://bkmd5n2ffjnq6" path="res://Sprites/Buttons/prev-page-button-hover.png" id="6_ahitw"]
+[ext_resource type="Texture2D" uid="uid://dy0g0w1k37boi" path="res://Sprites/Buttons/prev-page-button-disabled.png" id="7_s3gvx"]
+[ext_resource type="Texture2D" uid="uid://o4yotr48l0rt" path="res://Sprites/Buttons/prev-page-button-focus.png" id="8_0h054"]
+[ext_resource type="Texture2D" uid="uid://cwafy2kyl5dbb" path="res://Sprites/Buttons/next-page-button-normal.png" id="9_5gwu0"]
+[ext_resource type="Texture2D" uid="uid://c4sbtihab5icy" path="res://Sprites/Buttons/next-page-button-pressed.png" id="10_krjc1"]
+[ext_resource type="Texture2D" uid="uid://drib5mfsw5ypv" path="res://Sprites/Buttons/next-page-button-hover.png" id="11_7wkov"]
+[ext_resource type="Texture2D" uid="uid://y8i0a21b82e1" path="res://Sprites/Buttons/next-page-button-disabled.png" id="12_yk456"]
+[ext_resource type="Texture2D" uid="uid://duyv8t6t3mere" path="res://Sprites/Buttons/next-page-button-focus.png" id="13_br88r"]
 
 [node name="FactoryWindow" type="MarginContainer"]
 offset_right = 416.0
@@ -21,7 +21,7 @@ script = ExtResource("1_cgacj")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_3l0es")
+texture = ExtResource("2_fsvpq")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -74,11 +74,11 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 focus_neighbor_right = NodePath("../NextButton")
 disabled = true
-texture_normal = ExtResource("8_rcltm")
-texture_pressed = ExtResource("9_fcrgy")
-texture_hover = ExtResource("10_4i8ku")
-texture_disabled = ExtResource("11_0d2ck")
-texture_focused = ExtResource("12_s671f")
+texture_normal = ExtResource("4_b4vnu")
+texture_pressed = ExtResource("5_bk3lg")
+texture_hover = ExtResource("6_ahitw")
+texture_disabled = ExtResource("7_s3gvx")
+texture_focused = ExtResource("8_0h054")
 stretch_mode = 3
 
 [node name="NextButton" type="TextureButton" parent="."]
@@ -87,9 +87,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 focus_neighbor_left = NodePath("../PrevButton")
-texture_normal = ExtResource("13_r8xck")
-texture_pressed = ExtResource("14_sjr8m")
-texture_hover = ExtResource("15_akvrr")
-texture_disabled = ExtResource("16_j3ukt")
-texture_focused = ExtResource("17_ae3to")
+texture_normal = ExtResource("9_5gwu0")
+texture_pressed = ExtResource("10_krjc1")
+texture_hover = ExtResource("11_7wkov")
+texture_disabled = ExtResource("12_yk456")
+texture_focused = ExtResource("13_br88r")
 stretch_mode = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=37 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -23,14 +23,19 @@
 [ext_resource type="Texture2D" uid="uid://lqntwjndb75i" path="res://Sprites/Placeholder/PlaceholderHideFocus.png" id="19_gdf8v"]
 [ext_resource type="Texture2D" uid="uid://xa2ir7ymytr0" path="res://Sprites/Placeholder/PlaceholderFastNormalT.png" id="20_hyr5r"]
 [ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="21_b6cxi"]
-[ext_resource type="Texture2D" uid="uid://c2dkwi75v5ixw" path="res://Sprites/Buttons/next-button-normal.png" id="21_h3piy"]
+[ext_resource type="Texture2D" uid="uid://cyl5x8lwb62xc" path="res://Sprites/Buttons/play-button-normal.png" id="21_h110y"]
 [ext_resource type="Texture2D" uid="uid://fu0wlgopeplc" path="res://Sprites/Placeholder/PlaceholderFastPressedT.png" id="21_q2dyf"]
-[ext_resource type="Texture2D" uid="uid://bpl2seicw046k" path="res://Sprites/Buttons/next-button-pressed.png" id="22_0tgtd"]
 [ext_resource type="Texture2D" uid="uid://bu8la6milv254" path="res://Sprites/Placeholder/PlaceholderFastHoverT.png" id="22_ct0so"]
-[ext_resource type="Texture2D" uid="uid://dsotr6wnp6wvi" path="res://Sprites/Buttons/next-button-hover.png" id="23_a61k0"]
-[ext_resource type="Texture2D" uid="uid://bj6nk1b3b01o3" path="res://Sprites/Buttons/next-button-disabled.png" id="24_y25lf"]
-[ext_resource type="Texture2D" uid="uid://b21p58iuvad0x" path="res://Sprites/Buttons/next-button-focus-light.png" id="25_ncawk"]
+[ext_resource type="Texture2D" uid="uid://prfbxyyf2mmw" path="res://Sprites/Buttons/play-button-pressed.png" id="22_jl0xb"]
+[ext_resource type="Texture2D" uid="uid://cluxpbiivn7rg" path="res://Sprites/Buttons/play-button-hover.png" id="23_1cf2x"]
+[ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="24_n3tcr"]
+[ext_resource type="Texture2D" uid="uid://cmfg36e7rwysi" path="res://Sprites/Buttons/settings-button-normal.png" id="25_ljxs3"]
 [ext_resource type="PackedScene" uid="uid://cfqd75j7k77x8" path="res://Scenes/hover_fade_component.tscn" id="25_tnpjw"]
+[ext_resource type="Texture2D" uid="uid://cwikb5b2vlxyp" path="res://Sprites/Buttons/settings-button-pressed.png" id="26_tjyli"]
+[ext_resource type="Texture2D" uid="uid://dcwc6kkvlnd58" path="res://Sprites/Buttons/settings-button-hover.png" id="27_ev750"]
+[ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
+[ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
+[ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
 
 [node name="TitleScreen" type="Control" node_paths=PackedStringArray("planet_lifter", "menu_lifter")]
 layout_mode = 3
@@ -169,39 +174,45 @@ grow_vertical = 2
 
 [node name="PlayButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
-texture_normal = ExtResource("21_h3piy")
-texture_pressed = ExtResource("22_0tgtd")
-texture_hover = ExtResource("23_a61k0")
-texture_disabled = ExtResource("24_y25lf")
-texture_focused = ExtResource("25_ncawk")
+size_flags_horizontal = 3
+texture_normal = ExtResource("21_h110y")
+texture_pressed = ExtResource("22_jl0xb")
+texture_hover = ExtResource("23_1cf2x")
+texture_disabled = ExtResource("21_h110y")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
 
 [node name="BobbingComponent" type="Node" parent="MenuBox/PlayButton"]
 script = ExtResource("21_b6cxi")
 bobbing_height = 4.0
 bob_offset = -0.7854
 
-[node name="PlayButton2" type="TextureButton" parent="MenuBox"]
+[node name="SettingsButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
-texture_normal = ExtResource("21_h3piy")
-texture_pressed = ExtResource("22_0tgtd")
-texture_hover = ExtResource("23_a61k0")
-texture_disabled = ExtResource("24_y25lf")
-texture_focused = ExtResource("25_ncawk")
+size_flags_horizontal = 3
+texture_normal = ExtResource("25_ljxs3")
+texture_pressed = ExtResource("26_tjyli")
+texture_hover = ExtResource("27_ev750")
+texture_disabled = ExtResource("25_ljxs3")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="MenuBox/PlayButton2"]
+[node name="BobbingComponent" type="Node" parent="MenuBox/SettingsButton"]
 script = ExtResource("21_b6cxi")
 bobbing_height = 4.0
 bob_offset = -1.5708
 
-[node name="PlayButton3" type="TextureButton" parent="MenuBox"]
+[node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
-texture_normal = ExtResource("21_h3piy")
-texture_pressed = ExtResource("22_0tgtd")
-texture_hover = ExtResource("23_a61k0")
-texture_disabled = ExtResource("24_y25lf")
-texture_focused = ExtResource("25_ncawk")
+size_flags_horizontal = 3
+texture_normal = ExtResource("28_3h5m7")
+texture_pressed = ExtResource("29_gjw76")
+texture_hover = ExtResource("30_51570")
+texture_disabled = ExtResource("28_3h5m7")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="MenuBox/PlayButton3"]
+[node name="BobbingComponent" type="Node" parent="MenuBox/ExitButton"]
 script = ExtResource("21_b6cxi")
 bobbing_height = 4.0
 bob_offset = -2.3562
@@ -267,6 +278,9 @@ texture_focused = ExtResource("19_gdf8v")
 layout_mode = 1
 active = false
 
+[connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="focus_entered" from="ControlBox/SlowButton" to="ControlBox/SlowButton/HoverFadeComponent" method="trigger_hover"]
 [connection signal="pressed" from="ControlBox/SlowButton" to="." method="_on_slow_button_pressed"]
 [connection signal="pressed" from="ControlBox/SlowButton" to="ControlBox/SlowButton/HoverFadeComponent" method="trigger_hover"]

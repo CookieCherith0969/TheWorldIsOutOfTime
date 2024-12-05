@@ -100,6 +100,7 @@ func make_new_screen():
 		GameManager.screensaver_mode = true
 	else:
 		GameManager.screensaver_mode = false
+		GameManager.timeskip_days = 0
 	
 	var new_screen = screen_scenes[current_screen_type].instantiate()
 	add_child(new_screen)

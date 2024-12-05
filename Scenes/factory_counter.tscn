@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2vqwi7lc5hc0" path="res://Sprites/Icons/factory-arrow.png" id="4_d0ei5"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
-[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="5_74akv"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="5_deej6"]
 [ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="6_kivah"]
 [ext_resource type="Texture2D" uid="uid://bxws353d0cbt3" path="res://Sprites/Icons/metal.png" id="7_86jvy"]
 [ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
@@ -84,7 +84,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_74akv")
+texture = ExtResource("5_deej6")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2

@@ -32,6 +32,8 @@ var slow_button : TextureButton = $ControlBox/SlowButton
 var fast_button : TextureButton = $ControlBox/FastButton
 @onready
 var play_button : TextureButton = $MenuBox/PlayButton
+@onready
+var exit_button : TextureButton = $MenuBox/ExitButton
 
 const max_speed : int = 16
 const control_disabled_length : float = 0.1
@@ -43,6 +45,9 @@ var menu_lifter : LiftManager
 
 func _ready():
 	play_button.grab_focus()
+	if OS.has_feature("web"):
+		menu_box.remove_child(exit_button)
+		exit_button.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -147,3 +152,13 @@ func _on_fast_button_pressed() -> void:
 	else:
 		fast_button.disabled = false
 	slow_button.disabled = false
+
+func _on_play_button_pressed() -> void:
+	UIManager.current_screen_type = UIManager.Screens.GAME
+	UIManager.make_new_screen()
+
+func _on_settings_button_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
