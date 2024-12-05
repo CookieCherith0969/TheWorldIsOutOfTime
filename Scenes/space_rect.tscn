@@ -6,6 +6,7 @@
 [node name="SpaceRect" type="TextureRect"]
 offset_right = 196.0
 offset_bottom = 196.0
+mouse_filter = 2
 texture = ExtResource("1_wfqjq")
 expand_mode = 1
 stretch_mode = 1

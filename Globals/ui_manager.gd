@@ -24,6 +24,10 @@ var current_screen : Control
 @export
 var screen_scenes : Array[PackedScene]
 
+var cursor_frame : int = 0
+@export
+var cursor_frames : Array[Texture]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_window().min_size = get_viewport().size
@@ -32,6 +36,22 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugReset"):
 		make_new_screen()
+	if event.is_action_pressed("DebugFullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			print_debug(DisplayServer.window_get_size())
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			cursor_frame -= 1
+			cursor_frame %= cursor_frames.size()*2
+		else:
+			cursor_frame += 1
+			cursor_frame %= cursor_frames.size()*2
+		
+		Input.set_custom_mouse_cursor(cursor_frames[cursor_frame/2])
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""

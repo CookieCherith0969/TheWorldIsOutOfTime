@@ -1,16 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=14 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
 [ext_resource type="PackedScene" uid="uid://deeyw2hrbotgb" path="res://Scenes/Screens/title_screen.tscn" id="2_jbj66"]
 [ext_resource type="PackedScene" uid="uid://1rb1mnyln0nq" path="res://Scenes/Screens/game_screen.tscn" id="3_khrr2"]
 [ext_resource type="PackedScene" uid="uid://esv3lpa5b5t1" path="res://Scenes/tooltip.tscn" id="3_m5j15"]
 [ext_resource type="PackedScene" uid="uid://bag3jm5pl2x0e" path="res://Scenes/Screens/screensaver_screen.tscn" id="4_6o3vy"]
+[ext_resource type="Texture2D" uid="uid://d1p78sprxcpm6" path="res://Sprites/Placeholder/PlaceholderCursor0.png" id="5_bi4nc"]
+[ext_resource type="Texture2D" uid="uid://dsc17bjhbucn6" path="res://Sprites/Placeholder/PlaceholderCursor1.png" id="6_7wl1l"]
+[ext_resource type="Texture2D" uid="uid://dyxou2k8uaqhx" path="res://Sprites/Placeholder/PlaceholderCursor2.png" id="7_m51hi"]
+[ext_resource type="Texture2D" uid="uid://ccxtjvxegkmm7" path="res://Sprites/Placeholder/PlaceholderCursor3.png" id="8_hkcs1"]
+[ext_resource type="Texture2D" uid="uid://ldppp7xnrbqs" path="res://Sprites/Placeholder/PlaceholderCursor4.png" id="9_8vbbc"]
+[ext_resource type="Texture2D" uid="uid://dxu0ov0t6m3um" path="res://Sprites/Placeholder/PlaceholderCursor5.png" id="10_joqiy"]
+[ext_resource type="Texture2D" uid="uid://rrkcr7dcgm0w" path="res://Sprites/Placeholder/PlaceholderCursor6.png" id="11_nrjmk"]
+[ext_resource type="Texture2D" uid="uid://c14je4ikkj01m" path="res://Sprites/Placeholder/PlaceholderCursor7.png" id="12_ysk3w"]
 
 [node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]
 script = ExtResource("1_g5gy1")
 current_screen_type = 1
 tooltip = NodePath("Tooltip")
 screen_scenes = Array[PackedScene]([ExtResource("2_jbj66"), ExtResource("3_khrr2"), ExtResource("4_6o3vy")])
+cursor_frames = Array[Texture]([ExtResource("5_bi4nc"), ExtResource("6_7wl1l"), ExtResource("7_m51hi"), ExtResource("8_hkcs1"), ExtResource("9_8vbbc"), ExtResource("10_joqiy"), ExtResource("11_nrjmk"), ExtResource("12_ysk3w")])
 
 [node name="Tooltip" parent="." instance=ExtResource("3_m5j15")]
 visible = false
