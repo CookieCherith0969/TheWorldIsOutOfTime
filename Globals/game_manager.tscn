@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cudnes87bgwwh"]
+[gd_scene load_steps=18 format=3 uid="uid://cudnes87bgwwh"]
 
 [ext_resource type="Script" path="res://Globals/game_manager.gd" id="1_pi4dq"]
 [ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="2_2ma4m"]
@@ -7,9 +7,20 @@
 [ext_resource type="Texture2D" uid="uid://dbp1ypikxgkvy" path="res://Sprites/Placeholder/PlaceholderPart.png" id="5_jc22t"]
 [ext_resource type="Texture2D" uid="uid://wu3rvbosv6bo" path="res://Sprites/Placeholder/PlaceholderElectronics.png" id="6_wo56c"]
 [ext_resource type="Texture2D" uid="uid://ctypbekssnrml" path="res://Sprites/Placeholder/PlaceholderRocketPart.png" id="7_edppm"]
+[ext_resource type="Texture2D" uid="uid://d1p78sprxcpm6" path="res://Sprites/Placeholder/PlaceholderCursor0.png" id="8_6no0p"]
+[ext_resource type="Texture2D" uid="uid://dsc17bjhbucn6" path="res://Sprites/Placeholder/PlaceholderCursor1.png" id="9_x5unc"]
+[ext_resource type="Texture2D" uid="uid://dyxou2k8uaqhx" path="res://Sprites/Placeholder/PlaceholderCursor2.png" id="10_ag8of"]
+[ext_resource type="Texture2D" uid="uid://ccxtjvxegkmm7" path="res://Sprites/Placeholder/PlaceholderCursor3.png" id="11_r1n4p"]
+[ext_resource type="Texture2D" uid="uid://ldppp7xnrbqs" path="res://Sprites/Placeholder/PlaceholderCursor4.png" id="12_rfikt"]
+[ext_resource type="Texture2D" uid="uid://dxu0ov0t6m3um" path="res://Sprites/Placeholder/PlaceholderCursor5.png" id="13_ab7p1"]
+[ext_resource type="Texture2D" uid="uid://rrkcr7dcgm0w" path="res://Sprites/Placeholder/PlaceholderCursor6.png" id="14_4gjeu"]
+[ext_resource type="Texture2D" uid="uid://c14je4ikkj01m" path="res://Sprites/Placeholder/PlaceholderCursor7.png" id="15_ni02j"]
+[ext_resource type="Texture2D" uid="uid://ccx2m3jms0433" path="res://Sprites/Placeholder/PlaceholderHammer.png" id="16_jp2xd"]
+[ext_resource type="Texture2D" uid="uid://po5bke1uwm7f" path="res://Sprites/Placeholder/PlaceholderSmallLock.png" id="17_7n5ne"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_pi4dq")
-material_icons = Array[Texture]([ExtResource("2_2ma4m"), ExtResource("3_46v4d"), ExtResource("4_j5ctj"), ExtResource("5_jc22t"), ExtResource("6_wo56c"), ExtResource("7_edppm")])
+material_icons = Array[Texture]([ExtResource("2_2ma4m"), ExtResource("3_46v4d"), ExtResource("4_j5ctj"), ExtResource("5_jc22t"), ExtResource("6_wo56c"), ExtResource("7_edppm"), ExtResource("8_6no0p"), ExtResource("9_x5unc"), ExtResource("10_ag8of"), ExtResource("11_r1n4p"), ExtResource("12_rfikt"), ExtResource("13_ab7p1"), ExtResource("14_4gjeu"), ExtResource("15_ni02j"), ExtResource("16_jp2xd"), ExtResource("17_7n5ne")])
 starting_factory_names = Array[StringName]([&"Stone Mine", &"Foundation Mixery", &"Metal Smeltery"])
 starting_factory_amounts = Array[int]([4, 1, 1])
+rocket_material = 5

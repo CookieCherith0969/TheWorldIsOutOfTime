@@ -24,9 +24,10 @@ SoundManager="*res://Globals/sound_manager.tscn"
 
 [display]
 
-window/size/viewport_width=600
-window/size/viewport_height=600
+window/size/viewport_width=500
+window/size/viewport_height=500
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://Sprites/Placeholder/PlaceholderCursor0.png"
 
 [input]
