@@ -12,13 +12,10 @@ var next_button : TextureButton = $NextButton
 @onready
 var material_grid : GridContainer = $InnerMargin/MaterialGrid
 
-var rocket_material_index : int
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var number_of_materials = GameManager.Materials.size()
+	var number_of_materials = GameManager.Materials.size() - GameManager.num_icon_only_materials
 	number_of_pages = ceili(float(number_of_materials)/materials_per_page)
-	rocket_material_index = GameManager.rocket_material as int
 	
 	populate_materials()
 	update_buttons()
@@ -42,12 +39,10 @@ func next_page():
 func populate_materials():
 	for i in range(material_grid.get_child_count()):
 		var material_index = i + materials_per_page*current_page
-		if material_index >= rocket_material_index:
-			material_index += 1
-			
+		
 		var material_counter : MaterialCounter = material_grid.get_child(i)
 		
-		if material_index >= GameManager.Materials.size():
+		if GameManager.is_material_icon_only(material_index):
 			material_counter.set_empty()
 			continue
 		

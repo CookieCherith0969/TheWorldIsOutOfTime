@@ -34,12 +34,14 @@ var plan_button : TextureButton = $PlanButton
 @onready
 var tooltip_marker : Marker2D = $TooltipMarker
 
-@export
 var unlocked : bool = false
 @onready
 var lock_panel : Panel = $LockPanel
 @onready
 var unlock_button : TextureButton = $LockPanel/UnlockButton
+
+var days_per_wrench_turn : int = 2
+var wrench_days : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,6 +50,7 @@ func _ready() -> void:
 	GameManager.factory_build_progressed.connect(on_factory_build_progressed)
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
+	GameManager.day_ended.connect(on_day_ended)
 	
 	if unlocked:
 		unlock()
@@ -61,6 +64,15 @@ func _ready() -> void:
 	populate_nums()
 	update_amounts()
 	update_progress(0)
+
+func on_day_ended():
+	wrench_days += 1
+	if wrench_days >= days_per_wrench_turn:
+		wrench_days -= days_per_wrench_turn
+		
+		var new_frame : int = building_wrench.frame + 1
+		new_frame %= building_wrench.sprite_frames.get_frame_count("default")
+		building_wrench.frame = new_frame
 
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:
@@ -76,11 +88,9 @@ func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : i
 		update_progress(day_progress)
 
 func on_timeskip_started(_num_days : int):
-	building_wrench.play()
 	update_buttons()
 	
 func on_timeskip_ended():
-	building_wrench.pause()
 	update_buttons()
 
 func populate_icons():

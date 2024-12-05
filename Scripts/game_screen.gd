@@ -30,8 +30,6 @@ var factory_next : TextureButton
 
 @export
 var minimise_button : TextureButton
-@export
-var rocket_counter : RocketCounter
 
 func _ready() -> void:
 	small_map.grab_focus()
@@ -116,7 +114,7 @@ func update_focus_neighbours():
 				factory.get_left_button().focus_neighbor_bottom = bottom_factory.get_left_button().get_path()
 				factory.get_right_button().focus_neighbor_bottom = bottom_factory.get_right_button().get_path()
 
-func on_factory_unlocked(factory : FactoryInfo, counter_index : int):
+func on_factory_unlocked(_factory : FactoryInfo, counter_index : int):
 	update_focus_neighbours()
 	factory_grid.get_child(counter_index).plan_button.grab_focus()
 
@@ -147,7 +145,6 @@ func show_large_map():
 	material_window.hide()
 	factory_window.hide()
 	time_control.hide()
-	rocket_counter.hide()
 	
 	minimise_button.grab_focus()
 
@@ -163,6 +160,5 @@ func hide_large_map():
 	material_window.show()
 	factory_window.show()
 	time_control.show()
-	rocket_counter.show()
 	
 	small_map.grab_focus()

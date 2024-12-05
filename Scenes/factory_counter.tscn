@@ -1,14 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=32 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
-[ext_resource type="Texture2D" uid="uid://dxs8tsj6f2n61" path="res://Sprites/Placeholder/PlaceholderMetal.png" id="3_s4axq"]
-[ext_resource type="Texture2D" uid="uid://bpe880ota52am" path="res://Sprites/Placeholder/PlaceholderRock.png" id="4_5vlrj"]
-[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/Placeholder/PlaceholderArrow.png" id="4_27xpf"]
+[ext_resource type="Texture2D" uid="uid://b2vqwi7lc5hc0" path="res://Sprites/Icons/factory-arrow.png" id="4_d0ei5"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
-[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="5_ao6k5"]
-[ext_resource type="Texture2D" uid="uid://cxg0iga5xht4d" path="res://Sprites/Placeholder/PlaceholderWrench.png" id="5_igpy1"]
+[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="5_74akv"]
+[ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="6_kivah"]
+[ext_resource type="Texture2D" uid="uid://bxws353d0cbt3" path="res://Sprites/Icons/metal.png" id="7_86jvy"]
+[ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
 [ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
 [ext_resource type="Texture2D" uid="uid://dai4ysitmliuc" path="res://Sprites/Buttons/add-prod-button-pressed.png" id="11_2akyy"]
 [ext_resource type="Texture2D" uid="uid://b0f16do1diy35" path="res://Sprites/Buttons/add-prod-button-hover.png" id="12_7ypcg"]
@@ -31,26 +31,36 @@ bg_color = Color(0.6, 0.6, 0.6, 0.270588)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw4a4"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5anxt"]
-atlas = ExtResource("5_igpy1")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfhr0"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1gfs"]
-atlas = ExtResource("5_igpy1")
-region = Rect2(8, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_75h1a"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_hokrf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6sis"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wnvel"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5anxt")
+"texture": SubResource("AtlasTexture_vfhr0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m1gfs")
+"texture": SubResource("AtlasTexture_75h1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6sis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75h1a")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wd7"]
@@ -65,7 +75,7 @@ offset_bottom = 65.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_2ei53")
 icon_scene = ExtResource("4_nkejt")
-arrow_texture = ExtResource("4_27xpf")
+arrow_texture = ExtResource("4_d0ei5")
 
 [node name="BackgroundRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -74,7 +84,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_ao6k5")
+texture = ExtResource("5_74akv")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -100,21 +110,27 @@ alignment = 1
 [node name="FactoryIcon2" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("4_5vlrj")
+texture = ExtResource("6_kivah")
 
 [node name="FactoryIcon3" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
+texture = ExtResource("4_d0ei5")
 
 [node name="FactoryIcon4" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("3_s4axq")
+texture = ExtResource("7_86jvy")
 
 [node name="FactoryIcon6" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("4_5vlrj")
+texture = ExtResource("6_kivah")
+
+[node name="FactoryIcon7" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_kivah")
 
 [node name="NumBox" type="HBoxContainer" parent="."]
 visible = false
@@ -167,9 +183,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -53.0
+offset_left = -47.0
 offset_top = 3.0
-offset_right = 53.0
+offset_right = 47.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -181,8 +197,10 @@ show_percentage = false
 
 [node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(7, 70)
-sprite_frames = SubResource("SpriteFrames_hokrf")
+position = Vector2(9, 73)
+sprite_frames = SubResource("SpriteFrames_wnvel")
+frame = 2
+frame_progress = 0.421552
 
 [node name="PlanButton" type="TextureButton" parent="."]
 visible = false

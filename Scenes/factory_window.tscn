@@ -1,12 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://yf4p7g6dmo68"]
+[gd_scene load_steps=16 format=3 uid="uid://yf4p7g6dmo68"]
 
 [ext_resource type="Script" path="res://Scripts/factory_window.gd" id="1_cgacj"]
-[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="1_oopqv"]
+[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="2_3l0es"]
 [ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="2_dkht3"]
 [ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="3_ocrpp"]
-[ext_resource type="Resource" uid="uid://dib570tkj0s03" path="res://Factories/FoundationMixery.tres" id="4_t6s2j"]
-[ext_resource type="Resource" uid="uid://bfj4def3ve48o" path="res://Factories/PartWorkshop.tres" id="5_8m14a"]
-[ext_resource type="Resource" uid="uid://br52j8668p87f" path="res://Factories/ElectronicsWorkshop.tres" id="6_stj0e"]
 [ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="7_v6omy"]
 [ext_resource type="Texture2D" uid="uid://chelway1kwbr3" path="res://Sprites/Buttons/previous-button-normal.png" id="8_rcltm"]
 [ext_resource type="Texture2D" uid="uid://bdh6hnu2f5gfv" path="res://Sprites/Buttons/previous-button-pressed.png" id="9_fcrgy"]
@@ -26,7 +23,7 @@ script = ExtResource("1_cgacj")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_oopqv")
+texture = ExtResource("2_3l0es")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -37,35 +34,33 @@ layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 45
+theme_override_constants/margin_bottom = 54
 
 [node name="FactoryGrid" type="GridContainer" parent="InnerMargin"]
 layout_mode = 2
 theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 13
+theme_override_constants/v_separation = 16
 columns = 3
 
 [node name="FactoryCounter" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
 represented_factory = ExtResource("3_ocrpp")
-unlocked = true
 
 [node name="FactoryCounter2" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("4_t6s2j")
-unlocked = true
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter3" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-unlocked = true
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter4" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("5_8m14a")
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter5" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("6_stj0e")
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter6" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
@@ -73,15 +68,15 @@ represented_factory = ExtResource("7_v6omy")
 
 [node name="FactoryCounter7" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("7_v6omy")
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter8" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("7_v6omy")
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter9" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("7_v6omy")
+represented_factory = ExtResource("3_ocrpp")
 
 [node name="PrevButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(44, 44)

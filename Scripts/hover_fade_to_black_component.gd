@@ -31,14 +31,14 @@ func _process(delta: float) -> void:
 		if fade_progress <= 0.0:
 			fade_progress = 0.0
 		
-		var fade_color : Color
+		var new_color : Color
 		var hold_ratio = hold_time/total_time
 		if fade_progress > hold_ratio:
-			fade_color = hover_color
+			new_color = hover_color
 		else:
-			fade_color = fade_color.lerp(hover_color, in_out_sine_ease(fade_progress/(1-hold_ratio)))
+			new_color = fade_color.lerp(hover_color, in_out_sine_ease(fade_progress/(1-hold_ratio)))
 		
-		get_parent().modulate = fade_color
+		get_parent().modulate = new_color
 
 func _on_mouse_entered() -> void:
 	trigger_hover()

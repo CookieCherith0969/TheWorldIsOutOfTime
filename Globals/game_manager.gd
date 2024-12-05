@@ -9,19 +9,30 @@ signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 
 enum Materials {
 	STONE,
-	FOUNDATION, 
-	METALS, 
-	PARTS, 
-	ELECTRONICS, 
-	ROCKET_PART,
-	T1,T2,T3,T4,T5,T6,T7,T8,T9,T10}
+	WATER,
+	CONCRETE,
+	METALS,
+	OIL,
+	PLASTIC,
+	RARE_METALS,
+	ELECTRONICS,
+	COMPUTER,
+	HULL,
+	RAW_URANIUM,
+	ENRICHED_URANIUM,
+	NUCLEAR_BOMB,
+	# Begin Icon Only Materials
+	MINUS_POLLUTION,
+	ROCKET,
+}
+
+const num_icon_only_materials : int = 2
 
 @export
 var material_icons : Array[Texture] = []
 
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
-#const hour_length : float = day_length/hours_per_day
 
 const starting_days : int = 365*9
 var days_left : int = starting_days
@@ -70,10 +81,6 @@ const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
-@export
-var rocket_material : Materials
-var parts_per_rocket : int = 100
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialise factory list from Factories folder
@@ -88,12 +95,14 @@ func _ready() -> void:
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
 		active_factory_amounts.append(0)
-		if factories[i].factory_name in starting_factory_names:
-			var index = starting_factory_names.find(factories[i].factory_name)
-			active_factory_amounts[i] = starting_factory_amounts[index]
 		planned_factory_amounts.append(0)
 		factory_build_progress.append(0)
 		unlocked_factories.append(false)
+		
+		if factories[i].factory_name in starting_factory_names:
+			var index = starting_factory_names.find(factories[i].factory_name)
+			active_factory_amounts[i] = starting_factory_amounts[index]
+			unlocked_factories[index] = true
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
@@ -101,7 +110,7 @@ func _ready() -> void:
 		prev_day_gains.append(0)
 	
 	material_amounts[Materials.STONE] = 200
-	material_amounts[Materials.FOUNDATION] = 200
+	material_amounts[Materials.CONCRETE] = 200
 	material_amounts[Materials.METALS] = 100
 
 func _physics_process(delta: float) -> void:
@@ -189,6 +198,9 @@ func is_timeskipping() -> bool:
 		return true
 	return false
 
+func is_material_icon_only(material : Materials):
+	return material as int >= GameManager.Materials.size()-1-num_icon_only_materials
+
 func get_material_amount(material : Materials):
 	return material_amounts[material]
 
@@ -233,6 +245,9 @@ func has_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 
 func add_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int], negate : bool = false, multiplier : int = 1):
 	for i in range(materials.size()):
+		if is_material_icon_only(materials[i]):
+			continue
+		
 		if negate:
 			material_amounts[materials[i]] -= amounts[i] * multiplier
 		else:

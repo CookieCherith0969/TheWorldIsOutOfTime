@@ -31,7 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dc0waj3fc7lsu" path="res://Sprites/Buttons/minimize-button-focus.png" id="31_ygalj"]
 [ext_resource type="Script" path="res://Scripts/large_map.gd" id="32_21avp"]
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "rocket_counter")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,6 +45,7 @@ large_time_control = NodePath("LargeTimeControl")
 material_window = NodePath("MaterialWindow")
 factory_window = NodePath("FactoryWindow")
 minimise_button = NodePath("LargeMap/MinimiseButton")
+rocket_counter = NodePath("")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
