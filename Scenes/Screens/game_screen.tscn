@@ -25,12 +25,12 @@
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="22_7g3ue"]
 [ext_resource type="PackedScene" uid="uid://dbihtam1i81a" path="res://Scenes/material_window.tscn" id="24_fqstt"]
 [ext_resource type="PackedScene" uid="uid://yf4p7g6dmo68" path="res://Scenes/factory_window.tscn" id="25_rre55"]
+[ext_resource type="Texture2D" uid="uid://cwsve6uidhjpg" path="res://Sprites/Buttons/minimize-button-normal.png" id="28_33452"]
+[ext_resource type="Texture2D" uid="uid://chgttx4jxaigf" path="res://Sprites/Buttons/minimize-button-pressed.png" id="29_l8m8v"]
+[ext_resource type="Texture2D" uid="uid://cpkyvrrj0j0he" path="res://Sprites/Buttons/minimize-button-hover.png" id="30_f28y7"]
 [ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/Placeholder/PlaceholderWindowSpace.png" id="31_g8vrw"]
+[ext_resource type="Texture2D" uid="uid://dc0waj3fc7lsu" path="res://Sprites/Buttons/minimize-button-focus.png" id="31_ygalj"]
 [ext_resource type="Script" path="res://Scripts/large_map.gd" id="32_21avp"]
-[ext_resource type="Texture2D" uid="uid://bkb0rswoobt66" path="res://Sprites/Placeholder/PlaceholderMinimiseNormal.png" id="33_mrlk8"]
-[ext_resource type="Texture2D" uid="uid://dfmpgf8687hyv" path="res://Sprites/Placeholder/PlaceholderMinimisePressed.png" id="34_4pqng"]
-[ext_resource type="Texture2D" uid="uid://q06aa54hhrr" path="res://Sprites/Placeholder/PlaceholderMinimiseHover.png" id="35_j2xgj"]
-[ext_resource type="Texture2D" uid="uid://73pjsux6m0pt" path="res://Sprites/Placeholder/PlaceholderMinimiseFocus.png" id="36_3mr2o"]
 
 [node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "rocket_counter")]
 anchors_preset = 15
@@ -212,16 +212,16 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -19.0
-offset_top = 1.0
-offset_right = -3.0
-offset_bottom = 17.0
+offset_left = -26.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 26.0
 grow_horizontal = 0
-texture_normal = ExtResource("33_mrlk8")
-texture_pressed = ExtResource("34_4pqng")
-texture_hover = ExtResource("35_j2xgj")
-texture_disabled = ExtResource("34_4pqng")
-texture_focused = ExtResource("36_3mr2o")
+texture_normal = ExtResource("28_33452")
+texture_pressed = ExtResource("29_l8m8v")
+texture_hover = ExtResource("30_f28y7")
+texture_disabled = ExtResource("29_l8m8v")
+texture_focused = ExtResource("31_ygalj")
 
 [node name="SpaceRect" parent="LargeMap" instance=ExtResource("22_7g3ue")]
 layout_mode = 0
