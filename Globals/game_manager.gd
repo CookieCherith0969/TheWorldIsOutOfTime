@@ -64,8 +64,10 @@ var elapsed_timeskip_days : int = 0
 var last_day_time : float = 0.0
 
 var screensaver_mode : bool = false
-var day_speed_multiplier : float = 1.0
-var max_speed_multiplier : float = 20.0
+const base_speed_multiplier : float = 1.0
+var day_speed_multiplier : float = base_speed_multiplier
+const base_max_speed_multiplier : float = 2.0
+var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
 @export
@@ -146,12 +148,13 @@ func normalised_sine(progress : float):
 
 func update_speed_multiplier():
 	var total_days : float = elapsed_timeskip_days + timeskip_days
+	
 	var elapsed_ratio = elapsed_timeskip_days/total_days
 	var remaining_ratio = timeskip_days/total_days
 	
 	var speed_progress : float = min(2*elapsed_ratio, 2*remaining_ratio)
 	
-	day_speed_multiplier = 1.0 + normalised_sine(speed_progress)*(max_speed_multiplier-1)
+	day_speed_multiplier = base_speed_multiplier + normalised_sine(speed_progress)*(max_speed_multiplier-1)
 
 func get_mixed_time() -> Array[int]:
 	# A copy of the number of days left, so the following calculations don't change the underlying days left
@@ -237,6 +240,11 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 
 func process_days(number_of_days : int):
 	timeskip_days += number_of_days
+	var total_days = elapsed_timeskip_days + timeskip_days
+	var days_log = log(total_days)/log(2)
+	
+	max_speed_multiplier = base_max_speed_multiplier*days_log
+	
 	if timeskip_days == number_of_days:
 		timeskip_started.emit(number_of_days)
 
