@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd1eivqdcegwi"]
+
+[ext_resource type="Script" path="res://Scripts/lift_manager.gd" id="1_abppd"]
+
+[node name="LiftManager" type="Node" node_paths=PackedStringArray("targets")]
+script = ExtResource("1_abppd")
+targets = [NodePath("")]

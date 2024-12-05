@@ -1,0 +1,89 @@
+[gd_scene load_steps=14 format=3 uid="uid://dbihtam1i81a"]
+
+[ext_resource type="Texture2D" uid="uid://b0s1r51slfwgp" path="res://Sprites/Placeholder/PlaceholderWindowLight.png" id="1_7r80h"]
+[ext_resource type="Script" path="res://Scripts/material_window.gd" id="1_jkkvl"]
+[ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="2_fbetd"]
+[ext_resource type="Texture2D" uid="uid://cw5cgymy7oclv" path="res://Sprites/Buttons/time-subtract-button-normal.png" id="3_7a76h"]
+[ext_resource type="Texture2D" uid="uid://jmsovgotpssy" path="res://Sprites/Buttons/time-subtract-button-pressed.png" id="4_wyqwn"]
+[ext_resource type="Texture2D" uid="uid://bn5dt0stxdwti" path="res://Sprites/Buttons/time-subtract-button-hover.png" id="5_lr6t7"]
+[ext_resource type="Texture2D" uid="uid://c5dyj6typoo01" path="res://Sprites/Buttons/time-subtract-button-disabled.png" id="6_xl85n"]
+[ext_resource type="Texture2D" uid="uid://chv7rs2abbgak" path="res://Sprites/Buttons/time-subtract-button-focus.png" id="7_g26n3"]
+[ext_resource type="Texture2D" uid="uid://c606tlo051v8k" path="res://Sprites/Buttons/time-add-button-normal.png" id="8_gc0xj"]
+[ext_resource type="Texture2D" uid="uid://b6on7h3c51n8d" path="res://Sprites/Buttons/time-add-button-pressed.png" id="9_yqlaq"]
+[ext_resource type="Texture2D" uid="uid://dxb6m2fsbiquw" path="res://Sprites/Buttons/time-add-button-hover.png" id="10_xqkgu"]
+[ext_resource type="Texture2D" uid="uid://b0v60n4qau5ek" path="res://Sprites/Buttons/time-add-button-disabled.png" id="11_l131p"]
+[ext_resource type="Texture2D" uid="uid://b73udptx3mded" path="res://Sprites/Buttons/time-add-button-focus.png" id="12_dsunx"]
+
+[node name="MaterialWindow" type="MarginContainer"]
+offset_right = 286.0
+offset_bottom = 130.0
+script = ExtResource("1_jkkvl")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_7r80h")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 22
+
+[node name="MaterialGrid" type="GridContainer" parent="InnerMargin"]
+layout_mode = 2
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
+columns = 3
+
+[node name="MaterialCounter" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="MaterialCounter2" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="MaterialCounter3" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="MaterialCounter4" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="MaterialCounter5" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="MaterialCounter6" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
+layout_mode = 2
+
+[node name="PrevButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+focus_neighbor_right = NodePath("../NextButton")
+disabled = true
+texture_normal = ExtResource("3_7a76h")
+texture_pressed = ExtResource("4_wyqwn")
+texture_hover = ExtResource("5_lr6t7")
+texture_disabled = ExtResource("6_xl85n")
+texture_focused = ExtResource("7_g26n3")
+stretch_mode = 3
+
+[node name="NextButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_neighbor_left = NodePath("../PrevButton")
+texture_normal = ExtResource("8_gc0xj")
+texture_pressed = ExtResource("9_yqlaq")
+texture_hover = ExtResource("10_xqkgu")
+texture_disabled = ExtResource("11_l131p")
+texture_focused = ExtResource("12_dsunx")
+stretch_mode = 3
+
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

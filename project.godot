@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The World is Out of Time"
-run/main_scene="res://Scenes/Screens/title_screen.tscn"
+run/main_scene="res://Scenes/Screens/empty_control.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://game_icon.png"
 config/windows_native_icon="res://game_icon.ico"
@@ -24,9 +24,10 @@ SoundManager="*res://Globals/sound_manager.tscn"
 
 [display]
 
-window/size/viewport_width=600
-window/size/viewport_height=600
+window/size/viewport_width=500
+window/size/viewport_height=500
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://Sprites/Placeholder/PlaceholderCursor0.png"
 
 [input]

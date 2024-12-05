@@ -1,4 +1,5 @@
 extends TextureRect
+class_name SpaceRect
 
 @export
 var do_flipping : bool = true

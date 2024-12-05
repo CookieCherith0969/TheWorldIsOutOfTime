@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum Screens {TITLE, GAME, SCREENSAVER}
+enum Screens {TITLE, GAME}
 
 @export
 var current_screen_type : Screens = Screens.TITLE
@@ -96,7 +96,7 @@ func make_new_screen():
 		remove_child(current_screen)
 		current_screen.queue_free()
 	
-	if current_screen_type == Screens.SCREENSAVER:
+	if current_screen_type != Screens.GAME:
 		GameManager.screensaver_mode = true
 	else:
 		GameManager.screensaver_mode = false

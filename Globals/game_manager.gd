@@ -13,7 +13,8 @@ enum Materials {
 	METALS, 
 	PARTS, 
 	ELECTRONICS, 
-	ROCKET_PART}
+	ROCKET_PART,
+	T1,T2,T3,T4,T5,T6,T7,T8,T9,T10}
 
 @export
 var material_icons : Array[Texture] = []
@@ -65,6 +66,11 @@ var last_day_time : float = 0.0
 var screensaver_mode : bool = false
 var day_speed_multiplier : float = 1.0
 var max_speed_multiplier : float = 20.0
+var screensaver_speed_multiplier : int = 4
+
+@export
+var rocket_material : Materials
+var parts_per_rocket : int = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -99,6 +105,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if screensaver_mode:
 		timeskip_days = 365
+		if screensaver_speed_multiplier == 0:
+			return
 	if timeskip_days <= 0:
 		return
 	
@@ -106,6 +114,8 @@ func _physics_process(delta: float) -> void:
 	
 	var effective_day_length = day_length
 	effective_day_length /= day_speed_multiplier
+	if screensaver_mode:
+		effective_day_length /= screensaver_speed_multiplier
 	
 	while elapsed_timeskip_time - last_day_time >= effective_day_length && timeskip_days > 0:
 		last_day_time += effective_day_length
@@ -131,6 +141,9 @@ func in_out_sine_ease(progress : float):
 func out_quad_ease(progress : float):
 	return 1 - (1 - progress) * (1 - progress);
 
+func normalised_sine(progress : float):
+	return sin(progress*PI/2)
+
 func update_speed_multiplier():
 	var total_days : float = elapsed_timeskip_days + timeskip_days
 	var elapsed_ratio = elapsed_timeskip_days/total_days
@@ -138,7 +151,7 @@ func update_speed_multiplier():
 	
 	var speed_progress : float = min(2*elapsed_ratio, 2*remaining_ratio)
 	
-	day_speed_multiplier = 1.0 + out_quad_ease(speed_progress)*(max_speed_multiplier-1)
+	day_speed_multiplier = 1.0 + normalised_sine(speed_progress)*(max_speed_multiplier-1)
 
 func get_mixed_time() -> Array[int]:
 	# A copy of the number of days left, so the following calculations don't change the underlying days left
