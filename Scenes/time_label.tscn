@@ -12,4 +12,3 @@ bbcode_enabled = true
 text = "[fill]02[font_size=16] Years [/font_size]09[font_size=16] Months [/font_size]11[font_size=16] Days [/font_size]"
 scroll_active = false
 script = ExtResource("1_ccv85")
-text_template = "[fill]%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"
