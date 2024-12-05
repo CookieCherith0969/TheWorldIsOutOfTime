@@ -18,48 +18,32 @@
 [ext_resource type="Texture2D" uid="uid://b0v60n4qau5ek" path="res://Sprites/Buttons/time-add-button-disabled.png" id="16_em3f6"]
 [ext_resource type="Texture2D" uid="uid://b73udptx3mded" path="res://Sprites/Buttons/time-add-button-focus.png" id="17_i77lj"]
 
-[node name="TimeControl" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 290.0
-offset_top = 6.0
-offset_right = 395.0
-offset_bottom = 40.0
+[node name="TimeControl" type="MarginContainer"]
+offset_right = 105.0
+offset_bottom = 28.0
 script = ExtResource("1_6fb1j")
 
 [node name="Background" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture = ExtResource("2_xdf6k")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="TimeskipButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 7.0
-offset_right = 103.0
-offset_bottom = 31.0
-focus_neighbor_left = NodePath("../DoubleButton")
-texture_normal = ExtResource("3_3kf5r")
-texture_pressed = ExtResource("4_ubg5d")
-texture_hover = ExtResource("5_6iinn")
-texture_disabled = ExtResource("6_fpkb2")
-texture_focused = ExtResource("7_iul2v")
-stretch_mode = 3
+[node name="InnerMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
-[node name="HalveButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 8.0
-offset_right = 22.0
-offset_bottom = 28.0
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HalveButton" type="TextureButton" parent="InnerMargin/HBoxContainer"]
+layout_mode = 2
 focus_neighbor_right = NodePath("../DoubleButton")
 disabled = true
 texture_normal = ExtResource("8_ykv2u")
@@ -69,12 +53,14 @@ texture_disabled = ExtResource("11_62xaa")
 texture_focused = ExtResource("12_m25io")
 stretch_mode = 3
 
-[node name="DoubleButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 8.0
-offset_right = 79.0
-offset_bottom = 28.0
+[node name="DurationLabel" type="Label" parent="InnerMargin/HBoxContainer"]
+custom_minimum_size = Vector2(37, 0)
+layout_mode = 2
+text = "2048"
+horizontal_alignment = 1
+
+[node name="DoubleButton" type="TextureButton" parent="InnerMargin/HBoxContainer"]
+layout_mode = 2
 focus_neighbor_left = NodePath("../HalveButton")
 focus_neighbor_right = NodePath("../TimeskipButton")
 texture_normal = ExtResource("13_3buj1")
@@ -84,15 +70,17 @@ texture_disabled = ExtResource("16_em3f6")
 texture_focused = ExtResource("17_i77lj")
 stretch_mode = 3
 
-[node name="DurationLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 6.0
-offset_right = 61.0
-offset_bottom = 29.0
-text = "1"
-horizontal_alignment = 1
+[node name="TimeskipButton" type="TextureButton" parent="InnerMargin/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../DoubleButton")
+texture_normal = ExtResource("3_3kf5r")
+texture_pressed = ExtResource("4_ubg5d")
+texture_hover = ExtResource("5_6iinn")
+texture_disabled = ExtResource("6_fpkb2")
+texture_focused = ExtResource("7_iul2v")
+stretch_mode = 3
 
-[connection signal="pressed" from="TimeskipButton" to="." method="_on_timeskip_button_pressed"]
-[connection signal="pressed" from="HalveButton" to="." method="_on_halve_button_pressed"]
-[connection signal="pressed" from="DoubleButton" to="." method="_on_double_button_pressed"]
+[connection signal="pressed" from="InnerMargin/HBoxContainer/HalveButton" to="." method="_on_halve_button_pressed"]
+[connection signal="pressed" from="InnerMargin/HBoxContainer/DoubleButton" to="." method="_on_double_button_pressed"]
+[connection signal="pressed" from="InnerMargin/HBoxContainer/TimeskipButton" to="." method="_on_timeskip_button_pressed"]
