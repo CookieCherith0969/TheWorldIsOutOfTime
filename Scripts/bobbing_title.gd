@@ -1,2 +1,0 @@
-extends TextureRect
-class_name BobbingTitle
