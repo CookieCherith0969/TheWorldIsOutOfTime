@@ -1,12 +1,9 @@
 extends Control
-class_name MaterialCounter
 
 @export
 var represented_material : GameManager.Materials = GameManager.Materials.STONE : set = set_rep_material
 @export
 var hide_gain : bool = false
-@export
-var empty : bool = false
 
 @onready
 var icon : TextureRect = $Icon
@@ -39,16 +36,4 @@ func set_rep_material(new_material):
 	represented_material = new_material
 	if !is_instance_valid(icon):
 		return
-	
 	icon.texture = GameManager.get_material_icon(represented_material)
-	icon.show()
-	amount_label.show()
-	gain_label.show()
-	
-	update_labels()
-
-func set_empty():
-	empty = true
-	icon.hide()
-	amount_label.hide()
-	gain_label.hide()

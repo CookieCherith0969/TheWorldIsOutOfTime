@@ -13,8 +13,7 @@ enum Materials {
 	METALS, 
 	PARTS, 
 	ELECTRONICS, 
-	ROCKET_PART,
-	T1,T2,T3,T4,T5,T6,T7,T8,T9,T10}
+	ROCKET_PART}
 
 @export
 var material_icons : Array[Texture] = []
@@ -67,10 +66,6 @@ var screensaver_mode : bool = false
 var day_speed_multiplier : float = 1.0
 var max_speed_multiplier : float = 20.0
 var screensaver_speed_multiplier : int = 4
-
-@export
-var rocket_material : Materials
-var parts_per_rocket : int = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
