@@ -15,6 +15,7 @@
 
 [node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]
 script = ExtResource("1_g5gy1")
+current_screen_type = 1
 tooltip = NodePath("Tooltip")
 screen_scenes = Array[PackedScene]([ExtResource("2_jbj66"), ExtResource("3_khrr2")])
 cursor_frames = Array[Texture]([ExtResource("5_bi4nc"), ExtResource("6_7wl1l"), ExtResource("7_m51hi"), ExtResource("8_hkcs1"), ExtResource("9_8vbbc"), ExtResource("10_joqiy"), ExtResource("11_nrjmk"), ExtResource("12_ysk3w")])

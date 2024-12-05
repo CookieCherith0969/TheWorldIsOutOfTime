@@ -92,6 +92,7 @@ func fade_tooltip():
 
 
 func make_new_screen():
+	GameManager.timeskip_days = 0
 	if is_instance_valid(current_screen):
 		remove_child(current_screen)
 		current_screen.queue_free()
