@@ -182,7 +182,7 @@ theme_override_constants/margin_bottom = 6
 layout_mode = 2
 theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 5
-columns = 3
+columns = 4
 
 [node name="MaterialCounter" parent="MaterialWindow/InnerMargin/MaterialGrid" instance=ExtResource("24_gpho0")]
 layout_mode = 2
