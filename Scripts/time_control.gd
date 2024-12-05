@@ -8,19 +8,21 @@ var normal_color : Color = Color.WHITE
 var max_color : Color = Color.RED
 
 @onready
-var duration_label : Label = $DurationLabel
+var duration_label : Label = $InnerMargin/HBoxContainer/DurationLabel
 
 @onready
-var halve_button : TextureButton = $HalveButton
+var halve_button : TextureButton = $InnerMargin/HBoxContainer/HalveButton
 @onready
-var double_button : TextureButton = $DoubleButton
+var double_button : TextureButton = $InnerMargin/HBoxContainer/DoubleButton
 @onready
-var timeskip_button : TextureButton = $TimeskipButton
+var timeskip_button : TextureButton = $InnerMargin/HBoxContainer/TimeskipButton
 
 func _ready() -> void:
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
 	GameManager.day_ended.connect(on_day_ended)
+	update_buttons()
+	update_label()
 
 func on_timeskip_started(_num_days):
 	update_buttons()
