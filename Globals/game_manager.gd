@@ -81,6 +81,12 @@ const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
+func factory_sort(a : FactoryInfo, b : FactoryInfo):
+	assert(a.sort_priority != b.sort_priority)
+	if a.sort_priority < b.sort_priority:
+		return true
+	return false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialise factory list from Factories folder
@@ -91,6 +97,8 @@ func _ready() -> void:
 		if file_name.get_extension() != "tres":
 			continue
 		factories.append(ResourceLoader.load("res://Factories/"+file_name))
+	
+	factories.sort_custom(factory_sort)
 	
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):

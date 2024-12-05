@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
-[ext_resource type="Resource" uid="uid://btbmbtexp3hb1" path="res://Factories/MetalSmeltery.tres" id="2_2ei53"]
+[ext_resource type="Resource" uid="uid://saqj5krpedy7" path="res://Factories/StoneMine.tres" id="2_7gxrd"]
 [ext_resource type="Texture2D" uid="uid://b2vqwi7lc5hc0" path="res://Sprites/Icons/factory-arrow.png" id="4_d0ei5"]
 [ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
@@ -73,7 +73,7 @@ anchors_preset = 0
 offset_right = 132.0
 offset_bottom = 65.0
 script = ExtResource("1_f452t")
-represented_factory = ExtResource("2_2ei53")
+represented_factory = ExtResource("2_7gxrd")
 icon_scene = ExtResource("4_nkejt")
 arrow_texture = ExtResource("4_d0ei5")
 

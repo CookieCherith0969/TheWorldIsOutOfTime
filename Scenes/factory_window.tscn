@@ -1,10 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://yf4p7g6dmo68"]
+[gd_scene load_steps=14 format=3 uid="uid://yf4p7g6dmo68"]
 
 [ext_resource type="Script" path="res://Scripts/factory_window.gd" id="1_cgacj"]
 [ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="2_3l0es"]
 [ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="2_dkht3"]
-[ext_resource type="Resource" uid="uid://wdn13qxwhjk7" path="res://Factories/StoneMine.tres" id="3_ocrpp"]
-[ext_resource type="Resource" uid="uid://deqnhpxpvqf4c" path="res://Factories/RocketPart.tres" id="7_v6omy"]
 [ext_resource type="Texture2D" uid="uid://chelway1kwbr3" path="res://Sprites/Buttons/previous-button-normal.png" id="8_rcltm"]
 [ext_resource type="Texture2D" uid="uid://bdh6hnu2f5gfv" path="res://Sprites/Buttons/previous-button-pressed.png" id="9_fcrgy"]
 [ext_resource type="Texture2D" uid="uid://ch6lcy7bou6ik" path="res://Sprites/Buttons/previous-button-hover.png" id="10_4i8ku"]
@@ -44,39 +42,30 @@ columns = 3
 
 [node name="FactoryCounter" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter2" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter3" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter4" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter5" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter6" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("7_v6omy")
 
 [node name="FactoryCounter7" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter8" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="FactoryCounter9" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
 layout_mode = 2
-represented_factory = ExtResource("3_ocrpp")
 
 [node name="PrevButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(44, 44)

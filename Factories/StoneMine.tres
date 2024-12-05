@@ -1,18 +1,19 @@
-[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://wdn13qxwhjk7"]
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://saqj5krpedy7"]
 
 [ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_mpusp"]
 
 [resource]
 script = ExtResource("1_mpusp")
 factory_name = &"Stone Mine"
+sort_priority = 0
 output_on_build = false
 input_materials = Array[int]([])
 inputs_per_day = Array[int]([])
 output_materials = Array[int]([0])
 outputs_per_day = Array[int]([10])
 build_days = 2
-build_materials = Array[int]([2])
-build_amounts = Array[int]([50])
+build_materials = Array[int]([0])
+build_amounts = Array[int]([10])
 research_materials = Array[int]([])
 research_amounts = Array[int]([])
 hide_material_amounts = false
