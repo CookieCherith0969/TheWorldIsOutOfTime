@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=33 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://saqj5krpedy7" path="res://Factories/StoneMine.tres" id="2_7gxrd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="5_deej6"]
 [ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="6_kivah"]
+[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="6_m328o"]
 [ext_resource type="Texture2D" uid="uid://bxws353d0cbt3" path="res://Sprites/Icons/metal.png" id="7_86jvy"]
 [ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
 [ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
@@ -76,6 +77,8 @@ script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_7gxrd")
 icon_scene = ExtResource("4_nkejt")
 arrow_texture = ExtResource("4_d0ei5")
+unlocked_background = ExtResource("5_deej6")
+locked_background = ExtResource("6_m328o")
 
 [node name="BackgroundRect" type="NinePatchRect" parent="."]
 layout_mode = 1

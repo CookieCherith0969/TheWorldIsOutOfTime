@@ -54,12 +54,18 @@ func set_empty():
 	gain_label.hide()
 
 func _on_mouse_entered() -> void:
+	if empty:
+		return
+	
 	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
 
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
+	if empty:
+		return
+	
 	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
 
 func _on_focus_exited() -> void:

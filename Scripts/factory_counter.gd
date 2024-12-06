@@ -40,6 +40,14 @@ var lock_panel : Panel = $LockPanel
 @onready
 var unlock_button : TextureButton = $LockPanel/UnlockButton
 
+@onready
+var background : NinePatchRect = $BackgroundRect
+@export
+var unlocked_background : Texture
+@export
+var locked_background : Texture
+
+
 var days_per_wrench_turn : int = 2
 var wrench_days : int = 0
 
@@ -245,6 +253,7 @@ func unlock():
 	unplan_button.show()
 	plan_button.show()
 	
+	background.texture = unlocked_background
 	unlocked = true
 	#GameManager.unlock_factory(factory_index)
 
@@ -256,6 +265,7 @@ func lock():
 	unplan_button.hide()
 	plan_button.hide()
 	
+	background.texture = locked_background
 	unlocked = false
 
 func _on_unlock_button_pressed() -> void:

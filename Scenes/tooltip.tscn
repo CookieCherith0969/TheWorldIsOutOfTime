@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://esv3lpa5b5t1"]
+[gd_scene load_steps=11 format=3 uid="uid://esv3lpa5b5t1"]
 
 [ext_resource type="Script" path="res://Scripts/tooltip.gd" id="1_15287"]
 [ext_resource type="PackedScene" uid="uid://7l7r07tjgtu" path="res://Scenes/tooltip_icon_amount.tscn" id="2_3tkas"]
@@ -6,9 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://0t52u2y1hbqf" path="res://Sprites/Icons/small-clock.png" id="4_ts8tm"]
 [ext_resource type="Texture2D" uid="uid://cjdq7kllg5mx6" path="res://Sprites/Icons/hammer.png" id="5_a2kyi"]
 [ext_resource type="Texture2D" uid="uid://ckxvifkijmeqa" path="res://Sprites/Icons/small-lock.png" id="6_7sv3s"]
-[ext_resource type="Texture2D" uid="uid://bht1jakmy22oo" path="res://Sprites/Icons/nuclear-bomb.png" id="7_jeoby"]
 [ext_resource type="Texture2D" uid="uid://dkvs0nyfjxla2" path="res://Sprites/Panels/white-panel-2px-border.png" id="7_mlhkp"]
-[ext_resource type="Texture2D" uid="uid://b2vqwi7lc5hc0" path="res://Sprites/Icons/factory-arrow.png" id="8_wimxe"]
+[ext_resource type="Texture2D" uid="uid://cmaarwb2xosjp" path="res://Sprites/Placeholder/PlaceholderPlus.png" id="7_xmvpc"]
+[ext_resource type="Texture2D" uid="uid://dhwp1kkhdxuol" path="res://Sprites/Placeholder/PlaceholderMinus.png" id="8_1hhym"]
+[ext_resource type="Texture2D" uid="uid://bxwqp7chkcfap" path="res://Sprites/Placeholder/PlaceholderTooltipArrow.png" id="9_cqldc"]
 
 [node name="Tooltip" type="MarginContainer"]
 z_index = 10
@@ -21,9 +22,9 @@ header_icon_scene = ExtResource("3_4urou")
 time_icon = ExtResource("4_ts8tm")
 build_icon = ExtResource("5_a2kyi")
 lock_icon = ExtResource("6_7sv3s")
-increase_icon = ExtResource("5_a2kyi")
-decrease_icon = ExtResource("7_jeoby")
-change_icon = ExtResource("8_wimxe")
+increase_icon = ExtResource("7_xmvpc")
+decrease_icon = ExtResource("8_1hhym")
+change_icon = ExtResource("9_cqldc")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
