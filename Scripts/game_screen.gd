@@ -31,6 +31,9 @@ var factory_next : TextureButton
 @export
 var minimise_button : TextureButton
 
+@export
+var launch_button : TextureButton
+
 func _ready() -> void:
 	small_map.grab_focus()
 	
@@ -53,7 +56,7 @@ func _ready() -> void:
 func setup_focus_neighbours():
 	small_map.focus_neighbor_left = material_next.get_path()
 	time_control.timeskip_button.focus_neighbor_right = small_map.get_path()
-	material_prev.focus_neighbor_top = time_control.halve_button.get_path()
+	material_prev.focus_neighbor_top = launch_button.get_path()
 	material_next.focus_neighbor_top = time_control.timeskip_button.get_path()
 	time_control.halve_button.focus_neighbor_bottom = material_prev.get_path()
 	time_control.double_button.focus_neighbor_bottom = material_next.get_path()
@@ -145,6 +148,7 @@ func show_large_map():
 	material_window.hide()
 	factory_window.hide()
 	time_control.hide()
+	launch_button.hide()
 	
 	minimise_button.grab_focus()
 
@@ -160,5 +164,6 @@ func hide_large_map():
 	material_window.show()
 	factory_window.show()
 	time_control.show()
+	launch_button.show()
 	
 	small_map.grab_focus()
