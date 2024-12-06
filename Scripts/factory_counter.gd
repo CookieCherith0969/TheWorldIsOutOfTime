@@ -211,6 +211,9 @@ func _on_focus_exited() -> void:
 	UIManager.hide_tooltip()
 
 func show_tooltip():
+	if empty:
+		return
+	
 	if unlocked:
 		var build_materials : Array[GameManager.Materials]
 		build_materials.assign(represented_factory.build_materials)
@@ -269,6 +272,13 @@ func set_rep_factory(new_factory):
 	if !is_instance_valid(icon_box):
 		return
 	
+	icon_box.show()
+	num_box.show()
+	amount_label.show()
+	build_progress_bar.show()
+	unplan_button.show()
+	plan_button.show()
+	
 	unlocked = GameManager.is_factory_unlocked(factory_index)
 	
 	
@@ -282,14 +292,8 @@ func set_rep_factory(new_factory):
 		unlock()
 	else:
 		lock()
-		return
 	
-	icon_box.show()
-	num_box.show()
-	amount_label.show()
-	build_progress_bar.show()
-	unplan_button.show()
-	plan_button.show()
+	
 
 func set_empty():
 	empty = true

@@ -8,7 +8,7 @@ var sort_priority : int
 @export
 var start_amount : int = 0
 
-## If True, output materials are given when factory building is completed, and normal factory production doesn't occur
+## If True, output materials are given when factory building is completed, and input materials are only used to determine icons shown
 @export
 var output_on_build : bool = false
 

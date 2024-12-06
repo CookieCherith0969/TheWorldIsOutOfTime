@@ -17,6 +17,8 @@ texture_hover = ExtResource("3_y263o")
 texture_disabled = ExtResource("4_d7vkx")
 texture_focused = ExtResource("5_dt4w0")
 script = ExtResource("6_dxw5t")
+rocket_materials = Array[int]([9, 8, 12])
+rocket_amounts = Array[int]([50, 30, 1])
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
 position = Vector2(130, 0)

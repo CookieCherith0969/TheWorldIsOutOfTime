@@ -27,11 +27,9 @@ enum Materials {
 	ALLOY,
 	FUEL,
 	# Begin Icon Only Materials
-	MINUS_POLLUTION,
-	ROCKET,
 }
 
-const num_icon_only_materials : int = 2
+const num_icon_only_materials : int = 0
 
 @export
 var material_icons : Array[Texture] = []
@@ -60,7 +58,9 @@ const days_per_month : Array[int] = [
 
 var material_amounts : Array[int] = []
 
-var prev_day_gains : Array[int] = []
+var prev_day_changes : Array[int] = []
+var prev_day_increases : Array[int] = []
+var prev_day_decreases : Array[int] = []
 
 @export
 var starting_factory_names : Array[StringName]
@@ -127,7 +127,9 @@ func _ready() -> void:
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
 		material_amounts.append(0)
-		prev_day_gains.append(0)
+		prev_day_changes.append(0)
+		prev_day_increases.append(0)
+		prev_day_decreases.append(0)
 	
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
@@ -242,8 +244,18 @@ func get_material_amount(material : Materials):
 func get_material_icon(material : Materials):
 	return material_icons[material]
 
-func get_prev_day_material_gain(material : Materials):
-	return prev_day_gains[material]
+func get_material_name(material : Materials):
+	var raw_name : String = Materials.keys()[material]
+	return raw_name.capitalize()
+
+func get_prev_day_change(material : Materials):
+	return prev_day_changes[material]
+
+func get_prev_day_increase(material : Materials):
+	return prev_day_increases[material]
+
+func get_prev_day_decrease(material : Materials):
+	return prev_day_decreases[material]
 
 func get_total_factory_amount(factory_index : int):
 	return active_factory_amounts[factory_index] + planned_factory_amounts[factory_index]
@@ -283,10 +295,20 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 		if is_material_icon_only(materials[i]):
 			continue
 		
+		var total : int = amounts[i] * multiplier
 		if negate:
-			material_amounts[materials[i]] -= amounts[i] * multiplier
-		else:
-			material_amounts[materials[i]] += amounts[i] * multiplier
+			total = -total
+		material_amounts[materials[i]] += total
+		
+		# Don't modify change arrays when factories are planned/destroyed, or research is done.
+		# Ensures change arrays only reflect factory production
+		if is_timeskipping():
+			if total > 0:
+				prev_day_increases[materials[i]] += total
+			else:
+				prev_day_decreases[materials[i]] += total
+			prev_day_changes[materials[i]] += total
+		
 	materials_updated.emit()
 
 func process_days(number_of_days : int):
@@ -305,7 +327,9 @@ func process_day():
 	if screensaver_mode:
 		return
 	
-	prev_day_gains.fill(0)
+	prev_day_changes.fill(0)
+	prev_day_increases.fill(0)
+	prev_day_decreases.fill(0)
 	
 	for f in range(factories.size()):
 		if planned_factory_amounts[f] > 0:
@@ -321,10 +345,8 @@ func process_day():
 		
 		var prev_material_amounts = material_amounts.duplicate()
 		process_factory(f)
-		
-		for j in range(material_amounts.size()):
-			prev_day_gains[j] += material_amounts[j] - prev_material_amounts[j]
 	
+	materials_updated.emit()
 	days_left -= 1
 
 func build_factory(factory_index : int):

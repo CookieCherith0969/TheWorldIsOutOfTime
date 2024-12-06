@@ -93,3 +93,6 @@ texture_hover = ExtResource("11_7wkov")
 texture_disabled = ExtResource("12_yk456")
 texture_focused = ExtResource("13_br88r")
 stretch_mode = 3
+
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

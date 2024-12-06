@@ -15,6 +15,9 @@ var amount_label : Label = $AmountLabel
 @onready
 var gain_label : Label = $GainLabel
 
+@onready
+var tooltip_marker : Marker2D = $TooltipMarker
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	icon.texture = GameManager.get_material_icon(represented_material)
@@ -29,7 +32,7 @@ func on_materials_updated():
 
 func update_labels():
 	amount_label.text = UIManager.simplify_number(GameManager.get_material_amount(represented_material))
-	gain_label.text = UIManager.simplify_number(GameManager.get_prev_day_material_gain(represented_material))+" /d"
+	gain_label.text = UIManager.simplify_number(GameManager.get_prev_day_change(represented_material))+" /d"
 
 func set_rep_material(new_material):
 	represented_material = new_material
@@ -49,3 +52,15 @@ func set_empty():
 	icon.hide()
 	amount_label.hide()
 	gain_label.hide()
+
+func _on_mouse_entered() -> void:
+	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
+
+func _on_mouse_exited() -> void:
+	UIManager.hide_tooltip()
+
+func _on_focus_entered() -> void:
+	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
+
+func _on_focus_exited() -> void:
+	UIManager.hide_tooltip()

@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://b6in2nmxhf64s"]
 
-[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_64i84"]
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_lgri4"]
 
 [resource]
-script = ExtResource("1_64i84")
+script = ExtResource("1_lgri4")
 factory_name = &"Computer"
 sort_priority = 130
 start_amount = 0
 output_on_build = true
-input_materials = Array[int]([])
-inputs_per_day = Array[int]([])
+input_materials = Array[int]([7, 5])
+inputs_per_day = Array[int]([0, 0])
 output_materials = Array[int]([8])
 outputs_per_day = Array[int]([1])
 build_days = 32

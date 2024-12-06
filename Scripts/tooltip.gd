@@ -7,7 +7,7 @@ var inner_margin : MarginContainer = $InnerMargin
 var icon_list : VBoxContainer = $InnerMargin/IconList
 
 @export
-var cost_icon_scene : PackedScene
+var icon_amount_scene : PackedScene
 @export
 var header_icon_scene : PackedScene
 
@@ -17,6 +17,13 @@ var time_icon : Texture
 var build_icon : Texture
 @export
 var lock_icon : Texture
+
+@export
+var increase_icon : Texture
+@export
+var decrease_icon : Texture
+@export
+var change_icon : Texture
 
 var hold_time : float = 0.0
 var fade_time : float = 0.0
@@ -46,8 +53,11 @@ func _process(delta: float) -> void:
 
 func populate_costs(materials : Array[GameManager.Materials], amounts : Array[int]):
 	add_icons_from_material_amounts(materials, amounts)
-	
-	size.y = 1
+
+func populate_rates(rate_material : GameManager.Materials):
+	add_icon_amount(increase_icon, GameManager.get_prev_day_increase(rate_material), "%s /d")
+	add_icon_amount(decrease_icon, GameManager.get_prev_day_decrease(rate_material), "%s /d")
+	add_icon_amount(change_icon, GameManager.get_prev_day_change(rate_material), "%s /d")
 
 func add_build_header():
 	add_header_icon(build_icon)
@@ -55,36 +65,45 @@ func add_build_header():
 func add_unlock_header():
 	add_header_icon(lock_icon)
 
-func add_time_cost(amount : int):
-	add_time_cost_icon(amount)
+func add_material_header(header_material : GameManager.Materials):
+	add_header_icon(GameManager.get_material_icon(header_material), GameManager.get_material_name(header_material))
 
-func add_header_icon(texture : Texture):
-	var header_icon : TextureRect = header_icon_scene.instantiate()
-	header_icon.texture = texture
+func add_time_cost(amount : int):
+	add_icon_amount(time_icon, amount)
+
+func add_header_icon(texture : Texture, text : String = ""):
+	var header_icon : TooltipHeaderIcon = header_icon_scene.instantiate()
 	icon_list.add_child(header_icon)
+	header_icon.set_icon(texture)
+	header_icon.set_label(text)
 
 # Type checking for Arrays of Enums doesn't seem to work properly, so materials is a generic array instead
 func add_icons_from_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int]):
 	for i in range(materials.size()):
-		var new_icon : TooltipCostIcon = cost_icon_scene.instantiate()
-		var icon_material = materials[i]
-		var icon_amount = amounts[i]
-		
-		icon_list.add_child(new_icon)
-		new_icon.set_cost_material(icon_material)
-		new_icon.set_cost_amount(icon_amount)
+		var material_icon = GameManager.get_material_icon(materials[i])
+		var material_amount = amounts[i]
+		add_icon_amount(material_icon, material_amount)
 
-func add_time_cost_icon(length : int):
-	var time_cost : TooltipCostIcon = cost_icon_scene.instantiate()
+func add_icon_amount(icon : Texture, amount : int, format_string : String = ""):
+	var new_icon : TooltipIconAmount = icon_amount_scene.instantiate()
 	
-	icon_list.add_child(time_cost)
-	time_cost.set_custom_icon(time_icon)
-	time_cost.set_cost_amount(length)
+	icon_list.add_child(new_icon)
+	new_icon.set_icon(icon)
+	
+	if format_string.is_empty():
+		new_icon.set_amount(amount)
+	else:
+		new_icon.set_amount_formatted(amount, format_string)
 
 func clear_icons():
 	for child in icon_list.get_children():
 		icon_list.remove_child(child)
 		child.queue_free()
+	
+	# Shrinks tooltip so that it doesn't overhang, in the cast that fewer icons are added than were previously present
+	# Expanding is handled automatically by MarginContainer behaviour
+	size.y = 1
+	size.x = 1
 
 func show_tooltip():
 	show()

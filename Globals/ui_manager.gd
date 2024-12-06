@@ -74,7 +74,8 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	return plus_string + num_string + simplification_suffixes[suffix_index]
 
 func show_build_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int], time_cost : int = 0):
-	tooltip.set_position(pos)
+	print_debug(tooltip.position)
+	tooltip.position = pos
 	tooltip.clear_icons()
 	tooltip.add_build_header()
 	tooltip.populate_costs(materials, amounts)
@@ -83,14 +84,22 @@ func show_build_tooltip(pos : Vector2i, materials : Array[GameManager.Materials]
 	tooltip.show_tooltip()
 	
 func show_unlock_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int], time_cost : int = 0):
-	tooltip.set_position(pos)
+	print_debug(tooltip.position)
+	tooltip.position = pos
 	tooltip.clear_icons()
 	tooltip.add_unlock_header()
 	tooltip.populate_costs(materials, amounts)
 	if time_cost > 0:
 		tooltip.add_time_cost(time_cost)
 	tooltip.show_tooltip()
-	
+
+func show_material_tooltip(pos : Vector2i, represented_material : GameManager.Materials):
+	tooltip.position = pos
+	tooltip.clear_icons()
+	tooltip.add_material_header(represented_material)
+	tooltip.populate_rates(represented_material)
+	tooltip.show_tooltip()
+
 func hide_tooltip():
 	tooltip.hide_tooltip()
 

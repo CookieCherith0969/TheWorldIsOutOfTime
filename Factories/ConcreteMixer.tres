@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_p2fdg")
-factory_name = &"ConcreteMixer"
+factory_name = &"Concrete Mixer"
 sort_priority = 20
 start_amount = 1
 output_on_build = false

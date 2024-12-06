@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://7l7r07tjgtu"]
+
+[ext_resource type="Script" path="res://Scripts/tooltip_icon_amount.gd" id="1_c432c"]
+[ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="2_iwf0g"]
+
+[node name="TooltipIconAmount" type="HBoxContainer"]
+mouse_filter = 2
+script = ExtResource("1_c432c")
+
+[node name="IconRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_iwf0g")
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(56, 23)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.295866, 0.295867, 0.295866, 1)
+text = "999.9M"

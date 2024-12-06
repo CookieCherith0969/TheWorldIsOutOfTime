@@ -1,8 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm53s1s8yyno7"]
+[gd_scene load_steps=4 format=3 uid="uid://dm53s1s8yyno7"]
 
-[ext_resource type="Texture2D" uid="uid://ccx2m3jms0433" path="res://Sprites/Placeholder/PlaceholderHammer.png" id="1_5t8c4"]
+[ext_resource type="Script" path="res://Scripts/tooltip_header_icon.gd" id="1_li8jd"]
+[ext_resource type="Texture2D" uid="uid://cjdq7kllg5mx6" path="res://Sprites/Icons/hammer.png" id="2_4entj"]
 
-[node name="TooltipHeaderIcon" type="TextureRect"]
+[sub_resource type="SystemFont" id="SystemFont_1cd4b"]
+font_names = PackedStringArray("Cascadia Mono")
+font_weight = 975
+
+[node name="TooltipHeaderIcon" type="HBoxContainer"]
+offset_right = 114.0
+offset_bottom = 49.0
+script = ExtResource("1_li8jd")
+
+[node name="HeaderLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(56, 23)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.295866, 0.295867, 0.295866, 1)
+theme_override_fonts/font = SubResource("SystemFont_1cd4b")
+theme_override_font_sizes/font_size = 16
+text = "Enriched Uranium"
+autowrap_mode = 2
+
+[node name="HeaderIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
 size_flags_horizontal = 8
-texture = ExtResource("1_5t8c4")
+texture = ExtResource("2_4entj")
 stretch_mode = 2

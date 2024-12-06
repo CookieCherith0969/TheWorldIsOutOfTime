@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_xavd5")
-factory_name = &"OilRig"
+factory_name = &"Oil Rig"
 sort_priority = 40
 start_amount = 0
 output_on_build = false
@@ -13,8 +13,8 @@ inputs_per_day = Array[int]([60])
 output_materials = Array[int]([4])
 outputs_per_day = Array[int]([10])
 build_days = 16
-build_materials = Array[int]([])
-build_amounts = Array[int]([])
+build_materials = Array[int]([2, 3])
+build_amounts = Array[int]([20, 200])
 research_materials = Array[int]([])
 research_amounts = Array[int]([])
 hide_material_amounts = false
