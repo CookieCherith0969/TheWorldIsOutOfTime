@@ -171,6 +171,11 @@ func update_buttons():
 		plan_button.disabled = true
 		unlock_button.disabled = true
 		return
+	if GameManager.game_over:
+		unplan_button.disabled = true
+		plan_button.disabled = true
+		unlock_button.disabled = true
+		return
 	
 	if GameManager.get_total_factory_amount(factory_index) <= 0:
 		unplan_button.disabled = true
@@ -194,22 +199,27 @@ func _on_unplan_button_pressed() -> void:
 	GameManager.unplan_factory(factory_index)
 
 func _on_mouse_entered() -> void:
-	if unlocked:
-		UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
-	else:
-		UIManager.show_unlock_tooltip(tooltip_marker.global_position, represented_factory)
+	show_tooltip()
 
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
-	if unlocked:
-		UIManager.show_build_tooltip(tooltip_marker.global_position, represented_factory)
-	else:
-		UIManager.show_unlock_tooltip(tooltip_marker.global_position, represented_factory)
+	show_tooltip()
 
 func _on_focus_exited() -> void:
 	UIManager.hide_tooltip()
+
+func show_tooltip():
+	if unlocked:
+		var build_materials : Array[GameManager.Materials]
+		build_materials.assign(represented_factory.build_materials)
+		UIManager.show_build_tooltip(tooltip_marker.global_position, build_materials, represented_factory.build_amounts, represented_factory.build_days)
+	else:
+		var research_materials : Array[GameManager.Materials]
+		research_materials.assign(represented_factory.research_materials)
+		UIManager.show_unlock_tooltip(tooltip_marker.global_position, research_materials, represented_factory.research_amounts)
+
 
 func get_right_button() -> TextureButton:
 	if unlocked:
@@ -250,6 +260,7 @@ func _on_unlock_button_pressed() -> void:
 		GameManager.unlock_factory(factory_index)
 		unlock()
 		factory_unlocked.emit(represented_factory, get_index())
+		UIManager.hide_tooltip()
 
 func set_rep_factory(new_factory):
 	represented_factory = new_factory

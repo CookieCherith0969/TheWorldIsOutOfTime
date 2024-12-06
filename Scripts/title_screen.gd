@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	var raw_time = SoundManager.get_raw_menu_music_position()
 	var time_diff = current_time - previous_time
 	var raw_diff = raw_time - previous_raw_time
-	var playback : AudioStreamPlaybackOggVorbis = SoundManager.get_menu_music_playback()
+	#var playback : AudioStreamPlaybackOggVorbis = SoundManager.get_menu_music_playback()
 	
 	# Keeping within bounds to avoid too much error
 	while registered_time > seconds_per_cycle:

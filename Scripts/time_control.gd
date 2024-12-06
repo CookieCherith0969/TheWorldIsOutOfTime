@@ -58,6 +58,11 @@ func update_buttons():
 		double_button.disabled = true
 		timeskip_button.disabled = true
 		return
+	if GameManager.game_over:
+		halve_button.disabled = true
+		double_button.disabled = true
+		timeskip_button.disabled = true
+		return
 	
 	if selected_exponent <= 0:
 		halve_button.disabled = true

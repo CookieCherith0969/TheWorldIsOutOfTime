@@ -266,6 +266,7 @@ flip_h = true
 
 [node name="HoverFadeComponent" parent="ControlBox/SlowButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
 
 [node name="FastButton" type="TextureButton" parent="ControlBox"]
 layout_mode = 2
@@ -277,6 +278,7 @@ texture_focused = ExtResource("19_gdf8v")
 
 [node name="HoverFadeComponent" parent="ControlBox/FastButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
 
 [node name="HideButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -299,6 +301,7 @@ texture_focused = ExtResource("19_gdf8v")
 
 [node name="HoverFadeComponent" parent="HideButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
 active = false
 
 [connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]

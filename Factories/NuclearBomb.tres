@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://4edklsb4o7a3"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_o2rf3"]
+
+[resource]
+script = ExtResource("1_o2rf3")
+factory_name = &"NuclearBomb"
+sort_priority = 140
+start_amount = 0
+output_on_build = true
+input_materials = Array[int]([])
+inputs_per_day = Array[int]([])
+output_materials = Array[int]([12])
+outputs_per_day = Array[int]([1])
+build_days = 256
+build_materials = Array[int]([11, 13])
+build_amounts = Array[int]([10000, 2000])
+research_materials = Array[int]([11])
+research_amounts = Array[int]([100])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

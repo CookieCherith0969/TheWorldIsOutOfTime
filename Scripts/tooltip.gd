@@ -44,32 +44,19 @@ func _process(delta: float) -> void:
 	var fade_progress = (elapsed_time - hold_time)/fade_time
 	modulate = Color(1,1,1,1-fade_progress)
 
-func populate_build_costs(factory : FactoryInfo):
-	clear_icons()
-	
-	add_header_icon(build_icon)
-	
-	# Workaround for weird type-checking behaviour
-	var build_materials : Array[GameManager.Materials]
-	build_materials.assign(factory.build_materials)
-	
-	add_icons_from_material_amounts(build_materials, factory.build_amounts)
-	add_time_cost_icon(factory.build_days)
+func populate_costs(materials : Array[GameManager.Materials], amounts : Array[int]):
+	add_icons_from_material_amounts(materials, amounts)
 	
 	size.y = 1
 
-func populate_unlock_costs(factory : FactoryInfo):
-	clear_icons()
+func add_build_header():
+	add_header_icon(build_icon)
 	
+func add_unlock_header():
 	add_header_icon(lock_icon)
-	
-	# Workaround for weird type-checking behaviour
-	var research_materials : Array[GameManager.Materials]
-	research_materials.assign(factory.research_materials)
-	
-	add_icons_from_material_amounts(research_materials, factory.research_amounts)
-	
-	size.y = 1
+
+func add_time_cost(amount : int):
+	add_time_cost_icon(amount)
 
 func add_header_icon(texture : Texture):
 	var header_icon : TextureRect = header_icon_scene.instantiate()

@@ -6,6 +6,9 @@ signal timeskip_started(number_of_days : int)
 signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
+signal materials_updated
+signal asteroid_collided
+signal rocket_launched
 
 enum Materials {
 	STONE,
@@ -83,6 +86,8 @@ const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
+var game_over : bool = false
+
 func factory_sort(a : FactoryInfo, b : FactoryInfo):
 	assert(a.sort_priority != b.sort_priority)
 	if a.sort_priority < b.sort_priority:
@@ -127,6 +132,7 @@ func _ready() -> void:
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
 	material_amounts[Materials.METALS] = 100
+	materials_updated.emit()
 
 func _physics_process(delta: float) -> void:
 	if screensaver_mode:
@@ -134,6 +140,8 @@ func _physics_process(delta: float) -> void:
 		if screensaver_speed_multiplier == 0:
 			return
 	if timeskip_days <= 0:
+		return
+	if game_over:
 		return
 	
 	elapsed_timeskip_time += delta
@@ -154,12 +162,24 @@ func _physics_process(delta: float) -> void:
 		timeskip_days -= 1
 		if !screensaver_mode:
 			update_speed_multiplier()
+		
 	
 	if timeskip_days <= 0:
 		elapsed_timeskip_time = 0.0
 		elapsed_timeskip_days = 0
 		last_day_time = 0.0
 		timeskip_ended.emit()
+	
+	if days_left <= 0:
+		collide_asteroid()
+
+func collide_asteroid():
+	game_over = true
+	asteroid_collided.emit()
+
+func launch_rocket():
+	game_over = true
+	rocket_launched.emit()
 
 func in_out_sine_ease(progress : float):
 	return -(cos(PI*progress) - 1) / 2
@@ -267,9 +287,12 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 			material_amounts[materials[i]] -= amounts[i] * multiplier
 		else:
 			material_amounts[materials[i]] += amounts[i] * multiplier
+	materials_updated.emit()
 
 func process_days(number_of_days : int):
 	timeskip_days += number_of_days
+	if timeskip_days > days_left:
+		timeskip_days = days_left
 	var total_days = elapsed_timeskip_days + timeskip_days
 	var days_log = log(total_days)/log(2)
 	

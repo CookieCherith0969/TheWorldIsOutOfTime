@@ -20,15 +20,11 @@ func _ready() -> void:
 	icon.texture = GameManager.get_material_icon(represented_material)
 	update_labels()
 	
-	GameManager.day_ended.connect(on_day_ended)
-	GameManager.factory_amount_updated.connect(on_factory_amount_updated)
+	GameManager.materials_updated.connect(on_materials_updated)
 	if hide_gain:
 		gain_label.hide()
 
-func on_day_ended():
-	update_labels()
-
-func on_factory_amount_updated(_factory : FactoryInfo):
+func on_materials_updated():
 	update_labels()
 
 func update_labels():
