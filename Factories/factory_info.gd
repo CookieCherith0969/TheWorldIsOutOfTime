@@ -5,6 +5,8 @@ class_name FactoryInfo
 var factory_name : StringName
 @export
 var sort_priority : int
+@export
+var start_amount : int = 0
 
 ## If True, output materials are given when factory building is completed, and normal factory production doesn't occur
 @export

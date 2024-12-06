@@ -37,6 +37,7 @@ func update_labels():
 
 func set_rep_material(new_material):
 	represented_material = new_material
+	empty = false
 	if !is_instance_valid(icon):
 		return
 	

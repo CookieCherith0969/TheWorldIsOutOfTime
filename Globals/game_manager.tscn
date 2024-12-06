@@ -11,5 +11,3 @@
 [node name="GameManager" type="Node"]
 script = ExtResource("1_pi4dq")
 material_icons = Array[Texture]([ExtResource("2_hh8fx"), ExtResource("2_sudsf"), ExtResource("3_amlk2"), ExtResource("4_1gw3n"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("6_hxjsl"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("2_sudsf"), ExtResource("7_iuscd")])
-starting_factory_names = Array[StringName]([&"Stone Mine", &"Foundation Mixery", &"Metal Smeltery", &"RocketPart"])
-starting_factory_amounts = Array[int]([4, 1, 1, 0])

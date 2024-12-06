@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://24tyavjggpt5" path="res://Sprites/Buttons/lock-button-focus.png" id="24_qmq1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
-bg_color = Color(0.6, 0.6, 0.6, 0.270588)
+bg_color = Color(0.10748, 0.10748, 0.10748, 0.447059)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw4a4"]
 bg_color = Color(1, 1, 1, 1)

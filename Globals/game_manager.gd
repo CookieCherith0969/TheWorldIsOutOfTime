@@ -107,10 +107,15 @@ func _ready() -> void:
 		factory_build_progress.append(0)
 		unlocked_factories.append(false)
 		
-		if factories[i].factory_name in starting_factory_names:
-			var index = starting_factory_names.find(factories[i].factory_name)
-			active_factory_amounts[i] = starting_factory_amounts[index]
-			unlocked_factories[index] = true
+		if factories[i].research_materials.size() == 0:
+			unlocked_factories[i] = true
+		
+		if factories[i].start_amount > 0:
+			active_factory_amounts[i] = factories[i].start_amount
+		#if factories[i].factory_name in starting_factory_names:
+		#	var index = starting_factory_names.find(factories[i].factory_name)
+		#	active_factory_amounts[i] = starting_factory_amounts[index]
+		#	unlocked_factories[index] = true
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):

@@ -21,6 +21,8 @@ func _ready() -> void:
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
 	GameManager.day_ended.connect(on_day_ended)
+	update_label()
+	update_buttons()
 
 func on_timeskip_started(_num_days):
 	update_buttons()

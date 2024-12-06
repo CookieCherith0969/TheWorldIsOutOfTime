@@ -4,7 +4,7 @@ class_name FactoryCounter
 signal factory_unlocked(factory : FactoryInfo, counter_index : int)
 
 @export
-var represented_factory : FactoryInfo
+var represented_factory : FactoryInfo : set = set_rep_factory
 var factory_index : int
 
 @onready
@@ -43,6 +43,8 @@ var unlock_button : TextureButton = $LockPanel/UnlockButton
 var days_per_wrench_turn : int = 2
 var wrench_days : int = 0
 
+var empty : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	factory_index = GameManager.get_factory_index(represented_factory)
@@ -52,18 +54,7 @@ func _ready() -> void:
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
 	GameManager.day_ended.connect(on_day_ended)
 	
-	if unlocked:
-		unlock()
-	
-	unlocked = GameManager.is_factory_unlocked(factory_index)
-	
-	if unlocked:
-		unlock()
-	
-	populate_icons()
-	populate_nums()
-	update_amounts()
-	update_progress(0)
+	set_rep_factory(represented_factory)
 
 func on_day_ended():
 	wrench_days += 1
@@ -77,10 +68,11 @@ func on_day_ended():
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:
 		update_amounts()
-		if GameManager.get_planned_factory_amount(factory_index) != 0:
-			building_wrench.show()
-		else:
-			building_wrench.hide()
+		if !empty:
+			if GameManager.get_planned_factory_amount(factory_index) != 0:
+				building_wrench.show()
+			else:
+				building_wrench.hide()
 	update_buttons()
 
 func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : int):
@@ -241,9 +233,58 @@ func unlock():
 	plan_button.show()
 	
 	unlocked = true
-	GameManager.unlock_factory(factory_index)
-	factory_unlocked.emit(represented_factory, get_index())
+	#GameManager.unlock_factory(factory_index)
+
+func lock():
+	lock_panel.show()
+	
+	num_box.hide()
+	amount_label.hide()
+	unplan_button.hide()
+	plan_button.hide()
+	
+	unlocked = false
 
 func _on_unlock_button_pressed() -> void:
 	if GameManager.can_unlock_factory(factory_index):
+		GameManager.unlock_factory(factory_index)
 		unlock()
+		factory_unlocked.emit(represented_factory, get_index())
+
+func set_rep_factory(new_factory):
+	represented_factory = new_factory
+	empty = false
+	factory_index = GameManager.get_factory_index(represented_factory)
+	if !is_instance_valid(icon_box):
+		return
+	
+	unlocked = GameManager.is_factory_unlocked(factory_index)
+	
+	
+	
+	populate_icons()
+	populate_nums()
+	update_amounts()
+	update_progress(GameManager.factory_build_progress[factory_index])
+	
+	if unlocked:
+		unlock()
+	else:
+		lock()
+		return
+	
+	icon_box.show()
+	num_box.show()
+	amount_label.show()
+	build_progress_bar.show()
+	unplan_button.show()
+	plan_button.show()
+
+func set_empty():
+	empty = true
+	icon_box.hide()
+	num_box.hide()
+	amount_label.hide()
+	build_progress_bar.hide()
+	unplan_button.hide()
+	plan_button.hide()
