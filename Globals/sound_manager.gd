@@ -27,3 +27,9 @@ func get_menu_music_length() -> float:
 
 func get_menu_music_playback() -> AudioStreamPlayback:
 	return menu_music.get_stream_playback()
+
+func get_raw_menu_music_position() -> float:
+	return menu_music.get_playback_position()
+
+func get_menu_music_seconds() -> int:
+	return roundi(menu_music.stream.get_length())

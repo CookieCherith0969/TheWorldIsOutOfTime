@@ -37,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "planet_lifter", "menu_lifter")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_lifter", "menu_lifter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,6 +47,7 @@ grow_vertical = 2
 script = ExtResource("1_84wai")
 second_hand = NodePath("Title/SecondHand")
 minute_hand = NodePath("Title/MinuteHand")
+hour_hand = NodePath("Title/HourHand")
 hide_normal_open = ExtResource("16_t0b0n")
 hide_hover_open = ExtResource("18_xpuh5")
 hide_normal_closed = ExtResource("4_g1cr4")

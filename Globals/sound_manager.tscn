@@ -8,4 +8,6 @@ script = ExtResource("1_dbxqp")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mbuky")
+volume_db = -9.3729
+bus = &"Music"
 parameters/looping = true

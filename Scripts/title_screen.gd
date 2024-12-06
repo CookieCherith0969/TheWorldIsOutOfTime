@@ -6,27 +6,26 @@ var registered_time : float = time_offset
 var unregistered_time : float = 0.0
 var registered_seconds : int = 0
 var previous_time : float = 0.0
-
-var debug_seconds : int = 0
+var previous_raw_time : float = 0.0
 
 @export
 var second_hand_length : float = 30.0
 @export
 var minute_hand_length : float = 24.0
-#@export
-#var hour_hand_length : float = 18.0
+@export
+var hour_hand_length : float = 18.0
 @export
 var second_hand : Line2D
 @export
 var minute_hand : Line2D
-#@export
-#var hour_hand : Line2D
+@export
+var hour_hand : Line2D
 
 const seconds_per_minute : int = 60
 const minutes_per_hour : int = 60
 const hours_per_cycle : int = 12
 
-var loops_seen : int = 0
+var seconds_per_cycle : int = hours_per_cycle*minutes_per_hour*seconds_per_minute
 
 @onready
 var hide_button : TextureButton = $HideButton
@@ -72,28 +71,41 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	var current_time = SoundManager.get_menu_music_position()
+	var raw_time = SoundManager.get_raw_menu_music_position()
 	var time_diff = current_time - previous_time
-	var playback : AudioStreamPlayback = SoundManager.get_menu_music_playback()
+	var raw_diff = raw_time - previous_raw_time
+	var playback : AudioStreamPlaybackOggVorbis = SoundManager.get_menu_music_playback()
 	
-	if playback.get_loop_count() > loops_seen:
-		var length = SoundManager.get_menu_music_length()
-		time_diff = previous_time - length + current_time
-		debug_seconds += 104
-		loops_seen += 1
+	# Keeping within bounds to avoid too much error
+	while registered_time > seconds_per_cycle:
+		registered_time -= seconds_per_cycle
+		unregistered_time -= seconds_per_cycle
+	
+	# Track looped
+	if raw_diff < 0.0:
+		unregistered_time = snappedf(unregistered_time, SoundManager.get_menu_music_seconds())
+		registered_time = unregistered_time
+		registered_seconds = int(registered_time)
+		unregistered_time += current_time
+		update_clock_hands()
+		previous_time = current_time
+		previous_raw_time = raw_time
+		return
 	
 	unregistered_time += time_diff
 	
-	while registered_time - unregistered_time >= 1.0:
-		unregistered_time += 1.0
+	#while registered_time - unregistered_time >= 1.0:
+	#	unregistered_time += 1.0
 	
 	while unregistered_time - registered_time >= 1.0:
 		registered_time += 1.0
 		registered_seconds += 1
-		registered_seconds %= int(hours_per_cycle*minutes_per_hour*seconds_per_minute)
+		registered_seconds %= seconds_per_cycle
 		
 		update_clock_hands()
 	
 	previous_time = current_time
+	previous_raw_time = raw_time
 
 func update_clock_hands():
 	var seconds_passed : int = registered_seconds
@@ -111,8 +123,7 @@ func update_clock_hands():
 	
 	second_hand.points[1] = Vector2.UP.rotated(second_ratio*2*PI)*second_hand_length
 	minute_hand.points[1] = Vector2.UP.rotated(minute_ratio*2*PI)*minute_hand_length
-	
-	#hour_hand.points[1] = Vector2.UP.rotated(hour_ratio*2*PI)*hour_hand_length
+	hour_hand.points[1] = Vector2.UP.rotated(hour_ratio*2*PI)*hour_hand_length
 
 
 func _on_hide_button_pressed() -> void:
