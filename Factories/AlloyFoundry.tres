@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://vh64u1gc8xe1"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_hvbkw"]
+
+[resource]
+script = ExtResource("1_hvbkw")
+factory_name = &"Alloy Foundry"
+sort_priority = 70
+start_amount = 0
+output_on_build = false
+input_materials = Array[int]([3, 6, 4])
+inputs_per_day = Array[int]([200, 100, 50])
+output_materials = Array[int]([13])
+outputs_per_day = Array[int]([25])
+build_days = 16
+build_materials = Array[int]([2, 3])
+build_amounts = Array[int]([1500, 1000])
+research_materials = Array[int]([3, 6])
+research_amounts = Array[int]([10000, 5000])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

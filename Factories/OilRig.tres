@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://e1slvstjf7bj"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_xavd5"]
+
+[resource]
+script = ExtResource("1_xavd5")
+factory_name = &"OilRig"
+sort_priority = 40
+start_amount = 0
+output_on_build = false
+input_materials = Array[int]([1])
+inputs_per_day = Array[int]([60])
+output_materials = Array[int]([4])
+outputs_per_day = Array[int]([10])
+build_days = 16
+build_materials = Array[int]([])
+build_amounts = Array[int]([])
+research_materials = Array[int]([])
+research_amounts = Array[int]([])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

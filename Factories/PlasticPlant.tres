@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://cwq5s8cfbre2x"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_mogbc"]
+
+[resource]
+script = ExtResource("1_mogbc")
+factory_name = &"Plastic Plant"
+sort_priority = 60
+start_amount = 0
+output_on_build = false
+input_materials = Array[int]([4, 1])
+inputs_per_day = Array[int]([40, 10])
+output_materials = Array[int]([5])
+outputs_per_day = Array[int]([10])
+build_days = 32
+build_materials = Array[int]([2, 3, 6])
+build_amounts = Array[int]([200, 200, 50])
+research_materials = Array[int]([4])
+research_amounts = Array[int]([2000])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

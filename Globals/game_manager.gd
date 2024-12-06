@@ -21,6 +21,8 @@ enum Materials {
 	RAW_URANIUM,
 	ENRICHED_URANIUM,
 	NUCLEAR_BOMB,
+	ALLOY,
+	FUEL,
 	# Begin Icon Only Materials
 	MINUS_POLLUTION,
 	ROCKET,
