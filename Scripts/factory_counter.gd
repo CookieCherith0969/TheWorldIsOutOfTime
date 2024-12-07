@@ -80,11 +80,7 @@ func on_day_ended():
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:
 		update_amounts()
-		if !empty:
-			if GameManager.get_planned_factory_amount(factory_index) != 0:
-				building_wrench.show()
-			else:
-				building_wrench.hide()
+		
 	update_buttons()
 
 func on_factory_build_progressed(updated_factory : FactoryInfo, day_progress : int):
@@ -166,6 +162,11 @@ func update_amounts():
 		amount_label.text = "%s" % GameManager.get_planned_factory_amount(factory_index)
 	else:
 		amount_label.text = "%s/%s" % [GameManager.get_active_factory_amount(factory_index), GameManager.get_total_factory_amount(factory_index)]
+	if !empty:
+			if GameManager.get_planned_factory_amount(factory_index) != 0:
+				building_wrench.show()
+			else:
+				building_wrench.hide()
 	update_buttons()
 
 func update_progress(day_progress : int):

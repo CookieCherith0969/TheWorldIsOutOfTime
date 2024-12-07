@@ -5,6 +5,7 @@ class_name TooltipHeaderIcon
 var header_label : Label = $HeaderLabel
 @onready
 var header_icon : TextureRect = $HeaderIcon
+const vertical_size_per_line : int = 12
 
 func get_longest_word_width(words : Array[String]):
 	var longest_word = ""
@@ -24,6 +25,7 @@ func get_string_width(string : String):
 func set_label(text : String):
 	header_label.text = text
 	header_label.custom_minimum_size.x = get_longest_word_width(text.split(" "))
+	header_label.custom_minimum_size.y = text.split(" ").size()*vertical_size_per_line
 
 func set_icon(icon : Texture):
 	header_icon.texture = icon

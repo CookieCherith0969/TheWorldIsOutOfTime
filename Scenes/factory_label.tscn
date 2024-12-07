@@ -7,6 +7,7 @@ custom_minimum_size = Vector2(16, 0)
 offset_right = 1.0
 offset_bottom = 23.0
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("1_13r1l")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1

@@ -26,6 +26,11 @@ script = ExtResource("1_g5gy1")
 tooltip = NodePath("Tooltip")
 screen_scenes = Array[PackedScene]([ExtResource("2_jbj66"), ExtResource("3_khrr2")])
 cursor_frames = Array[Texture]([ExtResource("5_bi4nc"), ExtResource("6_7wl1l"), ExtResource("7_m51hi"), ExtResource("8_hkcs1"), ExtResource("9_8vbbc"), ExtResource("10_joqiy"), ExtResource("11_nrjmk"), ExtResource("12_ysk3w")])
+palette_blue = Color(0.137255, 0.709804, 0.827451, 1)
+palette_white = Color(0.87451, 0.878431, 0.886275, 1)
+palette_grey = Color(0.635294, 0.682353, 0.733333, 1)
+palette_black = Color(0.0901961, 0.0901961, 0.219608, 1)
+palette_green = Color(0.505882, 0.913725, 0.223529, 1)
 
 [node name="Tooltip" parent="." instance=ExtResource("3_m5j15")]
 visible = false
@@ -34,3 +39,5 @@ layout_mode = 0
 
 [node name="FadeComponent" type="Node" parent="."]
 script = ExtResource("13_w3olf")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

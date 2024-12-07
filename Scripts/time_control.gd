@@ -55,6 +55,7 @@ func _on_double_button_pressed() -> void:
 func _on_timeskip_button_pressed() -> void:
 	var number_of_days : int = pow(2, selected_exponent)
 	GameManager.process_days(number_of_days)
+	#GameManager.process_until_all_built()
 	UIManager.print_to_code_window("process_days(%s)"%number_of_days)
 	selected_exponent = 0
 

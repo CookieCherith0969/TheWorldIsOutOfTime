@@ -34,11 +34,17 @@ func on_materials_updated():
 
 func update_labels():
 	amount_label.text = UIManager.simplify_number(GameManager.get_material_amount(represented_material))
+	GameManager.get_predicted_change(represented_material)
 	var prefix : String = ""
 	var change : int = GameManager.get_prev_day_change(represented_material)
-	if change > 0:
+	var prediction : int = GameManager.get_predicted_change(represented_material)
+	if prediction != change:
+		gain_label.add_theme_color_override("font_color", UIManager.palette_blue)
+	else:
+		gain_label.add_theme_color_override("font_color", UIManager.palette_white)
+	if prediction > 0:
 		prefix = "+"
-	gain_label.text = prefix+UIManager.simplify_number(change)+"/d"
+	gain_label.text = prefix+UIManager.simplify_number(prediction)+"/d"
 
 func set_rep_material(new_material):
 	represented_material = new_material

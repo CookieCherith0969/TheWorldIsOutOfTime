@@ -28,10 +28,10 @@
 [ext_resource type="Texture2D" uid="uid://24tyavjggpt5" path="res://Sprites/Buttons/lock-button-focus.png" id="24_qmq1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
-bg_color = Color(0.10748, 0.10748, 0.10748, 0.447059)
+bg_color = Color(0.0901961, 0.0901961, 0.219608, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw4a4"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.87451, 0.878431, 0.886275, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfhr0"]
 atlas = ExtResource("9_lqr1t")
@@ -177,6 +177,7 @@ offset_top = -26.0
 offset_right = 65.0
 offset_bottom = -3.0
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("10_wb8r5")
 theme_override_font_sizes/font_size = 8
 text = "999/999"
@@ -198,6 +199,7 @@ offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_neighbor_left = NodePath("../UnplanButton")
+focus_previous = NodePath("../UnplanButton")
 mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("10_xsj8s")
@@ -222,6 +224,7 @@ offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_neighbor_right = NodePath("../PlanButton")
+focus_next = NodePath("../PlanButton")
 mouse_filter = 1
 disabled = true
 texture_normal = ExtResource("15_dqyv1")

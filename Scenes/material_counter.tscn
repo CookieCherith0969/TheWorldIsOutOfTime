@@ -43,6 +43,7 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("4_dblea")
 theme_override_font_sizes/font_size = 8
 text = "999.9M"
@@ -52,6 +53,7 @@ vertical_alignment = 1
 [node name="GainLabel" type="Label" parent="InnerMargin"]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("4_dblea")
 theme_override_font_sizes/font_size = 8
 text = "+999.9M/d"

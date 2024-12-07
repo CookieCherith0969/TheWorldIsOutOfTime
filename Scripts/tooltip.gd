@@ -102,9 +102,11 @@ func add_icons_from_material_amounts(materials : Array[GameManager.Materials], a
 	for i in range(materials.size()):
 		var material_icon = GameManager.get_material_icon(materials[i])
 		var material_amount = amounts[i]
-		add_icon_amount(material_icon, material_amount)
+		var new_icon := add_icon_amount(material_icon, material_amount)
+		if !GameManager.has_material_amount(materials[i], amounts[i]):
+			new_icon.set_color(UIManager.palette_blue)
 
-func add_icon_amount(icon : Texture, amount : int, format_string : String = ""):
+func add_icon_amount(icon : Texture, amount : int, format_string : String = "") -> TooltipIconAmount:
 	var new_icon : TooltipIconAmount = icon_amount_scene.instantiate()
 	
 	icon_list.add_child(new_icon)
@@ -114,6 +116,8 @@ func add_icon_amount(icon : Texture, amount : int, format_string : String = ""):
 		new_icon.set_amount(amount)
 	else:
 		new_icon.set_amount_formatted(amount, format_string)
+	
+	return new_icon
 
 func clear_icons():
 	for child in icon_list.get_children():

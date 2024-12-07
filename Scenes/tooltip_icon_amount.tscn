@@ -19,7 +19,7 @@ stretch_mode = 3
 [node name="AmountLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(48, 16)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.295866, 0.295867, 0.295866, 1)
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
 theme_override_fonts/font = ExtResource("3_uqcq5")
 theme_override_font_sizes/font_size = 8
 text = "999.9M"

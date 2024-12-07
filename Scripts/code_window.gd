@@ -14,7 +14,7 @@ func _ready() -> void:
 	UIManager.code_text_added.connect(add_text)
 
 func _process(delta: float) -> void:
-	if code_label.visible_characters > code_label.text.length():
+	if code_label.visible_characters >= code_label.text.length():
 		code_label.visible_characters = code_label.text.length()
 		return
 	

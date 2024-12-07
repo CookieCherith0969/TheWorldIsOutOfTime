@@ -1,6 +1,8 @@
 extends MarginContainer
 class_name FactoryWindow
 
+signal page_changed
+
 const factories_per_page : int = 9
 var current_page : int = 0
 var number_of_pages : int
@@ -28,6 +30,7 @@ func prev_page():
 	populate_factories()
 	update_buttons()
 	UIManager.print_to_code_window("prev_fact_page()")
+	page_changed.emit()
 
 func next_page():
 	current_page += 1
@@ -37,6 +40,7 @@ func next_page():
 	populate_factories()
 	update_buttons()
 	UIManager.print_to_code_window("next_fact_page()")
+	page_changed.emit()
 
 func populate_factories():
 	for i in range(factory_grid.get_child_count()):

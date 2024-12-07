@@ -64,6 +64,7 @@ var menu_slider : SlideManager
 
 func _ready():
 	play_button.grab_focus()
+	UIManager.set_focus_target(play_button)
 	if OS.has_feature("web"):
 		menu_box.remove_child(exit_button)
 		exit_button.queue_free()

@@ -37,6 +37,19 @@ var fade_component : FadeComponent = $FadeComponent
 
 var empty_screen : Control
 
+var focus_target : Control = self
+
+@export
+var palette_blue : Color
+@export
+var palette_white : Color
+@export
+var palette_grey : Color
+@export
+var palette_black : Color
+@export
+var palette_green : Color
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	empty_screen = get_tree().current_scene
@@ -61,6 +74,12 @@ func _input(event: InputEvent) -> void:
 			cursor_frame %= cursor_frames.size()*2
 		
 		Input.set_custom_mouse_cursor(cursor_frames[cursor_frame/2])
+	
+	#if event.is_action_pressed("FixFocus"):
+	#	focus_target.grab_focus()
+
+func set_focus_target(target : Control):
+	focus_target = target
 
 func simplify_number(num : int, show_positive : bool = false) -> String:
 	var plus_string = ""

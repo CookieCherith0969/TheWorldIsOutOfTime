@@ -29,7 +29,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="TimeLabel" type="RichTextLabel" parent="InnerMargin"]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.295866, 0.295867, 0.295866, 1)
+theme_override_colors/default_color = Color(0.0901961, 0.0901961, 0.219608, 1)
 theme_override_fonts/normal_font = ExtResource("3_aouag")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true

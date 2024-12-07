@@ -36,6 +36,7 @@ var launch_button : TextureButton
 
 func _ready() -> void:
 	small_map.grab_focus()
+	UIManager.set_focus_target(small_map)
 	
 	material_prev = material_window.prev_button
 	material_next = material_window.next_button
@@ -51,6 +52,12 @@ func _ready() -> void:
 		factory.factory_unlocked.connect(on_factory_unlocked)
 	
 	setup_focus_neighbours()
+	update_focus_neighbours()
+	
+	factory_window.page_changed.connect(on_factory_page_changed)
+	GameManager.update_predicted_changes()
+
+func on_factory_page_changed():
 	update_focus_neighbours()
 
 func setup_focus_neighbours():
@@ -71,6 +78,8 @@ func setup_focus_neighbours():
 func update_focus_neighbours():
 	material_prev.focus_neighbor_bottom = top_left_factory.get_left_button().get_path()
 	material_next.focus_neighbor_bottom = top_middle_factory.get_right_button().get_path()
+	material_next.focus_next = top_left_factory.get_left_button().get_path()
+	top_left_factory.get_left_button().focus_previous = material_next.get_path()
 	small_map.focus_neighbor_bottom = top_right_factory.get_right_button().get_path()
 	
 	var rows : int = ceili(factory_grid.get_child_count() / float(factory_grid.columns))
@@ -81,17 +90,29 @@ func update_focus_neighbours():
 		if i % factory_grid.columns != 0:
 			var left_factory : FactoryCounter = factory_grid.get_child(i-1)
 			factory.get_left_button().focus_neighbor_left = left_factory.get_right_button().get_path()
+			factory.get_left_button().focus_previous = left_factory.get_right_button().get_path()
 		# Against left side
 		else:
 			factory.get_left_button().focus_neighbor_left = factory.get_left_button().get_path()
+			if i-1 >= 0:
+				var prev_factory : FactoryCounter = factory_grid.get_child(i-1)
+				factory.get_left_button().focus_previous = prev_factory.get_right_button().get_path()
 		
+		if i >= GameManager.factories.size():
+			factory.get_right_button().focus_neighbor_right = factory.get_right_button().get_path()
 		# Not against right side
-		if i % factory_grid.columns != factory_grid.columns-1:
+		elif i % factory_grid.columns != factory_grid.columns-1:
 			var right_factory : FactoryCounter = factory_grid.get_child(i+1)
 			factory.get_right_button().focus_neighbor_right = right_factory.get_left_button().get_path()
-		# Against left side
+			factory.get_right_button().focus_next = right_factory.get_left_button().get_path()
+		# Against right side
 		else:
 			factory.get_right_button().focus_neighbor_right = factory.get_right_button().get_path()
+			factory.get_right_button().focus_next = factory_prev.get_path()
+			if i+1 < factory_grid.get_child_count():
+				var next_factory : FactoryCounter = factory_grid.get_child(i+1)
+				if !next_factory.empty:
+					factory.get_right_button().focus_next = next_factory.get_left_button().get_path()
 		
 		# Not against top side
 		if i / factory_grid.columns != 0:
@@ -114,8 +135,16 @@ func update_focus_neighbours():
 		if i / factory_grid.columns != rows:
 			if i+factory_grid.columns < factory_grid.get_child_count():
 				var bottom_factory : FactoryCounter = factory_grid.get_child(i+factory_grid.columns)
-				factory.get_left_button().focus_neighbor_bottom = bottom_factory.get_left_button().get_path()
-				factory.get_right_button().focus_neighbor_bottom = bottom_factory.get_right_button().get_path()
+				if bottom_factory.empty:
+					if i % factory_grid.columns == 0:
+						factory.get_left_button().focus_neighbor_bottom = factory_prev.get_path()
+						factory.get_right_button().focus_neighbor_bottom = factory_prev.get_path()
+					else:
+						factory.get_left_button().focus_neighbor_bottom = factory_next.get_path()
+						factory.get_right_button().focus_neighbor_bottom = factory_next.get_path()
+				else:
+					factory.get_left_button().focus_neighbor_bottom = bottom_factory.get_left_button().get_path()
+					factory.get_right_button().focus_neighbor_bottom = bottom_factory.get_right_button().get_path()
 
 func on_factory_unlocked(_factory : FactoryInfo, counter_index : int):
 	update_focus_neighbours()

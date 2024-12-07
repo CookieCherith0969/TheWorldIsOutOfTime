@@ -62,6 +62,7 @@ var prev_day_changes : Array[int] = []
 var prev_day_increases : Array[int] = []
 var prev_day_decreases : Array[int] = []
 var lifetime_increases : Array[int] = []
+var predicted_changes : Array[int] = []
 
 @export
 var starting_factory_names : Array[StringName]
@@ -132,6 +133,7 @@ func _ready() -> void:
 		prev_day_increases.append(0)
 		prev_day_decreases.append(0)
 		lifetime_increases.append(0)
+		predicted_changes.append(0)
 	
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
@@ -175,8 +177,6 @@ func _physics_process(delta: float) -> void:
 		elapsed_timeskip_days = 0
 		last_day_time = 0.0
 		timeskip_ended.emit()
-	
-	
 
 func collide_asteroid():
 	game_over = true
@@ -185,6 +185,34 @@ func collide_asteroid():
 func launch_rocket():
 	game_over = true
 	rocket_launched.emit()
+
+func update_predicted_changes():
+	predicted_changes.fill(0)
+	for i in range(factories.size()):
+		var factory : FactoryInfo = factories[i]
+		if factory.output_on_build:
+			continue
+		
+		var output_materials : Array[GameManager.Materials] = factory.output_materials
+		var output_amounts : Array[int] = factory.outputs_per_day
+		
+		add_predicted_material_amounts(output_materials, output_amounts, false, get_total_factory_amount(i))
+		
+		var input_materials : Array[GameManager.Materials] = factory.input_materials
+		var input_amounts : Array[int] = factory.inputs_per_day
+		
+		add_predicted_material_amounts(input_materials, input_amounts, true, get_total_factory_amount(i))
+	materials_updated.emit()
+
+func add_predicted_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int], negate : bool = false, multiplier : int = 1):
+	for i in range(materials.size()):
+		if is_material_icon_only(materials[i]):
+			continue
+		
+		var total : int = amounts[i] * multiplier
+		if negate:
+			total = -total
+		predicted_changes[materials[i]] += total
 
 func in_out_sine_ease(progress : float):
 	return -(cos(PI*progress) - 1) / 2
@@ -251,6 +279,9 @@ func get_material_name(material : Materials):
 	var raw_name : String = Materials.keys()[material]
 	return raw_name.capitalize()
 
+func get_predicted_change(material : Materials):
+	return predicted_changes[material]
+
 func get_prev_day_change(material : Materials):
 	return prev_day_changes[material]
 
@@ -268,6 +299,12 @@ func get_active_factory_amount(factory_index : int):
 
 func get_planned_factory_amount(factory_index : int):
 	return planned_factory_amounts[factory_index]
+
+func get_running_factory_amount(factory_index : int):
+	var running : int = active_factory_amounts[factory_index]
+	if planned_factory_amounts[factory_index] < 0:
+		running += planned_factory_amounts[factory_index]
+	return running
 
 func get_factory_index(factory : FactoryInfo):
 	return factories.find(factory)
@@ -293,6 +330,9 @@ func has_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 	
 	return true
 
+func has_material_amount(material : GameManager.Materials, amount : int) -> bool:
+	return material_amounts[material] >= amount
+
 func add_material_amounts(materials : Array[GameManager.Materials], amounts : Array[int], negate : bool = false, multiplier : int = 1):
 	for i in range(materials.size()):
 		if is_material_icon_only(materials[i]):
@@ -315,7 +355,23 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 		
 	materials_updated.emit()
 
+func process_until_all_built():
+	var highest_remaining_days : int = 0
+	
+	for i in range(factories.size()):
+		var planned_factories : int = planned_factory_amounts[i]
+		var build_length : int = factories[i].build_days
+		var build_progress : int = factory_build_progress[i]
+		
+		var remaining_days : int = planned_factories*build_length - build_progress
+		if remaining_days > highest_remaining_days:
+			highest_remaining_days = remaining_days
+	
+	process_days(highest_remaining_days)
+
 func process_days(number_of_days : int):
+	if number_of_days <= 0:
+		return
 	timeskip_days += number_of_days
 	if timeskip_days > days_left:
 		timeskip_days = days_left
@@ -409,9 +465,7 @@ func process_factory(factory_index : int):
 		if possible_runs < min_possible_runs:
 			min_possible_runs = possible_runs
 	
-	var running_factories = active_factory_amounts[factory_index]
-	if planned_factory_amounts[factory_index] < 0:
-		running_factories += planned_factory_amounts[factory_index]
+	var running_factories = get_running_factory_amount(factory_index)
 	var actual_runs : int = min(min_possible_runs, running_factories)
 	
 	add_material_amounts(factory.input_materials, factory.inputs_per_day, true, actual_runs)
@@ -472,3 +526,7 @@ func unlock_factory(factory_index : int) -> bool:
 	unlocked_factories[factory_index] = true
 	factory_amount_updated.emit(factory)
 	return true
+
+
+func _on_factory_amount_updated(factory: FactoryInfo) -> void:
+	update_predicted_changes()
