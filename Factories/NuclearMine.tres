@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_y0eyy")
 factory_name = &"Nuclear Mine"
-sort_priority = 100
+sort_priority = 90
 start_amount = 0
 output_on_build = false
 input_materials = Array[int]([1])
 inputs_per_day = Array[int]([200])
-output_materials = Array[int]([10])
+output_materials = Array[int]([9])
 outputs_per_day = Array[int]([1])
 build_days = 8
 build_materials = Array[int]([3, 6])

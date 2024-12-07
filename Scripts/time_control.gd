@@ -42,7 +42,7 @@ func _on_halve_button_pressed() -> void:
 		selected_exponent = 0
 	update_buttons()
 	update_label()
-	UIManager.print_to_code_window("time_control.halve_time()")
+	UIManager.print_to_code_window("halve_time()")
 
 func _on_double_button_pressed() -> void:
 	selected_exponent += 1
@@ -50,12 +50,12 @@ func _on_double_button_pressed() -> void:
 		selected_exponent = max_exponent
 	update_buttons()
 	update_label()
-	UIManager.print_to_code_window("time_control.double_time()")
+	UIManager.print_to_code_window("double_time()")
 
 func _on_timeskip_button_pressed() -> void:
 	var number_of_days : int = pow(2, selected_exponent)
 	GameManager.process_days(number_of_days)
-	UIManager.print_to_code_window("time_control.process_days(%s)"%number_of_days)
+	UIManager.print_to_code_window("process_days(%s)"%number_of_days)
 	selected_exponent = 0
 
 func update_buttons():

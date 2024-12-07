@@ -13,9 +13,9 @@ var menu_music : AudioStreamPlayer = $MenuMusic
 var music_tracks : Array[AudioStreamPlayer]
 
 @export
-var end_game_duration : int = 365
+var late_game_proportion : float = 1/3.0
 @export
-var mid_game_duration : int = 365
+var mid_game_proportion : float = 1/3.0
 
 const low_db : float = -80.0
 const high_db : float = 0.0
@@ -26,13 +26,35 @@ var music_fade_state : MusicFadeState = MusicFadeState.IDLE
 var current_track : MusicTracks = MusicTracks.MENU
 
 @export
-var track_change_time : float = 100.0
+var track_change_fade_time : float = 20.0
+@export
+var track_change_base : float = 100.0
 @export
 var track_change_variance : float = 20.0
+var track_change_time : float = 0.0
+var track_change_timer : float = 0.0
+var track_changing : bool = false
+
+var prev_day_proportion : float = 1.0
+
+func _ready() -> void:
+	track_change_time = track_change_base + randf_range(-track_change_variance, track_change_variance)
+	GameManager.day_ended.connect(on_day_ended)
+
+func on_day_ended():
+	var day_proportion : float = float(GameManager.days_left)/GameManager.starting_days
+	var mid_game_cutoff = late_game_proportion + mid_game_proportion
+	
+	if day_proportion < mid_game_cutoff && prev_day_proportion >= mid_game_cutoff:
+		track_change_timer += track_change_time/2
+	elif day_proportion < late_game_proportion && prev_day_proportion >= late_game_proportion:
+		track_change_timer += track_change_time/2
+	
+	prev_day_proportion = day_proportion
 
 func _process(delta: float) -> void:
 	handle_fading(delta)
-	
+	handle_track_changing(delta)
 
 func handle_fading(delta : float):
 	if music_fade_state == MusicFadeState.IDLE:
@@ -56,6 +78,40 @@ func handle_fading(delta : float):
 	var new_db : float = lerp(low_db, high_db, weight)
 	
 	AudioServer.set_bus_volume_db(1, new_db)
+
+func handle_track_changing(delta : float):
+	if !track_changing:
+		return
+	if fade_progress < 1.0:
+		return
+	
+	track_change_timer += delta
+	
+	if track_change_timer > track_change_time:
+		track_change_timer = 0.0
+		track_change_time = track_change_base + randf_range(-track_change_variance, track_change_variance)
+		change_tracks()
+
+func change_tracks():
+	var day_proportion : float = float(GameManager.days_left)/GameManager.starting_days
+	# Early game
+	if day_proportion > late_game_proportion + mid_game_proportion:
+		if current_track == MusicTracks.AMBIENT:
+			fade_to_track(track_change_fade_time, MusicTracks.EARLY)
+		else:
+			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
+	# Mid game
+	elif day_proportion > late_game_proportion:
+		if current_track == MusicTracks.AMBIENT:
+			fade_to_track(track_change_fade_time, MusicTracks.MIDDLE)
+		else:
+			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
+	# Late game
+	else:
+		if current_track == MusicTracks.AMBIENT:
+			fade_to_track(track_change_fade_time, MusicTracks.LATE)
+		else:
+			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
 
 func in_out_sine_ease(progress : float):
 	return -(cos(PI*progress) - 1) / 2

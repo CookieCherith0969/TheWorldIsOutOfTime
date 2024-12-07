@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/code_window.gd" id="1_2pnrw"]
 [ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="2_2xbch"]
-[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="3_rv1g5"]
+[ext_resource type="FontFile" uid="uid://qni0tmaljlnt" path="res://Fonts/goodbye_despair/goodbyeDespair.ttf" id="3_g1fhe"]
 
 [node name="CodeWindow" type="MarginContainer"]
-offset_right = 114.0
+offset_left = -22.0
+offset_right = 92.0
 offset_bottom = 287.0
 script = ExtResource("1_2pnrw")
 
@@ -39,9 +40,11 @@ theme_override_constants/margin_bottom = 4
 custom_minimum_size = Vector2(62, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("3_rv1g5")
-theme_override_font_sizes/font_size = 5
+theme_override_fonts/font = ExtResource("3_g1fhe")
+theme_override_font_sizes/font_size = 8
 vertical_alignment = 2
 autowrap_mode = 1
+uppercase = true
 max_lines_visible = 35
 visible_characters = 0
+visible_ratio = -1.0

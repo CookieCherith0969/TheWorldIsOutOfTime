@@ -238,7 +238,6 @@ offset_left = 382.0
 offset_top = 209.0
 offset_right = 496.0
 offset_bottom = 496.0
-characters_per_line = 22
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]

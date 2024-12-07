@@ -27,7 +27,7 @@ func prev_page():
 	
 	populate_factories()
 	update_buttons()
-	UIManager.print_to_code_window("factory_window.prev_page()")
+	UIManager.print_to_code_window("prev_fact_page()")
 
 func next_page():
 	current_page += 1
@@ -36,7 +36,7 @@ func next_page():
 	
 	populate_factories()
 	update_buttons()
-	UIManager.print_to_code_window("factory_window.next_page()")
+	UIManager.print_to_code_window("next_fact_page()")
 
 func populate_factories():
 	for i in range(factory_grid.get_child_count()):

@@ -16,16 +16,16 @@ enum Materials {
 	CONCRETE,
 	METALS,
 	OIL,
-	PLASTIC,
 	RARE_METALS,
+	PLASTIC,
+	ALLOY,
 	ELECTRONICS,
-	COMPUTER,
-	HULL,
 	RAW_URANIUM,
 	ENRICHED_URANIUM,
-	NUCLEAR_BOMB,
-	ALLOY,
 	FUEL,
+	HULL,
+	COMPUTER,
+	NUCLEAR_BOMB,
 	# Begin Icon Only Materials
 }
 
@@ -239,7 +239,7 @@ func is_timeskipping() -> bool:
 	return false
 
 func is_material_icon_only(material : Materials):
-	return material as int >= GameManager.Materials.size()-1-num_icon_only_materials
+	return material as int > GameManager.Materials.size()-1-num_icon_only_materials
 
 func get_material_amount(material : Materials):
 	return material_amounts[material]

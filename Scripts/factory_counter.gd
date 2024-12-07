@@ -297,8 +297,6 @@ func set_rep_factory(new_factory):
 	
 	unlocked = GameManager.is_factory_unlocked(factory_index)
 	
-	
-	
 	populate_icons()
 	populate_nums()
 	update_amounts()
@@ -319,3 +317,4 @@ func set_empty():
 	build_progress_bar.hide()
 	unplan_button.hide()
 	plan_button.hide()
+	lock_panel.hide()

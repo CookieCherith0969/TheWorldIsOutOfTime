@@ -27,7 +27,7 @@ func prev_page():
 	
 	populate_materials()
 	update_buttons()
-	UIManager.print_to_code_window("material_window.prev_page()")
+	UIManager.print_to_code_window("prev_mat_page()")
 
 func next_page():
 	current_page += 1
@@ -36,7 +36,7 @@ func next_page():
 	
 	populate_materials()
 	update_buttons()
-	UIManager.print_to_code_window("material_window.next_page()")
+	UIManager.print_to_code_window("next_mat_page()")
 
 func populate_materials():
 	for i in range(material_grid.get_child_count()):
@@ -44,7 +44,7 @@ func populate_materials():
 		
 		var material_counter : MaterialCounter = material_grid.get_child(i)
 		
-		if GameManager.is_material_icon_only(material_index):
+		if material_index >= GameManager.Materials.size() || GameManager.is_material_icon_only(material_index):
 			material_counter.set_empty()
 			continue
 		

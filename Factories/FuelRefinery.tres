@@ -5,16 +5,16 @@
 [resource]
 script = ExtResource("1_dacru")
 factory_name = &"Fuel Refinery"
-sort_priority = 90
+sort_priority = 110
 start_amount = 0
 output_on_build = false
 input_materials = Array[int]([4])
 inputs_per_day = Array[int]([500])
-output_materials = Array[int]([14])
+output_materials = Array[int]([11])
 outputs_per_day = Array[int]([50])
 build_days = 16
 build_materials = Array[int]([2, 3])
-build_amounts = Array[int]([3000, 2000])
+build_amounts = Array[int]([10000, 2000])
 research_materials = Array[int]([4])
 research_amounts = Array[int]([100000])
 hide_material_amounts = false

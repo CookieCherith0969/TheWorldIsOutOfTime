@@ -154,6 +154,7 @@ func make_new_screen(fade : bool = true):
 	
 	if fade:
 		await get_tree().create_timer(fade_time/3).timeout
+		SoundManager.track_changing = true
 		fade_in(fade_time/3)
 		await fade_component.fade_in_finished
 	empty_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
