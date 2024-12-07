@@ -12,6 +12,11 @@ var tooltip : Tooltip
 const tooltip_hold_time : float = 1
 const tooltip_fade_time : float = 1
 
+@export
+var survival_backgrounds : Array[Texture]
+@export
+var destruction_backgrounds : Array[Texture]
+
 const simplification_suffixes = [
 	"",
 	"K",
