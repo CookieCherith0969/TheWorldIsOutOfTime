@@ -1,6 +1,6 @@
 extends Control
 
-enum Screens {TITLE, GAME}
+enum Screens {TITLE, GAME, END}
 
 signal code_text_added(text : String)
 
