@@ -1,27 +1,27 @@
 [gd_scene load_steps=7 format=3 uid="uid://ug7ye1ri5gke"]
 
-[ext_resource type="Texture2D" uid="uid://b2xuehig88cd1" path="res://Sprites/Buttons/launch-button-normal.png" id="1_bcsu1"]
-[ext_resource type="Texture2D" uid="uid://h4awtox86s13" path="res://Sprites/Buttons/launch-button-pressed.png" id="2_dhgq0"]
-[ext_resource type="Texture2D" uid="uid://dbhjohcpbu7gk" path="res://Sprites/Buttons/launch-button-hover.png" id="3_pmrpr"]
-[ext_resource type="Texture2D" uid="uid://d4l84xn0j1ni" path="res://Sprites/Buttons/launch-button-disabled.png" id="4_u0yt4"]
-[ext_resource type="Texture2D" uid="uid://bkswne5u58jni" path="res://Sprites/Buttons/launch-button-focus.png" id="5_simlf"]
+[ext_resource type="Texture2D" uid="uid://dcc6agu0gev21" path="res://Sprites/Placeholder/PlaceholderLaunchNormal.png" id="1_h8nh0"]
+[ext_resource type="Texture2D" uid="uid://cas2f2hwlyqrg" path="res://Sprites/Placeholder/PlaceholderLaunchPressed.png" id="2_muiy3"]
+[ext_resource type="Texture2D" uid="uid://bs75e57g8c8jv" path="res://Sprites/Placeholder/PlaceholderLaunchHover.png" id="3_45vyu"]
+[ext_resource type="Texture2D" uid="uid://dkorvdhtmyndf" path="res://Sprites/Placeholder/PlaceholderLaunchDisabled.png" id="4_xrv3j"]
+[ext_resource type="Texture2D" uid="uid://coefn8oauxntl" path="res://Sprites/Placeholder/PlaceholderLaunchFocus.png" id="5_xscbi"]
 [ext_resource type="Script" path="res://Scripts/launch_button.gd" id="6_dxw5t"]
 
 [node name="LaunchButton" type="TextureButton"]
-offset_right = 128.0
+offset_right = 120.0
 offset_bottom = 28.0
 disabled = true
-texture_normal = ExtResource("1_bcsu1")
-texture_pressed = ExtResource("2_dhgq0")
-texture_hover = ExtResource("3_pmrpr")
-texture_disabled = ExtResource("4_u0yt4")
-texture_focused = ExtResource("5_simlf")
+texture_normal = ExtResource("1_h8nh0")
+texture_pressed = ExtResource("2_muiy3")
+texture_hover = ExtResource("3_45vyu")
+texture_disabled = ExtResource("4_xrv3j")
+texture_focused = ExtResource("5_xscbi")
 script = ExtResource("6_dxw5t")
 rocket_materials = Array[int]([9, 8, 12])
 rocket_amounts = Array[int]([50, 30, 1])
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
-position = Vector2(128, 0)
+position = Vector2(120, 0)
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

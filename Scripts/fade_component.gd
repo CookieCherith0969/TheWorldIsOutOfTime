@@ -22,25 +22,32 @@ func _process(delta: float) -> void:
 	if fade_state == FadeState.FADING_IN:
 		fade_progress += delta / fade_time
 		if fade_progress >= 1.0:
+			fade_progress = 1.0
 			fade_state = FadeState.IDLE
 			fade_in_finished.emit()
 			fade_finished.emit()
 	
 	elif fade_state == FadeState.FADING_OUT:
 		fade_progress -= delta / fade_time
-		if fade_progress <= 1.0:
+		if fade_progress <= 0.0:
+			fade_progress = 0.0
 			fade_state = FadeState.IDLE
 			fade_out_finished.emit()
 			fade_finished.emit()
 	
-	get_parent().modulate = out_color.lerp(in_color, fade_progress)
+	get_parent().modulate = out_color.lerp(in_color, in_out_sine_ease(fade_progress))
+
+func in_out_sine_ease(progress : float):
+	return -(cos(PI*progress) - 1) / 2
 
 func fade_out(time : float):
+	fade_progress = 1.0
 	fade_time = time
 	fade_state = FadeState.FADING_OUT
 	fade_started.emit()
 
 func fade_in(time : float):
+	fade_progress = 0.0
 	fade_time = time
 	fade_state = FadeState.FADING_IN
 	fade_started.emit()

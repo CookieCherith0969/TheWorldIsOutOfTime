@@ -1,13 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://3622lee72wb6"]
+[gd_scene load_steps=6 format=3 uid="uid://3622lee72wb6"]
 
 [ext_resource type="Script" path="res://Globals/sound_manager.gd" id="1_dbxqp"]
 [ext_resource type="AudioStream" uid="uid://dr32fccddwxil" path="res://Sounds/Music/1menu.ogg" id="2_mbuky"]
+[ext_resource type="AudioStream" uid="uid://cteyoss5720r1" path="res://Sounds/Music/2ambient.ogg" id="3_cosvd"]
+[ext_resource type="AudioStream" uid="uid://do4328ror1vj1" path="res://Sounds/Music/3early-game.ogg" id="4_70i3m"]
+[ext_resource type="AudioStream" uid="uid://cko3plib2u1mp" path="res://Sounds/Music/4middle-game.ogg" id="5_st12c"]
 
-[node name="SoundManager" type="Node"]
+[node name="SoundManager" type="Node" node_paths=PackedStringArray("music_tracks")]
 script = ExtResource("1_dbxqp")
+music_tracks = [NodePath("MenuMusic"), NodePath("Ambience"), NodePath("EarlyMusic"), NodePath("MiddleMusic"), NodePath("LateMusic")]
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mbuky")
 volume_db = -9.3729
+autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cosvd")
+volume_db = -9.3729
+bus = &"Music"
+parameters/looping = true
+
+[node name="EarlyMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_70i3m")
+volume_db = -9.3729
+bus = &"Music"
+parameters/looping = true
+
+[node name="MiddleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_st12c")
+volume_db = -9.3729
+bus = &"Music"
+parameters/looping = true
+
+[node name="LateMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mbuky")
+volume_db = -9.3729
+bus = &"Music"
+parameters/looping = true
+
+[node name="ButtonDown" type="AudioStreamPlayer" parent="."]
+bus = &"Effects"
+
+[node name="ButtonUp" type="AudioStreamPlayer" parent="."]
+bus = &"Effects"
+
+[node name="Timeskip" type="AudioStreamPlayer" parent="."]
+bus = &"Effects"

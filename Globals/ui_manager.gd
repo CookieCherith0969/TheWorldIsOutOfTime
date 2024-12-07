@@ -1,11 +1,8 @@
 extends Control
 
-signal faded_in
-signal faded_out
-signal finished_fading
-
 enum Screens {TITLE, GAME}
-enum FadeState {IDLE, FADING_IN, FADING_OUT}
+
+signal code_text_added(text : String)
 
 @export
 var current_screen_type : Screens = Screens.TITLE
@@ -34,12 +31,15 @@ var cursor_frame : int = 0
 var cursor_frames : Array[Texture]
 
 @export
-var fade_time : float = 2.0
+var fade_time : float = 4.0
 @onready
 var fade_component : FadeComponent = $FadeComponent
 
+var empty_screen : Control
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	empty_screen = get_tree().current_scene
 	get_window().min_size = get_viewport().size
 	make_new_screen(false)
 
@@ -84,7 +84,6 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	return plus_string + num_string + simplification_suffixes[suffix_index]
 
 func show_build_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int], time_cost : int = 0):
-	print_debug(tooltip.position)
 	tooltip.position = pos
 	tooltip.clear_icons()
 	tooltip.add_build_header()
@@ -94,7 +93,6 @@ func show_build_tooltip(pos : Vector2i, materials : Array[GameManager.Materials]
 	tooltip.show_tooltip()
 	
 func show_unlock_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int], time_cost : int = 0):
-	print_debug(tooltip.position)
 	tooltip.position = pos
 	tooltip.clear_icons()
 	tooltip.add_unlock_header()
@@ -123,12 +121,20 @@ func hide_tooltip():
 func fade_tooltip():
 	tooltip.begin_fade(tooltip_hold_time, tooltip_fade_time)
 
-
-
 func make_new_screen(fade : bool = true):
+	empty_screen.mouse_filter = Control.MOUSE_FILTER_STOP
 	if fade:
-		print_debug("Fading")
-		fade_out(fade_time)
+		match(current_screen_type):
+			Screens.GAME:
+				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.EARLY)
+			Screens.TITLE: 
+				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.MENU)
+		
+		focus_mode = FOCUS_ALL
+		grab_focus()
+		focus_mode = FOCUS_NONE
+		release_focus()
+		fade_out(fade_time/3)
 		await fade_component.fade_out_finished
 	
 	if is_instance_valid(current_screen):
@@ -139,20 +145,24 @@ func make_new_screen(fade : bool = true):
 		Screens.GAME:
 			GameManager.screensaver_mode = false
 			GameManager.timeskip_days = 0
-			SoundManager.start_game_music()
 		Screens.TITLE:
 			GameManager.screensaver_mode = true
-			SoundManager.start_menu_music()
 	
 	var new_screen = screen_scenes[current_screen_type].instantiate()
 	add_child(new_screen)
 	current_screen = new_screen
 	
 	if fade:
-		fade_in(fade_time)
+		await get_tree().create_timer(fade_time/3).timeout
+		fade_in(fade_time/3)
+		await fade_component.fade_in_finished
+	empty_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func fade_out(time : float):
 	fade_component.fade_out(time)
 
 func fade_in(time : float):
 	fade_component.fade_in(time)
+
+func print_to_code_window(text : String):
+	code_text_added.emit(text)

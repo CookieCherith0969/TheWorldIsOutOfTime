@@ -14,8 +14,8 @@
 
 [node name="Tooltip" type="MarginContainer"]
 z_index = 10
-offset_right = 76.0
-offset_bottom = 56.0
+offset_right = 8.0
+offset_bottom = 8.0
 mouse_filter = 2
 script = ExtResource("1_15287")
 icon_amount_scene = ExtResource("2_3tkas")

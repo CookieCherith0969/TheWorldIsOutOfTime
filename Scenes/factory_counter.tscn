@@ -69,10 +69,10 @@ animations = [{
 bg_color = Color(0.25, 0.25, 0.25, 0.356863)
 
 [node name="FactoryCounter" type="Control"]
-custom_minimum_size = Vector2(132, 65)
+custom_minimum_size = Vector2(116, 65)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 132.0
+offset_right = 116.0
 offset_bottom = 65.0
 script = ExtResource("1_f452t")
 represented_factory = ExtResource("2_7gxrd")
@@ -174,40 +174,14 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = -26.0
-offset_right = 82.0
+offset_right = 65.0
 offset_bottom = -3.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("10_wb8r5")
 theme_override_font_sizes/font_size = 8
-text = "0/0"
+text = "999/999"
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="BuildProgressBar" type="ProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = 3.0
-offset_right = 47.0
-offset_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_cii6y")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iw4a4")
-value = 50.0
-show_percentage = false
-
-[node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(9, 73)
-sprite_frames = SubResource("SpriteFrames_wnvel")
-frame = 2
-frame_progress = 0.421552
 
 [node name="PlanButton" type="TextureButton" parent="."]
 visible = false
@@ -257,8 +231,35 @@ texture_disabled = ExtResource("18_sioiy")
 texture_focused = ExtResource("19_ta8fr")
 stretch_mode = 3
 
+[node name="BuildProgressBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cii6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iw4a4")
+value = 50.0
+show_percentage = false
+
+[node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(9, 73)
+sprite_frames = SubResource("SpriteFrames_wnvel")
+frame = 2
+frame_progress = 0.421552
+
 [node name="TooltipMarker" type="Marker2D" parent="."]
-position = Vector2(132, 0)
+position = Vector2(116, 0)
 
 [node name="LockPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -290,6 +291,10 @@ texture_hover = ExtResource("22_n62rc")
 texture_disabled = ExtResource("23_kjsbo")
 texture_focused = ExtResource("24_qmq1s")
 stretch_mode = 3
+
+[node name="SketchSound" type="AudioStreamPlayer" parent="."]
+
+[node name="EraseSound" type="AudioStreamPlayer" parent="."]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

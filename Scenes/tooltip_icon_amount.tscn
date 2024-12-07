@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="3_uqcq5"]
 
 [node name="TooltipIconAmount" type="HBoxContainer"]
+custom_minimum_size = Vector2(68, 16)
 mouse_filter = 2
 script = ExtResource("1_c432c")
 

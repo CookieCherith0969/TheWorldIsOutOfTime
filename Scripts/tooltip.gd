@@ -124,8 +124,12 @@ func clear_icons():
 	# Expanding is handled automatically by MarginContainer behaviour
 	size.y = 1
 	size.x = 1
+	inner_margin.size.y = 1
+	inner_margin.size.x = 1
 
 func show_tooltip():
+	size.x = inner_margin.size.x + inner_margin.get_theme_constant("margin_left") + inner_margin.get_theme_constant("margin_right")
+	size.y = inner_margin.size.y + inner_margin.get_theme_constant("margin_top") + inner_margin.get_theme_constant("margin_bottom")
 	show()
 	fading = false
 	modulate = Color(1,1,1,1)

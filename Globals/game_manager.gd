@@ -37,7 +37,7 @@ var material_icons : Array[Texture] = []
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
 
-const starting_days : int = 24#365*9
+const starting_days : int = 365*9
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -347,7 +347,6 @@ func process_day():
 		if active_factory_amounts[f] == 0:
 			continue
 		
-		var prev_material_amounts = material_amounts.duplicate()
 		process_factory(f)
 	
 	materials_updated.emit()
@@ -422,6 +421,7 @@ func process_factory(factory_index : int):
 func plan_factory(factory_index : int) -> bool:
 	if !can_build_factory(factory_index) && planned_factory_amounts[factory_index] >= 0:
 		return false
+	UIManager.print_to_code_window("plan_factory(%s)"%factory_index)
 	
 	var factory : FactoryInfo = factories[factory_index]
 	
@@ -440,10 +440,10 @@ func plan_factory(factory_index : int) -> bool:
 
 func unplan_factory(factory_index : int) -> bool:
 	# Cannot unplan if there are no plans
-	
 	var planned_total = active_factory_amounts[factory_index] + planned_factory_amounts[factory_index]
 	if planned_total <= 0:
 		return false
+	UIManager.print_to_code_window("unplan_factory(%s)"%factory_index)
 	
 	var factory : FactoryInfo = factories[factory_index]
 	
@@ -464,6 +464,7 @@ func unplan_factory(factory_index : int) -> bool:
 func unlock_factory(factory_index : int) -> bool:
 	if unlocked_factories[factory_index]:
 		return false
+	UIManager.print_to_code_window("unlock_factory(%s)"%factory_index)
 	
 	var factory : FactoryInfo = factories[factory_index]
 	add_material_amounts(factory.research_materials, factory.research_amounts, true)

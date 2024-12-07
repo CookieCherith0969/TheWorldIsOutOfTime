@@ -47,6 +47,10 @@ var unlocked_background : Texture
 @export
 var locked_background : Texture
 
+@onready
+var sketch_sound : AudioStreamPlayer = $SketchSound
+@onready
+var erase_sound : AudioStreamPlayer = $EraseSound
 
 var days_per_wrench_turn : int = 2
 var wrench_days : int = 0
@@ -202,9 +206,11 @@ func update_buttons():
 
 func _on_plan_button_pressed() -> void:
 	GameManager.plan_factory(factory_index)
+	sketch_sound.play()
 
 func _on_unplan_button_pressed() -> void:
 	GameManager.unplan_factory(factory_index)
+	erase_sound.play()
 
 func _on_mouse_entered() -> void:
 	show_tooltip()

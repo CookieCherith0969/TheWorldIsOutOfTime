@@ -137,6 +137,7 @@ func toggle_large_map():
 	update_focus_neighbours()
 
 func show_large_map():
+	UIManager.print_to_code_window("show_large_map()")
 	large_time_control.selected_exponent = time_control.selected_exponent
 	large_time_control.update_label()
 	large_time_control.update_buttons()
@@ -153,6 +154,7 @@ func show_large_map():
 	minimise_button.grab_focus()
 
 func hide_large_map():
+	UIManager.print_to_code_window("hide_large_map()")
 	time_control.selected_exponent = large_time_control.selected_exponent
 	time_control.update_label()
 	time_control.update_buttons()

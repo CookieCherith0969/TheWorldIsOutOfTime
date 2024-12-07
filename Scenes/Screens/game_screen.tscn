@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=33 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://ug7ye1ri5gke" path="res://Scenes/launch_button.tscn" id="31_gp4wh"]
 [ext_resource type="Texture2D" uid="uid://dc0waj3fc7lsu" path="res://Sprites/Buttons/minimize-button-focus.png" id="31_ygalj"]
 [ext_resource type="Script" path="res://Scripts/large_map.gd" id="32_21avp"]
+[ext_resource type="PackedScene" uid="uid://blqairk0d88el" path="res://Scenes/code_window.tscn" id="32_xgsqe"]
 
 [node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button")]
 anchors_preset = 15
@@ -50,16 +51,16 @@ launch_button = NodePath("LaunchButton")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 268.0
-offset_bottom = 28.0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 280.0
+offset_bottom = 37.0
 
 [node name="NormalTimeControl" parent="." instance=ExtResource("3_4sqxc")]
 layout_mode = 0
-offset_left = 155.0
+offset_left = 158.0
 offset_top = 41.0
-offset_right = 280.0
+offset_right = 278.0
 offset_bottom = 69.0
 
 [node name="SolarSystemMap" type="TextureButton" parent="."]
@@ -166,16 +167,16 @@ offset_bottom = 203.0
 layout_mode = 0
 offset_left = 5.0
 offset_top = 209.0
-offset_right = 421.0
-offset_bottom = 487.0
+offset_right = 378.0
+offset_bottom = 496.0
 
 [node name="LargeTimeControl" parent="." instance=ExtResource("3_4sqxc")]
 visible = false
 layout_mode = 0
-offset_left = 297.0
-offset_top = 7.0
-offset_right = 402.0
-offset_bottom = 43.0
+offset_left = 317.0
+offset_top = 11.0
+offset_right = 437.0
+offset_bottom = 39.0
 
 [node name="LargeMap" type="NinePatchRect" parent="." node_paths=PackedStringArray("small_map")]
 visible = false
@@ -226,10 +227,18 @@ do_rotating = false
 
 [node name="LaunchButton" parent="." instance=ExtResource("31_gp4wh")]
 layout_mode = 0
-offset_left = 15.0
+offset_left = 18.0
 offset_top = 41.0
-offset_right = 145.0
+offset_right = 138.0
 offset_bottom = 69.0
+
+[node name="CodeWindow" parent="." instance=ExtResource("32_xgsqe")]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 209.0
+offset_right = 496.0
+offset_bottom = 496.0
+characters_per_line = 22
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]

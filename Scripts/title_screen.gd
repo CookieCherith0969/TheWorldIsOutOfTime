@@ -58,9 +58,9 @@ var exit_button : TextureButton = $MenuBox/ExitButton
 const max_speed : int = 16
 
 @export
-var planet_lifter : LiftManager
+var planet_slider : SlideManager
 @export
-var menu_lifter : LiftManager
+var menu_slider : SlideManager
 
 func _ready():
 	play_button.grab_focus()
@@ -69,7 +69,7 @@ func _ready():
 		exit_button.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var current_time = SoundManager.get_menu_music_position()
 	var raw_time = SoundManager.get_raw_menu_music_position()
 	var time_diff = current_time - previous_time
@@ -138,7 +138,7 @@ func _on_hide_button_pressed() -> void:
 func hide_menu():
 	#title.hide()
 	#menu_box.hide()
-	menu_lifter.begin_lift()
+	menu_slider.slide_forward()
 	for button in menu_box.get_children():
 		button.focus_mode = Control.FOCUS_NONE
 		button.disabled = true
@@ -146,8 +146,8 @@ func hide_menu():
 func show_menu():
 	#title.show()
 	#menu_box.show()
-	menu_lifter.begin_fall()
-	await menu_lifter.fall_complete
+	menu_slider.slide_backward()
+	await menu_slider.backward_complete
 	for button in menu_box.get_children():
 		button.focus_mode = Control.FOCUS_ALL
 		button.disabled = false
@@ -165,8 +165,8 @@ func show_controls():
 	fast_button.get_child(0).trigger_hover()
 	hide_button.get_child(0).active = true
 	
-	planet_lifter.begin_lift()
-	await planet_lifter.lift_complete
+	planet_slider.slide_forward()
+	await planet_slider.forward_complete
 	
 	slow_button.disabled = false
 	fast_button.disabled = false
@@ -181,8 +181,8 @@ func hide_controls():
 	hide_button.disabled = true
 	hide_button.get_child(0).active = false
 	
-	planet_lifter.begin_fall()
-	await planet_lifter.fall_complete
+	planet_slider.slide_backward()
+	await planet_slider.backward_complete
 	
 	slow_button.disabled = false
 	fast_button.disabled = false

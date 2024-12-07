@@ -8,8 +8,8 @@
 [ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="5_2muob"]
 [ext_resource type="Texture2D" uid="uid://bl14iyscuhdl8" path="res://Sprites/Placeholder/PlaceholderHideHoverClosed.png" id="5_kigbf"]
 [ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="6_8osvy"]
-[ext_resource type="PackedScene" uid="uid://dd1eivqdcegwi" path="res://Scenes/lift_manager.tscn" id="7_61jxl"]
 [ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="7_80nfk"]
+[ext_resource type="PackedScene" uid="uid://dkhvm16stdjdi" path="res://Scenes/slide_manager.tscn" id="7_rqhpv"]
 [ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="8_4to8t"]
 [ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="9_mhqpv"]
 [ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="10_j3eve"]
@@ -37,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_lifter", "menu_lifter")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,8 +52,8 @@ hide_normal_open = ExtResource("16_t0b0n")
 hide_hover_open = ExtResource("18_xpuh5")
 hide_normal_closed = ExtResource("4_g1cr4")
 hide_hover_closed = ExtResource("5_kigbf")
-planet_lifter = NodePath("PlanetLifter")
-menu_lifter = NodePath("MenuLifter")
+planet_slider = NodePath("PlanetSlider")
+menu_slider = NodePath("MenuSlider")
 
 [node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
 z_index = -2
@@ -61,12 +61,13 @@ layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
 
-[node name="PlanetLifter" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_61jxl")]
+[node name="PlanetSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
 targets = [NodePath("../Planets")]
+slide_target_pos = Vector2(0, -100)
 
-[node name="MenuLifter" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_61jxl")]
+[node name="MenuSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
 targets = [NodePath("../Title"), NodePath("../MenuBox")]
-lift_height = 300.0
+slide_target_pos = Vector2(0, -300)
 
 [node name="Planets" type="Node2D" parent="."]
 z_index = -2

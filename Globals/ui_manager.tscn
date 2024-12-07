@@ -29,6 +29,7 @@ cursor_frames = Array[Texture]([ExtResource("5_bi4nc"), ExtResource("6_7wl1l"), 
 
 [node name="Tooltip" parent="." instance=ExtResource("3_m5j15")]
 visible = false
+top_level = true
 layout_mode = 0
 
 [node name="FadeComponent" type="Node" parent="."]

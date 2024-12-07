@@ -27,6 +27,7 @@ func prev_page():
 	
 	populate_materials()
 	update_buttons()
+	UIManager.print_to_code_window("material_window.prev_page()")
 
 func next_page():
 	current_page += 1
@@ -35,6 +36,7 @@ func next_page():
 	
 	populate_materials()
 	update_buttons()
+	UIManager.print_to_code_window("material_window.next_page()")
 
 func populate_materials():
 	for i in range(material_grid.get_child_count()):
