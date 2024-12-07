@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=34 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://saqj5krpedy7" path="res://Factories/StoneMine.tres" id="2_7gxrd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="6_m328o"]
 [ext_resource type="Texture2D" uid="uid://bxws353d0cbt3" path="res://Sprites/Icons/metal.png" id="7_86jvy"]
 [ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="10_wb8r5"]
 [ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
 [ext_resource type="Texture2D" uid="uid://dai4ysitmliuc" path="res://Sprites/Buttons/add-prod-button-pressed.png" id="11_2akyy"]
 [ext_resource type="Texture2D" uid="uid://b0f16do1diy35" path="res://Sprites/Buttons/add-prod-button-hover.png" id="12_7ypcg"]
@@ -176,8 +177,11 @@ offset_top = -26.0
 offset_right = 82.0
 offset_bottom = -3.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_wb8r5")
+theme_override_font_sizes/font_size = 8
 text = "0/0"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="BuildProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1

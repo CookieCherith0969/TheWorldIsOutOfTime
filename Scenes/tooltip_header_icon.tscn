@@ -2,25 +2,23 @@
 
 [ext_resource type="Script" path="res://Scripts/tooltip_header_icon.gd" id="1_li8jd"]
 [ext_resource type="Texture2D" uid="uid://cjdq7kllg5mx6" path="res://Sprites/Icons/hammer.png" id="2_4entj"]
-
-[sub_resource type="SystemFont" id="SystemFont_1cd4b"]
-font_names = PackedStringArray("Cascadia Mono")
-font_weight = 975
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="2_jo1at"]
 
 [node name="TooltipHeaderIcon" type="HBoxContainer"]
-offset_right = 114.0
+offset_right = 58.0
 offset_bottom = 49.0
 script = ExtResource("1_li8jd")
 
 [node name="HeaderLabel" type="Label" parent="."]
-custom_minimum_size = Vector2(56, 23)
+custom_minimum_size = Vector2(40, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.295866, 0.295867, 0.295866, 1)
-theme_override_fonts/font = SubResource("SystemFont_1cd4b")
-theme_override_font_sizes/font_size = 16
-text = "Enriched Uranium"
+theme_override_fonts/font = ExtResource("2_jo1at")
+theme_override_font_sizes/font_size = 8
+text = "STONE"
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="HeaderIcon" type="TextureRect" parent="."]

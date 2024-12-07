@@ -50,10 +50,10 @@ launch_button = NodePath("LaunchButton")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 277.0
-offset_bottom = 37.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 268.0
+offset_bottom = 28.0
 
 [node name="NormalTimeControl" parent="." instance=ExtResource("3_4sqxc")]
 layout_mode = 0

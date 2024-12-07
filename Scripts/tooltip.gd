@@ -17,6 +17,8 @@ var time_icon : Texture
 var build_icon : Texture
 @export
 var lock_icon : Texture
+@export
+var rocket_icon : Texture
 
 @export
 var increase_icon : Texture
@@ -55,9 +57,24 @@ func populate_costs(materials : Array[GameManager.Materials], amounts : Array[in
 	add_icons_from_material_amounts(materials, amounts)
 
 func populate_rates(rate_material : GameManager.Materials):
-	add_icon_amount(increase_icon, GameManager.get_prev_day_increase(rate_material), "%s /d")
-	add_icon_amount(decrease_icon, GameManager.get_prev_day_decrease(rate_material), "%s /d")
-	add_icon_amount(change_icon, GameManager.get_prev_day_change(rate_material), "%s /d")
+	var increase_format : String = "%s/d"
+	var decrease_format : String = "%s/d"
+	var change_format : String = "%s/d"
+	
+	var increase : int = GameManager.get_prev_day_increase(rate_material)
+	var decrease : int = GameManager.get_prev_day_decrease(rate_material)
+	var change : int = GameManager.get_prev_day_change(rate_material)
+	
+	if increase > 0:
+		increase_format = "+%s/d"
+	if decrease > 0:
+		decrease_format = "+%s/d"
+	if change > 0:
+		change_format = "+%s/d"
+	
+	add_icon_amount(increase_icon, increase, increase_format)
+	add_icon_amount(decrease_icon, decrease, decrease_format)
+	add_icon_amount(change_icon, change, change_format)
 
 func add_build_header():
 	add_header_icon(build_icon)
@@ -67,6 +84,9 @@ func add_unlock_header():
 
 func add_material_header(header_material : GameManager.Materials):
 	add_header_icon(GameManager.get_material_icon(header_material), GameManager.get_material_name(header_material))
+
+func add_rocket_header():
+	add_header_icon(rocket_icon, "Rocket")
 
 func add_time_cost(amount : int):
 	add_icon_amount(time_icon, amount)

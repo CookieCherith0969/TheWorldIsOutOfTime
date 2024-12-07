@@ -37,13 +37,13 @@ func update_button():
 		disabled = true
 
 func _on_mouse_entered() -> void:
-	UIManager.show_build_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
+	UIManager.show_rocket_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
 
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
-	UIManager.show_build_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
+	UIManager.show_rocket_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
 
 func _on_focus_exited() -> void:
 	UIManager.hide_tooltip()

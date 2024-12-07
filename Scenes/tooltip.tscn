@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://esv3lpa5b5t1"]
+[gd_scene load_steps=12 format=3 uid="uid://esv3lpa5b5t1"]
 
 [ext_resource type="Script" path="res://Scripts/tooltip.gd" id="1_15287"]
 [ext_resource type="PackedScene" uid="uid://7l7r07tjgtu" path="res://Scenes/tooltip_icon_amount.tscn" id="2_3tkas"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://0t52u2y1hbqf" path="res://Sprites/Icons/small-clock.png" id="4_ts8tm"]
 [ext_resource type="Texture2D" uid="uid://cjdq7kllg5mx6" path="res://Sprites/Icons/hammer.png" id="5_a2kyi"]
 [ext_resource type="Texture2D" uid="uid://ckxvifkijmeqa" path="res://Sprites/Icons/small-lock.png" id="6_7sv3s"]
+[ext_resource type="Texture2D" uid="uid://dp13ts6r3eo78" path="res://Sprites/Icons/rocket-part.png" id="7_8lha4"]
 [ext_resource type="Texture2D" uid="uid://dkvs0nyfjxla2" path="res://Sprites/Panels/white-panel-2px-border.png" id="7_mlhkp"]
 [ext_resource type="Texture2D" uid="uid://cmaarwb2xosjp" path="res://Sprites/Placeholder/PlaceholderPlus.png" id="7_xmvpc"]
 [ext_resource type="Texture2D" uid="uid://dhwp1kkhdxuol" path="res://Sprites/Placeholder/PlaceholderMinus.png" id="8_1hhym"]
@@ -13,8 +14,8 @@
 
 [node name="Tooltip" type="MarginContainer"]
 z_index = 10
-offset_right = 84.0
-offset_bottom = 27.0
+offset_right = 76.0
+offset_bottom = 56.0
 mouse_filter = 2
 script = ExtResource("1_15287")
 icon_amount_scene = ExtResource("2_3tkas")
@@ -22,6 +23,7 @@ header_icon_scene = ExtResource("3_4urou")
 time_icon = ExtResource("4_ts8tm")
 build_icon = ExtResource("5_a2kyi")
 lock_icon = ExtResource("6_7sv3s")
+rocket_icon = ExtResource("7_8lha4")
 increase_icon = ExtResource("7_xmvpc")
 decrease_icon = ExtResource("8_1hhym")
 change_icon = ExtResource("9_cqldc")
@@ -45,6 +47,13 @@ theme_override_constants/margin_bottom = 4
 [node name="IconList" type="VBoxContainer" parent="InnerMargin"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 2
 
 [node name="TooltipHeaderIcon" parent="InnerMargin/IconList" instance=ExtResource("3_4urou")]
+layout_mode = 2
+
+[node name="TooltipIconAmount" parent="InnerMargin/IconList" instance=ExtResource("2_3tkas")]
+layout_mode = 2
+
+[node name="TooltipIconAmount2" parent="InnerMargin/IconList" instance=ExtResource("2_3tkas")]
 layout_mode = 2

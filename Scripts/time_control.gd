@@ -26,12 +26,14 @@ func _ready() -> void:
 
 func on_timeskip_started(_num_days):
 	update_buttons()
+	update_label()
 
 func on_timeskip_ended():
 	update_buttons()
 	update_label()
 
 func on_day_ended():
+	update_buttons()
 	update_label()
 
 func _on_halve_button_pressed() -> void:

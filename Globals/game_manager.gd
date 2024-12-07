@@ -37,7 +37,7 @@ var material_icons : Array[Texture] = []
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
 
-const starting_days : int = 365*9
+const starting_days : int = 24#365*9
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -61,6 +61,7 @@ var material_amounts : Array[int] = []
 var prev_day_changes : Array[int] = []
 var prev_day_increases : Array[int] = []
 var prev_day_decreases : Array[int] = []
+var lifetime_increases : Array[int] = []
 
 @export
 var starting_factory_names : Array[StringName]
@@ -130,6 +131,7 @@ func _ready() -> void:
 		prev_day_changes.append(0)
 		prev_day_increases.append(0)
 		prev_day_decreases.append(0)
+		lifetime_increases.append(0)
 	
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
@@ -164,7 +166,9 @@ func _physics_process(delta: float) -> void:
 		timeskip_days -= 1
 		if !screensaver_mode:
 			update_speed_multiplier()
-		
+	
+	if days_left <= 0:
+		collide_asteroid()
 	
 	if timeskip_days <= 0:
 		elapsed_timeskip_time = 0.0
@@ -172,8 +176,7 @@ func _physics_process(delta: float) -> void:
 		last_day_time = 0.0
 		timeskip_ended.emit()
 	
-	if days_left <= 0:
-		collide_asteroid()
+	
 
 func collide_asteroid():
 	game_over = true
@@ -308,6 +311,7 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 			else:
 				prev_day_decreases[materials[i]] += total
 			prev_day_changes[materials[i]] += total
+			lifetime_increases[materials[i]] += total
 		
 	materials_updated.emit()
 

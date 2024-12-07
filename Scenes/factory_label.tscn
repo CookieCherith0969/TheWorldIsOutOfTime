@@ -1,8 +1,13 @@
-[gd_scene format=3 uid="uid://n01k6less0tr"]
+[gd_scene load_steps=2 format=3 uid="uid://n01k6less0tr"]
+
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="1_13r1l"]
 
 [node name="FactoryLabel" type="Label"]
 custom_minimum_size = Vector2(16, 0)
 offset_right = 1.0
 offset_bottom = 23.0
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_13r1l")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
+vertical_alignment = 2

@@ -54,13 +54,13 @@ func _ready() -> void:
 	update_focus_neighbours()
 
 func setup_focus_neighbours():
-	small_map.focus_neighbor_left = material_next.get_path()
+	small_map.focus_neighbor_left = time_control.timeskip_button.get_path()
 	time_control.timeskip_button.focus_neighbor_right = small_map.get_path()
-	material_prev.focus_neighbor_top = launch_button.get_path()
-	material_next.focus_neighbor_top = time_control.timeskip_button.get_path()
-	time_control.halve_button.focus_neighbor_bottom = material_prev.get_path()
-	time_control.double_button.focus_neighbor_bottom = material_next.get_path()
-	time_control.timeskip_button.focus_neighbor_bottom = material_next.get_path()
+	#material_prev.focus_neighbor_top = launch_button.get_path()
+	#material_next.focus_neighbor_top = time_control.timeskip_button.get_path()
+	#time_control.halve_button.focus_neighbor_bottom = material_prev.get_path()
+	#time_control.double_button.focus_neighbor_bottom = material_next.get_path()
+	#time_control.timeskip_button.focus_neighbor_bottom = material_next.get_path()
 	
 	minimise_button.focus_neighbor_left = large_time_control.timeskip_button.get_path()
 	large_time_control.halve_button.focus_neighbor_bottom = minimise_button.get_path()

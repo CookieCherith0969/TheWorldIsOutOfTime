@@ -29,34 +29,51 @@ patch_margin_bottom = 2
 
 [node name="InnerMargin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
+theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 22
 
 [node name="MaterialGrid" type="GridContainer" parent="InnerMargin"]
 layout_mode = 2
-theme_override_constants/h_separation = 3
-theme_override_constants/v_separation = 3
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 12
 columns = 3
 
 [node name="MaterialCounter" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_right = NodePath("../MaterialCounter2")
+focus_neighbor_bottom = NodePath("../MaterialCounter4")
 
 [node name="MaterialCounter2" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../MaterialCounter")
+focus_neighbor_right = NodePath("../MaterialCounter3")
+focus_neighbor_bottom = NodePath("../MaterialCounter5")
 
 [node name="MaterialCounter3" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../MaterialCounter2")
+focus_neighbor_bottom = NodePath("../MaterialCounter6")
 
 [node name="MaterialCounter4" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MaterialCounter")
+focus_neighbor_right = NodePath("../MaterialCounter5")
+focus_neighbor_bottom = NodePath("../../../PrevButton")
 
 [node name="MaterialCounter5" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../MaterialCounter4")
+focus_neighbor_top = NodePath("../MaterialCounter2")
+focus_neighbor_right = NodePath("../MaterialCounter6")
+focus_neighbor_bottom = NodePath("../../../PrevButton")
 
 [node name="MaterialCounter6" parent="InnerMargin/MaterialGrid" instance=ExtResource("2_fbetd")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../MaterialCounter5")
+focus_neighbor_top = NodePath("../MaterialCounter3")
+focus_neighbor_bottom = NodePath("../../../NextButton")
 
 [node name="PrevButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(24, 24)

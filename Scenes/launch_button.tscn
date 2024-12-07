@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/launch_button.gd" id="6_dxw5t"]
 
 [node name="LaunchButton" type="TextureButton"]
-offset_right = 130.0
+offset_right = 128.0
 offset_bottom = 28.0
 disabled = true
 texture_normal = ExtResource("1_bcsu1")
@@ -21,7 +21,7 @@ rocket_materials = Array[int]([9, 8, 12])
 rocket_amounts = Array[int]([50, 30, 1])
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
-position = Vector2(130, 0)
+position = Vector2(128, 0)
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

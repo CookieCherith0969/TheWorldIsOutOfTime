@@ -9,14 +9,16 @@ var hide_gain : bool = false
 var empty : bool = false
 
 @onready
-var icon : TextureRect = $Icon
+var icon : TextureRect = $InnerMargin/Icon
 @onready
-var amount_label : Label = $AmountLabel
+var amount_label : Label = $InnerMargin/AmountLabel
 @onready
-var gain_label : Label = $GainLabel
+var gain_label : Label = $InnerMargin/GainLabel
 
 @onready
 var tooltip_marker : Marker2D = $TooltipMarker
+@onready
+var focus : NinePatchRect = $OuterMargin/Focus
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +34,11 @@ func on_materials_updated():
 
 func update_labels():
 	amount_label.text = UIManager.simplify_number(GameManager.get_material_amount(represented_material))
-	gain_label.text = UIManager.simplify_number(GameManager.get_prev_day_change(represented_material))+" /d"
+	var prefix : String = ""
+	var change : int = GameManager.get_prev_day_change(represented_material)
+	if change > 0:
+		prefix = "+"
+	gain_label.text = prefix+UIManager.simplify_number(change)+"/d"
 
 func set_rep_material(new_material):
 	represented_material = new_material
@@ -63,10 +69,12 @@ func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
+	focus.show()
 	if empty:
 		return
 	
 	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
 
 func _on_focus_exited() -> void:
+	focus.hide()
 	UIManager.hide_tooltip()

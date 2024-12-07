@@ -1,7 +1,8 @@
 extends MarginContainer
 class_name TimeCounter
 
-var text_template : String = "[fill]%02d[font_size=16] Years [/font_size]%02d[font_size=16] Months [/font_size]%02d[font_size=16] Days [/font_size]"
+@export_multiline
+var text_template : String = "%0d[font_size=8] Years [/font_size]%d[font_size=8] Months [/font_size]%d[font_size=8] Days [/font_size]"
 
 @onready
 var time_label : RichTextLabel = $InnerMargin/TimeLabel

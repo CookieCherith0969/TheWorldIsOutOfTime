@@ -46,8 +46,6 @@ func populate_factories():
 			factory_counter.set_empty()
 			continue
 		
-		print(factory_index)
-		print(GameManager.factories[factory_index].factory_name)
 		factory_counter.set_rep_factory(GameManager.factories[factory_index])
 
 func update_buttons():

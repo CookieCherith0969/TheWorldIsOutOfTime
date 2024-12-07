@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5w4ww0w8kvcd"]
+[gd_scene load_steps=14 format=3 uid="uid://c5w4ww0w8kvcd"]
 
 [ext_resource type="Script" path="res://Globals/ui_manager.gd" id="1_g5gy1"]
 [ext_resource type="PackedScene" uid="uid://deeyw2hrbotgb" path="res://Scenes/Screens/title_screen.tscn" id="2_jbj66"]
@@ -12,8 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://dxu0ov0t6m3um" path="res://Sprites/Placeholder/PlaceholderCursor5.png" id="10_joqiy"]
 [ext_resource type="Texture2D" uid="uid://rrkcr7dcgm0w" path="res://Sprites/Placeholder/PlaceholderCursor6.png" id="11_nrjmk"]
 [ext_resource type="Texture2D" uid="uid://c14je4ikkj01m" path="res://Sprites/Placeholder/PlaceholderCursor7.png" id="12_ysk3w"]
+[ext_resource type="Script" path="res://Scripts/fade_component.gd" id="13_w3olf"]
 
-[node name="UIManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("tooltip")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_g5gy1")
 tooltip = NodePath("Tooltip")
 screen_scenes = Array[PackedScene]([ExtResource("2_jbj66"), ExtResource("3_khrr2")])
@@ -21,3 +29,7 @@ cursor_frames = Array[Texture]([ExtResource("5_bi4nc"), ExtResource("6_7wl1l"), 
 
 [node name="Tooltip" parent="." instance=ExtResource("3_m5j15")]
 visible = false
+layout_mode = 0
+
+[node name="FadeComponent" type="Node" parent="."]
+script = ExtResource("13_w3olf")

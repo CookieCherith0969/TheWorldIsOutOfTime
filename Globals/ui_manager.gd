@@ -1,6 +1,11 @@
-extends CanvasLayer
+extends Control
+
+signal faded_in
+signal faded_out
+signal finished_fading
 
 enum Screens {TITLE, GAME}
+enum FadeState {IDLE, FADING_IN, FADING_OUT}
 
 @export
 var current_screen_type : Screens = Screens.TITLE
@@ -28,10 +33,15 @@ var cursor_frame : int = 0
 @export
 var cursor_frames : Array[Texture]
 
+@export
+var fade_time : float = 2.0
+@onready
+var fade_component : FadeComponent = $FadeComponent
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_window().min_size = get_viewport().size
-	make_new_screen()
+	make_new_screen(false)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugReset"):
@@ -100,6 +110,13 @@ func show_material_tooltip(pos : Vector2i, represented_material : GameManager.Ma
 	tooltip.populate_rates(represented_material)
 	tooltip.show_tooltip()
 
+func show_rocket_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int]):
+	tooltip.position = pos
+	tooltip.clear_icons()
+	tooltip.add_rocket_header()
+	tooltip.populate_costs(materials, amounts)
+	tooltip.show_tooltip()
+
 func hide_tooltip():
 	tooltip.hide_tooltip()
 
@@ -108,7 +125,12 @@ func fade_tooltip():
 
 
 
-func make_new_screen():
+func make_new_screen(fade : bool = true):
+	if fade:
+		print_debug("Fading")
+		fade_out(fade_time)
+		await fade_component.fade_out_finished
+	
 	if is_instance_valid(current_screen):
 		remove_child(current_screen)
 		current_screen.queue_free()
@@ -125,3 +147,12 @@ func make_new_screen():
 	var new_screen = screen_scenes[current_screen_type].instantiate()
 	add_child(new_screen)
 	current_screen = new_screen
+	
+	if fade:
+		fade_in(fade_time)
+
+func fade_out(time : float):
+	fade_component.fade_out(time)
+
+func fade_in(time : float):
+	fade_component.fade_in(time)

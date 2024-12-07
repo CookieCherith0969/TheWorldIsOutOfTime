@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbj8x7k48jrb5"]
+[gd_scene load_steps=4 format=3 uid="uid://cbj8x7k48jrb5"]
 
 [ext_resource type="Script" path="res://Scripts/time_label.gd" id="1_ccv85"]
 [ext_resource type="Texture2D" uid="uid://dkvs0nyfjxla2" path="res://Sprites/Panels/white-panel-2px-border.png" id="2_ju5jq"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="3_aouag"]
 
 [node name="TimeCounter" type="MarginContainer"]
 offset_left = 8.0
 offset_top = -130.0
-offset_right = 282.0
-offset_bottom = -96.0
+offset_right = 272.0
+offset_bottom = -106.0
 script = ExtResource("1_ccv85")
+text_template = "[fill]%02d[font_size=8] Years [/font_size]%02d[font_size=8] Months [/font_size]%02d[font_size=8] Days[/font_size]"
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -20,16 +22,18 @@ patch_margin_bottom = 2
 
 [node name="InnerMargin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = -8
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="TimeLabel" type="RichTextLabel" parent="InnerMargin"]
-custom_minimum_size = Vector2(270, 40)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
+theme_override_colors/default_color = Color(0.295866, 0.295867, 0.295866, 1)
+theme_override_fonts/normal_font = ExtResource("3_aouag")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[fill]02[font_size=16] Years [/font_size]09[font_size=16] Months [/font_size]11[font_size=16] Days [/font_size]"
+text = "02[font_size=8] Years [/font_size]09[font_size=8] Months [/font_size]11[font_size=8] Days[/font_size]"
+fit_content = true
 scroll_active = false
 autowrap_mode = 0

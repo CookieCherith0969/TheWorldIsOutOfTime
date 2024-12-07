@@ -4,18 +4,18 @@
 
 [resource]
 script = ExtResource("1_5y5hv")
-factory_name = &"NuclearEnricher"
+factory_name = &"EnrichedUranium"
 sort_priority = 110
 start_amount = 0
-output_on_build = false
+output_on_build = true
 input_materials = Array[int]([10])
-inputs_per_day = Array[int]([1000])
+inputs_per_day = Array[int]([0])
 output_materials = Array[int]([11])
 outputs_per_day = Array[int]([2])
 build_days = 32
-build_materials = Array[int]([2, 13])
-build_amounts = Array[int]([2000, 1000])
+build_materials = Array[int]([10])
+build_amounts = Array[int]([1000])
 research_materials = Array[int]([10])
 research_amounts = Array[int]([2000])
-hide_material_amounts = false
-keep_zero_factory_active_amount = false
+hide_material_amounts = true
+keep_zero_factory_active_amount = true
