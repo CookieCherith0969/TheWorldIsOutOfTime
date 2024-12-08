@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=51 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://sn3xn4lu5idc" path="res://Sprites/Placeholder/PlaceholderHidePressed.png" id="17_uywws"]
 [ext_resource type="Texture2D" uid="uid://bht8ve2bl7egx" path="res://Sprites/Placeholder/PlaceholderHideHoverOpen.png" id="18_xpuh5"]
 [ext_resource type="Texture2D" uid="uid://lqntwjndb75i" path="res://Sprites/Placeholder/PlaceholderHideFocus.png" id="19_gdf8v"]
+[ext_resource type="PackedScene" uid="uid://bmhqcdla8tfxq" path="res://Scenes/bobbing_component.tscn" id="20_5bwx1"]
 [ext_resource type="Texture2D" uid="uid://xa2ir7ymytr0" path="res://Sprites/Placeholder/PlaceholderFastNormalT.png" id="20_hyr5r"]
 [ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="21_b6cxi"]
 [ext_resource type="Texture2D" uid="uid://cyl5x8lwb62xc" path="res://Sprites/Buttons/play-button-normal.png" id="21_h110y"]
@@ -36,8 +37,42 @@
 [ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="37_ieih4"]
+[ext_resource type="Texture2D" uid="uid://d30f8ofddp7gm" path="res://Sprites/Placeholder/PlaceholderSlideGrabberDisabled.png" id="37_pv5e0"]
+[ext_resource type="Texture2D" uid="uid://cnxn358w5568f" path="res://Sprites/Placeholder/PlaceholderSlideGrabberHighlighted.png" id="38_2djdh"]
+[ext_resource type="Texture2D" uid="uid://diclbprv1curb" path="res://Sprites/Placeholder/PlaceholderSlideGrabberNormal.png" id="39_pw6tx"]
+[ext_resource type="Texture2D" uid="uid://gcu564pkd7yh" path="res://Sprites/Placeholder/PlaceholderFullscreenNormal.png" id="40_8a75j"]
+[ext_resource type="Script" path="res://Scripts/volume_slider.gd" id="40_d8j5p"]
+[ext_resource type="Texture2D" uid="uid://dhqqo663g4aov" path="res://Sprites/Placeholder/PlaceholderFullscreenPressed.png" id="41_xiv7p"]
+[ext_resource type="Texture2D" uid="uid://clus4ymiqx4xj" path="res://Sprites/Placeholder/PlaceholderFullscreenHover.png" id="42_gfxev"]
+[ext_resource type="Script" path="res://Scripts/texture_button.gd" id="44_flenv"]
+[ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc5sd"]
+content_margin_left = 0.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+content_margin_bottom = 6.0
+bg_color = Color(0.635294, 0.682353, 0.733333, 1)
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.87451, 0.878431, 0.886275, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3imni"]
+bg_color = Color(0.137255, 0.709804, 0.827451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.87451, 0.878431, 0.886275, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xkkh"]
+bg_color = Color(0.137255, 0.709804, 0.827451, 1)
+corner_detail = 1
+
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,6 +89,9 @@ hide_normal_closed = ExtResource("4_g1cr4")
 hide_hover_closed = ExtResource("5_kigbf")
 planet_slider = NodePath("PlanetSlider")
 menu_slider = NodePath("MenuSlider")
+settings_slider = NodePath("SettingsSlider")
+settings_title_slider = NodePath("SettingsTitleSlider")
+settings_menu_slider = NodePath("SettingsMenuSlider")
 
 [node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
 z_index = -2
@@ -66,8 +104,23 @@ targets = [NodePath("../Planets")]
 slide_target_pos = Vector2(0, -100)
 
 [node name="MenuSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
-targets = [NodePath("../Title"), NodePath("../MenuBox")]
+targets = [NodePath("../Title"), NodePath("../MenuBox"), NodePath("../SettingsBox")]
 slide_target_pos = Vector2(0, -300)
+
+[node name="SettingsMenuSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../MenuBox")]
+slide_target_pos = Vector2(0, 50)
+
+[node name="SettingsTitleSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../Title")]
+slide_target_pos = Vector2(0, -300)
+
+[node name="SettingsSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../SettingsBox")]
+slide_target_pos = Vector2(0, 300)
 
 [node name="Planets" type="Node2D" parent="."]
 z_index = -2
@@ -152,6 +205,7 @@ map_offset = Vector2(0, 90)
 map_scale = Vector2(2.5, 2.5)
 
 [node name="Title" type="TextureRect" parent="."]
+z_index = 2
 layout_mode = 0
 offset_top = -13.0
 offset_right = 500.0
@@ -159,27 +213,27 @@ offset_bottom = 187.0
 texture = ExtResource("14_x72yw")
 stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="Title"]
-script = ExtResource("21_b6cxi")
+[node name="BobbingComponent" parent="Title" instance=ExtResource("20_5bwx1")]
 
 [node name="HourHand" type="Line2D" parent="Title"]
-position = Vector2(116, 139)
+position = Vector2(114, 139)
 points = PackedVector2Array(0, 0, 0, -18)
 width = 6.0
-default_color = Color(0.36, 0.36, 0.36, 1)
+default_color = Color(0.635294, 0.682353, 0.733333, 1)
 texture_mode = 2
 
 [node name="MinuteHand" type="Line2D" parent="Title"]
-position = Vector2(116, 139)
+position = Vector2(114, 139)
 points = PackedVector2Array(0, 0, 0, -24)
 width = 4.0
+default_color = Color(0.87451, 0.878431, 0.886275, 1)
 texture_mode = 2
 
 [node name="SecondHand" type="Line2D" parent="Title"]
-position = Vector2(116, 139)
+position = Vector2(114, 139)
 points = PackedVector2Array(0, 0, 0, -30)
 width = 2.0
-default_color = Color(1, 0, 0, 1)
+default_color = Color(0.137255, 0.709804, 0.827451, 1)
 texture_mode = 2
 
 [node name="MenuBox" type="HBoxContainer" parent="."]
@@ -202,12 +256,11 @@ size_flags_horizontal = 3
 texture_normal = ExtResource("21_h110y")
 texture_pressed = ExtResource("22_jl0xb")
 texture_hover = ExtResource("23_1cf2x")
-texture_disabled = ExtResource("21_h110y")
+texture_disabled = ExtResource("22_jl0xb")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="MenuBox/PlayButton"]
-script = ExtResource("21_b6cxi")
+[node name="BobbingComponent2" parent="MenuBox/PlayButton" instance=ExtResource("20_5bwx1")]
 bobbing_height = 4.0
 bob_offset = -0.7854
 
@@ -217,12 +270,11 @@ size_flags_horizontal = 3
 texture_normal = ExtResource("25_ljxs3")
 texture_pressed = ExtResource("26_tjyli")
 texture_hover = ExtResource("27_ev750")
-texture_disabled = ExtResource("25_ljxs3")
+texture_disabled = ExtResource("26_tjyli")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="MenuBox/SettingsButton"]
-script = ExtResource("21_b6cxi")
+[node name="BobbingComponent2" parent="MenuBox/SettingsButton" instance=ExtResource("20_5bwx1")]
 bobbing_height = 4.0
 bob_offset = -1.5708
 
@@ -232,12 +284,11 @@ size_flags_horizontal = 3
 texture_normal = ExtResource("28_3h5m7")
 texture_pressed = ExtResource("29_gjw76")
 texture_hover = ExtResource("30_51570")
-texture_disabled = ExtResource("28_3h5m7")
+texture_disabled = ExtResource("29_gjw76")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 
-[node name="BobbingComponent" type="Node" parent="MenuBox/ExitButton"]
-script = ExtResource("21_b6cxi")
+[node name="BobbingComponent2" parent="MenuBox/ExitButton" instance=ExtResource("20_5bwx1")]
 bobbing_height = 4.0
 bob_offset = -2.3562
 
@@ -305,6 +356,91 @@ layout_mode = 1
 fade_color = Color(0, 0, 0, 0)
 active = false
 
+[node name="SettingsBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = -280.0
+offset_right = 151.0
+offset_bottom = -72.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Music"
+
+[node name="Label3" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Effects"
+
+[node name="EffectSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Effects"
+
+[node name="FullscreenButton" type="TextureButton" parent="SettingsBox"]
+layout_mode = 2
+texture_normal = ExtResource("40_8a75j")
+texture_pressed = ExtResource("41_xiv7p")
+texture_hover = ExtResource("42_gfxev")
+texture_disabled = ExtResource("41_xiv7p")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+script = ExtResource("44_flenv")
+
+[node name="BobbingComponent" type="Node" parent="SettingsBox"]
+script = ExtResource("21_b6cxi")
+bobbing_height = 2.0
+
 [connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -317,3 +453,4 @@ active = false
 [connection signal="focus_entered" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
 [connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
 [connection signal="pressed" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]

@@ -10,6 +10,8 @@ signal materials_updated
 signal asteroid_collided
 signal rocket_launched
 
+enum GameState {MENU, GAME, END_SURVIVAL, END_DESTRUCTION}
+
 enum Materials {
 	STONE,
 	WATER,
@@ -37,7 +39,7 @@ var material_icons : Array[Texture] = []
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
 
-const starting_days : int = 365*9
+const starting_days : int = 10#365*9
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -64,10 +66,6 @@ var prev_day_decreases : Array[int] = []
 var lifetime_increases : Array[int] = []
 var predicted_changes : Array[int] = []
 
-@export
-var starting_factory_names : Array[StringName]
-@export
-var starting_factory_amounts : Array[int]
 var factories : Array[FactoryInfo] = []
 
 #var total_factory_amounts : Array[int] = []
@@ -81,14 +79,13 @@ var elapsed_timeskip_time : float = 0.0
 var elapsed_timeskip_days : int = 0
 var last_day_time : float = 0.0
 
-var screensaver_mode : bool = false
 const base_speed_multiplier : float = 1.0
 var day_speed_multiplier : float = base_speed_multiplier
 const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
-var game_over : bool = false
+var game_state : GameState = GameState.MENU
 
 func factory_sort(a : FactoryInfo, b : FactoryInfo):
 	assert(a.sort_priority != b.sort_priority)
@@ -109,6 +106,11 @@ func _ready() -> void:
 	
 	factories.sort_custom(factory_sort)
 	
+	setup_game()
+
+func setup_game():
+	days_left = starting_days
+	timeskip_days = 0
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
 		active_factory_amounts.append(0)
@@ -121,10 +123,6 @@ func _ready() -> void:
 		
 		if factories[i].start_amount > 0:
 			active_factory_amounts[i] = factories[i].start_amount
-		#if factories[i].factory_name in starting_factory_names:
-		#	var index = starting_factory_names.find(factories[i].factory_name)
-		#	active_factory_amounts[i] = starting_factory_amounts[index]
-		#	unlocked_factories[index] = true
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
@@ -141,20 +139,20 @@ func _ready() -> void:
 	materials_updated.emit()
 
 func _physics_process(delta: float) -> void:
-	if screensaver_mode:
+	if game_state == GameState.MENU:
 		timeskip_days = 365
 		if screensaver_speed_multiplier == 0:
 			return
 	if timeskip_days <= 0:
 		return
-	if game_over:
+	if game_state > GameState.GAME:
 		return
 	
 	elapsed_timeskip_time += delta
 	
 	var effective_day_length = day_length
 	effective_day_length /= day_speed_multiplier
-	if screensaver_mode:
+	if game_state == GameState.MENU:
 		effective_day_length /= screensaver_speed_multiplier
 	
 	while elapsed_timeskip_time - last_day_time >= effective_day_length && timeskip_days > 0:
@@ -166,7 +164,7 @@ func _physics_process(delta: float) -> void:
 		
 		elapsed_timeskip_days += 1
 		timeskip_days -= 1
-		if !screensaver_mode:
+		if game_state == GameState.GAME:
 			update_speed_multiplier()
 	
 	if days_left <= 0:
@@ -179,12 +177,14 @@ func _physics_process(delta: float) -> void:
 		timeskip_ended.emit()
 
 func collide_asteroid():
-	game_over = true
-	asteroid_collided.emit()
+	game_state = GameState.END_DESTRUCTION
+	UIManager.current_screen_type = UIManager.Screens.END
+	UIManager.make_new_screen()
 
 func launch_rocket():
-	game_over = true
-	rocket_launched.emit()
+	game_state = GameState.END_SURVIVAL
+	UIManager.current_screen_type = UIManager.Screens.END
+	UIManager.make_new_screen()
 
 func update_predicted_changes():
 	predicted_changes.fill(0)
@@ -384,7 +384,7 @@ func process_days(number_of_days : int):
 		timeskip_started.emit(number_of_days)
 
 func process_day():
-	if screensaver_mode:
+	if game_state != GameState.GAME:
 		return
 	
 	prev_day_changes.fill(0)
@@ -530,3 +530,6 @@ func unlock_factory(factory_index : int) -> bool:
 
 func _on_factory_amount_updated(factory: FactoryInfo) -> void:
 	update_predicted_changes()
+
+func reset_game():
+	setup_game()

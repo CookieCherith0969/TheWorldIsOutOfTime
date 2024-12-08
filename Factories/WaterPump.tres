@@ -6,7 +6,7 @@
 script = ExtResource("1_l1la5")
 factory_name = &"Water Pump"
 sort_priority = 10
-start_amount = 1
+start_amount = 2
 output_on_build = false
 input_materials = Array[int]([])
 inputs_per_day = Array[int]([])

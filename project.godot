@@ -18,6 +18,7 @@ config/windows_native_icon="res://game_icon.ico"
 
 [autoload]
 
+SettingsManager="*res://Scripts/settings_manager.gd"
 SoundManager="*res://Globals/sound_manager.tscn"
 GameManager="*res://Globals/game_manager.tscn"
 UIManager="*res://Globals/ui_manager.tscn"

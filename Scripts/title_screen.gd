@@ -47,11 +47,15 @@ var menu_box : HBoxContainer = $MenuBox
 @onready
 var control_box : HBoxContainer = $ControlBox
 @onready
+var settings_box : VBoxContainer = $SettingsBox
+@onready
 var slow_button : TextureButton = $ControlBox/SlowButton
 @onready
 var fast_button : TextureButton = $ControlBox/FastButton
 @onready
 var play_button : TextureButton = $MenuBox/PlayButton
+@onready
+var settings_button : TextureButton = $MenuBox/SettingsButton
 @onready
 var exit_button : TextureButton = $MenuBox/ExitButton
 
@@ -61,6 +65,15 @@ const max_speed : int = 16
 var planet_slider : SlideManager
 @export
 var menu_slider : SlideManager
+
+@export
+var settings_slider : SlideManager
+@export
+var settings_title_slider : SlideManager
+@export
+var settings_menu_slider : SlideManager
+
+var settings_hidden : bool = true
 
 func _ready():
 	play_button.grab_focus()
@@ -209,11 +222,59 @@ func _on_fast_button_pressed() -> void:
 	slow_button.disabled = false
 
 func _on_play_button_pressed() -> void:
-	UIManager.current_screen_type = UIManager.Screens.GAME
-	UIManager.make_new_screen()
+	UIManager.move_to_screen(UIManager.Screens.GAME)
 
 func _on_settings_button_pressed() -> void:
-	pass # Replace with function body.
+	settings_hidden = !settings_hidden
+	if settings_hidden:
+		hide_settings()
+		SettingsManager.save_settings()
+	else:
+		show_settings()
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+func hide_settings():
+	settings_button.disabled = true
+	hide_button.disabled = true
+	for child in settings_box.get_children():
+		if child is Slider:
+			child.editable = false
+		elif child is TextureButton:
+			child.disabled = true
+	
+	settings_slider.slide_backward()
+	settings_menu_slider.slide_backward()
+	settings_title_slider.slide_backward()
+	await settings_slider.backward_complete
+	
+	settings_button.disabled = false
+	hide_button.disabled = false
+	for child in settings_box.get_children():
+		if child is Slider:
+			child.editable = true
+		elif child is TextureButton:
+			child.disabled = false
+
+func show_settings():
+	settings_button.disabled = true
+	hide_button.disabled = true
+	for child in settings_box.get_children():
+		if child is Slider:
+			child.editable = false
+		elif child is TextureButton:
+			child.disabled = true
+			
+	settings_slider.slide_forward()
+	settings_menu_slider.slide_forward()
+	settings_title_slider.slide_forward()
+	await settings_slider.forward_complete
+	
+	settings_button.disabled = false
+	hide_button.disabled = false
+	for child in settings_box.get_children():
+		if child is Slider:
+			child.editable = true
+		elif child is TextureButton:
+			child.disabled = false

@@ -27,7 +27,7 @@ func update_button():
 	if GameManager.is_timeskipping():
 		disabled = true
 		return
-	if GameManager.game_over:
+	if GameManager.game_state != GameManager.GameState.GAME:
 		disabled = true
 		return
 	

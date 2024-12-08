@@ -184,7 +184,7 @@ func update_buttons():
 		plan_button.disabled = true
 		unlock_button.disabled = true
 		return
-	if GameManager.game_over:
+	if GameManager.game_state != GameManager.GameState.GAME:
 		unplan_button.disabled = true
 		plan_button.disabled = true
 		unlock_button.disabled = true
