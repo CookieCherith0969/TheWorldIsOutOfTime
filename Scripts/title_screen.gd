@@ -156,6 +156,7 @@ func hide_menu():
 	for button in menu_box.get_children():
 		button.focus_mode = Control.FOCUS_NONE
 		button.disabled = true
+	set_settings_disabled(true)
 
 func show_menu():
 	#title.show()
@@ -165,6 +166,7 @@ func show_menu():
 	for button in menu_box.get_children():
 		button.focus_mode = Control.FOCUS_ALL
 		button.disabled = false
+	set_settings_disabled(false)
 
 func show_controls():
 	control_box.show()
@@ -238,11 +240,7 @@ func _on_exit_button_pressed() -> void:
 func hide_settings():
 	settings_button.disabled = true
 	hide_button.disabled = true
-	for child in settings_box.get_children():
-		if child is Slider:
-			child.editable = false
-		elif child is TextureButton:
-			child.disabled = true
+	set_settings_disabled(true)
 	
 	settings_slider.slide_backward()
 	settings_menu_slider.slide_backward()
@@ -251,20 +249,12 @@ func hide_settings():
 	
 	settings_button.disabled = false
 	hide_button.disabled = false
-	for child in settings_box.get_children():
-		if child is Slider:
-			child.editable = true
-		elif child is TextureButton:
-			child.disabled = false
+	set_settings_disabled(false)
 
 func show_settings():
 	settings_button.disabled = true
 	hide_button.disabled = true
-	for child in settings_box.get_children():
-		if child is Slider:
-			child.editable = false
-		elif child is TextureButton:
-			child.disabled = true
+	set_settings_disabled(true)
 			
 	settings_slider.slide_forward()
 	settings_menu_slider.slide_forward()
@@ -273,8 +263,11 @@ func show_settings():
 	
 	settings_button.disabled = false
 	hide_button.disabled = false
+	set_settings_disabled(false)
+
+func set_settings_disabled(disabled : bool):
 	for child in settings_box.get_children():
 		if child is Slider:
-			child.editable = true
+			child.editable = !disabled
 		elif child is TextureButton:
-			child.disabled = false
+			child.disabled = disabled
