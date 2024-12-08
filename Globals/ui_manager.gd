@@ -94,11 +94,7 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	if num == 0:
 		return plus_string + "0"
 	
-	var magnitude : int
-	if abs(num) > 1:
-		magnitude = int(log(abs(num)-1) / log(10))
-	else:
-		magnitude = int(log(abs(num)) / log(10))
+	var magnitude : int = int(log(abs(num)+1) / log(10))
 	var suffix_index = min(magnitude/3, simplification_suffixes.size()-1)
 	
 	var simplified_num : float = num/float(pow(1000,suffix_index))
