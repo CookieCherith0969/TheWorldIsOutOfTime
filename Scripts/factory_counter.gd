@@ -360,3 +360,7 @@ func set_empty():
 	lock_panel.hide()
 	background.texture = locked_background
 	building_wrench.hide()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	pass # Replace with function body.
