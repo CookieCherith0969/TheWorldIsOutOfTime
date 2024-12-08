@@ -133,7 +133,8 @@ func clear_icons():
 
 func show_tooltip():
 	size.x = inner_margin.size.x + inner_margin.get_theme_constant("margin_left") + inner_margin.get_theme_constant("margin_right")
-	size.y = inner_margin.size.y + inner_margin.get_theme_constant("margin_top") + inner_margin.get_theme_constant("margin_bottom")
+	#size.y = inner_margin.size.y + inner_margin.get_theme_constant("margin_top") + inner_margin.get_theme_constant("margin_bottom")
+	size.y = 1
 	show()
 	fading = false
 	modulate = Color(1,1,1,1)

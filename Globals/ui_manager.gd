@@ -151,6 +151,12 @@ func show_rocket_tooltip(pos : Vector2i, materials : Array[GameManager.Materials
 	tooltip.populate_costs(materials, amounts)
 	tooltip.show_tooltip()
 
+func show_time_tooltip(pos : Vector2i):
+	tooltip.position = pos
+	tooltip.clear_icons()
+	tooltip.add_header_icon(tooltip.time_icon, str(GameManager.days_left)+" days")
+	tooltip.show_tooltip()
+
 func hide_tooltip():
 	tooltip.hide_tooltip()
 

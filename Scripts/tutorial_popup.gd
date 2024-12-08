@@ -41,3 +41,11 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_focus_exited() -> void:
 	if visible:
 		grab_focus()
+
+
+func _on_screen_cover_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index < 3 && event.pressed:
+			popup_dismissed.emit()
+	elif event.is_action_pressed("ui_accept"):
+		popup_dismissed.emit()

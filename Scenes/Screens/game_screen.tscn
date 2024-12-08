@@ -79,7 +79,7 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "play_button")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "time_label", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "play_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -100,6 +100,7 @@ material_window = NodePath("MaterialWindow")
 factory_window = NodePath("FactoryWindow")
 minimise_button = NodePath("LargeMap/MinimiseButton")
 launch_button = NodePath("LaunchButton")
+time_label = NodePath("TimeLabel")
 death_asteroid_manager = NodePath("SolarSystemMap/DeathAsteroidManager")
 tutorial_popup = NodePath("TutorialPopup")
 tutorial_elements = [NodePath("CodeWindow"), NodePath("SolarSystemMap"), NodePath("TimeLabel"), NodePath("NormalTimeControl"), NodePath("LaunchButton"), NodePath("MaterialWindow"), NodePath("FactoryWindow"), NodePath("SettingsBox"), NodePath("MenuBox"), NodePath("FactoryWindow"), NodePath("FactoryWindow"), NodePath("FactoryWindow")]
@@ -116,6 +117,11 @@ offset_left = 16.0
 offset_top = 13.0
 offset_right = 280.0
 offset_bottom = 37.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../SolarSystemMap")
+focus_neighbor_bottom = NodePath("../LaunchButton")
+focus_next = NodePath("../LaunchButton")
 
 [node name="NormalTimeControl" parent="." instance=ExtResource("3_4sqxc")]
 layout_mode = 0
@@ -506,6 +512,7 @@ slide_target_pos = Vector2(0, 400)
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]
+[connection signal="gui_input" from="ScreenCover" to="TutorialPopup" method="_on_screen_cover_gui_input"]
 [connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]
 [connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]

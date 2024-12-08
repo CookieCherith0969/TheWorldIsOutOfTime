@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbj8x7k48jrb5"]
+[gd_scene load_steps=6 format=3 uid="uid://cbj8x7k48jrb5"]
 
 [ext_resource type="Script" path="res://Scripts/time_label.gd" id="1_ccv85"]
 [ext_resource type="Texture2D" uid="uid://dkvs0nyfjxla2" path="res://Sprites/Panels/white-panel-2px-border.png" id="2_ju5jq"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="3_aouag"]
+[ext_resource type="Texture2D" uid="uid://cnyb60d88fty0" path="res://Sprites/Placeholder/PlaceholderMaterialFocus.png" id="4_wkuv8"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="5_1h1wa"]
 
-[node name="TimeCounter" type="MarginContainer"]
+[node name="TimeCounter" type="MarginContainer" node_paths=PackedStringArray("tooltip_marker", "focus")]
 offset_left = 8.0
 offset_top = -130.0
 offset_right = 272.0
 offset_bottom = -106.0
+focus_mode = 2
 script = ExtResource("1_ccv85")
 text_template = "[fill]%02d[font_size=8] Years [/font_size]%02d[font_size=8] Months [/font_size]%02d[font_size=8] Days[/font_size]"
+tooltip_marker = NodePath("TooltipMarker")
+focus = NodePath("OuterMargin/Focus")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -37,3 +42,31 @@ text = "02[font_size=8] Years [/font_size]09[font_size=8] Months [/font_size]11[
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="TooltipMarker" type="Marker2D" parent="."]
+position = Vector2(264, 0)
+
+[node name="OuterMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = -2
+theme_override_constants/margin_bottom = -2
+
+[node name="Focus" type="NinePatchRect" parent="OuterMargin"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_wkuv8")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="KeyFocusComponent" type="Node" parent="OuterMargin/Focus"]
+script = ExtResource("5_1h1wa")
+targeted_texture = "texture"
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

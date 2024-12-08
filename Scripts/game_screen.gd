@@ -36,6 +36,9 @@ var minimise_button : TextureButton
 var launch_button : TextureButton
 
 @export
+var time_label : MarginContainer
+
+@export
 var death_asteroid_manager : DeathAsteroidManager
 
 @export
@@ -236,6 +239,10 @@ func on_factory_page_changed():
 	update_focus_neighbours()
 
 func setup_focus_neighbours():
+	time_label.focus_previous = factory_next.get_path()
+	factory_next.focus_next = time_label.get_path()
+	launch_button.focus_next = time_control.halve_button.get_path()
+	time_control.halve_button.focus_previous = launch_button.get_path()
 	small_map.focus_neighbor_left = time_control.timeskip_button.get_path()
 	time_control.timeskip_button.focus_neighbor_right = small_map.get_path()
 	#material_prev.focus_neighbor_top = launch_button.get_path()
