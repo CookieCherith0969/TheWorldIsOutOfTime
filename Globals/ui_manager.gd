@@ -62,14 +62,6 @@ func _ready() -> void:
 	make_new_screen(false)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("DebugReset"):
-		make_new_screen()
-	if event.is_action_pressed("DebugFullscreen"):
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			cursor_frame -= 1
@@ -162,7 +154,10 @@ func make_new_screen(fade : bool = true):
 			Screens.TITLE: 
 				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.MENU)
 			Screens.END:
-				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.AMBIENT)
+				if GameManager.game_state == GameManager.GameState.END_SURVIVAL:
+					SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.EARLY)
+				else:
+					SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.AMBIENT)
 		
 		focus_mode = FOCUS_ALL
 		grab_focus()
@@ -179,6 +174,7 @@ func make_new_screen(fade : bool = true):
 		Screens.GAME:
 			GameManager.game_state = GameManager.GameState.TUTORIAL
 			GameManager.timeskip_days = 0
+			GameManager.reset_game()
 		Screens.TITLE:
 			GameManager.game_state = GameManager.GameState.MENU
 	

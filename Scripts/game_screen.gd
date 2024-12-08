@@ -90,6 +90,20 @@ var tutorial_index : int = 0
 
 @export
 var screen_cover : ColorRect
+@export
+var screen_cover_fader : FadeComponent
+const cover_fade_time : float = 2.0
+const menu_cover_color : Color = Color(0.277,0.277,0.277,0.72)
+
+var menu_shown : bool = false
+@export
+var settings_box : VBoxContainer
+@export
+var menu_box : HBoxContainer
+@export
+var menu_slider : SlideManager
+@export
+var play_button : TextureButton
 
 func _ready() -> void:
 	#small_map.grab_focus()
@@ -116,31 +130,92 @@ func _ready() -> void:
 	GameManager.update_predicted_changes()
 	
 	for child in get_children():
-		child.hide()
+		if child is CanvasItem:
+			child.hide()
 	
 	tutorial_popup.popup_dismissed.connect(on_popup_dismissed)
 	
 	setup_popup.call_deferred()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ToggleMenu"):
+		if tutorial_index < tutorial_texts.size():
+			end_tutorial()
+			return
+		toggle_menu()
+
+func toggle_menu():
+	if screen_cover_fader.fade_state != FadeComponent.FadeState.IDLE:
+		return
+	if menu_slider.slide_state != SlideManager.SlideState.IDLE:
+		return
+	
+	menu_shown = !menu_shown
+	set_menu_disabled(true)
+	if menu_shown:
+		menu_slider.slide_forward()
+		screen_cover.show()
+		screen_cover.color = menu_cover_color
+		screen_cover_fader.fade_in(cover_fade_time)
+	else:
+		small_map.grab_focus()
+		menu_slider.slide_backward()
+		screen_cover_fader.fade_out(cover_fade_time)
+		SettingsManager.save_settings()
+	
+	await menu_slider.slide_complete
+	if menu_shown:
+		set_menu_disabled(false)
+		play_button.grab_focus()
+	else:
+		screen_cover.hide()
+
+func set_menu_disabled(disabled : bool):
+	for child in settings_box.get_children():
+		if child is Control:
+			if disabled:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+		if child is Slider:
+			child.editable = !disabled
+		if child is TextureButton:
+			child.disabled = disabled
+	for child in menu_box.get_children():
+		if child is Control:
+			if disabled:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+		if child is TextureButton:
+			child.disabled = disabled
 
 func setup_popup():
 	tutorial_targets[1] = Vector2i(death_asteroid_manager.death_asteroid.global_position + death_asteroid_manager.warning_offset)
 	show_tutorial_popup(0)
 
 func on_popup_dismissed():
-	print("popup dismissed")
 	tutorial_index += 1
 	if tutorial_index >= tutorial_texts.size():
-		GameManager.game_state = GameManager.GameState.GAME
-		tutorial_popup.hide()
-		small_map.disabled = false
-		small_map.grab_focus()
-		factory_window.prev_page()
-		material_window.prev_page(false)
-		screen_cover.hide()
-		time_control.update_buttons()
+		end_tutorial()
 		return
 	
 	show_tutorial_popup(tutorial_index)
+
+func end_tutorial():
+	tutorial_index = tutorial_texts.size()
+	GameManager.game_state = GameManager.GameState.GAME
+	tutorial_popup.hide()
+	factory_window.prev_page()
+	screen_cover_fader.fade_out(cover_fade_time)
+	for child in tutorial_elements:
+		child.show()
+	await screen_cover_fader.fade_out_finished
+	screen_cover.hide()
+	material_window.prev_page(false)
+	time_control.update_buttons()
+	small_map.grab_focus()
+	small_map.disabled = false
 
 func show_tutorial_popup(index : int):
 	tutorial_popup.show()
@@ -297,3 +372,11 @@ func hide_large_map():
 	launch_button.show()
 	
 	small_map.grab_focus()
+
+func _on_exit_button_pressed() -> void:
+	UIManager.move_to_screen(UIManager.Screens.TITLE)
+	SettingsManager.save_settings()
+
+
+func _on_play_button_pressed() -> void:
+	toggle_menu()

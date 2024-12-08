@@ -30,6 +30,8 @@ func _ready() -> void:
 	fade_out_ui()
 	exit_button.grab_focus()
 	UIManager.set_focus_target(exit_button)
+	texture = null
+	prev_frame_rect.texture = null
 
 func _process(delta: float) -> void:
 	if !playing:

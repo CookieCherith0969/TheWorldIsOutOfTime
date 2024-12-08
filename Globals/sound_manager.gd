@@ -77,7 +77,8 @@ func handle_fading(delta : float):
 	var weight : float = in_out_sine_ease(fade_progress)
 	var new_db : float = lerp(low_db, high_db, weight)
 	
-	AudioServer.set_bus_volume_db(1, new_db)
+	AudioServer.get_bus_effect(1, 0).ceiling_db = new_db
+	#AudioServer.set_bus_volume_db(1, new_db)
 
 func handle_track_changing(delta : float):
 	if !track_changing:

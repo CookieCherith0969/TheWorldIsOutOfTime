@@ -78,7 +78,7 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "play_button")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "exit_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,7 +107,7 @@ screen_cover_fader = NodePath("ScreenCover/ScreenCoverFader")
 settings_box = NodePath("SettingsBox")
 menu_box = NodePath("MenuBox")
 menu_slider = NodePath("MenuSlider")
-play_button = NodePath("MenuBox/PlayButton")
+exit_button = NodePath("MenuBox/ExitButton")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
@@ -419,8 +419,8 @@ layout_mode = 2
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../EffectSlider")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../MenuBox/PlayButton")
-focus_next = NodePath("../../MenuBox/PlayButton")
+focus_neighbor_bottom = NodePath("../../MenuBox/ExitButton")
+focus_next = NodePath("../../MenuBox/ExitButton")
 focus_previous = NodePath("../EffectSlider")
 texture_normal = ExtResource("39_kbjun")
 texture_pressed = ExtResource("40_57v1h")
@@ -452,12 +452,6 @@ grow_vertical = 2
 [node name="PlayButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../SettingsBox/FullscreenButton")
-focus_neighbor_right = NodePath("../ExitButton")
-focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../ExitButton")
-focus_previous = NodePath("../../SettingsBox/FullscreenButton")
 texture_normal = ExtResource("45_txbng")
 texture_pressed = ExtResource("46_dvoyk")
 texture_hover = ExtResource("47_0mlq1")
@@ -472,12 +466,6 @@ bob_offset = -0.7854
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_left = NodePath("../PlayButton")
-focus_neighbor_top = NodePath("../../SettingsBox/FullscreenButton")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../../SettingsBox/MasterSlider")
-focus_previous = NodePath("../PlayButton")
 texture_normal = ExtResource("52_dqu7l")
 texture_pressed = ExtResource("53_slvke")
 texture_hover = ExtResource("54_2ipsv")
