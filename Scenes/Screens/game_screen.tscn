@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=58 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="42_qnjso"]
 [ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="44_2yefa"]
 [ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="44_iwao7"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="45_jbswd"]
 [ext_resource type="Texture2D" uid="uid://cyl5x8lwb62xc" path="res://Sprites/Buttons/play-button-normal.png" id="45_txbng"]
 [ext_resource type="Texture2D" uid="uid://prfbxyyf2mmw" path="res://Sprites/Buttons/play-button-pressed.png" id="46_dvoyk"]
 [ext_resource type="Texture2D" uid="uid://cluxpbiivn7rg" path="res://Sprites/Buttons/play-button-hover.png" id="47_0mlq1"]
@@ -217,6 +218,9 @@ offset_top = 5.0
 offset_right = 201.0
 offset_bottom = 201.0
 
+[node name="KeyFocusComponent" type="Node" parent="SolarSystemMap"]
+script = ExtResource("45_jbswd")
+
 [node name="MaterialWindow" parent="." instance=ExtResource("24_fqstt")]
 layout_mode = 0
 offset_left = 5.0
@@ -277,6 +281,9 @@ texture_pressed = ExtResource("29_l8m8v")
 texture_hover = ExtResource("30_f28y7")
 texture_disabled = ExtResource("29_l8m8v")
 texture_focused = ExtResource("31_ygalj")
+
+[node name="KeyFocusComponent" type="Node" parent="LargeMap/MinimiseButton"]
+script = ExtResource("45_jbswd")
 
 [node name="SpaceRect" parent="LargeMap" instance=ExtResource("22_7g3ue")]
 layout_mode = 0
@@ -429,6 +436,9 @@ texture_disabled = ExtResource("40_57v1h")
 texture_focused = ExtResource("42_qnjso")
 stretch_mode = 3
 script = ExtResource("44_iwao7")
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/FullscreenButton"]
+script = ExtResource("45_jbswd")
 
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("44_2yefa")

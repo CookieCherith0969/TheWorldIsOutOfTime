@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=52 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="24_n3tcr"]
 [ext_resource type="Texture2D" uid="uid://cmfg36e7rwysi" path="res://Sprites/Buttons/settings-button-normal.png" id="25_ljxs3"]
 [ext_resource type="PackedScene" uid="uid://cfqd75j7k77x8" path="res://Scenes/hover_fade_component.tscn" id="25_tnpjw"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="26_nshxy"]
 [ext_resource type="Texture2D" uid="uid://cwikb5b2vlxyp" path="res://Sprites/Buttons/settings-button-pressed.png" id="26_tjyli"]
 [ext_resource type="Texture2D" uid="uid://dcwc6kkvlnd58" path="res://Sprites/Buttons/settings-button-hover.png" id="27_ev750"]
 [ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
@@ -264,6 +265,9 @@ stretch_mode = 3
 bobbing_height = 4.0
 bob_offset = -0.7854
 
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/PlayButton"]
+script = ExtResource("26_nshxy")
+
 [node name="SettingsButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -278,6 +282,9 @@ stretch_mode = 3
 bobbing_height = 4.0
 bob_offset = -1.5708
 
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/SettingsButton"]
+script = ExtResource("26_nshxy")
+
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -291,6 +298,9 @@ stretch_mode = 3
 [node name="BobbingComponent2" parent="MenuBox/ExitButton" instance=ExtResource("20_5bwx1")]
 bobbing_height = 4.0
 bob_offset = -2.3562
+
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/ExitButton"]
+script = ExtResource("26_nshxy")
 
 [node name="ControlBox" type="HBoxContainer" parent="."]
 visible = false
@@ -320,6 +330,9 @@ flip_h = true
 layout_mode = 1
 fade_color = Color(0, 0, 0, 0)
 
+[node name="KeyFocusComponent" type="Node" parent="ControlBox/SlowButton"]
+script = ExtResource("26_nshxy")
+
 [node name="FastButton" type="TextureButton" parent="ControlBox"]
 layout_mode = 2
 texture_normal = ExtResource("20_hyr5r")
@@ -331,6 +344,9 @@ texture_focused = ExtResource("19_gdf8v")
 [node name="HoverFadeComponent" parent="ControlBox/FastButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
 fade_color = Color(0, 0, 0, 0)
+
+[node name="KeyFocusComponent" type="Node" parent="ControlBox/FastButton"]
+script = ExtResource("26_nshxy")
 
 [node name="HideButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -355,6 +371,9 @@ texture_focused = ExtResource("19_gdf8v")
 layout_mode = 1
 fade_color = Color(0, 0, 0, 0)
 active = false
+
+[node name="KeyFocusComponent" type="Node" parent="HideButton"]
+script = ExtResource("26_nshxy")
 
 [node name="SettingsBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -439,6 +458,9 @@ texture_disabled = ExtResource("41_xiv7p")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 script = ExtResource("46_v4k27")
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/FullscreenButton"]
+script = ExtResource("26_nshxy")
 
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("21_b6cxi")

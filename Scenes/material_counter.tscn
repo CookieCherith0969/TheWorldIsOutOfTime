@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://4b0rsfr4udam"]
+[gd_scene load_steps=7 format=3 uid="uid://4b0rsfr4udam"]
 
 [ext_resource type="Script" path="res://Scripts/material_counter.gd" id="1_nlbnh"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="2_ake4p"]
 [ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="3_h7ntd"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="4_dblea"]
 [ext_resource type="Texture2D" uid="uid://cnyb60d88fty0" path="res://Sprites/Placeholder/PlaceholderMaterialFocus.png" id="5_74guf"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="6_7wtt2"]
 
 [node name="MaterialCounter" type="MarginContainer"]
 custom_minimum_size = Vector2(82, 42)
@@ -75,6 +76,10 @@ patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
+
+[node name="KeyFocusComponent" type="Node" parent="OuterMargin/Focus"]
+script = ExtResource("6_7wtt2")
+targeted_texture = "texture"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

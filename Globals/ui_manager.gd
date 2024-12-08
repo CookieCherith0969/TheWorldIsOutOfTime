@@ -3,6 +3,8 @@ extends Control
 enum Screens {TITLE, GAME, END}
 
 signal code_text_added(text : String)
+signal mouse_used
+signal ui_key_used
 
 @export
 var current_screen_type : Screens = Screens.TITLE
@@ -55,6 +57,16 @@ var palette_black : Color
 @export
 var palette_green : Color
 
+var ui_actions : Array[String] = [
+	"ui_accept",
+	"ui_focus_next",
+	"ui_focus_prev",
+	"ui_left",
+	"ui_right",
+	"ui_up",
+	"ui_down"
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	empty_screen = get_tree().current_scene
@@ -63,6 +75,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		if event.button_index < 3:
+			mouse_used.emit()
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			cursor_frame -= 1
 			cursor_frame %= cursor_frames.size()*2
@@ -71,6 +85,12 @@ func _input(event: InputEvent) -> void:
 			cursor_frame %= cursor_frames.size()*2
 		
 		Input.set_custom_mouse_cursor(cursor_frames[cursor_frame/2])
+		return
+	
+	for action in ui_actions:
+		if event.is_action_pressed(action):
+			ui_key_used.emit()
+			return
 	
 	#if event.is_action_pressed("FixFocus"):
 	#	focus_target.grab_focus()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ug7ye1ri5gke"]
+[gd_scene load_steps=8 format=3 uid="uid://ug7ye1ri5gke"]
 
 [ext_resource type="Texture2D" uid="uid://dcc6agu0gev21" path="res://Sprites/Placeholder/PlaceholderLaunchNormal.png" id="1_h8nh0"]
 [ext_resource type="Texture2D" uid="uid://cas2f2hwlyqrg" path="res://Sprites/Placeholder/PlaceholderLaunchPressed.png" id="2_muiy3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkorvdhtmyndf" path="res://Sprites/Placeholder/PlaceholderLaunchDisabled.png" id="4_xrv3j"]
 [ext_resource type="Texture2D" uid="uid://coefn8oauxntl" path="res://Sprites/Placeholder/PlaceholderLaunchFocus.png" id="5_xscbi"]
 [ext_resource type="Script" path="res://Scripts/launch_button.gd" id="6_dxw5t"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="7_xbwri"]
 
 [node name="LaunchButton" type="TextureButton"]
 offset_right = 120.0
@@ -22,6 +23,9 @@ rocket_amounts = Array[int]([50, 30, 1])
 
 [node name="TooltipMarker" type="Marker2D" parent="."]
 position = Vector2(120, 0)
+
+[node name="KeyFocusComponent" type="Node" parent="."]
+script = ExtResource("7_xbwri")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

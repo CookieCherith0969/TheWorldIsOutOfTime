@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbihtam1i81a"]
+[gd_scene load_steps=15 format=3 uid="uid://dbihtam1i81a"]
 
 [ext_resource type="Script" path="res://Scripts/material_window.gd" id="1_jkkvl"]
 [ext_resource type="PackedScene" uid="uid://4b0rsfr4udam" path="res://Scenes/material_counter.tscn" id="2_fbetd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c5dyj6typoo01" path="res://Sprites/Buttons/time-subtract-button-disabled.png" id="6_xl85n"]
 [ext_resource type="Texture2D" uid="uid://chv7rs2abbgak" path="res://Sprites/Buttons/time-subtract-button-focus.png" id="7_g26n3"]
 [ext_resource type="Texture2D" uid="uid://c606tlo051v8k" path="res://Sprites/Buttons/time-add-button-normal.png" id="8_gc0xj"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="9_lbkjn"]
 [ext_resource type="Texture2D" uid="uid://b6on7h3c51n8d" path="res://Sprites/Buttons/time-add-button-pressed.png" id="9_yqlaq"]
 [ext_resource type="Texture2D" uid="uid://dxb6m2fsbiquw" path="res://Sprites/Buttons/time-add-button-hover.png" id="10_xqkgu"]
 [ext_resource type="Texture2D" uid="uid://b0v60n4qau5ek" path="res://Sprites/Buttons/time-add-button-disabled.png" id="11_l131p"]
@@ -89,6 +90,9 @@ texture_disabled = ExtResource("6_xl85n")
 texture_focused = ExtResource("7_g26n3")
 stretch_mode = 3
 
+[node name="KeyFocusComponent" type="Node" parent="PrevButton"]
+script = ExtResource("9_lbkjn")
+
 [node name="NextButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -101,6 +105,9 @@ texture_hover = ExtResource("10_xqkgu")
 texture_disabled = ExtResource("11_l131p")
 texture_focused = ExtResource("12_dsunx")
 stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="NextButton"]
+script = ExtResource("9_lbkjn")
 
 [connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

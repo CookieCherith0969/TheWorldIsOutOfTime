@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://j48kbuc5aeum"]
+[gd_scene load_steps=20 format=3 uid="uid://j48kbuc5aeum"]
 
 [ext_resource type="Script" path="res://Scripts/time_control.gd" id="1_6fb1j"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="2_0rf1v"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cypiysrgwdpyr" path="res://Sprites/Buttons/clock-button-disabled.png" id="6_fpkb2"]
 [ext_resource type="Texture2D" uid="uid://b83tbmwctbxy5" path="res://Sprites/Buttons/clock-button-focus.png" id="7_iul2v"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="8_42d2q"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="8_u5rks"]
 [ext_resource type="Texture2D" uid="uid://cw5cgymy7oclv" path="res://Sprites/Buttons/time-subtract-button-normal.png" id="8_ykv2u"]
 [ext_resource type="Texture2D" uid="uid://jmsovgotpssy" path="res://Sprites/Buttons/time-subtract-button-pressed.png" id="9_8bfpu"]
 [ext_resource type="Texture2D" uid="uid://bn5dt0stxdwti" path="res://Sprites/Buttons/time-subtract-button-hover.png" id="10_yk32h"]
@@ -57,6 +58,9 @@ texture_disabled = ExtResource("11_62xaa")
 texture_focused = ExtResource("12_m25io")
 stretch_mode = 3
 
+[node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/HalveButton"]
+script = ExtResource("8_u5rks")
+
 [node name="DurationLabel" type="Label" parent="InnerMargin/InnerBox"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -80,6 +84,9 @@ texture_disabled = ExtResource("16_em3f6")
 texture_focused = ExtResource("17_i77lj")
 stretch_mode = 3
 
+[node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/DoubleButton"]
+script = ExtResource("8_u5rks")
+
 [node name="TimeskipButton" type="TextureButton" parent="InnerMargin/InnerBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -90,6 +97,9 @@ texture_hover = ExtResource("5_6iinn")
 texture_disabled = ExtResource("6_fpkb2")
 texture_focused = ExtResource("7_iul2v")
 stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/TimeskipButton"]
+script = ExtResource("8_u5rks")
 
 [connection signal="pressed" from="InnerMargin/InnerBox/HalveButton" to="." method="_on_halve_button_pressed"]
 [connection signal="pressed" from="InnerMargin/InnerBox/DoubleButton" to="." method="_on_double_button_pressed"]

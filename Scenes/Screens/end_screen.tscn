@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmjpetrwl6i7o"]
+[gd_scene load_steps=13 format=3 uid="uid://dmjpetrwl6i7o"]
 
 [ext_resource type="Texture2D" uid="uid://bygckhp1i41t6" path="res://Sprites/Cutscenes/good-end.png" id="1_rcpy3"]
 [ext_resource type="Script" path="res://Scripts/end_screen.gd" id="2_ex4ru"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="5_38wc1"]
 [ext_resource type="Script" path="res://Scripts/fade_component.gd" id="7_ort0p"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="8_208u3"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="8_tceqx"]
 [ext_resource type="PackedScene" uid="uid://bmhqcdla8tfxq" path="res://Scenes/bobbing_component.tscn" id="9_btp46"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="9_kfjd0"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="10_it7iu"]
@@ -75,6 +76,9 @@ texture_hover = ExtResource("4_seib3")
 texture_disabled = ExtResource("2_vfqrm")
 texture_focused = ExtResource("5_38wc1")
 stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="UI/ExitButton"]
+script = ExtResource("8_tceqx")
 
 [node name="UIFader" type="Node" parent="UI"]
 script = ExtResource("7_ort0p")
