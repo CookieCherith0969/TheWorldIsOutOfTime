@@ -13,6 +13,8 @@ var end_angle : float
 var min_end_angle : float = 100.0
 @export
 var max_end_angle : float = 230.0
+@export
+var angle_offset : float = 2.0
 
 var death_asteroid : MapPlanet
 @export
@@ -24,6 +26,7 @@ var asteroid_end_distance : float
 var warning_scene : PackedScene
 @export
 var warning_offset : Vector2 = Vector2(0,0)
+
 
 func _ready():
 	GameManager.hour_passed.connect(on_hour_passed)
@@ -40,7 +43,7 @@ func create_death_asteroid():
 	add_sibling.call_deferred(death_asteroid)
 	
 	var starting_hours : float = GameManager.starting_days*GameManager.hours_per_day
-	death_asteroid.orbit_angle = end_angle - 360*(starting_hours/death_asteroid_info.orbital_period_hours)
+	death_asteroid.orbit_angle = end_angle - 360*(starting_hours/death_asteroid_info.orbital_period_hours) - angle_offset
 	death_asteroid.update_position()
 	
 	var warning = warning_scene.instantiate()
