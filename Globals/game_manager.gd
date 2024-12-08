@@ -384,6 +384,17 @@ func process_until_all_built():
 func process_days(number_of_days : int):
 	if number_of_days <= 0:
 		return
+	if number_of_days == 1:
+		timeskip_days = 1
+		timeskip_started.emit(number_of_days)
+		for i in range(hours_per_day):
+			hour_passed.emit()
+		process_day()
+		day_ended.emit()
+		timeskip_days = 0
+		timeskip_ended.emit()
+		return
+	
 	timeskip_days += number_of_days
 	if timeskip_days > days_left:
 		timeskip_days = days_left
