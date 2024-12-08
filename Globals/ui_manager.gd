@@ -169,9 +169,7 @@ func make_new_screen(fade : bool = true):
 		focus_mode = FOCUS_NONE
 		release_focus()
 		fade_out(fade_time/3)
-		print_debug("Start fade out")
 		await fade_component.fade_out_finished
-		print_debug("End fade out")
 	
 	if is_instance_valid(current_screen):
 		remove_child(current_screen)
@@ -189,13 +187,9 @@ func make_new_screen(fade : bool = true):
 	current_screen = new_screen
 	
 	if fade:
-		print_debug("Start wait")
 		await get_tree().create_timer(fade_time/3).timeout
-		print_debug("End wait")
 		fade_in(fade_time/3)
-		print_debug("Start fade in")
 		await fade_component.fade_in_finished
-		print_debug("End fade in")
 	empty_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if current_screen_type == Screens.END:
 		current_screen.start_playing()

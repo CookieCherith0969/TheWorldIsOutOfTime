@@ -16,6 +16,6 @@ build_days = 64
 build_materials = Array[int]([10, 7])
 build_amounts = Array[int]([100, 2000])
 research_materials = Array[int]([10])
-research_amounts = Array[int]([1])
+research_amounts = Array[int]([2])
 hide_material_amounts = false
 keep_zero_factory_active_amount = false

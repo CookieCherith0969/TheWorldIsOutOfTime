@@ -319,3 +319,5 @@ func set_empty():
 	unplan_button.hide()
 	plan_button.hide()
 	lock_panel.hide()
+	background.texture = locked_background
+	building_wrench.hide()

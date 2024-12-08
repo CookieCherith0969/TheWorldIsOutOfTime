@@ -10,7 +10,7 @@ signal materials_updated
 signal asteroid_collided
 signal rocket_launched
 
-enum GameState {MENU, GAME, END_SURVIVAL, END_DESTRUCTION}
+enum GameState {MENU, TUTORIAL, GAME, END_SURVIVAL, END_DESTRUCTION}
 
 enum Materials {
 	STONE,

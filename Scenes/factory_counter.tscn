@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="5_deej6"]
 [ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="6_kivah"]
 [ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="6_m328o"]
-[ext_resource type="Texture2D" uid="uid://bxws353d0cbt3" path="res://Sprites/Icons/metal.png" id="7_86jvy"]
+[ext_resource type="Texture2D" uid="uid://uf1q7lm2dhq0" path="res://Sprites/Icons/common-metal.png" id="8_j78le"]
 [ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="10_wb8r5"]
 [ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
@@ -124,7 +124,7 @@ texture = ExtResource("4_d0ei5")
 [node name="FactoryIcon4" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("7_86jvy")
+texture = ExtResource("8_j78le")
 
 [node name="FactoryIcon6" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
