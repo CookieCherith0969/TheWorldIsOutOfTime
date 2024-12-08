@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 script = ExtResource("2_ex4ru")
 exit_button = NodePath("UI/ExitButton")
 ui_fader = NodePath("UI/UIFader")
@@ -22,6 +23,7 @@ prev_frame_rect = NodePath("PrevFrame")
 frame_fader = NodePath("FrameFader")
 prev_frame_fader = NodePath("PrevFrame/PrevFrameFader")
 ending_name_label = NodePath("UI/EndingNameLabel")
+frame_hold_length = 6.0
 
 [node name="FrameFader" type="Node" parent="."]
 script = ExtResource("7_ort0p")
@@ -34,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 
 [node name="PrevFrameFader" type="Node" parent="PrevFrame"]
 script = ExtResource("7_ort0p")

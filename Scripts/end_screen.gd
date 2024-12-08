@@ -13,7 +13,7 @@ var prev_frame_fader : FadeComponent
 @export
 var ending_name_label : Label
 
-const ui_fade_time : float = 3.0
+const ui_fade_time : float = 5.0
 const frame_fade_time : float = 1.0
 
 @export

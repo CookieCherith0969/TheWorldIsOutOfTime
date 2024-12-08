@@ -39,7 +39,7 @@ var material_icons : Array[Texture] = []
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
 
-const starting_days : int = 10#365*9
+const starting_days : int = 365*9
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -111,6 +111,12 @@ func _ready() -> void:
 func setup_game():
 	days_left = starting_days
 	timeskip_days = 0
+	
+	active_factory_amounts.clear()
+	planned_factory_amounts.clear()
+	factory_build_progress.clear()
+	unlocked_factories.clear()
+	
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
 		active_factory_amounts.append(0)
@@ -123,6 +129,13 @@ func setup_game():
 		
 		if factories[i].start_amount > 0:
 			active_factory_amounts[i] = factories[i].start_amount
+	
+	material_amounts.clear()
+	prev_day_changes.clear()
+	prev_day_increases.clear()
+	prev_day_decreases.clear()
+	lifetime_increases.clear()
+	predicted_changes.clear()
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
