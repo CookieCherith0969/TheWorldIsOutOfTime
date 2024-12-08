@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_o2rf3")
-factory_name = &"NuclearBomb"
+factory_name = &"Nuclear Bomb"
 sort_priority = 140
 start_amount = 0
 output_on_build = true
@@ -17,5 +17,5 @@ build_materials = Array[int]([10, 7])
 build_amounts = Array[int]([100, 2000])
 research_materials = Array[int]([10])
 research_amounts = Array[int]([2])
-hide_material_amounts = false
-keep_zero_factory_active_amount = false
+hide_material_amounts = true
+keep_zero_factory_active_amount = true

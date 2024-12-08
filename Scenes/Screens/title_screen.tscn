@@ -374,6 +374,7 @@ text = "Master"
 
 [node name="MasterSlider" type="HSlider" parent="SettingsBox"]
 layout_mode = 2
+theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("37_pv5e0")
 theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
 theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
@@ -394,6 +395,7 @@ text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsBox"]
 layout_mode = 2
+theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("37_pv5e0")
 theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
 theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
@@ -414,6 +416,7 @@ text = "Effects"
 
 [node name="EffectSlider" type="HSlider" parent="SettingsBox"]
 layout_mode = 2
+theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("37_pv5e0")
 theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
 theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")

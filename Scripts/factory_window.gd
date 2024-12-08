@@ -55,6 +55,11 @@ func populate_factories():
 		factory_counter.set_rep_factory(GameManager.factories[factory_index])
 
 func update_buttons():
+	if GameManager.game_state != GameManager.GameState.GAME:
+		prev_button.disabled = true
+		next_button.disabled = true
+		return
+	
 	if current_page == 0:
 		prev_button.disabled = true
 	else:

@@ -20,14 +20,15 @@ func _ready() -> void:
 	populate_materials()
 	update_buttons()
 
-func prev_page():
+func prev_page(print : bool = true):
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
 	
 	populate_materials()
 	update_buttons()
-	UIManager.print_to_code_window("prev_mat_page()")
+	if print:
+		UIManager.print_to_code_window("prev_mat_page()")
 
 func next_page():
 	current_page += 1
@@ -51,6 +52,11 @@ func populate_materials():
 		material_counter.set_rep_material(material_index as GameManager.Materials)
 
 func update_buttons():
+	if GameManager.game_state != GameManager.GameState.GAME:
+		prev_button.disabled = true
+		next_button.disabled = true
+		return
+	
 	if current_page == 0:
 		prev_button.disabled = true
 	else:

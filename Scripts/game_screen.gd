@@ -25,6 +25,7 @@ var factory_grid : GridContainer
 var top_left_factory : FactoryCounter
 var top_middle_factory : FactoryCounter
 var top_right_factory : FactoryCounter
+var middle_right_factory : FactoryCounter
 var factory_prev : TextureButton
 var factory_next : TextureButton
 
@@ -34,8 +35,64 @@ var minimise_button : TextureButton
 @export
 var launch_button : TextureButton
 
+@export
+var death_asteroid_manager : DeathAsteroidManager
+
+@export
+var tutorial_popup : TutorialPopup
+
+var tutorial_texts : Array[String] = [
+	"Hello, World.",
+	"An asteroid is heading towards Earth.",
+	"You have 9 years to stop it.",
+	"You control when time progresses.",
+	"You must launch a rocket to destroy the asteroid. The rocket needs materials.",
+	"This window tracks your stocks and (projected) production of each material. Materials are produced by factories.",
+	"This window tracks the built and planned amounts of each factory. Most factories output daily once built.",
+	"The numbers above the material icons indicate the daily input and output of the factory.",
+	"Factories cost materials to research, and to build.",
+	"Some factories run upon being built, instead of daily. These factories lack numbers above their inputs.",
+	"The fate of Earth lies in your hands. Good luck."
+]
+
+var tutorial_positions : Array[Vector2i] = [
+	Vector2i(250,250),
+	Vector2i(200,300),
+	Vector2i(200,200),
+	Vector2i(340,200),
+	Vector2i(200,200),
+	Vector2i(150,300),
+	Vector2i(400,150),
+	Vector2i(250,170),
+	Vector2i(350,200),
+	Vector2i(250,160),
+	Vector2i(250,250),
+]
+
+var tutorial_targets : Array[Vector2i] = [
+	Vector2i(250,250),
+	Vector2i(0,0),
+	Vector2i(200,37),
+	Vector2i(218,69),
+	Vector2i(78,69),
+	Vector2i(150,203),
+	Vector2i(350,210),
+	Vector2i(305,224),
+	Vector2i(400,300),
+	Vector2i(290,224),
+	Vector2i(250,250),
+]
+
+@export
+var tutorial_elements : Array[Control] = []
+
+var tutorial_index : int = 0
+
+@export
+var screen_cover : ColorRect
+
 func _ready() -> void:
-	small_map.grab_focus()
+	#small_map.grab_focus()
 	UIManager.set_focus_target(small_map)
 	
 	material_prev = material_window.prev_button
@@ -45,6 +102,7 @@ func _ready() -> void:
 	top_left_factory = factory_grid.get_child(0)
 	top_middle_factory = factory_grid.get_child(factory_grid.columns/2)
 	top_right_factory = factory_grid.get_child(factory_grid.columns-1)
+	middle_right_factory = factory_grid.get_child(factory_grid.columns-1 + factory_grid.columns)
 	factory_prev = factory_window.prev_button
 	factory_next = factory_window.next_button
 	
@@ -56,6 +114,47 @@ func _ready() -> void:
 	
 	factory_window.page_changed.connect(on_factory_page_changed)
 	GameManager.update_predicted_changes()
+	
+	for child in get_children():
+		child.hide()
+	
+	tutorial_popup.popup_dismissed.connect(on_popup_dismissed)
+	
+	setup_popup.call_deferred()
+
+func setup_popup():
+	tutorial_targets[1] = Vector2i(death_asteroid_manager.death_asteroid.global_position + death_asteroid_manager.warning_offset)
+	show_tutorial_popup(0)
+
+func on_popup_dismissed():
+	print("popup dismissed")
+	tutorial_index += 1
+	if tutorial_index >= tutorial_texts.size():
+		GameManager.game_state = GameManager.GameState.GAME
+		tutorial_popup.hide()
+		small_map.disabled = false
+		small_map.grab_focus()
+		factory_window.prev_page()
+		material_window.prev_page(false)
+		screen_cover.hide()
+		time_control.update_buttons()
+		return
+	
+	show_tutorial_popup(tutorial_index)
+
+func show_tutorial_popup(index : int):
+	tutorial_popup.show()
+	screen_cover.show()
+	tutorial_popup.grab_focus()
+	tutorial_popup.set_text(tutorial_texts[tutorial_index])
+	tutorial_popup.set_center_position(tutorial_positions[tutorial_index])
+	tutorial_popup.set_target(tutorial_targets[tutorial_index])
+	tutorial_elements[tutorial_index].show()
+	if index == 8:
+		middle_right_factory.show_tooltip()
+	elif index == 9:
+		UIManager.hide_tooltip()
+		factory_window.next_page()
 
 func on_factory_page_changed():
 	update_focus_neighbours()

@@ -57,6 +57,8 @@ var wrench_days : int = 0
 
 var empty : bool = false
 
+var showing_tooltip : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	factory_index = GameManager.get_factory_index(represented_factory)
@@ -67,6 +69,14 @@ func _ready() -> void:
 	GameManager.day_ended.connect(on_day_ended)
 	
 	set_rep_factory(represented_factory)
+
+func _input(event: InputEvent) -> void:
+	if !showing_tooltip:
+		return
+	if event.is_action_pressed("FactoryFifty") || event.is_action_pressed("FactoryTen"):
+		show_tooltip()
+	if event.is_action_released("FactoryFifty") || event.is_action_released("FactoryTen"):
+		show_tooltip()
 
 func on_day_ended():
 	wrench_days += 1
@@ -206,33 +216,62 @@ func update_buttons():
 		unlock_button.disabled = true
 
 func _on_plan_button_pressed() -> void:
-	GameManager.plan_factory(factory_index)
+	var multiplier : int = 1
+	if Input.is_action_pressed("FactoryTen"):
+		multiplier *= 10
+	if Input.is_action_pressed("FactoryFifty"):
+		multiplier *= 50
+	for i in range(multiplier):
+		if !GameManager.plan_factory(factory_index):
+			break
 	sketch_sound.play()
+	show_tooltip()
 
 func _on_unplan_button_pressed() -> void:
-	GameManager.unplan_factory(factory_index)
+	var multiplier : int = 1
+	if Input.is_action_pressed("FactoryTen"):
+		multiplier *= 10
+	if Input.is_action_pressed("FactoryFifty"):
+		multiplier *= 50
+	for i in range(multiplier):
+		if !GameManager.unplan_factory(factory_index):
+			break
+	
 	erase_sound.play()
+	show_tooltip()
 
 func _on_mouse_entered() -> void:
 	show_tooltip()
 
 func _on_mouse_exited() -> void:
+	showing_tooltip = false
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
 	show_tooltip()
 
 func _on_focus_exited() -> void:
+	showing_tooltip = false
 	UIManager.hide_tooltip()
 
 func show_tooltip():
+	showing_tooltip = true
 	if empty:
 		return
 	
 	if unlocked:
 		var build_materials : Array[GameManager.Materials]
 		build_materials.assign(represented_factory.build_materials)
-		UIManager.show_build_tooltip(tooltip_marker.global_position, build_materials, represented_factory.build_amounts, represented_factory.build_days)
+		var amount_mult : int = 1
+		if Input.is_action_pressed("FactoryTen"):
+			amount_mult *= 10
+		if Input.is_action_pressed("FactoryFifty"):
+			amount_mult *= 50
+		var build_amounts : Array[int]
+		build_amounts.assign(represented_factory.build_amounts)
+		for i in build_amounts.size():
+			build_amounts[i] *= amount_mult
+		UIManager.show_build_tooltip(tooltip_marker.global_position, build_materials, build_amounts, represented_factory.build_days*amount_mult)
 	else:
 		var research_materials : Array[GameManager.Materials]
 		research_materials.assign(represented_factory.research_materials)
@@ -267,7 +306,7 @@ func unlock():
 func lock():
 	lock_panel.show()
 	
-	num_box.hide()
+	#num_box.hide()
 	amount_label.hide()
 	unplan_button.hide()
 	plan_button.hide()

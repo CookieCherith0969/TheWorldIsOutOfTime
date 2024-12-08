@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfglvy7i2o8wj"]
+
+[ext_resource type="Script" path="res://Scripts/tutorial_popup.gd" id="1_i6ywn"]
+[ext_resource type="Texture2D" uid="uid://cdhtrfcgfnnn8" path="res://Sprites/Placeholder/PlaceholderBluePanel.png" id="2_udrl6"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="3_ybac3"]
+
+[node name="TutorialPopup" type="MarginContainer"]
+z_index = 10
+offset_right = 150.0
+offset_bottom = 50.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+focus_mode = 2
+mouse_filter = 0
+script = ExtResource("1_i6ywn")
+
+[node name="HorizontalLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 76, 24)
+width = 2.0
+default_color = Color(0.137255, 0.709804, 0.827451, 1)
+
+[node name="VerticalLine" type="Line2D" parent="."]
+position = Vector2(0, -1)
+points = PackedVector2Array(0, 0, 213, -41)
+width = 2.0
+default_color = Color(0.137255, 0.709804, 0.827451, 1)
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("2_udrl6")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PopupLabel" type="Label" parent="InnerMargin"]
+custom_minimum_size = Vector2(165, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
+theme_override_fonts/font = ExtResource("3_ybac3")
+theme_override_font_sizes/font_size = 8
+text = "An asteroid is heading for Earth"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

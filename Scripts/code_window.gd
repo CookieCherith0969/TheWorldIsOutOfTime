@@ -27,22 +27,24 @@ func _process(delta: float) -> void:
 			return
 
 func add_text(text : String):
+	var working_text : String = code_label.text
+	if !working_text.is_empty():
+		working_text += "\n"
+	working_text += text
+	
 	var visible_characters : int = code_label.visible_characters
 	
-	if code_label.get_line_count()+1 > code_label.max_lines_visible:
-		var last_line : String = code_label.text.get_slice("\n",0)
+	while working_text.count("\n")+1 > code_label.max_lines_visible:
+		var last_line : String = working_text.get_slice("\n",0)
 		"""if get_string_width(last_line) > code_label.size.x:
 			working_text = working_text.right(-characters_per_line)
 			visible_characters -= characters_per_line
 		else:"""
-		code_label.text = code_label.text.right(-last_line.length()-1)
+		working_text = working_text.right(-last_line.length()-1)
 		visible_characters -= last_line.length()-1
 	
-	if !code_label.text.is_empty():
-		code_label.text += "\n"
-	code_label.text += text
-	
-	code_label.visible_characters = visible_characters
+	code_label.text = working_text
+	code_label.visible_characters = max(visible_characters, 0)
 
 """func get_string_width(text : String):
 	var font : Font = code_label.get_theme_font("font")

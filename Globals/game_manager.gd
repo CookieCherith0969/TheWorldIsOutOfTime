@@ -88,7 +88,6 @@ var screensaver_speed_multiplier : int = 4
 var game_state : GameState = GameState.MENU
 
 func factory_sort(a : FactoryInfo, b : FactoryInfo):
-	assert(a.sort_priority != b.sort_priority)
 	if a.sort_priority < b.sort_priority:
 		return true
 	return false
