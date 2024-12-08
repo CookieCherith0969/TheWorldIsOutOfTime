@@ -45,7 +45,7 @@
 [ext_resource type="Script" path="res://Scripts/volume_slider.gd" id="40_d8j5p"]
 [ext_resource type="Texture2D" uid="uid://dhqqo663g4aov" path="res://Sprites/Placeholder/PlaceholderFullscreenPressed.png" id="41_xiv7p"]
 [ext_resource type="Texture2D" uid="uid://clus4ymiqx4xj" path="res://Sprites/Placeholder/PlaceholderFullscreenHover.png" id="42_gfxev"]
-[ext_resource type="Script" path="res://Scripts/texture_button.gd" id="44_flenv"]
+[ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="46_v4k27"]
 [ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc5sd"]
@@ -438,7 +438,7 @@ texture_hover = ExtResource("42_gfxev")
 texture_disabled = ExtResource("41_xiv7p")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
-script = ExtResource("44_flenv")
+script = ExtResource("46_v4k27")
 
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("21_b6cxi")

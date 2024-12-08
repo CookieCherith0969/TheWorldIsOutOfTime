@@ -43,8 +43,8 @@
 [ext_resource type="Texture2D" uid="uid://dhqqo663g4aov" path="res://Sprites/Placeholder/PlaceholderFullscreenPressed.png" id="40_57v1h"]
 [ext_resource type="Texture2D" uid="uid://clus4ymiqx4xj" path="res://Sprites/Placeholder/PlaceholderFullscreenHover.png" id="41_1xkls"]
 [ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="42_qnjso"]
-[ext_resource type="Script" path="res://Scripts/texture_button.gd" id="43_qvykw"]
 [ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="44_2yefa"]
+[ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="44_iwao7"]
 [ext_resource type="Texture2D" uid="uid://cyl5x8lwb62xc" path="res://Sprites/Buttons/play-button-normal.png" id="45_txbng"]
 [ext_resource type="Texture2D" uid="uid://prfbxyyf2mmw" path="res://Sprites/Buttons/play-button-pressed.png" id="46_dvoyk"]
 [ext_resource type="Texture2D" uid="uid://cluxpbiivn7rg" path="res://Sprites/Buttons/play-button-hover.png" id="47_0mlq1"]
@@ -428,7 +428,7 @@ texture_hover = ExtResource("41_1xkls")
 texture_disabled = ExtResource("40_57v1h")
 texture_focused = ExtResource("42_qnjso")
 stretch_mode = 3
-script = ExtResource("43_qvykw")
+script = ExtResource("44_iwao7")
 
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("44_2yefa")

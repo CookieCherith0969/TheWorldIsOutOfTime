@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="9_kfjd0"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="10_it7iu"]
 
-[node name="EndScreen" type="TextureRect" node_paths=PackedStringArray("exit_button", "ui_fader", "prev_frame_rect", "frame_fader", "prev_frame_fader", "ending_name_label", "remainder_counter")]
+[node name="EndScreen" type="TextureRect" node_paths=PackedStringArray("exit_button", "ui_fader", "prev_frame_rect", "frame_fader", "prev_frame_fader", "ending_name_label", "remainder_counter", "percent_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,7 +28,11 @@ frame_fader = NodePath("FrameFader")
 prev_frame_fader = NodePath("PrevFrame/PrevFrameFader")
 ending_name_label = NodePath("UI/EndingNameLabel")
 remainder_counter = NodePath("UI/RemainderCounter")
+percent_label = NodePath("UI/PercentLabel")
 frame_hold_length = 6.0
+rocket_materials = Array[int]([12, 13, 14])
+rocket_amounts = Array[int]([50, 30, 1])
+rocket_weightings = Array[float]([40.0, 40.0, 20.0])
 
 [node name="FrameFader" type="Node" parent="."]
 script = ExtResource("7_ort0p")
@@ -105,6 +109,45 @@ offset_left = -4.0
 offset_top = -6.0
 offset_right = 4.0
 offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_it7iu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="PercentLabel" type="Label" parent="UI"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 409.0
+offset_right = 160.0
+offset_bottom = 425.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("8_208u3")
+theme_override_font_sizes/font_size = 16
+text = "Rocket Progress: 50%"
+horizontal_alignment = 1
+
+[node name="BobbingComponent" parent="UI/PercentLabel" instance=ExtResource("9_btp46")]
+bobbing_height = 4.0
+bob_offset = 1.5708
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/PercentLabel"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -6.0
+offset_right = 4.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_it7iu")
