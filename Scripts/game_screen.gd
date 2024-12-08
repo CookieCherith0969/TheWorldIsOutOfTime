@@ -200,18 +200,20 @@ func setup_popup():
 func on_popup_dismissed():
 	tutorial_index += 1
 	if tutorial_index >= tutorial_texts.size():
+		if screen_cover_fader.fade_state != FadeComponent.FadeState.IDLE:
+			return
 		end_tutorial()
 		return
 	
 	show_tutorial_popup(tutorial_index)
 
 func end_tutorial():
+	GameManager.game_state = GameManager.GameState.GAME
 	if tutorial_index >= tutorial_texts.size()-2:
 		factory_window.prev_page()
 	else:
 		factory_window.prev_page(false)
 	tutorial_index = tutorial_texts.size()
-	GameManager.game_state = GameManager.GameState.GAME
 	tutorial_popup.hide()
 	screen_cover_fader.fade_out(cover_fade_time)
 	UIManager.hide_tooltip()
