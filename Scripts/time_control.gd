@@ -37,6 +37,14 @@ func on_day_ended():
 	update_label()
 
 func _on_halve_button_pressed() -> void:
+	halve_time()
+
+func _on_double_button_pressed() -> void:
+	double_time()
+
+func halve_time():
+	if GameManager.is_timeskipping():
+		return
 	selected_exponent -= 1
 	if selected_exponent < 0:
 		selected_exponent = 0
@@ -44,7 +52,9 @@ func _on_halve_button_pressed() -> void:
 	update_label()
 	UIManager.print_to_code_window("halve_time()")
 
-func _on_double_button_pressed() -> void:
+func double_time():
+	if GameManager.is_timeskipping():
+		return
 	selected_exponent += 1
 	if selected_exponent > max_exponent:
 		selected_exponent = max_exponent
@@ -94,3 +104,17 @@ func update_label():
 		duration_label.add_theme_color_override("font_color", max_color)
 	else:
 		duration_label.add_theme_color_override("font_color", normal_color)
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if !event.pressed:
+			return
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			double_time()
+			update_buttons()
+			update_label()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			halve_time()
+			update_buttons()
+			update_label()

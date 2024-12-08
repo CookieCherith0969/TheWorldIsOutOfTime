@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://3622lee72wb6"]
+[gd_scene load_steps=7 format=3 uid="uid://3622lee72wb6"]
 
 [ext_resource type="Script" path="res://Globals/sound_manager.gd" id="1_dbxqp"]
 [ext_resource type="AudioStream" uid="uid://dr32fccddwxil" path="res://Sounds/Music/1menu.ogg" id="2_mbuky"]
 [ext_resource type="AudioStream" uid="uid://cteyoss5720r1" path="res://Sounds/Music/2ambient.ogg" id="3_cosvd"]
 [ext_resource type="AudioStream" uid="uid://do4328ror1vj1" path="res://Sounds/Music/3early-game.ogg" id="4_70i3m"]
 [ext_resource type="AudioStream" uid="uid://cko3plib2u1mp" path="res://Sounds/Music/4middle-game.ogg" id="5_st12c"]
+[ext_resource type="AudioStream" uid="uid://76payn65uuot" path="res://Sounds/Music/5late-game.ogg" id="6_3olas"]
 
 [node name="SoundManager" type="Node" node_paths=PackedStringArray("music_tracks")]
 script = ExtResource("1_dbxqp")
@@ -39,7 +40,7 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="LateMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_mbuky")
+stream = ExtResource("6_3olas")
 volume_db = -9.3729
 bus = &"Music"
 parameters/looping = true

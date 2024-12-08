@@ -208,6 +208,7 @@ func end_tutorial():
 	tutorial_popup.hide()
 	factory_window.prev_page()
 	screen_cover_fader.fade_out(cover_fade_time)
+	UIManager.hide_tooltip()
 	for child in tutorial_elements:
 		child.show()
 	await screen_cover_fader.fade_out_finished

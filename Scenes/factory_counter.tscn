@@ -154,17 +154,21 @@ alignment = 1
 
 [node name="FactoryLabel" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 text = "2"
 
 [node name="FactoryLabel2" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 
 [node name="FactoryLabel3" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 text = "3"
 
 [node name="FactoryLabel5" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 text = "3"
 
 [node name="AmountLabel" type="Label" parent="."]
@@ -309,6 +313,7 @@ script = ExtResource("16_jf1oa")
 
 [node name="EraseSound" type="AudioStreamPlayer" parent="."]
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="focus_entered" from="PlanButton" to="." method="_on_focus_entered"]

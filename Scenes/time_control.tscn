@@ -25,6 +25,7 @@ offset_left = 290.0
 offset_top = 12.0
 offset_right = 395.0
 offset_bottom = 40.0
+mouse_filter = 0
 script = ExtResource("1_6fb1j")
 
 [node name="Background" type="NinePatchRect" parent="."]
@@ -101,6 +102,7 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/TimeskipButton"]
 script = ExtResource("8_u5rks")
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="InnerMargin/InnerBox/HalveButton" to="." method="_on_halve_button_pressed"]
 [connection signal="pressed" from="InnerMargin/InnerBox/DoubleButton" to="." method="_on_double_button_pressed"]
 [connection signal="pressed" from="InnerMargin/InnerBox/TimeskipButton" to="." method="_on_timeskip_button_pressed"]

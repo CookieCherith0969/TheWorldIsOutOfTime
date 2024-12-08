@@ -48,4 +48,4 @@ autowrap_mode = 1
 uppercase = true
 max_lines_visible = 28
 visible_characters = 0
-visible_ratio = -1.0
+visible_ratio = 0.0

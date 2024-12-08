@@ -363,4 +363,14 @@ func set_empty():
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	pass # Replace with function body.
+	if event is InputEventMouseButton:
+		if !event.pressed:
+			return
+		if !unlocked:
+			return
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			GameManager.plan_factory(factory_index)
+			show_tooltip()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			GameManager.unplan_factory(factory_index)
+			show_tooltip()
