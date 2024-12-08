@@ -12,6 +12,8 @@ var frame_fader : FadeComponent
 var prev_frame_fader : FadeComponent
 @export
 var ending_name_label : Label
+@export
+var remainder_counter : TimeCounter
 
 const ui_fade_time : float = 5.0
 const frame_fade_time : float = 1.0
@@ -82,6 +84,7 @@ func start_playing():
 		ending_name_label.text = "SURVIVAL"
 	elif GameManager.game_state == GameManager.GameState.END_DESTRUCTION:
 		ending_name_label.text = "DESTRUCTION"
+		remainder_counter.hide()
 	update_texture()
 
 func fade_in_ui():

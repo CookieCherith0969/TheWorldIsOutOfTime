@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmjpetrwl6i7o"]
+[gd_scene load_steps=12 format=3 uid="uid://dmjpetrwl6i7o"]
 
+[ext_resource type="Texture2D" uid="uid://bygckhp1i41t6" path="res://Sprites/Cutscenes/good-end.png" id="1_rcpy3"]
 [ext_resource type="Script" path="res://Scripts/end_screen.gd" id="2_ex4ru"]
 [ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="2_vfqrm"]
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="3_uk1kl"]
@@ -8,13 +9,16 @@
 [ext_resource type="Script" path="res://Scripts/fade_component.gd" id="7_ort0p"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="8_208u3"]
 [ext_resource type="PackedScene" uid="uid://bmhqcdla8tfxq" path="res://Scenes/bobbing_component.tscn" id="9_btp46"]
+[ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="9_kfjd0"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="10_it7iu"]
 
-[node name="EndScreen" type="TextureRect" node_paths=PackedStringArray("exit_button", "ui_fader", "prev_frame_rect", "frame_fader", "prev_frame_fader", "ending_name_label")]
+[node name="EndScreen" type="TextureRect" node_paths=PackedStringArray("exit_button", "ui_fader", "prev_frame_rect", "frame_fader", "prev_frame_fader", "ending_name_label", "remainder_counter")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_rcpy3")
 expand_mode = 1
 script = ExtResource("2_ex4ru")
 exit_button = NodePath("UI/ExitButton")
@@ -23,6 +27,7 @@ prev_frame_rect = NodePath("PrevFrame")
 frame_fader = NodePath("FrameFader")
 prev_frame_fader = NodePath("PrevFrame/PrevFrameFader")
 ending_name_label = NodePath("UI/EndingNameLabel")
+remainder_counter = NodePath("UI/RemainderCounter")
 frame_hold_length = 6.0
 
 [node name="FrameFader" type="Node" parent="."]
@@ -71,21 +76,58 @@ stretch_mode = 3
 script = ExtResource("7_ort0p")
 
 [node name="EndingNameLabel" type="Label" parent="UI"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -128.0
+offset_left = -64.0
 offset_top = 27.0
-offset_right = 128.0
+offset_right = 64.0
 offset_bottom = 59.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("8_208u3")
 theme_override_font_sizes/font_size = 32
-text = "THE END"
+horizontal_alignment = 1
 
 [node name="BobbingComponent" parent="UI/EndingNameLabel" instance=ExtResource("9_btp46")]
 bobbing_height = 4.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/EndingNameLabel"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -6.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_it7iu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RemainderCounter" parent="UI" instance=ExtResource("9_kfjd0")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -150.0
+offset_right = 132.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BobbingComponent2" parent="UI/RemainderCounter" instance=ExtResource("9_btp46")]
+bobbing_height = 4.0
+bob_offset = 1.5708
 
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]

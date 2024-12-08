@@ -430,7 +430,8 @@ func build_factory(factory_index : int):
 	if factory_build_progress[factory_index] >= factory.build_days:
 		factory_build_progress[factory_index] = 0
 		planned_factory_amounts[factory_index] -= 1
-		active_factory_amounts[factory_index] += 1
+		if !factory.keep_zero_factory_active_amount:
+			active_factory_amounts[factory_index] += 1
 		if factory.output_on_build:
 			add_material_amounts(factory.output_materials, factory.outputs_per_day)
 		factory_amount_updated.emit(factory)
