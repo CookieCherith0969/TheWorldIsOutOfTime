@@ -54,7 +54,7 @@ var tutorial_texts : Array[String] = [
 	"This window tracks the built and planned amounts of each factory. Most factories output daily once built.",
 	"The numbers above the material icons indicate the daily input and output of the factory.",
 	"Factories cost materials to research, and to build.",
-	"Some factories run upon being built, instead of daily. These factories lack numbers above their inputs.",
+	"Some factories run once upon being built, instead of daily. These factories lack numbers above their inputs.",
 	"The fate of Earth lies in your hands. Good luck."
 ]
 
@@ -206,10 +206,13 @@ func on_popup_dismissed():
 	show_tutorial_popup(tutorial_index)
 
 func end_tutorial():
+	if tutorial_index >= tutorial_texts.size()-2:
+		factory_window.prev_page()
+	else:
+		factory_window.prev_page(false)
 	tutorial_index = tutorial_texts.size()
 	GameManager.game_state = GameManager.GameState.GAME
 	tutorial_popup.hide()
-	factory_window.prev_page()
 	screen_cover_fader.fade_out(cover_fade_time)
 	UIManager.hide_tooltip()
 	for child in tutorial_elements:
@@ -234,6 +237,15 @@ func show_tutorial_popup(index : int):
 	elif index == 9:
 		UIManager.hide_tooltip()
 		factory_window.next_page()
+		factory_grid.get_child(2).unlock()
+		factory_grid.get_child(4).unlock()
+		factory_grid.get_child(5).unlock()
+		factory_grid.get_child(6).unlock()
+	elif index == 10:
+		factory_grid.get_child(2).lock()
+		factory_grid.get_child(4).lock()
+		factory_grid.get_child(5).lock()
+		factory_grid.get_child(6).lock()
 
 func on_factory_page_changed():
 	update_focus_neighbours()

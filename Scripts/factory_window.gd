@@ -22,14 +22,15 @@ func _ready() -> void:
 	populate_factories()
 	update_buttons()
 
-func prev_page():
+func prev_page(print : bool = true):
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
 	
 	populate_factories()
 	update_buttons()
-	UIManager.print_to_code_window("prev_fact_page()")
+	if print:
+		UIManager.print_to_code_window("prev_fact_page()")
 	page_changed.emit()
 
 func next_page():
