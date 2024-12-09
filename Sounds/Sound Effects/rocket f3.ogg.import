@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bd47ov17gsud0"
+path="res://.godot/imported/rocket f3.ogg-1f6a19c8b6edc1e7ef2f854291867eaf.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/rocket f3.ogg"
+dest_files=["res://.godot/imported/rocket f3.ogg-1f6a19c8b6edc1e7ef2f854291867eaf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

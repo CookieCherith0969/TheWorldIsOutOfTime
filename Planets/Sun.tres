@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="PlanetInfo" load_steps=22 format=3 uid="uid://bgw0yq7bf5wo4"]
+[gd_resource type="Resource" script_class="PlanetInfo" load_steps=12 format=3 uid="uid://bgw0yq7bf5wo4"]
 
 [ext_resource type="Script" path="res://Planets/planet_info.gd" id="1_ssmw3"]
 [ext_resource type="Texture2D" uid="uid://d1sjtb7f485wh" path="res://Sprites/Solar System Objects/solar-system-sun.png" id="2_lyts2"]
-[ext_resource type="Texture2D" uid="uid://dg2jvnupcw4yb" path="res://Sprites/Placeholder/PlaceholderRotatingAsteroid.png" id="3_aykju"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ihty3"]
 atlas = ExtResource("2_lyts2")
@@ -68,78 +67,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_okbl1"]
-atlas = ExtResource("3_aykju")
-region = Rect2(0, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_teyyx"]
-atlas = ExtResource("3_aykju")
-region = Rect2(4, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p7g0d"]
-atlas = ExtResource("3_aykju")
-region = Rect2(8, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_svgk6"]
-atlas = ExtResource("3_aykju")
-region = Rect2(12, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oyrao"]
-atlas = ExtResource("3_aykju")
-region = Rect2(0, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gk51"]
-atlas = ExtResource("3_aykju")
-region = Rect2(4, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7opt"]
-atlas = ExtResource("3_aykju")
-region = Rect2(8, 0, 4, 4)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p00ip"]
-atlas = ExtResource("3_aykju")
-region = Rect2(12, 0, 4, 4)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_71jbq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_okbl1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_teyyx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p7g0d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_svgk6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oyrao")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4gk51")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o7opt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p00ip")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [resource]
 script = ExtResource("1_ssmw3")
 planet_name = "SUN"
-sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_gykvj"), SubResource("SpriteFrames_71jbq")])
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_gykvj")])
 sprite_offset = Vector2(0, 0)
 orbital_period_hours = 0.0
 orbit_variation = 0.0
-rotational_period_hours = 12.0
+rotational_period_hours = 22.0
 rotation_variation = 0.0
 orbit_distance = 0.0
 distance_variation = 0.0

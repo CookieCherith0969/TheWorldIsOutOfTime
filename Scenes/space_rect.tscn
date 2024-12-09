@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cml40s7uhfwfg"]
+
+[ext_resource type="Texture2D" uid="uid://dku4ojbvsv8pc" path="res://Sprites/Placeholder/PlaceholderSpaceTilePalette.png" id="1_skqg1"]
+[ext_resource type="Script" path="res://Scripts/space_rect.gd" id="2_ee78x"]
+
+[node name="SpaceRect" type="TextureRect"]
+offset_right = 196.0
+offset_bottom = 196.0
+mouse_filter = 2
+texture = ExtResource("1_skqg1")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("2_ee78x")

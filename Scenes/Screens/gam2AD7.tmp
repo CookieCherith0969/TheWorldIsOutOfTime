@@ -1,0 +1,252 @@
+[gd_scene load_steps=34 format=3 uid="uid://1rb1mnyln0nq"]
+
+[ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
+[ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
+[ext_resource type="PackedScene" uid="uid://j48kbuc5aeum" path="res://Scenes/time_control.tscn" id="3_4sqxc"]
+[ext_resource type="Texture2D" uid="uid://bu8xnim814cnm" path="res://Sprites/Buttons/solar-system-panel-normal.png" id="4_01h4l"]
+[ext_resource type="PackedScene" uid="uid://cfglvy7i2o8wj" path="res://Scenes/tutorial_popup.tscn" id="4_5hga2"]
+[ext_resource type="Texture2D" uid="uid://dmv2pyg3swwo4" path="res://Sprites/Buttons/solar-system-panel-pressed.png" id="5_trtoq"]
+[ext_resource type="Texture2D" uid="uid://c3distleqmp0c" path="res://Sprites/Buttons/solar-system-panel-hover.png" id="6_mbwtj"]
+[ext_resource type="Texture2D" uid="uid://5euyktl8xhyg" path="res://Sprites/Buttons/solar-system-panel-focus.png" id="7_5woe5"]
+[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="8_0pksf"]
+[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="9_jhacp"]
+[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="10_25e18"]
+[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="11_boivc"]
+[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="12_ytipg"]
+[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="13_kuh21"]
+[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="14_0d8i7"]
+[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="15_s4meh"]
+[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="16_tawda"]
+[ext_resource type="Script" path="res://Scripts/asteroid_field_populator.gd" id="17_ho582"]
+[ext_resource type="Resource" uid="uid://d2jw3lpyvsj4l" path="res://Planets/FieldAsteroid.tres" id="18_fnsl7"]
+[ext_resource type="Script" path="res://Scripts/death_asteroid_manager.gd" id="19_j0yud"]
+[ext_resource type="Resource" uid="uid://pt2e3x02hbja" path="res://Planets/DeathAsteroid.tres" id="20_xl0mu"]
+[ext_resource type="PackedScene" uid="uid://65lakltc5wdh" path="res://Scenes/asteroid_warning.tscn" id="21_t1fxb"]
+[ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="22_7g3ue"]
+[ext_resource type="PackedScene" uid="uid://dbihtam1i81a" path="res://Scenes/material_window.tscn" id="24_fqstt"]
+[ext_resource type="PackedScene" uid="uid://yf4p7g6dmo68" path="res://Scenes/factory_window.tscn" id="25_rre55"]
+[ext_resource type="Texture2D" uid="uid://cwsve6uidhjpg" path="res://Sprites/Buttons/minimize-button-normal.png" id="28_33452"]
+[ext_resource type="Texture2D" uid="uid://chgttx4jxaigf" path="res://Sprites/Buttons/minimize-button-pressed.png" id="29_l8m8v"]
+[ext_resource type="Texture2D" uid="uid://cpkyvrrj0j0he" path="res://Sprites/Buttons/minimize-button-hover.png" id="30_f28y7"]
+[ext_resource type="Texture2D" uid="uid://bdmjxtihs2g8v" path="res://Sprites/Placeholder/PlaceholderWindowSpace.png" id="31_g8vrw"]
+[ext_resource type="PackedScene" uid="uid://ug7ye1ri5gke" path="res://Scenes/launch_button.tscn" id="31_gp4wh"]
+[ext_resource type="Texture2D" uid="uid://dc0waj3fc7lsu" path="res://Sprites/Buttons/minimize-button-focus.png" id="31_ygalj"]
+[ext_resource type="Script" path="res://Scripts/large_map.gd" id="32_21avp"]
+[ext_resource type="PackedScene" uid="uid://blqairk0d88el" path="res://Scenes/code_window.tscn" id="32_xgsqe"]
+
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "death_asteroid_manager", "tutorial_popup", "tutorial_elements")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dpfp6")
+small_map = NodePath("SolarSystemMap")
+time_control = NodePath("NormalTimeControl")
+large_map = NodePath("LargeMap")
+large_time_control = NodePath("LargeTimeControl")
+material_window = NodePath("MaterialWindow")
+factory_window = NodePath("FactoryWindow")
+minimise_button = NodePath("LargeMap/MinimiseButton")
+launch_button = NodePath("LaunchButton")
+death_asteroid_manager = NodePath("SolarSystemMap/DeathAsteroidManager")
+tutorial_popup = NodePath("TutorialPopup")
+tutorial_elements = [NodePath("SolarSystemMap"), NodePath("TimeLabel")]
+
+[node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 280.0
+offset_bottom = 37.0
+
+[node name="NormalTimeControl" parent="." instance=ExtResource("3_4sqxc")]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 41.0
+offset_right = 278.0
+offset_bottom = 69.0
+
+[node name="TutorialPopup" parent="." instance=ExtResource("4_5hga2")]
+layout_mode = 0
+
+[node name="SolarSystemMap" type="TextureButton" parent="."]
+visible = false
+z_index = -1
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -206.0
+offset_bottom = 206.0
+grow_horizontal = 0
+focus_neighbor_left = NodePath("../NormalTimeControl")
+focus_neighbor_bottom = NodePath("../FactoryWindow")
+texture_normal = ExtResource("4_01h4l")
+texture_pressed = ExtResource("5_trtoq")
+texture_hover = ExtResource("6_mbwtj")
+texture_disabled = ExtResource("5_trtoq")
+texture_focused = ExtResource("7_5woe5")
+stretch_mode = 3
+
+[node name="Sun" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mercury" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("9_jhacp")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Venus" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("10_25e18")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Earth" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("11_boivc")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mars" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("12_ytipg")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Jupiter" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("13_kuh21")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Saturn" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("14_0d8i7")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Uranus" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("15_s4meh")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Neptune" parent="SolarSystemMap" instance=ExtResource("8_0pksf")]
+position = Vector2(117, 48)
+represented_planet = ExtResource("16_tawda")
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="AsteroidFieldPopulator" type="Node2D" parent="SolarSystemMap"]
+script = ExtResource("17_ho582")
+num_asteroids = 30
+asteroid_info = ExtResource("18_fnsl7")
+
+[node name="DeathAsteroidManager" type="Node2D" parent="SolarSystemMap" node_paths=PackedStringArray("earth", "large_map")]
+script = ExtResource("19_j0yud")
+earth = NodePath("../Earth")
+large_map = NodePath("../../LargeMap")
+planet_scene = ExtResource("8_0pksf")
+death_asteroid_info = ExtResource("20_xl0mu")
+warning_scene = ExtResource("21_t1fxb")
+warning_offset = Vector2(2.5, 7)
+
+[node name="SpaceRect" parent="SolarSystemMap" instance=ExtResource("22_7g3ue")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 201.0
+offset_bottom = 201.0
+
+[node name="MaterialWindow" parent="." instance=ExtResource("24_fqstt")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 73.0
+offset_right = 291.0
+offset_bottom = 203.0
+
+[node name="FactoryWindow" parent="." instance=ExtResource("25_rre55")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 209.0
+offset_right = 378.0
+offset_bottom = 496.0
+
+[node name="LargeTimeControl" parent="." instance=ExtResource("3_4sqxc")]
+visible = false
+layout_mode = 0
+offset_left = 317.0
+offset_top = 11.0
+offset_right = 437.0
+offset_bottom = 39.0
+
+[node name="LargeMap" type="NinePatchRect" parent="." node_paths=PackedStringArray("small_map")]
+visible = false
+z_index = 3
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_top = 50.0
+offset_bottom = 500.0
+grow_horizontal = 0
+mouse_filter = 0
+texture = ExtResource("31_g8vrw")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+script = ExtResource("32_21avp")
+small_map = NodePath("../SolarSystemMap")
+scale_factor = Vector2(2.5, 2.5)
+
+[node name="MinimiseButton" type="TextureButton" parent="LargeMap"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -26.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 26.0
+grow_horizontal = 0
+texture_normal = ExtResource("28_33452")
+texture_pressed = ExtResource("29_l8m8v")
+texture_hover = ExtResource("30_f28y7")
+texture_disabled = ExtResource("29_l8m8v")
+texture_focused = ExtResource("31_ygalj")
+
+[node name="SpaceRect" parent="LargeMap" instance=ExtResource("22_7g3ue")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 498.0
+offset_bottom = 448.0
+do_rotating = false
+
+[node name="LaunchButton" parent="." instance=ExtResource("31_gp4wh")]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 41.0
+offset_right = 138.0
+offset_bottom = 69.0
+
+[node name="CodeWindow" parent="." instance=ExtResource("32_xgsqe")]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 209.0
+offset_right = 496.0
+offset_bottom = 496.0
+
+[connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
+[connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]

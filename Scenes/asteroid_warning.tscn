@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://65lakltc5wdh"]
+
+[ext_resource type="Texture2D" uid="uid://bo7gc1i4sclov" path="res://Sprites/Solar System Objects/asteroid-warning.png" id="1_jawov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veeen"]
+atlas = ExtResource("1_jawov")
+region = Rect2(0, 0, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hueh1"]
+atlas = ExtResource("1_jawov")
+region = Rect2(18, 0, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmhvg"]
+atlas = ExtResource("1_jawov")
+region = Rect2(9, 0, 9, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k3oij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_veeen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hueh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmhvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hueh1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Warning" type="AnimatedSprite2D"]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_k3oij")
+autoplay = "default"

@@ -27,7 +27,7 @@ var rotational_period_hours : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameManager.hour_passed.connect(on_hour_passed)
+	GameManager.day_ended.connect(on_day_ended)
 	sprite_frames = represented_planet.sprite_frame_list.pick_random()
 	
 	if should_randomise_position:
@@ -60,6 +60,19 @@ func on_hour_passed():
 		rotation_angle = fposmod(rotation_angle, 360.0*rotation_divisor)
 		update_rotation()
 
+func on_day_ended():
+	if orbital_period_hours > 0:
+		var orbit_change = 1/orbital_period_hours
+		orbit_angle += 360*orbit_change*24
+		orbit_angle = fposmod(orbit_angle, 360.0)
+		update_position()
+	
+	if rotational_period_hours > 0:
+		var rotate_change = 1/rotational_period_hours
+		rotation_angle += 360*rotate_change*24
+		rotation_angle = fposmod(rotation_angle, 360.0*rotation_divisor)
+		update_rotation()
+
 func update_position():
 	var center: Vector2 = map_size/2 + map_offset
 	center *= map_scale
@@ -78,9 +91,9 @@ func update_position():
 	if orbital_period_hours <= 0:
 		return
 	if orbit_angle < 180:
-		z_index = 2
+		z_index = 3
 	else:
-		z_index = 0
+		z_index = 1
 		
 
 func update_rotation():

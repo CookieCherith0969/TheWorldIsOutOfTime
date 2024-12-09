@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkhvm16stdjdi"]
+
+[ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="1_vncqh"]
+
+[node name="SlideManager" type="Node" node_paths=PackedStringArray("targets")]
+script = ExtResource("1_vncqh")
+targets = [null]

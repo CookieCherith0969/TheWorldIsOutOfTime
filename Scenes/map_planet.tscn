@@ -69,7 +69,7 @@ animations = [{
 }]
 
 [node name="MapPlanet" type="AnimatedSprite2D"]
-z_index = 1
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_cfh4y")
 speed_scale = 0.1
 script = ExtResource("2_usar1")
