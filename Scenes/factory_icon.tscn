@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgdoipj6x5udp"]
+
+[ext_resource type="Texture2D" uid="uid://b3uyryexx61l8" path="res://Sprites/Placeholder/PlaceholderArrow.png" id="1_xqenk"]
+
+[node name="FactoryIcon" type="TextureRect"]
+size_flags_horizontal = 4
+texture = ExtResource("1_xqenk")
+stretch_mode = 3

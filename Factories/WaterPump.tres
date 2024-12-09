@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://q6j3y8cks5ja"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_l1la5"]
+
+[resource]
+script = ExtResource("1_l1la5")
+factory_name = &"Water Pump"
+sort_priority = 10
+start_amount = 2
+output_on_build = false
+input_materials = Array[int]([])
+inputs_per_day = Array[int]([])
+output_materials = Array[int]([1])
+outputs_per_day = Array[int]([100])
+build_days = 2
+build_materials = Array[int]([2, 3])
+build_amounts = Array[int]([200, 60])
+research_materials = Array[int]([])
+research_amounts = Array[int]([])
+hide_material_amounts = false
+keep_zero_factory_active_amount = false

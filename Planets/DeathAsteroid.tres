@@ -1,0 +1,237 @@
+[gd_resource type="Resource" script_class="PlanetInfo" load_steps=38 format=3 uid="uid://pt2e3x02hbja"]
+
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="1_dyw4w"]
+[ext_resource type="Texture2D" uid="uid://bk8e3yo0drxdj" path="res://Sprites/Solar System Objects/asteroid-1.png" id="2_1trim"]
+[ext_resource type="Texture2D" uid="uid://cwdxnitq1jtan" path="res://Sprites/Solar System Objects/asteroid-2.png" id="3_rvpa4"]
+[ext_resource type="Texture2D" uid="uid://c2stai8lothx3" path="res://Sprites/Solar System Objects/asteroid-3.png" id="4_ufvuh"]
+[ext_resource type="Texture2D" uid="uid://bby0uw4bmrt5l" path="res://Sprites/Solar System Objects/asteroid-4.png" id="5_c2ont"]
+[ext_resource type="Texture2D" uid="uid://cmhsfektvrpoj" path="res://Sprites/Solar System Objects/asteroid-5.png" id="6_e36vg"]
+[ext_resource type="Texture2D" uid="uid://dl3vdqbivvppi" path="res://Sprites/Solar System Objects/asteroid-6.png" id="7_2eomm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhl4i"]
+atlas = ExtResource("2_1trim")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3l0o"]
+atlas = ExtResource("2_1trim")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys1ix"]
+atlas = ExtResource("2_1trim")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3arb"]
+atlas = ExtResource("2_1trim")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0icyq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhl4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3l0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys1ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3arb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbmby"]
+atlas = ExtResource("3_rvpa4")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fedy1"]
+atlas = ExtResource("3_rvpa4")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i4p6"]
+atlas = ExtResource("3_rvpa4")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbfs0"]
+atlas = ExtResource("3_rvpa4")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7ib4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbmby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fedy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i4p6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbfs0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m5x6"]
+atlas = ExtResource("4_ufvuh")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgawo"]
+atlas = ExtResource("4_ufvuh")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7kvn"]
+atlas = ExtResource("4_ufvuh")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16hhq"]
+atlas = ExtResource("4_ufvuh")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8dqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m5x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgawo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7kvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16hhq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtvwj"]
+atlas = ExtResource("5_c2ont")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_disbb"]
+atlas = ExtResource("5_c2ont")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4g80"]
+atlas = ExtResource("5_c2ont")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jof20"]
+atlas = ExtResource("5_c2ont")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ssjm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtvwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_disbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4g80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jof20")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bqrf"]
+atlas = ExtResource("6_e36vg")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg8uu"]
+atlas = ExtResource("6_e36vg")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wigp6"]
+atlas = ExtResource("6_e36vg")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1hu3"]
+atlas = ExtResource("6_e36vg")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyytb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bqrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg8uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wigp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1hu3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imqol"]
+atlas = ExtResource("7_2eomm")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wujao"]
+atlas = ExtResource("7_2eomm")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62v57"]
+atlas = ExtResource("7_2eomm")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71mra"]
+atlas = ExtResource("7_2eomm")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4o3rn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imqol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wujao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62v57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71mra")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_dyw4w")
+planet_name = "DEATH ASTEROID"
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_0icyq"), SubResource("SpriteFrames_q7ib4"), SubResource("SpriteFrames_v8dqk"), SubResource("SpriteFrames_0ssjm"), SubResource("SpriteFrames_cyytb"), SubResource("SpriteFrames_4o3rn")])
+sprite_offset = Vector2(0, 0)
+orbital_period_hours = 6000.0
+orbit_variation = 0.0
+rotational_period_hours = 50.0
+rotation_variation = 0.0
+orbit_distance = 49.5
+distance_variation = 0.0

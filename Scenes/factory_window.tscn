@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://yf4p7g6dmo68"]
+
+[ext_resource type="Script" path="res://Scripts/factory_window.gd" id="1_cgacj"]
+[ext_resource type="PackedScene" uid="uid://cvpu5rrhb7ehv" path="res://Scenes/factory_counter.tscn" id="2_dkht3"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="2_fsvpq"]
+[ext_resource type="Texture2D" uid="uid://bp5odisi6b6eq" path="res://Sprites/Buttons/prev-page-button-normal.png" id="4_b4vnu"]
+[ext_resource type="Texture2D" uid="uid://cpv52j50mgwpj" path="res://Sprites/Buttons/prev-page-button-pressed.png" id="5_bk3lg"]
+[ext_resource type="Texture2D" uid="uid://bkmd5n2ffjnq6" path="res://Sprites/Buttons/prev-page-button-hover.png" id="6_ahitw"]
+[ext_resource type="Texture2D" uid="uid://dy0g0w1k37boi" path="res://Sprites/Buttons/prev-page-button-disabled.png" id="7_s3gvx"]
+[ext_resource type="Texture2D" uid="uid://o4yotr48l0rt" path="res://Sprites/Buttons/prev-page-button-focus.png" id="8_0h054"]
+[ext_resource type="Texture2D" uid="uid://cwafy2kyl5dbb" path="res://Sprites/Buttons/next-page-button-normal.png" id="9_5gwu0"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="9_jd46a"]
+[ext_resource type="Texture2D" uid="uid://c4sbtihab5icy" path="res://Sprites/Buttons/next-page-button-pressed.png" id="10_krjc1"]
+[ext_resource type="Texture2D" uid="uid://drib5mfsw5ypv" path="res://Sprites/Buttons/next-page-button-hover.png" id="11_7wkov"]
+[ext_resource type="Texture2D" uid="uid://y8i0a21b82e1" path="res://Sprites/Buttons/next-page-button-disabled.png" id="12_yk456"]
+[ext_resource type="Texture2D" uid="uid://duyv8t6t3mere" path="res://Sprites/Buttons/next-page-button-focus.png" id="13_br88r"]
+
+[node name="FactoryWindow" type="MarginContainer"]
+custom_minimum_size = Vector2(373, 287)
+offset_right = 372.0
+offset_bottom = 287.0
+script = ExtResource("1_cgacj")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_fsvpq")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 54
+
+[node name="FactoryGrid" type="GridContainer" parent="InnerMargin"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="FactoryCounter" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter2" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter3" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter4" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter5" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter6" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter7" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter8" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="FactoryCounter9" parent="InnerMargin/FactoryGrid" instance=ExtResource("2_dkht3")]
+layout_mode = 2
+
+[node name="PrevButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+focus_neighbor_right = NodePath("../NextButton")
+disabled = true
+texture_normal = ExtResource("4_b4vnu")
+texture_pressed = ExtResource("5_bk3lg")
+texture_hover = ExtResource("6_ahitw")
+texture_disabled = ExtResource("7_s3gvx")
+texture_focused = ExtResource("8_0h054")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="PrevButton"]
+script = ExtResource("9_jd46a")
+
+[node name="NextButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_neighbor_left = NodePath("../PrevButton")
+texture_normal = ExtResource("9_5gwu0")
+texture_pressed = ExtResource("10_krjc1")
+texture_hover = ExtResource("11_7wkov")
+texture_disabled = ExtResource("12_yk456")
+texture_focused = ExtResource("13_br88r")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="NextButton"]
+script = ExtResource("9_jd46a")
+
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

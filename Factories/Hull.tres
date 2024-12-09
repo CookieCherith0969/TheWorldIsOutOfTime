@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FactoryInfo" load_steps=2 format=3 uid="uid://b1f7du8kvbrno"]
+
+[ext_resource type="Script" path="res://Factories/factory_info.gd" id="1_1mpm5"]
+
+[resource]
+script = ExtResource("1_1mpm5")
+factory_name = &"Hull Assembler"
+sort_priority = 120
+start_amount = 0
+output_on_build = true
+input_materials = Array[int]([7, 6, 11])
+inputs_per_day = Array[int]([0, 0, 0])
+output_materials = Array[int]([12])
+outputs_per_day = Array[int]([1])
+build_days = 16
+build_materials = Array[int]([7, 6, 11])
+build_amounts = Array[int]([2000, 1000, 10000])
+research_materials = Array[int]([7, 6, 11])
+research_amounts = Array[int]([5000, 5000, 5000])
+hide_material_amounts = true
+keep_zero_factory_active_amount = true

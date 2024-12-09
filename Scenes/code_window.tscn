@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqairk0d88el"]
+
+[ext_resource type="Script" path="res://Scripts/code_window.gd" id="1_2pnrw"]
+[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="2_2xbch"]
+[ext_resource type="FontFile" uid="uid://qni0tmaljlnt" path="res://Fonts/goodbye_despair/goodbyeDespair.ttf" id="3_g1fhe"]
+
+[node name="CodeWindow" type="MarginContainer"]
+custom_minimum_size = Vector2(114, 287)
+offset_left = -22.0
+offset_right = 92.0
+offset_bottom = 287.0
+script = ExtResource("1_2pnrw")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_2xbch")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Innermargin" type="MarginContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="CodeBackground" type="ColorRect" parent="Innermargin"]
+layout_mode = 2
+color = Color(0.0901961, 0.0901961, 0.219608, 1)
+
+[node name="CodeMargin" type="MarginContainer" parent="Innermargin"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="CodeLabel" type="Label" parent="Innermargin/CodeMargin"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_g1fhe")
+theme_override_font_sizes/font_size = 8
+vertical_alignment = 2
+autowrap_mode = 1
+uppercase = true
+max_lines_visible = 28
+visible_characters = 0
+visible_ratio = 0.0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=17 format=3 uid="uid://cudnes87bgwwh"]
+
+[ext_resource type="Script" path="res://Globals/game_manager.gd" id="1_pi4dq"]
+[ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="2_hh8fx"]
+[ext_resource type="Texture2D" uid="uid://ccd8l7y3wjms4" path="res://Sprites/Icons/water.png" id="3_8g1ve"]
+[ext_resource type="Texture2D" uid="uid://dqd1ve0he8fmc" path="res://Sprites/Icons/concrete.png" id="4_8s8lv"]
+[ext_resource type="Texture2D" uid="uid://uf1q7lm2dhq0" path="res://Sprites/Icons/common-metal.png" id="5_cxnyy"]
+[ext_resource type="Texture2D" uid="uid://di0hd6sactc15" path="res://Sprites/Icons/electronics.png" id="6_hxjsl"]
+[ext_resource type="Texture2D" uid="uid://bry5af07pyxmn" path="res://Sprites/Icons/oil.png" id="6_noaih"]
+[ext_resource type="Texture2D" uid="uid://cgej0jdmw3wkl" path="res://Sprites/Icons/plastic.png" id="7_ln2ej"]
+[ext_resource type="Texture2D" uid="uid://cbmtjjkvffv4x" path="res://Sprites/Icons/rare-metal.png" id="8_inphn"]
+[ext_resource type="Texture2D" uid="uid://vus5fun1ko0g" path="res://Sprites/Icons/computers.png" id="10_ggnut"]
+[ext_resource type="Texture2D" uid="uid://boc4ikkkj7bvj" path="res://Sprites/Icons/hull.png" id="11_y71pq"]
+[ext_resource type="Texture2D" uid="uid://c0hlbgmex" path="res://Sprites/Icons/raw-uranium.png" id="12_ie47k"]
+[ext_resource type="Texture2D" uid="uid://b6ct4e3e1ubds" path="res://Sprites/Icons/enriched-uranium.png" id="13_ofuy2"]
+[ext_resource type="Texture2D" uid="uid://bht1jakmy22oo" path="res://Sprites/Icons/nuclear-bomb.png" id="14_6liol"]
+[ext_resource type="Texture2D" uid="uid://bw0hlqvyqiyep" path="res://Sprites/Icons/alloy.png" id="15_vy6w4"]
+[ext_resource type="Texture2D" uid="uid://m73ifsg3sgou" path="res://Sprites/Icons/fuel.png" id="16_5b7f4"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_pi4dq")
+material_icons = Array[Texture]([ExtResource("2_hh8fx"), ExtResource("3_8g1ve"), ExtResource("4_8s8lv"), ExtResource("5_cxnyy"), ExtResource("6_noaih"), ExtResource("8_inphn"), ExtResource("7_ln2ej"), ExtResource("15_vy6w4"), ExtResource("6_hxjsl"), ExtResource("12_ie47k"), ExtResource("13_ofuy2"), ExtResource("16_5b7f4"), ExtResource("11_y71pq"), ExtResource("10_ggnut"), ExtResource("14_6liol")])
+
+[connection signal="factory_amount_updated" from="." to="." method="_on_factory_amount_updated"]

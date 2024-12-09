@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://6tn58fw5s7d6"
+path="res://.godot/imported/metal f3.ogg-555822691c0068788c744ec212cb66c1.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/metal f3.ogg"
+dest_files=["res://.godot/imported/metal f3.ogg-555822691c0068788c744ec212cb66c1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

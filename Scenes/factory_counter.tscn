@@ -1,0 +1,323 @@
+[gd_scene load_steps=35 format=3 uid="uid://cvpu5rrhb7ehv"]
+
+[ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
+[ext_resource type="Resource" uid="uid://saqj5krpedy7" path="res://Factories/StoneMine.tres" id="2_7gxrd"]
+[ext_resource type="Texture2D" uid="uid://b2vqwi7lc5hc0" path="res://Sprites/Icons/factory-arrow.png" id="4_d0ei5"]
+[ext_resource type="PackedScene" uid="uid://cgdoipj6x5udp" path="res://Scenes/factory_icon.tscn" id="4_nkejt"]
+[ext_resource type="PackedScene" uid="uid://n01k6less0tr" path="res://Scenes/factory_label.tscn" id="4_ojxxd"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="5_deej6"]
+[ext_resource type="Texture2D" uid="uid://dgfls2rebh2dp" path="res://Sprites/Icons/stone.png" id="6_kivah"]
+[ext_resource type="Texture2D" uid="uid://dsv01mhtpj8jv" path="res://Sprites/Panels/gray-panel-2-2px-border.png" id="6_m328o"]
+[ext_resource type="Texture2D" uid="uid://uf1q7lm2dhq0" path="res://Sprites/Icons/common-metal.png" id="8_j78le"]
+[ext_resource type="Texture2D" uid="uid://i0x0fdwyrp2c" path="res://Sprites/Icons/wrench.png" id="9_lqr1t"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="10_wb8r5"]
+[ext_resource type="Texture2D" uid="uid://deswenf50s6fl" path="res://Sprites/Buttons/add-prod-button-normal.png" id="10_xsj8s"]
+[ext_resource type="Texture2D" uid="uid://dai4ysitmliuc" path="res://Sprites/Buttons/add-prod-button-pressed.png" id="11_2akyy"]
+[ext_resource type="Texture2D" uid="uid://b0f16do1diy35" path="res://Sprites/Buttons/add-prod-button-hover.png" id="12_7ypcg"]
+[ext_resource type="Texture2D" uid="uid://jvlg7ob1568a" path="res://Sprites/Buttons/add-prod-button-disabled.png" id="13_2gq2p"]
+[ext_resource type="Texture2D" uid="uid://cgp5ks7neup20" path="res://Sprites/Buttons/add-prod-button-focus.png" id="14_6qtwy"]
+[ext_resource type="Texture2D" uid="uid://27dwksrgug0i" path="res://Sprites/Buttons/minus-prod-button-normal.png" id="15_dqyv1"]
+[ext_resource type="Texture2D" uid="uid://d4lckcjm36v6o" path="res://Sprites/Buttons/minus-prod-button-pressed.png" id="16_7o6du"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="16_jf1oa"]
+[ext_resource type="Texture2D" uid="uid://br0qu116lkakb" path="res://Sprites/Buttons/minus-prod-button-hover.png" id="17_dx8m8"]
+[ext_resource type="Texture2D" uid="uid://bunidpkfhuk61" path="res://Sprites/Buttons/minus-prod-button-disabled.png" id="18_sioiy"]
+[ext_resource type="Texture2D" uid="uid://bwu8p2mnn4b3e" path="res://Sprites/Buttons/minus-prod-button-focus.png" id="19_ta8fr"]
+[ext_resource type="Texture2D" uid="uid://dmiid8l8odijq" path="res://Sprites/Buttons/lock-button-normal.png" id="20_jjlxd"]
+[ext_resource type="Texture2D" uid="uid://ckmgefvvi7f66" path="res://Sprites/Buttons/lock-button-pressed.png" id="21_oplvo"]
+[ext_resource type="Texture2D" uid="uid://8fl7tysyn1s8" path="res://Sprites/Buttons/lock-button-hover.png" id="22_n62rc"]
+[ext_resource type="Texture2D" uid="uid://rpkghyfsve4v" path="res://Sprites/Buttons/lock-button-disabled.png" id="23_kjsbo"]
+[ext_resource type="Texture2D" uid="uid://24tyavjggpt5" path="res://Sprites/Buttons/lock-button-focus.png" id="24_qmq1s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cii6y"]
+bg_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw4a4"]
+bg_color = Color(0.87451, 0.878431, 0.886275, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfhr0"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75h1a"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6sis"]
+atlas = ExtResource("9_lqr1t")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wnvel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfhr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75h1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6sis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75h1a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wd7"]
+bg_color = Color(0.25, 0.25, 0.25, 0.356863)
+
+[node name="FactoryCounter" type="Control"]
+custom_minimum_size = Vector2(116, 65)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 116.0
+offset_bottom = 65.0
+script = ExtResource("1_f452t")
+represented_factory = ExtResource("2_7gxrd")
+icon_scene = ExtResource("4_nkejt")
+arrow_texture = ExtResource("4_d0ei5")
+unlocked_background = ExtResource("5_deej6")
+locked_background = ExtResource("6_m328o")
+
+[node name="BackgroundRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_deej6")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="IconBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -12.5
+offset_right = 48.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="FactoryIcon2" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_kivah")
+
+[node name="FactoryIcon3" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_d0ei5")
+
+[node name="FactoryIcon4" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("8_j78le")
+
+[node name="FactoryIcon6" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_kivah")
+
+[node name="FactoryIcon7" parent="IconBox" instance=ExtResource("4_nkejt")]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_kivah")
+
+[node name="NumBox" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = -3.0
+offset_right = 48.0
+offset_bottom = 24.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="FactoryLabel" parent="NumBox" instance=ExtResource("4_ojxxd")]
+layout_mode = 2
+text = "2"
+
+[node name="FactoryLabel2" parent="NumBox" instance=ExtResource("4_ojxxd")]
+layout_mode = 2
+
+[node name="FactoryLabel3" parent="NumBox" instance=ExtResource("4_ojxxd")]
+layout_mode = 2
+text = "3"
+
+[node name="FactoryLabel5" parent="NumBox" instance=ExtResource("4_ojxxd")]
+layout_mode = 2
+text = "3"
+
+[node name="AmountLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -26.0
+offset_right = 65.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
+theme_override_fonts/font = ExtResource("10_wb8r5")
+theme_override_font_sizes/font_size = 8
+text = "999/999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlanButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../UnplanButton")
+focus_previous = NodePath("../UnplanButton")
+mouse_filter = 1
+disabled = true
+texture_normal = ExtResource("10_xsj8s")
+texture_pressed = ExtResource("11_2akyy")
+texture_hover = ExtResource("12_7ypcg")
+texture_disabled = ExtResource("13_2gq2p")
+texture_focused = ExtResource("14_6qtwy")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="PlanButton"]
+script = ExtResource("16_jf1oa")
+
+[node name="UnplanButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -28.0
+offset_right = -27.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../PlanButton")
+focus_next = NodePath("../PlanButton")
+mouse_filter = 1
+disabled = true
+texture_normal = ExtResource("15_dqyv1")
+texture_pressed = ExtResource("16_7o6du")
+texture_hover = ExtResource("17_dx8m8")
+texture_disabled = ExtResource("18_sioiy")
+texture_focused = ExtResource("19_ta8fr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="UnplanButton"]
+script = ExtResource("16_jf1oa")
+
+[node name="BuildProgressBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cii6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iw4a4")
+value = 50.0
+show_percentage = false
+
+[node name="BuildingWrench" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(9, 73)
+sprite_frames = SubResource("SpriteFrames_wnvel")
+frame = 2
+frame_progress = 0.421552
+
+[node name="TooltipMarker" type="Marker2D" parent="."]
+position = Vector2(116, 0)
+
+[node name="LockPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2wd7")
+
+[node name="UnlockButton" type="TextureButton" parent="LockPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = 5.0
+offset_right = 11.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+texture_normal = ExtResource("20_jjlxd")
+texture_pressed = ExtResource("21_oplvo")
+texture_hover = ExtResource("22_n62rc")
+texture_disabled = ExtResource("23_kjsbo")
+texture_focused = ExtResource("24_qmq1s")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="LockPanel/UnlockButton"]
+script = ExtResource("16_jf1oa")
+
+[node name="SketchSound" type="AudioStreamPlayer" parent="."]
+
+[node name="EraseSound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="focus_entered" from="PlanButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="PlanButton" to="." method="_on_focus_exited"]
+[connection signal="pressed" from="PlanButton" to="." method="_on_plan_button_pressed"]
+[connection signal="focus_entered" from="UnplanButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="UnplanButton" to="." method="_on_focus_exited"]
+[connection signal="pressed" from="UnplanButton" to="." method="_on_unplan_button_pressed"]
+[connection signal="focus_entered" from="LockPanel/UnlockButton" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="LockPanel/UnlockButton" to="." method="_on_focus_exited"]
+[connection signal="pressed" from="LockPanel/UnlockButton" to="." method="_on_unlock_button_pressed"]

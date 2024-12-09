@@ -1,0 +1,481 @@
+[gd_scene load_steps=52 format=3 uid="uid://deeyw2hrbotgb"]
+
+[ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
+[ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
+[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="3_6twq7"]
+[ext_resource type="Texture2D" uid="uid://xojghxn6vw3q" path="res://Sprites/Placeholder/PlaceholderHideNormalClosed.png" id="4_g1cr4"]
+[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="4_tt4sn"]
+[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="5_2muob"]
+[ext_resource type="Texture2D" uid="uid://bl14iyscuhdl8" path="res://Sprites/Placeholder/PlaceholderHideHoverClosed.png" id="5_kigbf"]
+[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="6_8osvy"]
+[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="7_80nfk"]
+[ext_resource type="PackedScene" uid="uid://dkhvm16stdjdi" path="res://Scenes/slide_manager.tscn" id="7_rqhpv"]
+[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="8_4to8t"]
+[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="9_mhqpv"]
+[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="10_j3eve"]
+[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="11_1aypn"]
+[ext_resource type="Script" path="res://Scripts/asteroid_field_populator.gd" id="12_sa5np"]
+[ext_resource type="Resource" uid="uid://d2jw3lpyvsj4l" path="res://Planets/FieldAsteroid.tres" id="13_w7yol"]
+[ext_resource type="Texture2D" uid="uid://ehhiibfpvbbx" path="res://Sprites/Placeholder/PlaceholderTitle.png" id="14_x72yw"]
+[ext_resource type="Texture2D" uid="uid://m453v7xmyt3n" path="res://Sprites/Placeholder/PlaceholderHideNormalOpen.png" id="16_t0b0n"]
+[ext_resource type="Texture2D" uid="uid://sn3xn4lu5idc" path="res://Sprites/Placeholder/PlaceholderHidePressed.png" id="17_uywws"]
+[ext_resource type="Texture2D" uid="uid://bht8ve2bl7egx" path="res://Sprites/Placeholder/PlaceholderHideHoverOpen.png" id="18_xpuh5"]
+[ext_resource type="Texture2D" uid="uid://lqntwjndb75i" path="res://Sprites/Placeholder/PlaceholderHideFocus.png" id="19_gdf8v"]
+[ext_resource type="PackedScene" uid="uid://bmhqcdla8tfxq" path="res://Scenes/bobbing_component.tscn" id="20_5bwx1"]
+[ext_resource type="Texture2D" uid="uid://xa2ir7ymytr0" path="res://Sprites/Placeholder/PlaceholderFastNormalT.png" id="20_hyr5r"]
+[ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="21_b6cxi"]
+[ext_resource type="Texture2D" uid="uid://cyl5x8lwb62xc" path="res://Sprites/Buttons/play-button-normal.png" id="21_h110y"]
+[ext_resource type="Texture2D" uid="uid://fu0wlgopeplc" path="res://Sprites/Placeholder/PlaceholderFastPressedT.png" id="21_q2dyf"]
+[ext_resource type="Texture2D" uid="uid://bu8la6milv254" path="res://Sprites/Placeholder/PlaceholderFastHoverT.png" id="22_ct0so"]
+[ext_resource type="Texture2D" uid="uid://prfbxyyf2mmw" path="res://Sprites/Buttons/play-button-pressed.png" id="22_jl0xb"]
+[ext_resource type="Texture2D" uid="uid://cluxpbiivn7rg" path="res://Sprites/Buttons/play-button-hover.png" id="23_1cf2x"]
+[ext_resource type="Texture2D" uid="uid://dbxmqwvuv50gr" path="res://Sprites/Buttons/mainmenu-button-focus.png" id="24_n3tcr"]
+[ext_resource type="Texture2D" uid="uid://cmfg36e7rwysi" path="res://Sprites/Buttons/settings-button-normal.png" id="25_ljxs3"]
+[ext_resource type="PackedScene" uid="uid://cfqd75j7k77x8" path="res://Scenes/hover_fade_component.tscn" id="25_tnpjw"]
+[ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="26_nshxy"]
+[ext_resource type="Texture2D" uid="uid://cwikb5b2vlxyp" path="res://Sprites/Buttons/settings-button-pressed.png" id="26_tjyli"]
+[ext_resource type="Texture2D" uid="uid://dcwc6kkvlnd58" path="res://Sprites/Buttons/settings-button-hover.png" id="27_ev750"]
+[ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
+[ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
+[ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="37_ieih4"]
+[ext_resource type="Texture2D" uid="uid://d30f8ofddp7gm" path="res://Sprites/Placeholder/PlaceholderSlideGrabberDisabled.png" id="37_pv5e0"]
+[ext_resource type="Texture2D" uid="uid://cnxn358w5568f" path="res://Sprites/Placeholder/PlaceholderSlideGrabberHighlighted.png" id="38_2djdh"]
+[ext_resource type="Texture2D" uid="uid://diclbprv1curb" path="res://Sprites/Placeholder/PlaceholderSlideGrabberNormal.png" id="39_pw6tx"]
+[ext_resource type="Texture2D" uid="uid://gcu564pkd7yh" path="res://Sprites/Placeholder/PlaceholderFullscreenNormal.png" id="40_8a75j"]
+[ext_resource type="Script" path="res://Scripts/volume_slider.gd" id="40_d8j5p"]
+[ext_resource type="Texture2D" uid="uid://dhqqo663g4aov" path="res://Sprites/Placeholder/PlaceholderFullscreenPressed.png" id="41_xiv7p"]
+[ext_resource type="Texture2D" uid="uid://clus4ymiqx4xj" path="res://Sprites/Placeholder/PlaceholderFullscreenHover.png" id="42_gfxev"]
+[ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="46_v4k27"]
+[ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc5sd"]
+content_margin_left = 0.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+content_margin_bottom = 6.0
+bg_color = Color(0.635294, 0.682353, 0.733333, 1)
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.87451, 0.878431, 0.886275, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3imni"]
+bg_color = Color(0.137255, 0.709804, 0.827451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.87451, 0.878431, 0.886275, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xkkh"]
+bg_color = Color(0.137255, 0.709804, 0.827451, 1)
+corner_detail = 1
+
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_84wai")
+second_hand = NodePath("Title/SecondHand")
+minute_hand = NodePath("Title/MinuteHand")
+hour_hand = NodePath("Title/HourHand")
+hide_normal_open = ExtResource("16_t0b0n")
+hide_hover_open = ExtResource("18_xpuh5")
+hide_normal_closed = ExtResource("4_g1cr4")
+hide_hover_closed = ExtResource("5_kigbf")
+planet_slider = NodePath("PlanetSlider")
+menu_slider = NodePath("MenuSlider")
+settings_slider = NodePath("SettingsSlider")
+settings_title_slider = NodePath("SettingsTitleSlider")
+settings_menu_slider = NodePath("SettingsMenuSlider")
+
+[node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
+z_index = -2
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+
+[node name="PlanetSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
+targets = [NodePath("../Planets")]
+slide_target_pos = Vector2(0, -100)
+
+[node name="MenuSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
+targets = [NodePath("../Title"), NodePath("../MenuBox"), NodePath("../SettingsBox")]
+slide_target_pos = Vector2(0, -300)
+
+[node name="SettingsMenuSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../MenuBox")]
+slide_target_pos = Vector2(0, 50)
+
+[node name="SettingsTitleSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../Title")]
+slide_target_pos = Vector2(0, -300)
+
+[node name="SettingsSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("47_dfowj")
+targets = [NodePath("../SettingsBox")]
+slide_target_pos = Vector2(0, 300)
+
+[node name="Planets" type="Node2D" parent="."]
+z_index = -2
+
+[node name="Sun" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mercury" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("4_tt4sn")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Venus" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("5_2muob")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Earth" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("6_8osvy")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Mars" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("7_80nfk")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Jupiter" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("8_4to8t")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Saturn" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("9_mhqpv")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Uranus" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("10_j3eve")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="Neptune" parent="Planets" instance=ExtResource("3_6twq7")]
+position = Vector2(280, 348)
+represented_planet = ExtResource("11_1aypn")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+should_randomise_position = true
+should_randomise_rotation = true
+
+[node name="AsteroidFieldPopulator" type="Node2D" parent="Planets"]
+position = Vector2(163, 300)
+script = ExtResource("12_sa5np")
+num_asteroids = 30
+asteroid_info = ExtResource("13_w7yol")
+map_offset = Vector2(0, 90)
+map_scale = Vector2(2.5, 2.5)
+
+[node name="Title" type="TextureRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_top = -13.0
+offset_right = 500.0
+offset_bottom = 187.0
+texture = ExtResource("14_x72yw")
+stretch_mode = 3
+
+[node name="BobbingComponent" parent="Title" instance=ExtResource("20_5bwx1")]
+
+[node name="HourHand" type="Line2D" parent="Title"]
+position = Vector2(114, 139)
+points = PackedVector2Array(0, 0, 0, -18)
+width = 6.0
+default_color = Color(0.635294, 0.682353, 0.733333, 1)
+texture_mode = 2
+
+[node name="MinuteHand" type="Line2D" parent="Title"]
+position = Vector2(114, 139)
+points = PackedVector2Array(0, 0, 0, -24)
+width = 4.0
+default_color = Color(0.87451, 0.878431, 0.886275, 1)
+texture_mode = 2
+
+[node name="SecondHand" type="Line2D" parent="Title"]
+position = Vector2(114, 139)
+points = PackedVector2Array(0, 0, 0, -30)
+width = 2.0
+default_color = Color(0.137255, 0.709804, 0.827451, 1)
+texture_mode = 2
+
+[node name="MenuBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -41.0
+offset_right = 166.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="TextureButton" parent="MenuBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("21_h110y")
+texture_pressed = ExtResource("22_jl0xb")
+texture_hover = ExtResource("23_1cf2x")
+texture_disabled = ExtResource("22_jl0xb")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="BobbingComponent2" parent="MenuBox/PlayButton" instance=ExtResource("20_5bwx1")]
+bobbing_height = 4.0
+bob_offset = -0.7854
+
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/PlayButton"]
+script = ExtResource("26_nshxy")
+
+[node name="SettingsButton" type="TextureButton" parent="MenuBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("25_ljxs3")
+texture_pressed = ExtResource("26_tjyli")
+texture_hover = ExtResource("27_ev750")
+texture_disabled = ExtResource("26_tjyli")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="BobbingComponent2" parent="MenuBox/SettingsButton" instance=ExtResource("20_5bwx1")]
+bobbing_height = 4.0
+bob_offset = -1.5708
+
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/SettingsButton"]
+script = ExtResource("26_nshxy")
+
+[node name="ExitButton" type="TextureButton" parent="MenuBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("28_3h5m7")
+texture_pressed = ExtResource("29_gjw76")
+texture_hover = ExtResource("30_51570")
+texture_disabled = ExtResource("29_gjw76")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="BobbingComponent2" parent="MenuBox/ExitButton" instance=ExtResource("20_5bwx1")]
+bobbing_height = 4.0
+bob_offset = -2.3562
+
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/ExitButton"]
+script = ExtResource("26_nshxy")
+
+[node name="ControlBox" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = -38.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SlowButton" type="TextureButton" parent="ControlBox"]
+layout_mode = 2
+texture_normal = ExtResource("20_hyr5r")
+texture_pressed = ExtResource("21_q2dyf")
+texture_hover = ExtResource("22_ct0so")
+texture_disabled = ExtResource("21_q2dyf")
+texture_focused = ExtResource("19_gdf8v")
+flip_h = true
+
+[node name="HoverFadeComponent" parent="ControlBox/SlowButton" instance=ExtResource("25_tnpjw")]
+layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
+
+[node name="KeyFocusComponent" type="Node" parent="ControlBox/SlowButton"]
+script = ExtResource("26_nshxy")
+
+[node name="FastButton" type="TextureButton" parent="ControlBox"]
+layout_mode = 2
+texture_normal = ExtResource("20_hyr5r")
+texture_pressed = ExtResource("21_q2dyf")
+texture_hover = ExtResource("22_ct0so")
+texture_disabled = ExtResource("21_q2dyf")
+texture_focused = ExtResource("19_gdf8v")
+
+[node name="HoverFadeComponent" parent="ControlBox/FastButton" instance=ExtResource("25_tnpjw")]
+layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
+
+[node name="KeyFocusComponent" type="Node" parent="ControlBox/FastButton"]
+script = ExtResource("26_nshxy")
+
+[node name="HideButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -38.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("16_t0b0n")
+texture_pressed = ExtResource("17_uywws")
+texture_hover = ExtResource("18_xpuh5")
+texture_disabled = ExtResource("17_uywws")
+texture_focused = ExtResource("19_gdf8v")
+
+[node name="HoverFadeComponent" parent="HideButton" instance=ExtResource("25_tnpjw")]
+layout_mode = 1
+fade_color = Color(0, 0, 0, 0)
+active = false
+
+[node name="KeyFocusComponent" type="Node" parent="HideButton"]
+script = ExtResource("26_nshxy")
+
+[node name="SettingsBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = -280.0
+offset_right = 151.0
+offset_bottom = -72.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Music"
+
+[node name="Label3" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Effects"
+
+[node name="EffectSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Effects"
+
+[node name="FullscreenButton" type="TextureButton" parent="SettingsBox"]
+layout_mode = 2
+texture_normal = ExtResource("40_8a75j")
+texture_pressed = ExtResource("41_xiv7p")
+texture_hover = ExtResource("42_gfxev")
+texture_disabled = ExtResource("41_xiv7p")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+script = ExtResource("46_v4k27")
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/FullscreenButton"]
+script = ExtResource("26_nshxy")
+
+[node name="BobbingComponent" type="Node" parent="SettingsBox"]
+script = ExtResource("21_b6cxi")
+bobbing_height = 2.0
+
+[connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="focus_entered" from="ControlBox/SlowButton" to="ControlBox/SlowButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="ControlBox/SlowButton" to="." method="_on_slow_button_pressed"]
+[connection signal="pressed" from="ControlBox/SlowButton" to="ControlBox/SlowButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="focus_entered" from="ControlBox/FastButton" to="ControlBox/FastButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="ControlBox/FastButton" to="." method="_on_fast_button_pressed"]
+[connection signal="pressed" from="ControlBox/FastButton" to="ControlBox/FastButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="focus_entered" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
+[connection signal="pressed" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm53s1s8yyno7"]
+
+[ext_resource type="Script" path="res://Scripts/tooltip_header_icon.gd" id="1_li8jd"]
+[ext_resource type="Texture2D" uid="uid://cjdq7kllg5mx6" path="res://Sprites/Icons/hammer.png" id="2_4entj"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="2_jo1at"]
+
+[node name="TooltipHeaderIcon" type="HBoxContainer"]
+offset_right = 58.0
+offset_bottom = 49.0
+script = ExtResource("1_li8jd")
+
+[node name="HeaderLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("2_jo1at")
+theme_override_font_sizes/font_size = 8
+text = "STONE"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HeaderIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("2_4entj")
+stretch_mode = 2
