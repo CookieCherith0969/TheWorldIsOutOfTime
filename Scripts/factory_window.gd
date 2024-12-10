@@ -26,6 +26,9 @@ func prev_page(print : bool = true):
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
+		populate_factories()
+		update_buttons()
+		return
 	
 	populate_factories()
 	update_buttons()
@@ -37,6 +40,9 @@ func next_page():
 	current_page += 1
 	if current_page >= number_of_pages:
 		current_page = number_of_pages-1
+		populate_factories()
+		update_buttons()
+		return
 	
 	populate_factories()
 	update_buttons()
@@ -78,3 +84,15 @@ func _on_prev_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
 	next_page()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if !event.pressed:
+			return
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			next_page()
+			UIManager.hide_tooltip()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			prev_page()
+			UIManager.hide_tooltip()

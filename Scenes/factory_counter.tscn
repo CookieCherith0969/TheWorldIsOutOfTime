@@ -138,14 +138,13 @@ mouse_filter = 2
 texture = ExtResource("6_kivah")
 
 [node name="NumBox" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -48.0
+offset_left = -56.0
 offset_top = -3.0
-offset_right = 48.0
+offset_right = 56.0
 offset_bottom = 24.0
 grow_horizontal = 2
 mouse_filter = 2
@@ -160,6 +159,10 @@ text = "2"
 layout_mode = 2
 
 [node name="FactoryLabel3" parent="NumBox" instance=ExtResource("4_ojxxd")]
+layout_mode = 2
+text = "3"
+
+[node name="FactoryLabel4" parent="NumBox" instance=ExtResource("4_ojxxd")]
 layout_mode = 2
 text = "3"
 
@@ -178,10 +181,27 @@ offset_top = -26.0
 offset_right = 65.0
 offset_bottom = -3.0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
 theme_override_fonts/font = ExtResource("10_wb8r5")
 theme_override_font_sizes/font_size = 8
 text = "999/999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="DailyLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -63.0
+offset_top = 6.0
+offset_right = -2.0
+offset_bottom = 14.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("10_wb8r5")
+theme_override_font_sizes/font_size = 8
+text = "/d"
 horizontal_alignment = 2
 vertical_alignment = 1
 

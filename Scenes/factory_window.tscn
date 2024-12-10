@@ -102,5 +102,6 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="NextButton"]
 script = ExtResource("9_jd46a")
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

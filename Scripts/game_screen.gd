@@ -33,7 +33,7 @@ var factory_next : TextureButton
 var minimise_button : TextureButton
 
 @export
-var launch_button : TextureButton
+var launch_button : LaunchButton
 
 @export
 var time_label : MarginContainer
@@ -107,6 +107,12 @@ var menu_box : HBoxContainer
 var menu_slider : SlideManager
 @export
 var play_button : TextureButton
+@export
+var confirm_cover : ColorRect
+@export
+var confirm_button_box : HBoxContainer
+@export
+var cancel_button : TextureButton
 
 func _ready() -> void:
 	#small_map.grab_focus()
@@ -153,6 +159,8 @@ func toggle_menu():
 	if menu_slider.slide_state != SlideManager.SlideState.IDLE:
 		return
 	
+	set_confirm_visible(false)
+	
 	menu_shown = !menu_shown
 	set_menu_disabled(true)
 	if menu_shown:
@@ -192,6 +200,24 @@ func set_menu_disabled(disabled : bool):
 				child.focus_mode = Control.FOCUS_ALL
 		if child is TextureButton:
 			child.disabled = disabled
+
+func set_confirm_visible(visibility : bool):
+	if visibility:
+		confirm_cover.show()
+	else:
+		confirm_cover.hide()
+	for child in confirm_button_box.get_children():
+		if child is Control:
+			if !visibility:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+		if child is TextureButton:
+			child.disabled = !visibility
+	if visibility:
+		cancel_button.grab_focus()
+	else:
+		play_button.grab_focus()
 
 func setup_popup():
 	tutorial_targets[1] = Vector2i(death_asteroid_manager.death_asteroid.global_position + death_asteroid_manager.warning_offset)
@@ -234,7 +260,11 @@ func show_tutorial_popup(index : int):
 	tutorial_popup.set_center_position(tutorial_positions[tutorial_index])
 	tutorial_popup.set_target(tutorial_targets[tutorial_index])
 	tutorial_elements[tutorial_index].show()
-	if index == 8:
+	if index == 4:
+		launch_button.show_tooltip()
+	elif index == 5:
+		UIManager.hide_tooltip()
+	elif index == 8:
 		middle_right_factory.show_tooltip()
 	elif index == 9:
 		UIManager.hide_tooltip()
@@ -396,9 +426,17 @@ func hide_large_map():
 	small_map.grab_focus()
 
 func _on_exit_button_pressed() -> void:
-	UIManager.move_to_screen(UIManager.Screens.TITLE)
-	SettingsManager.save_settings()
+	set_confirm_visible(true)
 
 
 func _on_play_button_pressed() -> void:
 	toggle_menu()
+
+
+func _on_confirm_button_pressed() -> void:
+	UIManager.move_to_screen(UIManager.Screens.TITLE)
+	SettingsManager.save_settings()
+
+
+func _on_cancel_button_pressed() -> void:
+	set_confirm_visible(false)

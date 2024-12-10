@@ -1,4 +1,5 @@
 extends TextureButton
+class_name LaunchButton
 
 @export
 var rocket_materials : Array[GameManager.Materials]
@@ -36,14 +37,17 @@ func update_button():
 	else:
 		disabled = true
 
-func _on_mouse_entered() -> void:
+func show_tooltip():
 	UIManager.show_rocket_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
+
+func _on_mouse_entered() -> void:
+	show_tooltip()
 
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
 
 func _on_focus_entered() -> void:
-	UIManager.show_rocket_tooltip(tooltip_marker.global_position, rocket_materials, rocket_amounts)
+	show_tooltip()
 
 func _on_focus_exited() -> void:
 	UIManager.hide_tooltip()

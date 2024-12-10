@@ -38,10 +38,12 @@ func update_labels():
 	var prefix : String = ""
 	var change : int = GameManager.get_prev_day_change(represented_material)
 	var prediction : int = GameManager.get_predicted_change(represented_material)
-	if prediction != change:
-		gain_label.add_theme_color_override("font_color", UIManager.palette_blue)
+	if prediction < 0:
+		gain_label.add_theme_color_override("font_color", UIManager.palette_red)
+	elif prediction != change:
+		gain_label.add_theme_color_override("font_color", UIManager.palette_dark_blue)
 	else:
-		gain_label.add_theme_color_override("font_color", UIManager.palette_white)
+		gain_label.add_theme_color_override("font_color", UIManager.palette_black)
 	if prediction > 0:
 		prefix = "+"
 	gain_label.text = prefix+UIManager.simplify_number(prediction)+"/d"

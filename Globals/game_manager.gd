@@ -393,6 +393,8 @@ func process_days(number_of_days : int):
 		day_ended.emit()
 		timeskip_days = 0
 		timeskip_ended.emit()
+		if days_left <= 0:
+			collide_asteroid()
 		return
 	
 	timeskip_days += number_of_days

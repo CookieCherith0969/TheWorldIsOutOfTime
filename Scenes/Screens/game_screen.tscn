@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=62 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
@@ -54,6 +54,10 @@
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="53_slvke"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="54_2ipsv"]
 [ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="55_3nq2p"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="55_68aly"]
+[ext_resource type="Texture2D" uid="uid://cprbsf8wab3lh" path="res://Sprites/Placeholder/PlaceholderConfirmNormal.png" id="56_ggxk4"]
+[ext_resource type="Texture2D" uid="uid://dltrkttajdupo" path="res://Sprites/Placeholder/PlaceholderConfirmPressed.png" id="57_liimt"]
+[ext_resource type="Texture2D" uid="uid://bjvtcmdv11rv0" path="res://Sprites/Placeholder/PlaceholderConfirmHover.png" id="58_o473k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fwsw"]
 content_margin_left = 0.0
@@ -79,7 +83,7 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "time_label", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "play_button")]
+[node name="GameScreen" type="TextureRect" node_paths=PackedStringArray("small_map", "time_control", "large_map", "large_time_control", "material_window", "factory_window", "minimise_button", "launch_button", "time_label", "death_asteroid_manager", "tutorial_popup", "tutorial_elements", "screen_cover", "screen_cover_fader", "settings_box", "menu_box", "menu_slider", "play_button", "confirm_cover", "confirm_button_box", "cancel_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,6 +114,9 @@ settings_box = NodePath("SettingsBox")
 menu_box = NodePath("MenuBox")
 menu_slider = NodePath("MenuSlider")
 play_button = NodePath("MenuBox/PlayButton")
+confirm_cover = NodePath("ConfirmCover")
+confirm_button_box = NodePath("ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox")
+cancel_button = NodePath("ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/CancelButton")
 
 [node name="TimeLabel" parent="." instance=ExtResource("2_npmaq")]
 layout_mode = 0
@@ -485,6 +492,9 @@ stretch_mode = 3
 bobbing_height = 4.0
 bob_offset = -0.7854
 
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/PlayButton"]
+script = ExtResource("45_jbswd")
+
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -505,10 +515,100 @@ stretch_mode = 3
 bobbing_height = 4.0
 bob_offset = -2.3562
 
+[node name="KeyFocusComponent" type="Node" parent="MenuBox/ExitButton"]
+script = ExtResource("45_jbswd")
+
 [node name="MenuSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("55_3nq2p")
-targets = [NodePath("../MenuBox"), NodePath("../SettingsBox")]
+targets = [NodePath("../MenuBox"), NodePath("../SettingsBox"), NodePath("../ConfirmCover/ConfirmWindow")]
 slide_target_pos = Vector2(0, 400)
+
+[node name="ConfirmCover" type="ColorRect" parent="."]
+visible = false
+z_index = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.42, 0.42, 0.42, 0.376471)
+
+[node name="ConfirmWindow" type="MarginContainer" parent="ConfirmCover"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.0
+offset_top = -222.0
+offset_right = 146.0
+offset_bottom = -104.0
+grow_horizontal = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmCover/ConfirmWindow"]
+layout_mode = 2
+texture = ExtResource("55_68aly")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="ConfirmCover/ConfirmWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 14
+
+[node name="Label" type="Label" parent="ConfirmCover/ConfirmWindow/InnerMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("6_i4nyd")
+text = "Return to Menu?"
+horizontal_alignment = 1
+
+[node name="ButtonBox" type="HBoxContainer" parent="ConfirmCover/ConfirmWindow/InnerMargin"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ConfirmButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../CancelButton")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../CancelButton")
+focus_previous = NodePath("../CancelButton")
+texture_normal = ExtResource("56_ggxk4")
+texture_pressed = ExtResource("57_liimt")
+texture_hover = ExtResource("58_o473k")
+texture_disabled = ExtResource("57_liimt")
+texture_focused = ExtResource("42_qnjso")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/ConfirmButton"]
+script = ExtResource("45_jbswd")
+
+[node name="CancelButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../ConfirmButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../ConfirmButton")
+focus_previous = NodePath("../ConfirmButton")
+texture_normal = ExtResource("52_dqu7l")
+texture_pressed = ExtResource("53_slvke")
+texture_hover = ExtResource("54_2ipsv")
+texture_disabled = ExtResource("53_slvke")
+texture_focused = ExtResource("42_qnjso")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/CancelButton"]
+script = ExtResource("45_jbswd")
 
 [connection signal="pressed" from="SolarSystemMap" to="." method="_on_solar_system_map_pressed"]
 [connection signal="pressed" from="LargeMap/MinimiseButton" to="." method="_on_minimise_button_pressed"]
@@ -516,3 +616,5 @@ slide_target_pos = Vector2(0, 400)
 [connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]
 [connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/CancelButton" to="." method="_on_cancel_button_pressed"]

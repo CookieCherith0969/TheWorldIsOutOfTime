@@ -56,6 +56,10 @@ var palette_grey : Color
 var palette_black : Color
 @export
 var palette_green : Color
+@export
+var palette_dark_blue : Color
+@export
+var palette_red : Color
 
 var ui_actions : Array[String] = [
 	"ui_accept",
@@ -72,6 +76,22 @@ func _ready() -> void:
 	empty_screen = get_tree().current_scene
 	get_window().min_size = get_viewport().size
 	make_new_screen(false)
+	for ui_action in ui_actions:
+		for event in InputMap.action_get_events(ui_action):
+			if event is not InputEventKey:
+				continue
+			var shift_event : InputEventKey = event.duplicate()
+			var ctrl_event : InputEventKey = event.duplicate()
+			var shift_ctrl_event : InputEventKey = event.duplicate()
+			
+			shift_event.shift_pressed = true
+			ctrl_event.ctrl_pressed = true
+			shift_ctrl_event.shift_pressed = true
+			shift_ctrl_event.ctrl_pressed = true
+			
+			InputMap.action_add_event(ui_action, shift_event)
+			InputMap.action_add_event(ui_action, ctrl_event)
+			InputMap.action_add_event(ui_action, shift_ctrl_event)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -110,7 +130,10 @@ func simplify_number(num : int, show_positive : bool = false) -> String:
 	var suffix_index = min(magnitude/3, simplification_suffixes.size()-1)
 	
 	var simplified_num : float = num/float(pow(1000,suffix_index))
-	var truncated_num : float = snapped(simplified_num, 0.1)
+	var truncated_num : float = simplified_num * 10
+	truncated_num = floorf(truncated_num)
+	truncated_num /= 10
+	
 	var num_string = ""
 	if suffix_index <= 0:
 		num_string = str(truncated_num)
@@ -179,7 +202,9 @@ func make_new_screen(fade : bool = true):
 				SoundManager.track_changing = true
 			Screens.TITLE: 
 				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.MENU)
+				SoundManager.track_changing = false
 			Screens.END:
+				SoundManager.track_changing = false
 				if GameManager.game_state == GameManager.GameState.END_SURVIVAL:
 					SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.EARLY)
 				else:

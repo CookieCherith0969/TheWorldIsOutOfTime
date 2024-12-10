@@ -4,9 +4,6 @@ class_name TimeControl
 var selected_exponent : int = 0
 var max_exponent : int = 11
 
-var normal_color : Color = Color.WHITE
-var max_color : Color = Color.RED
-
 @onready
 var duration_label : Label = $InnerMargin/InnerBox/DurationLabel
 
@@ -101,9 +98,9 @@ func update_label():
 	var duration = pow(2, selected_exponent)
 	duration_label.text = str(duration)
 	if duration >= GameManager.days_left:
-		duration_label.add_theme_color_override("font_color", max_color)
+		duration_label.add_theme_color_override("font_color", UIManager.palette_red)
 	else:
-		duration_label.add_theme_color_override("font_color", normal_color)
+		duration_label.add_theme_color_override("font_color", UIManager.palette_black)
 
 
 func _on_gui_input(event: InputEvent) -> void:
