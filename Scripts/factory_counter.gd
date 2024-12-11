@@ -377,6 +377,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			return
 		if GameManager.is_timeskipping():
 			return
+		if empty:
+			return
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			GameManager.plan_factory(factory_index)
 			show_tooltip()
