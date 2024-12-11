@@ -18,8 +18,8 @@ func _ready() -> void:
 	for i in range(num_asteroids):
 		var new_asteroid = planet_scene.instantiate()
 		new_asteroid.represented_planet = asteroid_info
-		new_asteroid.should_randomise_position = true
-		new_asteroid.should_randomise_rotation = true
+		#new_asteroid.should_randomise_position = true
+		#new_asteroid.should_randomise_rotation = true
 		new_asteroid.map_size = map_size
 		new_asteroid.map_offset = map_offset
 		new_asteroid.map_scale = map_scale

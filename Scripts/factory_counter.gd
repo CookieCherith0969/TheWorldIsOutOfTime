@@ -67,6 +67,7 @@ func _ready() -> void:
 	GameManager.timeskip_started.connect(on_timeskip_started)
 	GameManager.timeskip_ended.connect(on_timeskip_ended)
 	GameManager.day_ended.connect(on_day_ended)
+	UIManager.tooltip_shown.connect(_on_tooltip_shown)
 	
 	set_rep_factory(represented_factory)
 
@@ -259,7 +260,6 @@ func _on_focus_exited() -> void:
 	UIManager.hide_tooltip()
 
 func show_tooltip():
-	showing_tooltip = true
 	if empty:
 		return
 	
@@ -280,7 +280,10 @@ func show_tooltip():
 		var research_materials : Array[GameManager.Materials]
 		research_materials.assign(represented_factory.research_materials)
 		UIManager.show_unlock_tooltip(tooltip_marker.global_position, research_materials, represented_factory.research_amounts)
+	showing_tooltip = true
 
+func _on_tooltip_shown():
+	showing_tooltip = false
 
 func get_right_button() -> TextureButton:
 	if unlocked:

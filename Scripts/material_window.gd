@@ -20,7 +20,7 @@ func _ready() -> void:
 	populate_materials()
 	update_buttons()
 
-func prev_page(print : bool = true):
+func prev_page(print_to_code : bool = true):
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
@@ -30,7 +30,7 @@ func prev_page(print : bool = true):
 	
 	populate_materials()
 	update_buttons()
-	if print:
+	if print_to_code:
 		UIManager.print_to_code_window("prev_mat_page()")
 
 func next_page():

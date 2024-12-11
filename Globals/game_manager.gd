@@ -7,8 +7,8 @@ signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 signal materials_updated
-signal asteroid_collided
-signal rocket_launched
+#signal asteroid_collided
+#signal rocket_launched
 
 enum GameState {MENU, TUTORIAL, GAME, END_SURVIVAL, END_DESTRUCTION}
 
@@ -108,6 +108,10 @@ func _ready() -> void:
 	setup_game()
 
 func setup_game():
+	if SaveManager.has_planets:
+		setup_game_from_save()
+		return
+	
 	days_left = starting_days
 	timeskip_days = 0
 	
@@ -148,7 +152,19 @@ func setup_game():
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
 	material_amounts[Materials.METALS] = 100
-	materials_updated.emit()
+
+func setup_game_from_save():
+	days_left = SaveManager.current_save.days_left
+	timeskip_days = 0
+	
+	active_factory_amounts = SaveManager.current_save.active_factory_amounts.duplicate()
+	planned_factory_amounts = SaveManager.current_save.planned_factory_amounts.duplicate()
+	factory_build_progress = SaveManager.current_save.factory_build_progresses.duplicate()
+	unlocked_factories = SaveManager.current_save.unlocked_factories.duplicate()
+	
+	material_amounts = SaveManager.current_save.material_amounts.duplicate()
+	lifetime_increases = SaveManager.current_save.lifetime_increases.duplicate()
+	update_predicted_changes()
 
 func _physics_process(delta: float) -> void:
 	if game_state == GameState.MENU:
@@ -553,9 +569,22 @@ func unlock_factory(factory_index : int) -> bool:
 	factory_amount_updated.emit(factory)
 	return true
 
-
-func _on_factory_amount_updated(factory: FactoryInfo) -> void:
-	update_predicted_changes()
-
 func reset_game():
 	setup_game()
+
+func _on_factory_amount_updated(_factory: FactoryInfo) -> void:
+	update_predicted_changes()
+	SaveManager.current_save.unlocked_factories = unlocked_factories.duplicate()
+	SaveManager.current_save.active_factory_amounts = active_factory_amounts.duplicate()
+	SaveManager.current_save.planned_factory_amounts = planned_factory_amounts.duplicate()
+
+func _on_factory_build_progressed(_factory: FactoryInfo, _day_progress: int) -> void:
+	SaveManager.current_save.factory_build_progresses = factory_build_progress.duplicate()
+
+func _on_materials_updated() -> void:
+	SaveManager.current_save.material_amounts = material_amounts.duplicate()
+	SaveManager.current_save.lifetime_increases = lifetime_increases.duplicate()
+
+func _on_day_ended() -> void:
+	if game_state == GameState.GAME:
+		SaveManager.current_save.days_left = days_left

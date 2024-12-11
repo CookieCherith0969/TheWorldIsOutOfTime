@@ -1,0 +1,24 @@
+[gd_scene load_steps=15 format=3 uid="uid://bvu5ye34t6p8j"]
+
+[ext_resource type="Script" path="res://Scripts/solar_system_manager.gd" id="1_6ncfw"]
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="2_jda2k"]
+[ext_resource type="Resource" uid="uid://bgw0yq7bf5wo4" path="res://Planets/Sun.tres" id="3_03ok3"]
+[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="4_tca4e"]
+[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="5_lhfjn"]
+[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="6_4ghn5"]
+[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="7_81p4o"]
+[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="8_li1x7"]
+[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="9_pmvtr"]
+[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="10_nknqs"]
+[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="11_d8rp7"]
+[ext_resource type="Resource" uid="uid://d2jw3lpyvsj4l" path="res://Planets/FieldAsteroid.tres" id="12_nj7yk"]
+[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="13_gyj63"]
+[ext_resource type="PackedScene" uid="uid://c318r86viok08" path="res://Scenes/death_asteroid.tscn" id="14_antb8"]
+
+[node name="SolarSystemManager" type="Node2D"]
+script = ExtResource("1_6ncfw")
+planet_infos = Array[ExtResource("2_jda2k")]([ExtResource("3_03ok3"), ExtResource("4_tca4e"), ExtResource("5_lhfjn"), ExtResource("6_4ghn5"), ExtResource("7_81p4o"), ExtResource("8_li1x7"), ExtResource("9_pmvtr"), ExtResource("10_nknqs")])
+earth_info = ExtResource("11_d8rp7")
+asteroid_info = ExtResource("12_nj7yk")
+planet_scene = ExtResource("13_gyj63")
+death_asteroid_scene = ExtResource("14_antb8")

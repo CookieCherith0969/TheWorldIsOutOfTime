@@ -34,6 +34,11 @@ var rocket_amounts : Array[int]
 @export
 var rocket_weightings : Array[float]
 
+@export
+var percent_asterisk : Label
+@export
+var time_asterisk : Label
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fade_out_ui()
@@ -49,6 +54,14 @@ func _ready() -> void:
 		rocket_percent += min(created_percent,rocket_weightings[i])
 	
 	percent_label.text = "Rocket Progress: %01d%%" % roundi(rocket_percent)
+	
+	if !SaveManager.hash_valid:
+		percent_asterisk.show()
+		time_asterisk.show()
+		
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
+	GameManager.reset_game()
 
 func _process(delta: float) -> void:
 	if !playing:
@@ -120,7 +133,6 @@ func fade_out_ui():
 
 
 func _on_exit_button_pressed() -> void:
-	GameManager.reset_game()
 	UIManager.current_screen_type = UIManager.Screens.TITLE
 	UIManager.make_new_screen()
 	exit_button.disabled = true

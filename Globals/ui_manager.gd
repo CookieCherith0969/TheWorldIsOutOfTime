@@ -5,6 +5,8 @@ enum Screens {TITLE, GAME, END}
 signal code_text_added(text : String)
 signal mouse_used
 signal ui_key_used
+signal tooltip_shown
+signal tooltip_hidden
 
 @export
 var current_screen_type : Screens = Screens.TITLE
@@ -150,6 +152,7 @@ func show_build_tooltip(pos : Vector2i, materials : Array[GameManager.Materials]
 	if time_cost > 0:
 		tooltip.add_time_cost(time_cost)
 	tooltip.show_tooltip()
+	tooltip_shown.emit()
 	
 func show_unlock_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int], time_cost : int = 0):
 	tooltip.position = pos
@@ -159,6 +162,7 @@ func show_unlock_tooltip(pos : Vector2i, materials : Array[GameManager.Materials
 	if time_cost > 0:
 		tooltip.add_time_cost(time_cost)
 	tooltip.show_tooltip()
+	tooltip_shown.emit()
 
 func show_material_tooltip(pos : Vector2i, represented_material : GameManager.Materials):
 	tooltip.position = pos
@@ -166,6 +170,7 @@ func show_material_tooltip(pos : Vector2i, represented_material : GameManager.Ma
 	tooltip.add_material_header(represented_material)
 	tooltip.populate_rates(represented_material)
 	tooltip.show_tooltip()
+	tooltip_shown.emit()
 
 func show_rocket_tooltip(pos : Vector2i, materials : Array[GameManager.Materials], amounts : Array[int]):
 	tooltip.position = pos
@@ -173,15 +178,18 @@ func show_rocket_tooltip(pos : Vector2i, materials : Array[GameManager.Materials
 	tooltip.add_rocket_header()
 	tooltip.populate_costs(materials, amounts)
 	tooltip.show_tooltip()
+	tooltip_shown.emit()
 
 func show_time_tooltip(pos : Vector2i):
 	tooltip.position = pos
 	tooltip.clear_icons()
 	tooltip.add_header_icon(tooltip.time_icon, str(GameManager.days_left)+" days")
 	tooltip.show_tooltip()
+	tooltip_shown.emit()
 
 func hide_tooltip():
 	tooltip.hide_tooltip()
+	tooltip_hidden.emit()
 
 func fade_tooltip():
 	tooltip.begin_fade(tooltip_hold_time, tooltip_fade_time)

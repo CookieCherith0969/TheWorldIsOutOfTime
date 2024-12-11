@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://c318r86viok08"]
+
+[ext_resource type="Texture2D" uid="uid://d1sjtb7f485wh" path="res://Sprites/Solar System Objects/solar-system-sun.png" id="1_rv2ue"]
+[ext_resource type="Script" path="res://Scripts/map_planet.gd" id="2_mmqnq"]
+[ext_resource type="Resource" uid="uid://pt2e3x02hbja" path="res://Planets/DeathAsteroid.tres" id="3_yaos0"]
+[ext_resource type="PackedScene" uid="uid://65lakltc5wdh" path="res://Scenes/asteroid_warning.tscn" id="4_n7j7x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywvtf"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2icwd"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvudf"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5ccb"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r32g3"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixebn"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31dis"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5r86"]
+atlas = ExtResource("1_rv2ue")
+region = Rect2(280, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfh4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywvtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2icwd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvudf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5ccb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r32g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixebn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31dis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5r86")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="DeathAsteroid" type="AnimatedSprite2D"]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_cfh4y")
+speed_scale = 0.1
+script = ExtResource("2_mmqnq")
+represented_planet = ExtResource("3_yaos0")
+
+[node name="Warning" parent="." instance=ExtResource("4_n7j7x")]
+position = Vector2(2.5, 7)

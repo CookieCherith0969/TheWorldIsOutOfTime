@@ -8,7 +8,7 @@ var small_map : Control
 var time_control : TimeControl
 
 @export
-var large_map : LargeMap
+var large_map : Control
 @export
 var large_time_control : TimeControl
 
@@ -39,7 +39,7 @@ var launch_button : LaunchButton
 var time_label : MarginContainer
 
 @export
-var death_asteroid_manager : DeathAsteroidManager
+var solar_system_manager : SolarSystemManager
 
 @export
 var tutorial_popup : TutorialPopup
@@ -91,6 +91,9 @@ var tutorial_elements : Array[Control] = []
 
 var tutorial_index : int = 0
 
+const tutorial_warning_offset : Vector2 = Vector2(4, 12)
+const tutorial_one_time_indexes : Array[int] = [2,4,5,6]
+
 @export
 var screen_cover : ColorRect
 @export
@@ -113,6 +116,9 @@ var confirm_cover : ColorRect
 var confirm_button_box : HBoxContainer
 @export
 var cancel_button : TextureButton
+
+@export
+var hash_asterisk : Label
 
 func _ready() -> void:
 	#small_map.grab_focus()
@@ -145,11 +151,16 @@ func _ready() -> void:
 	tutorial_popup.popup_dismissed.connect(on_popup_dismissed)
 	
 	setup_popup.call_deferred()
+	
+	if !SaveManager.hash_valid:
+		hash_asterisk.show()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ToggleMenu"):
 		if tutorial_index < tutorial_texts.size():
 			end_tutorial()
+			return
+		if GameManager.is_timeskipping():
 			return
 		toggle_menu()
 
@@ -168,6 +179,7 @@ func toggle_menu():
 		screen_cover.show()
 		screen_cover.color = menu_cover_color
 		screen_cover_fader.fade_in(cover_fade_time)
+		SaveManager.save_current_game_to_file()
 	else:
 		small_map.grab_focus()
 		menu_slider.slide_backward()
@@ -201,26 +213,8 @@ func set_menu_disabled(disabled : bool):
 		if child is TextureButton:
 			child.disabled = disabled
 
-func set_confirm_visible(visibility : bool):
-	if visibility:
-		confirm_cover.show()
-	else:
-		confirm_cover.hide()
-	for child in confirm_button_box.get_children():
-		if child is Control:
-			if !visibility:
-				child.focus_mode = Control.FOCUS_NONE
-			else:
-				child.focus_mode = Control.FOCUS_ALL
-		if child is TextureButton:
-			child.disabled = !visibility
-	if visibility:
-		cancel_button.grab_focus()
-	else:
-		play_button.grab_focus()
-
 func setup_popup():
-	tutorial_targets[1] = Vector2i(death_asteroid_manager.death_asteroid.global_position + death_asteroid_manager.warning_offset)
+	tutorial_targets[1] = Vector2i(solar_system_manager.death_asteroid.global_position + tutorial_warning_offset)
 	show_tutorial_popup(0)
 
 func on_popup_dismissed():
@@ -251,6 +245,7 @@ func end_tutorial():
 	time_control.update_buttons()
 	small_map.grab_focus()
 	small_map.disabled = false
+	launch_button.update_button()
 
 func show_tutorial_popup(index : int):
 	tutorial_popup.show()
@@ -269,15 +264,13 @@ func show_tutorial_popup(index : int):
 	elif index == 9:
 		UIManager.hide_tooltip()
 		factory_window.next_page()
-		factory_grid.get_child(2).unlock()
-		factory_grid.get_child(4).unlock()
-		factory_grid.get_child(5).unlock()
-		factory_grid.get_child(6).unlock()
+		for i in tutorial_one_time_indexes:
+			factory_grid.get_child(i).unlock()
 	elif index == 10:
-		factory_grid.get_child(2).lock()
-		factory_grid.get_child(4).lock()
-		factory_grid.get_child(5).lock()
-		factory_grid.get_child(6).lock()
+		for i in tutorial_one_time_indexes:
+			var factory_index : int = factory_window.current_page*factory_window.factories_per_page + i
+			if !GameManager.unlocked_factories[factory_index]:
+				factory_grid.get_child(i).lock()
 
 func on_factory_page_changed():
 	update_focus_neighbours()
@@ -424,6 +417,23 @@ func hide_large_map():
 	launch_button.show()
 	
 	small_map.grab_focus()
+
+func set_confirm_visible(visibility : bool):
+	if visibility:
+		confirm_cover.show()
+	else:
+		confirm_cover.hide()
+	for child in confirm_button_box.get_children():
+		if child is TextureButton:
+			child.disabled = !visibility
+			if !visibility:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+	if visibility:
+		cancel_button.grab_focus()
+	else:
+		play_button.grab_focus()
 
 func _on_exit_button_pressed() -> void:
 	set_confirm_visible(true)

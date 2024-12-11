@@ -21,4 +21,7 @@
 script = ExtResource("1_pi4dq")
 material_icons = Array[Texture]([ExtResource("2_hh8fx"), ExtResource("3_8g1ve"), ExtResource("4_8s8lv"), ExtResource("5_cxnyy"), ExtResource("6_noaih"), ExtResource("8_inphn"), ExtResource("7_ln2ej"), ExtResource("15_vy6w4"), ExtResource("6_hxjsl"), ExtResource("12_ie47k"), ExtResource("13_ofuy2"), ExtResource("16_5b7f4"), ExtResource("11_y71pq"), ExtResource("10_ggnut"), ExtResource("14_6liol")])
 
+[connection signal="day_ended" from="." to="." method="_on_day_ended"]
 [connection signal="factory_amount_updated" from="." to="." method="_on_factory_amount_updated"]
+[connection signal="factory_build_progressed" from="." to="." method="_on_factory_build_progressed"]
+[connection signal="materials_updated" from="." to="." method="_on_materials_updated"]

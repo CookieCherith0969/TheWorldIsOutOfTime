@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="PlanetInfo" load_steps=12 format=3 uid="uid://di04e2xn2s5dc"]
+
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="1_mdwlv"]
+[ext_resource type="Texture2D" uid="uid://d23y4eji28lg4" path="res://Sprites/Solar System Objects/solar-system-venus.png" id="2_osga4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ydpm"]
+atlas = ExtResource("2_osga4")
+region = Rect2(77, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2ig0"]
+atlas = ExtResource("2_osga4")
+region = Rect2(66, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saq5g"]
+atlas = ExtResource("2_osga4")
+region = Rect2(55, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2v2m"]
+atlas = ExtResource("2_osga4")
+region = Rect2(44, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1jl7"]
+atlas = ExtResource("2_osga4")
+region = Rect2(33, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ro8n"]
+atlas = ExtResource("2_osga4")
+region = Rect2(22, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aer1"]
+atlas = ExtResource("2_osga4")
+region = Rect2(11, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgmf"]
+atlas = ExtResource("2_osga4")
+region = Rect2(0, 0, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8okp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ydpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2ig0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saq5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2v2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1jl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ro8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aer1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpgmf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_mdwlv")
+planet_name = "Fake Venus"
+sprite_frame_list = Array[SpriteFrames]([SubResource("SpriteFrames_e8okp")])
+sprite_offset = Vector2(0, 0)
+orbital_period_hours = 4380.0
+orbit_variation = 0.0
+rotational_period_hours = 72.0
+rotation_variation = 0.0
+orbit_distance = 29.0
+distance_variation = 0.0

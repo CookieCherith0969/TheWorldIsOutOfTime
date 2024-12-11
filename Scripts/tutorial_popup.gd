@@ -19,7 +19,7 @@ func set_center_position(pos : Vector2i):
 	global_position = pos - Vector2i(size/2)
 
 func set_target(target_position : Vector2i):
-	var popup_center : Vector2i = Vector2i(size/2)
+	#var popup_center : Vector2i = Vector2i(size/2)
 	var global_popup_center : Vector2i = Vector2i(global_position) + Vector2i(size/2)
 	hor_line.global_position = global_popup_center
 	hor_line.points[1].y = 0

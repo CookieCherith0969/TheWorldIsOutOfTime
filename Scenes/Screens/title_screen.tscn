@@ -1,26 +1,27 @@
-[gd_scene load_steps=52 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=61 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
-[ext_resource type="PackedScene" uid="uid://tge3qwkhqpy2" path="res://Scenes/map_planet.tscn" id="3_6twq7"]
 [ext_resource type="Texture2D" uid="uid://xojghxn6vw3q" path="res://Sprites/Placeholder/PlaceholderHideNormalClosed.png" id="4_g1cr4"]
-[ext_resource type="Resource" uid="uid://cbftq03u2wxje" path="res://Planets/Mercury.tres" id="4_tt4sn"]
-[ext_resource type="Resource" uid="uid://dvg2mr6dd04mo" path="res://Planets/Venus.tres" id="5_2muob"]
 [ext_resource type="Texture2D" uid="uid://bl14iyscuhdl8" path="res://Sprites/Placeholder/PlaceholderHideHoverClosed.png" id="5_kigbf"]
-[ext_resource type="Resource" uid="uid://b0di0xmpn7lhh" path="res://Planets/Earth.tres" id="6_8osvy"]
-[ext_resource type="Resource" uid="uid://bggsrxb7tq0qp" path="res://Planets/Mars.tres" id="7_80nfk"]
 [ext_resource type="PackedScene" uid="uid://dkhvm16stdjdi" path="res://Scenes/slide_manager.tscn" id="7_rqhpv"]
-[ext_resource type="Resource" uid="uid://dhirbl62gx8up" path="res://Planets/Jupiter.tres" id="8_4to8t"]
-[ext_resource type="Resource" uid="uid://d3mhqrpgltaje" path="res://Planets/Saturn.tres" id="9_mhqpv"]
-[ext_resource type="Resource" uid="uid://b34visnkpwsds" path="res://Planets/Uranus.tres" id="10_j3eve"]
-[ext_resource type="Resource" uid="uid://bba1sgnnn784y" path="res://Planets/Neptune.tres" id="11_1aypn"]
-[ext_resource type="Script" path="res://Scripts/asteroid_field_populator.gd" id="12_sa5np"]
-[ext_resource type="Resource" uid="uid://d2jw3lpyvsj4l" path="res://Planets/FieldAsteroid.tres" id="13_w7yol"]
+[ext_resource type="PackedScene" uid="uid://bvu5ye34t6p8j" path="res://Scenes/solar_system_manager.tscn" id="9_2fa3b"]
+[ext_resource type="Script" path="res://Planets/planet_info.gd" id="10_nrh77"]
+[ext_resource type="Resource" uid="uid://bkd3m3qouw2le" path="res://Planets/FakePlanets/FakeSun.tres" id="11_w3uo4"]
+[ext_resource type="Resource" uid="uid://duwfy2k8hx1wd" path="res://Planets/FakePlanets/FakeMercury.tres" id="12_l5hwv"]
+[ext_resource type="Resource" uid="uid://di04e2xn2s5dc" path="res://Planets/FakePlanets/FakeVenus.tres" id="13_a3m6y"]
+[ext_resource type="Resource" uid="uid://7em2yoy1fjse" path="res://Planets/FakePlanets/FakeMars.tres" id="14_wug8k"]
 [ext_resource type="Texture2D" uid="uid://ehhiibfpvbbx" path="res://Sprites/Placeholder/PlaceholderTitle.png" id="14_x72yw"]
+[ext_resource type="Resource" uid="uid://xys7vof6jrd" path="res://Planets/FakePlanets/FakeJupiter.tres" id="15_wquy6"]
+[ext_resource type="Resource" uid="uid://bqkk4gfmcmqbh" path="res://Planets/FakePlanets/FakeSaturn.tres" id="16_hd4ji"]
 [ext_resource type="Texture2D" uid="uid://m453v7xmyt3n" path="res://Sprites/Placeholder/PlaceholderHideNormalOpen.png" id="16_t0b0n"]
+[ext_resource type="Resource" uid="uid://27yar5prhyyj" path="res://Planets/FakePlanets/FakeUranus.tres" id="17_if2rw"]
 [ext_resource type="Texture2D" uid="uid://sn3xn4lu5idc" path="res://Sprites/Placeholder/PlaceholderHidePressed.png" id="17_uywws"]
+[ext_resource type="Resource" uid="uid://coo76odssex0f" path="res://Planets/FakePlanets/FakeNeptune.tres" id="18_656gl"]
 [ext_resource type="Texture2D" uid="uid://bht8ve2bl7egx" path="res://Sprites/Placeholder/PlaceholderHideHoverOpen.png" id="18_xpuh5"]
+[ext_resource type="Resource" uid="uid://fxgdddwvrn1v" path="res://Planets/FakePlanets/FakeEarth.tres" id="19_6dxlj"]
 [ext_resource type="Texture2D" uid="uid://lqntwjndb75i" path="res://Sprites/Placeholder/PlaceholderHideFocus.png" id="19_gdf8v"]
+[ext_resource type="Resource" uid="uid://dmvv5vpcoaplo" path="res://Planets/FakePlanets/FakeAsteroid.tres" id="20_0x67m"]
 [ext_resource type="PackedScene" uid="uid://bmhqcdla8tfxq" path="res://Scenes/bobbing_component.tscn" id="20_5bwx1"]
 [ext_resource type="Texture2D" uid="uid://xa2ir7ymytr0" path="res://Sprites/Placeholder/PlaceholderFastNormalT.png" id="20_hyr5r"]
 [ext_resource type="Script" path="res://Scripts/bobbing_component.gd" id="21_b6cxi"]
@@ -38,6 +39,9 @@
 [ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
+[ext_resource type="Texture2D" uid="uid://cyjsmg4ugj1jm" path="res://Sprites/Placeholder/PlaceholderResetNorma.png" id="34_bniu6"]
+[ext_resource type="Texture2D" uid="uid://dfgi1mdoya6up" path="res://Sprites/Placeholder/PlaceholderResetPressed.png" id="35_1x6a1"]
+[ext_resource type="Texture2D" uid="uid://byu07iuvm3yk3" path="res://Sprites/Placeholder/PlaceholderResetHover.png" id="36_mou3l"]
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="37_ieih4"]
 [ext_resource type="Texture2D" uid="uid://d30f8ofddp7gm" path="res://Sprites/Placeholder/PlaceholderSlideGrabberDisabled.png" id="37_pv5e0"]
 [ext_resource type="Texture2D" uid="uid://cnxn358w5568f" path="res://Sprites/Placeholder/PlaceholderSlideGrabberHighlighted.png" id="38_2djdh"]
@@ -46,6 +50,11 @@
 [ext_resource type="Script" path="res://Scripts/volume_slider.gd" id="40_d8j5p"]
 [ext_resource type="Texture2D" uid="uid://dhqqo663g4aov" path="res://Sprites/Placeholder/PlaceholderFullscreenPressed.png" id="41_xiv7p"]
 [ext_resource type="Texture2D" uid="uid://clus4ymiqx4xj" path="res://Sprites/Placeholder/PlaceholderFullscreenHover.png" id="42_gfxev"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="42_nc1a1"]
+[ext_resource type="Texture2D" uid="uid://cprbsf8wab3lh" path="res://Sprites/Placeholder/PlaceholderConfirmNormal.png" id="43_hem7m"]
+[ext_resource type="Texture2D" uid="uid://dltrkttajdupo" path="res://Sprites/Placeholder/PlaceholderConfirmPressed.png" id="44_aa6ga"]
+[ext_resource type="Texture2D" uid="uid://bjvtcmdv11rv0" path="res://Sprites/Placeholder/PlaceholderConfirmHover.png" id="45_1nwaq"]
+[ext_resource type="Script" path="res://Scripts/fade_component.gd" id="46_1dsgu"]
 [ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="46_v4k27"]
 [ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
 
@@ -73,7 +82,7 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider", "confirm_cover", "delete_confirm", "delete_feedback", "confirm_fader", "confirm_button_box", "cancel_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,6 +102,12 @@ menu_slider = NodePath("MenuSlider")
 settings_slider = NodePath("SettingsSlider")
 settings_title_slider = NodePath("SettingsTitleSlider")
 settings_menu_slider = NodePath("SettingsMenuSlider")
+confirm_cover = NodePath("ConfirmCover")
+delete_confirm = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm")
+delete_feedback = NodePath("ConfirmCover/ConfirmWindow/DeleteFeedback")
+confirm_fader = NodePath("ConfirmCover/ConfirmFader")
+confirm_button_box = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox")
+cancel_button = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton")
 
 [node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
 z_index = -2
@@ -101,7 +116,7 @@ offset_right = 500.0
 offset_bottom = 500.0
 
 [node name="PlanetSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
-targets = [NodePath("../Planets")]
+targets = [NodePath("../Planets"), NodePath("../FakePlanets")]
 slide_target_pos = Vector2(0, -100)
 
 [node name="MenuSlider" parent="." node_paths=PackedStringArray("targets") instance=ExtResource("7_rqhpv")]
@@ -123,87 +138,19 @@ script = ExtResource("47_dfowj")
 targets = [NodePath("../SettingsBox")]
 slide_target_pos = Vector2(0, 300)
 
-[node name="Planets" type="Node2D" parent="."]
+[node name="Planets" parent="." instance=ExtResource("9_2fa3b")]
 z_index = -2
-
-[node name="Sun" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
 map_offset = Vector2(0, 90)
 map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
 
-[node name="Mercury" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("4_tt4sn")
+[node name="FakePlanets" parent="." instance=ExtResource("9_2fa3b")]
+visible = false
+z_index = -2
 map_offset = Vector2(0, 90)
 map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Venus" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("5_2muob")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Earth" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("6_8osvy")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Mars" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("7_80nfk")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Jupiter" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("8_4to8t")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Saturn" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("9_mhqpv")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Uranus" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("10_j3eve")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="Neptune" parent="Planets" instance=ExtResource("3_6twq7")]
-position = Vector2(280, 348)
-represented_planet = ExtResource("11_1aypn")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
-should_randomise_position = true
-should_randomise_rotation = true
-
-[node name="AsteroidFieldPopulator" type="Node2D" parent="Planets"]
-position = Vector2(163, 300)
-script = ExtResource("12_sa5np")
-num_asteroids = 30
-asteroid_info = ExtResource("13_w7yol")
-map_offset = Vector2(0, 90)
-map_scale = Vector2(2.5, 2.5)
+planet_infos = Array[ExtResource("10_nrh77")]([ExtResource("11_w3uo4"), ExtResource("12_l5hwv"), ExtResource("13_a3m6y"), ExtResource("14_wug8k"), ExtResource("15_wquy6"), ExtResource("16_hd4ji"), ExtResource("17_if2rw"), ExtResource("18_656gl")])
+earth_info = ExtResource("19_6dxlj")
+asteroid_info = ExtResource("20_0x67m")
 
 [node name="Title" type="TextureRect" parent="."]
 z_index = 2
@@ -393,6 +340,7 @@ text = "Master"
 
 [node name="MasterSlider" type="HSlider" parent="SettingsBox"]
 layout_mode = 2
+focus_mode = 0
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("37_pv5e0")
 theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
@@ -414,6 +362,7 @@ text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsBox"]
 layout_mode = 2
+focus_mode = 0
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("37_pv5e0")
 theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
@@ -428,29 +377,34 @@ allow_lesser = true
 script = ExtResource("40_d8j5p")
 bus_name = "Music"
 
-[node name="Label3" type="Label" parent="SettingsBox"]
+[node name="ResetButton" type="TextureButton" parent="SettingsBox"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("37_ieih4")
-text = "Effects"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../FullscreenButton")
+focus_next = NodePath("../FullscreenButton")
+focus_previous = NodePath("../MusicSlider")
+focus_mode = 0
+texture_normal = ExtResource("34_bniu6")
+texture_pressed = ExtResource("35_1x6a1")
+texture_hover = ExtResource("36_mou3l")
+texture_disabled = ExtResource("35_1x6a1")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
 
-[node name="EffectSlider" type="HSlider" parent="SettingsBox"]
-layout_mode = 2
-theme_override_constants/center_grabber = 1
-theme_override_icons/grabber = ExtResource("37_pv5e0")
-theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
-theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
-theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
-max_value = 1.0
-step = 0.001
-allow_greater = true
-allow_lesser = true
-script = ExtResource("40_d8j5p")
-bus_name = "Effects"
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/ResetButton"]
+script = ExtResource("26_nshxy")
 
 [node name="FullscreenButton" type="TextureButton" parent="SettingsBox"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../ResetButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../MenuBox/SettingsButton")
+focus_next = NodePath("../../MenuBox/PlayButton")
+focus_previous = NodePath("../ResetButton")
+focus_mode = 0
 texture_normal = ExtResource("40_8a75j")
 texture_pressed = ExtResource("41_xiv7p")
 texture_hover = ExtResource("42_gfxev")
@@ -466,6 +420,113 @@ script = ExtResource("26_nshxy")
 script = ExtResource("21_b6cxi")
 bobbing_height = 2.0
 
+[node name="ConfirmCover" type="ColorRect" parent="."]
+visible = false
+z_index = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.42, 0.42, 0.42, 0.376471)
+
+[node name="ConfirmWindow" type="MarginContainer" parent="ConfirmCover"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.0
+offset_top = 157.0
+offset_right = 146.0
+offset_bottom = 275.0
+grow_horizontal = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmCover/ConfirmWindow"]
+layout_mode = 2
+texture = ExtResource("42_nc1a1")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="DeleteConfirm" type="MarginContainer" parent="ConfirmCover/ConfirmWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 14
+
+[node name="Label" type="Label" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Delete Save?"
+horizontal_alignment = 1
+
+[node name="ButtonBox" type="HBoxContainer" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ConfirmButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../CancelButton")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../CancelButton")
+focus_previous = NodePath("../CancelButton")
+texture_normal = ExtResource("43_hem7m")
+texture_pressed = ExtResource("44_aa6ga")
+texture_hover = ExtResource("45_1nwaq")
+texture_disabled = ExtResource("44_aa6ga")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton"]
+script = ExtResource("26_nshxy")
+
+[node name="CancelButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../ConfirmButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../ConfirmButton")
+focus_previous = NodePath("../ConfirmButton")
+texture_normal = ExtResource("28_3h5m7")
+texture_pressed = ExtResource("29_gjw76")
+texture_hover = ExtResource("30_51570")
+texture_disabled = ExtResource("29_gjw76")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton"]
+script = ExtResource("26_nshxy")
+
+[node name="DeleteFeedback" type="MarginContainer" parent="ConfirmCover/ConfirmWindow"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 14
+
+[node name="Label" type="Label" parent="ConfirmCover/ConfirmWindow/DeleteFeedback"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Save Deleted"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmFader" type="Node" parent="ConfirmCover"]
+script = ExtResource("46_1dsgu")
+
 [connection signal="pressed" from="MenuBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuBox/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -478,4 +539,7 @@ bobbing_height = 2.0
 [connection signal="focus_entered" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
 [connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
 [connection signal="pressed" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
+[connection signal="pressed" from="SettingsBox/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]
+[connection signal="pressed" from="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton" to="." method="_on_cancel_button_pressed"]

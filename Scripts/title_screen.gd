@@ -75,6 +75,21 @@ var settings_menu_slider : SlideManager
 
 var settings_hidden : bool = true
 
+@export
+var confirm_cover : ColorRect
+@export
+var delete_confirm : MarginContainer
+@export
+var delete_feedback : MarginContainer
+@export
+var confirm_fader : FadeComponent
+@export
+var confirm_button_box : HBoxContainer
+@export
+var cancel_button : TextureButton
+
+const delete_fade_time : float = 2.0
+
 func _ready():
 	play_button.grab_focus()
 	UIManager.set_focus_target(play_button)
@@ -269,5 +284,51 @@ func set_settings_disabled(disabled : bool):
 	for child in settings_box.get_children():
 		if child is Slider:
 			child.editable = !disabled
+			if disabled:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
 		elif child is TextureButton:
 			child.disabled = disabled
+			if disabled:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+
+func set_confirm_visible(visibility : bool):
+	if visibility:
+		confirm_fader.force_in_color()
+		confirm_cover.show()
+		delete_confirm.show()
+		delete_feedback.hide()
+	else:
+		confirm_cover.hide()
+	for child in confirm_button_box.get_children():
+		if child is TextureButton:
+			child.disabled = !visibility
+			if !visibility:
+				child.focus_mode = Control.FOCUS_NONE
+			else:
+				child.focus_mode = Control.FOCUS_ALL
+	if visibility:
+		cancel_button.grab_focus()
+	else:
+		play_button.grab_focus()
+
+func _on_reset_button_pressed() -> void:
+	set_confirm_visible(true)
+
+
+func _on_confirm_button_pressed() -> void:
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
+	GameManager.reset_game()
+	delete_confirm.hide()
+	delete_feedback.show()
+	confirm_fader.fade_out(delete_fade_time)
+	await confirm_fader.fade_out_finished
+	set_confirm_visible(false)
+
+
+func _on_cancel_button_pressed() -> void:
+	set_confirm_visible(false)
