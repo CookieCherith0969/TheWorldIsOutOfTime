@@ -147,12 +147,11 @@ func populate_nums():
 		
 		num_box.add_child(input_label)
 	
-	if represented_factory.inputs_per_day.size() + represented_factory.outputs_per_day.size() < 4:
-		# Arrow Spacer
-		var spacer_label : Label = num_scene.instantiate()
-		
-		num_box.add_child(spacer_label)
-		num_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	# Arrow Spacer
+	var spacer_label : Label = num_scene.instantiate()
+	
+	num_box.add_child(spacer_label)
+	num_box.alignment = BoxContainer.ALIGNMENT_CENTER
 	
 	# Output Nums
 	for output_num in represented_factory.outputs_per_day:
@@ -166,11 +165,11 @@ func populate_nums():
 		num_box.add_child(output_label)
 	
 	# Daily Indicator
-	if !represented_factory.output_on_build:
-		var daily_label : Label = num_scene.instantiate()
-		
-		daily_label.text = "/d"
-		#num_box.add_child(daily_label)
+	#if !represented_factory.output_on_build:
+	#	var daily_label : Label = num_scene.instantiate()
+	#	
+	#	daily_label.text = "/d"
+	#	num_box.add_child(daily_label)
 
 func update_amounts():
 	if represented_factory.keep_zero_factory_active_amount:
