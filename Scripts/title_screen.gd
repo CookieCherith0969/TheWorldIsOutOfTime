@@ -294,6 +294,14 @@ func set_settings_disabled(disabled : bool):
 				child.focus_mode = Control.FOCUS_NONE
 			else:
 				child.focus_mode = Control.FOCUS_ALL
+		elif child is BoxContainer:
+			for subchild in child.get_children():
+				if subchild is TextureButton:
+					subchild.disabled = disabled
+					if disabled:
+						subchild.focus_mode = Control.FOCUS_NONE
+					else:
+						subchild.focus_mode = Control.FOCUS_ALL
 
 func set_confirm_visible(visibility : bool):
 	if visibility:
@@ -332,3 +340,10 @@ func _on_confirm_button_pressed() -> void:
 
 func _on_cancel_button_pressed() -> void:
 	set_confirm_visible(false)
+
+
+func _on_hard_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		GameManager.activate_hard_mode()
+	else:
+		GameManager.deactivate_hard_mode()

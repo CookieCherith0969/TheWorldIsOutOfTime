@@ -148,13 +148,16 @@ func _ready() -> void:
 		if child is CanvasItem:
 			child.hide()
 	
-	tutorial_popup.popup_dismissed.connect(on_popup_dismissed)
-	
-	setup_popup.call_deferred()
-	
 	if !SaveManager.hash_valid:
 		hash_asterisk.show()
-
+	
+	if GameManager.hard_mode:
+		end_tutorial()
+		return
+	
+	tutorial_popup.popup_dismissed.connect(on_popup_dismissed)
+	setup_popup.call_deferred()
+	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ToggleMenu"):
 		if tutorial_index < tutorial_texts.size():
@@ -180,11 +183,13 @@ func toggle_menu():
 		screen_cover.color = menu_cover_color
 		screen_cover_fader.fade_in(cover_fade_time)
 		SaveManager.save_current_game_to_file()
+		GameManager.paused = true
 	else:
 		small_map.grab_focus()
 		menu_slider.slide_backward()
 		screen_cover_fader.fade_out(cover_fade_time)
 		SettingsManager.save_settings()
+		GameManager.paused = false
 	
 	await menu_slider.slide_complete
 	if menu_shown:

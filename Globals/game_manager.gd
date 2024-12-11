@@ -7,6 +7,7 @@ signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 signal materials_updated
+signal hard_mode_toggled
 #signal asteroid_collided
 #signal rocket_launched
 
@@ -78,12 +79,17 @@ var timeskip_days : int = 0
 var elapsed_timeskip_time : float = 0.0
 var elapsed_timeskip_days : int = 0
 var last_day_time : float = 0.0
+const elapsed_time_reset : float = 1000.0
 
 const base_speed_multiplier : float = 1.0
 var day_speed_multiplier : float = base_speed_multiplier
 const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
+
+var hard_mode : bool = false
+const hard_mode_day_length : float = 1.0
+var paused : bool = false
 
 var game_state : GameState = GameState.MENU
 
@@ -166,16 +172,50 @@ func setup_game_from_save():
 	lifetime_increases = SaveManager.current_save.lifetime_increases.duplicate()
 	update_predicted_changes()
 
+func activate_hard_mode():
+	SaveManager.save_current_game_to_file()
+	SaveManager.difficulty = "H"
+	SaveManager.update_save_game()
+	hard_mode = true
+	setup_game()
+	hard_mode_toggled.emit()
+
+func deactivate_hard_mode():
+	SaveManager.save_current_game_to_file()
+	SaveManager.difficulty = ""
+	SaveManager.update_save_game()
+	hard_mode = false
+	setup_game()
+	hard_mode_toggled.emit()
+
 func _physics_process(delta: float) -> void:
 	if game_state == GameState.MENU:
-		timeskip_days = 365
-		if screensaver_speed_multiplier == 0:
-			return
-	if timeskip_days <= 0:
+		if screensaver_speed_multiplier > 0:
+			process_menu(delta)
 		return
 	if game_state > GameState.GAME:
 		return
+	if hard_mode:
+		process_hard(delta)
+		return
+	if timeskip_days <= 0:
+		return
+	process_normal(delta)
+
+func process_menu(delta : float):
+	elapsed_timeskip_time += delta
 	
+	var effective_day_length = day_length
+	effective_day_length /= screensaver_speed_multiplier
+	while elapsed_timeskip_time - last_day_time >= effective_day_length:
+		last_day_time += effective_day_length
+		day_ended.emit()
+	
+	if elapsed_timeskip_time > elapsed_time_reset:
+		elapsed_timeskip_time -= elapsed_time_reset
+		last_day_time -= elapsed_time_reset
+
+func process_normal(delta : float):
 	elapsed_timeskip_time += delta
 	
 	var effective_day_length = day_length
@@ -195,6 +235,10 @@ func _physics_process(delta: float) -> void:
 		if game_state == GameState.GAME:
 			update_speed_multiplier()
 	
+	if elapsed_timeskip_time > elapsed_time_reset:
+		elapsed_timeskip_time -= elapsed_time_reset
+		last_day_time -= elapsed_time_reset
+	
 	if days_left <= 0:
 		collide_asteroid()
 	
@@ -203,6 +247,27 @@ func _physics_process(delta: float) -> void:
 		elapsed_timeskip_days = 0
 		last_day_time = 0.0
 		timeskip_ended.emit()
+
+func process_hard(delta : float):
+	if paused:
+		return
+	
+	elapsed_timeskip_time += delta
+	
+	var effective_day_length : float = hard_mode_day_length
+	while elapsed_timeskip_time - last_day_time >= effective_day_length && days_left > 0:
+		last_day_time += effective_day_length
+		for h in range(int(hours_per_day)):
+			hour_passed.emit()
+		process_day()
+		day_ended.emit()
+	
+	if elapsed_timeskip_time > elapsed_time_reset:
+		elapsed_timeskip_time -= elapsed_time_reset
+		last_day_time -= elapsed_time_reset
+	
+	if days_left <= 0:
+		collide_asteroid()
 
 func collide_asteroid():
 	game_state = GameState.END_DESTRUCTION

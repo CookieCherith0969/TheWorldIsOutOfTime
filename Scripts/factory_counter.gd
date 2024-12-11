@@ -87,6 +87,9 @@ func on_day_ended():
 		var new_frame : int = building_wrench.frame + 1
 		new_frame %= building_wrench.sprite_frames.get_frame_count("default")
 		building_wrench.frame = new_frame
+	if showing_tooltip:
+		show_tooltip()
+	update_buttons()
 
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:

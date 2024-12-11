@@ -234,6 +234,7 @@ func make_new_screen(fade : bool = true):
 			GameManager.game_state = GameManager.GameState.TUTORIAL
 			GameManager.timeskip_days = 0
 			GameManager.reset_game()
+			GameManager.paused = true
 		Screens.TITLE:
 			GameManager.game_state = GameManager.GameState.MENU
 	
@@ -245,6 +246,7 @@ func make_new_screen(fade : bool = true):
 		await get_tree().create_timer(fade_time/3).timeout
 		fade_in(fade_time/3)
 		await fade_component.fade_in_finished
+	GameManager.paused = false
 	empty_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if current_screen_type == Screens.END:
 		current_screen.start_playing()

@@ -42,6 +42,8 @@ func _on_double_button_pressed() -> void:
 func halve_time():
 	if GameManager.is_timeskipping():
 		return
+	if GameManager.hard_mode:
+		return
 	selected_exponent -= 1
 	if selected_exponent < 0:
 		selected_exponent = 0
@@ -51,6 +53,8 @@ func halve_time():
 
 func double_time():
 	if GameManager.is_timeskipping():
+		return
+	if GameManager.hard_mode:
 		return
 	selected_exponent += 1
 	if selected_exponent > max_exponent:
@@ -73,6 +77,11 @@ func update_buttons():
 		timeskip_button.disabled = true
 		return
 	if GameManager.game_state != GameManager.GameState.GAME:
+		halve_button.disabled = true
+		double_button.disabled = true
+		timeskip_button.disabled = true
+		return
+	if GameManager.hard_mode:
 		halve_button.disabled = true
 		double_button.disabled = true
 		timeskip_button.disabled = true

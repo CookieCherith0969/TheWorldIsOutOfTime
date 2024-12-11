@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=65 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -56,7 +56,11 @@
 [ext_resource type="Texture2D" uid="uid://bjvtcmdv11rv0" path="res://Sprites/Placeholder/PlaceholderConfirmHover.png" id="45_1nwaq"]
 [ext_resource type="Script" path="res://Scripts/fade_component.gd" id="46_1dsgu"]
 [ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="46_v4k27"]
+[ext_resource type="Texture2D" uid="uid://brisk70nijbuq" path="res://Sprites/Placeholder/PlaceholderHardNormal.png" id="46_vdmvh"]
+[ext_resource type="Texture2D" uid="uid://dk3iilwrcdrr6" path="res://Sprites/Placeholder/PlaceholderHardPressed.png" id="47_33r44"]
 [ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
+[ext_resource type="Texture2D" uid="uid://ds10nmb13kgll" path="res://Sprites/Placeholder/PlaceholderHardHover.png" id="48_cdqxq"]
+[ext_resource type="Script" path="res://Scripts/difficulty_label.gd" id="49_0s7t2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc5sd"]
 content_margin_left = 0.0
@@ -335,6 +339,7 @@ grow_horizontal = 2
 
 [node name="Label" type="Label" parent="SettingsBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("37_ieih4")
 text = "Master"
 
@@ -357,6 +362,7 @@ bus_name = "Master"
 
 [node name="Label2" type="Label" parent="SettingsBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
 theme_override_fonts/font = ExtResource("37_ieih4")
 text = "Music"
 
@@ -377,14 +383,59 @@ allow_lesser = true
 script = ExtResource("40_d8j5p")
 bus_name = "Music"
 
-[node name="ResetButton" type="TextureButton" parent="SettingsBox"]
+[node name="BobbingComponent" type="Node" parent="SettingsBox"]
+script = ExtResource("21_b6cxi")
+bobbing_height = 2.0
+
+[node name="HardBox" type="HBoxContainer" parent="SettingsBox"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="HardButton" type="TextureButton" parent="SettingsBox/HardBox"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_top = NodePath("../../MusicSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
+focus_next = NodePath("../../ButtonBox/ResetButton")
+focus_previous = NodePath("../../MusicSlider")
+toggle_mode = true
+texture_normal = ExtResource("46_vdmvh")
+texture_pressed = ExtResource("47_33r44")
+texture_hover = ExtResource("48_cdqxq")
+texture_disabled = ExtResource("47_33r44")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/HardBox/HardButton"]
+script = ExtResource("26_nshxy")
+
+[node name="DifficultyLabel" type="Label" parent="SettingsBox/HardBox"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
+theme_override_fonts/font = ExtResource("37_ieih4")
+theme_override_font_sizes/font_size = 16
+text = "Normal"
+horizontal_alignment = 1
+script = ExtResource("49_0s7t2")
+
+[node name="ButtonBox" type="HBoxContainer" parent="SettingsBox"]
+layout_mode = 2
+
+[node name="ResetButton" type="TextureButton" parent="SettingsBox/ButtonBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../HardBox/HardButton")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../FullscreenButton")
 focus_next = NodePath("../FullscreenButton")
-focus_previous = NodePath("../MusicSlider")
+focus_previous = NodePath("../../HardBox/HardButton")
 focus_mode = 0
 texture_normal = ExtResource("34_bniu6")
 texture_pressed = ExtResource("35_1x6a1")
@@ -393,16 +444,17 @@ texture_disabled = ExtResource("35_1x6a1")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 
-[node name="KeyFocusComponent" type="Node" parent="SettingsBox/ResetButton"]
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/ButtonBox/ResetButton"]
 script = ExtResource("26_nshxy")
 
-[node name="FullscreenButton" type="TextureButton" parent="SettingsBox"]
+[node name="FullscreenButton" type="TextureButton" parent="SettingsBox/ButtonBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../ResetButton")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../MenuBox/SettingsButton")
-focus_next = NodePath("../../MenuBox/PlayButton")
+focus_neighbor_bottom = NodePath("../../../MenuBox/SettingsButton")
+focus_next = NodePath("../../../MenuBox/PlayButton")
 focus_previous = NodePath("../ResetButton")
 focus_mode = 0
 texture_normal = ExtResource("40_8a75j")
@@ -413,12 +465,8 @@ texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 script = ExtResource("46_v4k27")
 
-[node name="KeyFocusComponent" type="Node" parent="SettingsBox/FullscreenButton"]
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/ButtonBox/FullscreenButton"]
 script = ExtResource("26_nshxy")
-
-[node name="BobbingComponent" type="Node" parent="SettingsBox"]
-script = ExtResource("21_b6cxi")
-bobbing_height = 2.0
 
 [node name="ConfirmCover" type="ColorRect" parent="."]
 visible = false
@@ -457,13 +505,16 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 14
 
-[node name="Label" type="Label" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
+[node name="DeleteLabel" type="Label" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
 theme_override_fonts/font = ExtResource("37_ieih4")
-text = "Delete Save?"
+text = "Delete Normal Save?"
 horizontal_alignment = 1
+script = ExtResource("49_0s7t2")
+normal_text = "Delete Normal Save?"
+hard_text = "Delete Hard Save?"
 
 [node name="ButtonBox" type="HBoxContainer" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
 layout_mode = 2
@@ -539,7 +590,8 @@ script = ExtResource("46_1dsgu")
 [connection signal="focus_entered" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
 [connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
 [connection signal="pressed" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
-[connection signal="pressed" from="SettingsBox/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="SettingsBox/FullscreenButton" to="SettingsBox/FullscreenButton" method="_on_pressed"]
+[connection signal="toggled" from="SettingsBox/HardBox/HardButton" to="." method="_on_hard_button_toggled"]
+[connection signal="pressed" from="SettingsBox/ButtonBox/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="SettingsBox/ButtonBox/FullscreenButton" to="SettingsBox/ButtonBox/FullscreenButton" method="_on_pressed"]
 [connection signal="pressed" from="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton" to="." method="_on_cancel_button_pressed"]
