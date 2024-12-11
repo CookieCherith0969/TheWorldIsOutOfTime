@@ -2,7 +2,7 @@ extends Node
 
 var game_version : String
 
-var save_path : String = "user://saved_game.tres"
+var save_path : String = "user://saved_game"
 
 var default_save : SaveGame = SaveGame.new()
 var current_save : SaveGame = SaveGame.new()
@@ -76,10 +76,10 @@ func reset_save_game():
 
 # Loads save from file. Returns the default save game if save isn't valid.
 func load_save_game() -> SaveGame:
-	if !ResourceLoader.exists(save_path, "SaveGame"):
+	if !ResourceLoader.exists(save_path+game_version+".tres", "SaveGame"):
 		push_warning("Save game doesn't exist")
 		return null
-	var loaded_save : SaveGame = SafeResourceLoader.load(save_path, "SaveGame")
+	var loaded_save : SaveGame = SafeResourceLoader.load(save_path+game_version+".tres", "SaveGame")
 	if !is_instance_valid(loaded_save):
 		push_error("Save game failed safety checks")
 		return null
@@ -110,11 +110,11 @@ func current_save_has_planets() -> bool:
 	return has_planets
 
 func save_current_game_to_file() -> void:
-	ResourceSaver.save(current_save.duplicate(), save_path)
-	current_save = SafeResourceLoader.load(save_path, "SaveGame").duplicate()
+	ResourceSaver.save(current_save.duplicate(), save_path+game_version+".tres")
+	current_save = SafeResourceLoader.load(save_path+game_version+".tres", "SaveGame").duplicate()
 	if hash_valid:
 		current_save.hash = generate_hash(current_save)
-	ResourceSaver.save(current_save.duplicate(), save_path)
+	ResourceSaver.save(current_save.duplicate(), save_path+game_version+".tres")
 
 func generate_hash(save : SaveGame) -> String:
 	var hash : String = "Hello, those who have decompiled the game! You've found the hash function! :P"
