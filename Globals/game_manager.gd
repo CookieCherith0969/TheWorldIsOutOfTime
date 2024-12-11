@@ -88,7 +88,7 @@ var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
 var hard_mode : bool = false
-const hard_mode_day_length : float = 1.0
+const hard_mode_day_length : float = 0.5
 var paused : bool = false
 
 var game_state : GameState = GameState.MENU
