@@ -46,6 +46,7 @@ func halve_time():
 	selected_exponent -= 1
 	if selected_exponent < 0:
 		selected_exponent = 0
+		return
 	update_buttons()
 	update_label()
 	if GameManager.is_realtime():
@@ -59,9 +60,11 @@ func double_time():
 	if GameManager.is_realtime():
 		if selected_exponent > max_realtime_exponent:
 			selected_exponent = max_realtime_exponent
+			return
 	else:
 		if selected_exponent > max_exponent:
 			selected_exponent = max_exponent
+			return
 	
 	update_buttons()
 	update_label()

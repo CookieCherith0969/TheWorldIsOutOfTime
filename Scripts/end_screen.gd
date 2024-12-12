@@ -64,6 +64,8 @@ func _ready() -> void:
 	
 	if GameManager.is_realtime():
 		difficulty_label.show()
+	else:
+		difficulty_label.hide()
 	
 	SaveManager.reset_save_game()
 	SaveManager.save_current_game_to_file()

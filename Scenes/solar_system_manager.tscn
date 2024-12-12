@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c318r86viok08" path="res://Scenes/death_asteroid.tscn" id="14_antb8"]
 
 [node name="SolarSystemManager" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_6ncfw")
 planet_infos = Array[ExtResource("2_jda2k")]([ExtResource("3_03ok3"), ExtResource("4_tca4e"), ExtResource("5_lhfjn"), ExtResource("6_4ghn5"), ExtResource("7_81p4o"), ExtResource("8_li1x7"), ExtResource("9_pmvtr"), ExtResource("10_nknqs")])
 earth_info = ExtResource("11_d8rp7")
