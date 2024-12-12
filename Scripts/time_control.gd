@@ -98,10 +98,16 @@ func update_buttons():
 	else:
 		halve_button.disabled = false
 	
-	if selected_exponent >= max_exponent:
-		double_button.disabled = true
+	if GameManager.hard_mode:
+		if selected_exponent >= max_hard_exponent:
+			double_button.disabled = true
+		else:
+			double_button.disabled = false
 	else:
-		double_button.disabled = false
+		if selected_exponent >= max_exponent:
+			double_button.disabled = true
+		else:
+			double_button.disabled = false
 
 func update_label():
 	if GameManager.is_timeskipping():
