@@ -39,6 +39,9 @@ var percent_asterisk : Label
 @export
 var time_asterisk : Label
 
+@export
+var hard_label : Label
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fade_out_ui()
@@ -58,7 +61,10 @@ func _ready() -> void:
 	if !SaveManager.hash_valid:
 		percent_asterisk.show()
 		time_asterisk.show()
-		
+	
+	if GameManager.hard_mode:
+		hard_label.show()
+	
 	SaveManager.reset_save_game()
 	SaveManager.save_current_game_to_file()
 	GameManager.reset_game()
@@ -113,7 +119,7 @@ func start_playing():
 	frame_index = 0
 	frame_timer = 0.0
 	if GameManager.game_state == GameManager.GameState.END_SURVIVAL:
-		ending_name_label.text = "SURVIVAL"
+		ending_name_label.text = "HARD SURVIVAL"
 		remainder_counter.show()
 		percent_label.hide()
 	elif GameManager.game_state == GameManager.GameState.END_DESTRUCTION:
