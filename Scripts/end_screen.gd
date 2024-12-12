@@ -119,7 +119,7 @@ func start_playing():
 	frame_index = 0
 	frame_timer = 0.0
 	if GameManager.game_state == GameManager.GameState.END_SURVIVAL:
-		ending_name_label.text = "HARD SURVIVAL"
+		ending_name_label.text = "SURVIVAL"
 		remainder_counter.show()
 		percent_label.hide()
 	elif GameManager.game_state == GameManager.GameState.END_DESTRUCTION:
