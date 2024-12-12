@@ -23,8 +23,8 @@ config/windows_native_icon="res://game_icon.ico"
 SettingsManager="*res://Scripts/settings_manager.gd"
 SoundManager="*res://Globals/sound_manager.tscn"
 GameManager="*res://Globals/game_manager.tscn"
-UIManager="*res://Globals/ui_manager.tscn"
 SaveManager="*res://Globals/save_manager.gd"
+UIManager="*res://Globals/ui_manager.tscn"
 
 [display]
 

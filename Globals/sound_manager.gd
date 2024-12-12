@@ -28,9 +28,9 @@ var current_track : MusicTracks = MusicTracks.MENU
 @export
 var track_change_fade_time : float = 20.0
 @export
-var track_change_base : float = 100.0
+var track_change_base : float = 150.0
 @export
-var track_change_variance : float = 20.0
+var track_change_variance : float = 40.0
 var track_change_time : float = 0.0
 var track_change_timer : float = 0.0
 var track_changing : bool = false
@@ -45,10 +45,22 @@ func on_day_ended():
 	var day_proportion : float = float(GameManager.days_left)/GameManager.starting_days
 	var mid_game_cutoff = late_game_proportion + mid_game_proportion
 	
+	# Move to mid-game
 	if day_proportion < mid_game_cutoff && prev_day_proportion >= mid_game_cutoff:
-		track_change_timer += track_change_time/2
+		if current_track != MusicTracks.AMBIENT:
+			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
+			reset_track_change_timer()
+			track_change_timer = track_change_time/2
+		else:
+			track_change_timer = max(track_change_time/2, track_change_timer)
+	# Move to late-game
 	elif day_proportion < late_game_proportion && prev_day_proportion >= late_game_proportion:
-		track_change_timer += track_change_time/2
+		if current_track != MusicTracks.AMBIENT:
+			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
+			reset_track_change_timer()
+			track_change_timer = track_change_time/2
+		else:
+			track_change_timer = max(track_change_time/2, track_change_timer)
 	
 	prev_day_proportion = day_proportion
 
@@ -89,27 +101,30 @@ func handle_track_changing(delta : float):
 	track_change_timer += delta
 	
 	if track_change_timer > track_change_time:
-		track_change_timer = 0.0
-		track_change_time = track_change_base + randf_range(-track_change_variance, track_change_variance)
+		reset_track_change_timer()
 		change_tracks()
+
+func reset_track_change_timer():
+	track_change_timer = 0.0
+	track_change_time = track_change_base + randf_range(-track_change_variance, track_change_variance)
 
 func change_tracks():
 	var day_proportion : float = float(GameManager.days_left)/GameManager.starting_days
 	# Early game
 	if day_proportion > late_game_proportion + mid_game_proportion:
-		if current_track == MusicTracks.AMBIENT:
+		if current_track <= MusicTracks.AMBIENT:
 			fade_to_track(track_change_fade_time, MusicTracks.EARLY)
 		else:
 			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
 	# Mid game
 	elif day_proportion > late_game_proportion:
-		if current_track == MusicTracks.AMBIENT:
+		if current_track <= MusicTracks.AMBIENT:
 			fade_to_track(track_change_fade_time, MusicTracks.MIDDLE)
 		else:
 			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)
 	# Late game
 	else:
-		if current_track == MusicTracks.AMBIENT:
+		if current_track <= MusicTracks.AMBIENT:
 			fade_to_track(track_change_fade_time, MusicTracks.LATE)
 		else:
 			fade_to_track(track_change_fade_time, MusicTracks.AMBIENT)

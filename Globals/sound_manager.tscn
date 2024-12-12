@@ -10,9 +10,6 @@
 [node name="SoundManager" type="Node" node_paths=PackedStringArray("music_tracks")]
 script = ExtResource("1_dbxqp")
 music_tracks = [NodePath("MenuMusic"), NodePath("Ambience"), NodePath("EarlyMusic"), NodePath("MiddleMusic"), NodePath("LateMusic")]
-track_change_fade_time = 30.0
-track_change_base = 150.0
-track_change_variance = 50.0
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mbuky")

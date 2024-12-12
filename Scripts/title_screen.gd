@@ -104,6 +104,8 @@ func _ready():
 		menu_box.remove_child(exit_button)
 		exit_button.queue_free()
 	
+	GameManager.setup_game()
+	
 	match(GameManager.difficulty):
 		GameManager.Difficulty.NORMAL:
 			normal_button.set_pressed_no_signal(true)

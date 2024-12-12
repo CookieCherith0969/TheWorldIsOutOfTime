@@ -206,8 +206,8 @@ func make_new_screen(fade : bool = true):
 	if fade:
 		match(current_screen_type):
 			Screens.GAME:
-				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.EARLY)
 				SoundManager.track_changing = true
+				SoundManager.change_tracks()
 			Screens.TITLE: 
 				SoundManager.fade_to_track(fade_time, SoundManager.MusicTracks.MENU)
 				SoundManager.track_changing = false
