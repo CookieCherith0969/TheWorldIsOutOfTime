@@ -86,7 +86,7 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider", "confirm_cover", "delete_confirm", "delete_feedback", "confirm_fader", "confirm_button_box", "cancel_button")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider", "confirm_cover", "delete_confirm", "delete_feedback", "confirm_fader", "confirm_button_box", "cancel_button", "hard_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,6 +112,7 @@ delete_feedback = NodePath("ConfirmCover/ConfirmWindow/DeleteFeedback")
 confirm_fader = NodePath("ConfirmCover/ConfirmFader")
 confirm_button_box = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox")
 cancel_button = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton")
+hard_button = NodePath("SettingsBox/HardBox/HardButton")
 
 [node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
 z_index = -2

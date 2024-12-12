@@ -90,12 +90,20 @@ var cancel_button : TextureButton
 
 const delete_fade_time : float = 2.0
 
+@export
+var hard_button : TextureButton
+
 func _ready():
 	play_button.grab_focus()
 	UIManager.set_focus_target(play_button)
 	if OS.has_feature("web"):
 		menu_box.remove_child(exit_button)
 		exit_button.queue_free()
+	
+	if GameManager.hard_mode:
+		hard_button.set_pressed_no_signal(true)
+	else:
+		hard_button.set_pressed_no_signal(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
