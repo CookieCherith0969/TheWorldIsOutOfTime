@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://ug7ye1ri5gke"]
 
-[ext_resource type="Texture2D" uid="uid://dcc6agu0gev21" path="res://Sprites/Placeholder/PlaceholderLaunchNormal.png" id="1_h8nh0"]
-[ext_resource type="Texture2D" uid="uid://cas2f2hwlyqrg" path="res://Sprites/Placeholder/PlaceholderLaunchPressed.png" id="2_muiy3"]
-[ext_resource type="Texture2D" uid="uid://bs75e57g8c8jv" path="res://Sprites/Placeholder/PlaceholderLaunchHover.png" id="3_45vyu"]
-[ext_resource type="Texture2D" uid="uid://dkorvdhtmyndf" path="res://Sprites/Placeholder/PlaceholderLaunchDisabled.png" id="4_xrv3j"]
-[ext_resource type="Texture2D" uid="uid://coefn8oauxntl" path="res://Sprites/Placeholder/PlaceholderLaunchFocus.png" id="5_xscbi"]
+[ext_resource type="Texture2D" uid="uid://dcc6agu0gev21" path="res://Sprites/Placeholder/PlaceholderLaunchThinNormal.png" id="1_h8nh0"]
+[ext_resource type="Texture2D" uid="uid://cas2f2hwlyqrg" path="res://Sprites/Placeholder/PlaceholderLaunchThinPressed.png" id="2_muiy3"]
+[ext_resource type="Texture2D" uid="uid://bs75e57g8c8jv" path="res://Sprites/Placeholder/PlaceholderLaunchThinHover.png" id="3_45vyu"]
+[ext_resource type="Texture2D" uid="uid://dkorvdhtmyndf" path="res://Sprites/Placeholder/PlaceholderLaunchThinDisabled.png" id="4_xrv3j"]
+[ext_resource type="Texture2D" uid="uid://coefn8oauxntl" path="res://Sprites/Placeholder/PlaceholderLaunchThinFocus.png" id="5_xscbi"]
 [ext_resource type="Script" path="res://Scripts/launch_button.gd" id="6_dxw5t"]
 [ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="7_xbwri"]
 
