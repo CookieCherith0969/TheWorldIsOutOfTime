@@ -151,7 +151,7 @@ func _ready() -> void:
 	if !SaveManager.hash_valid:
 		hash_asterisk.show()
 	
-	if GameManager.hard_mode:
+	if GameManager.is_realtime():
 		end_tutorial()
 		return
 	

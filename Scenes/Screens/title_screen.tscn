@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=72 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -55,12 +55,18 @@
 [ext_resource type="Texture2D" uid="uid://dltrkttajdupo" path="res://Sprites/Placeholder/PlaceholderConfirmPressed.png" id="44_aa6ga"]
 [ext_resource type="Texture2D" uid="uid://bjvtcmdv11rv0" path="res://Sprites/Placeholder/PlaceholderConfirmHover.png" id="45_1nwaq"]
 [ext_resource type="Script" path="res://Scripts/fade_component.gd" id="46_1dsgu"]
+[ext_resource type="Texture2D" uid="uid://cvs1t7b1c5a85" path="res://Sprites/Placeholder/PlaceholderNormalNormal.png" id="46_nay6f"]
 [ext_resource type="Script" path="res://Scripts/fullscreen_button.gd" id="46_v4k27"]
 [ext_resource type="Texture2D" uid="uid://brisk70nijbuq" path="res://Sprites/Placeholder/PlaceholderHardNormal.png" id="46_vdmvh"]
 [ext_resource type="Texture2D" uid="uid://dk3iilwrcdrr6" path="res://Sprites/Placeholder/PlaceholderHardPressed.png" id="47_33r44"]
+[ext_resource type="Texture2D" uid="uid://bi4qlhl8q7155" path="res://Sprites/Placeholder/PlaceholderNormalPressed.png" id="47_56pcc"]
 [ext_resource type="Script" path="res://Scripts/slide_manager.gd" id="47_dfowj"]
 [ext_resource type="Texture2D" uid="uid://ds10nmb13kgll" path="res://Sprites/Placeholder/PlaceholderHardHover.png" id="48_cdqxq"]
+[ext_resource type="Texture2D" uid="uid://ulx35m24doqu" path="res://Sprites/Placeholder/PlaceholderNormalHover.png" id="48_gf637"]
 [ext_resource type="Script" path="res://Scripts/difficulty_label.gd" id="49_0s7t2"]
+[ext_resource type="Texture2D" uid="uid://deioqqtulxln8" path="res://Sprites/Placeholder/PlaceholderMediumNormal.png" id="49_r5vjy"]
+[ext_resource type="Texture2D" uid="uid://cohjhdla52pt3" path="res://Sprites/Placeholder/PlaceholderMediumPressed.png" id="50_2mxrx"]
+[ext_resource type="Texture2D" uid="uid://y02yf1okab0s" path="res://Sprites/Placeholder/PlaceholderMediumHover.png" id="51_ctphw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc5sd"]
 content_margin_left = 0.0
@@ -86,7 +92,9 @@ corner_detail = 1
 bg_color = Color(0.137255, 0.709804, 0.827451, 1)
 corner_detail = 1
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider", "confirm_cover", "delete_confirm", "delete_feedback", "confirm_fader", "confirm_button_box", "cancel_button", "hard_button")]
+[sub_resource type="ButtonGroup" id="ButtonGroup_nlhj5"]
+
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("second_hand", "minute_hand", "hour_hand", "planet_slider", "menu_slider", "settings_slider", "settings_title_slider", "settings_menu_slider", "confirm_cover", "delete_confirm", "delete_feedback", "confirm_fader", "confirm_button_box", "cancel_button", "normal_button", "medium_button", "hard_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,7 +120,9 @@ delete_feedback = NodePath("ConfirmCover/ConfirmWindow/DeleteFeedback")
 confirm_fader = NodePath("ConfirmCover/ConfirmFader")
 confirm_button_box = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox")
 cancel_button = NodePath("ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton")
-hard_button = NodePath("SettingsBox/HardBox/HardButton")
+normal_button = NodePath("SettingsBox/DifficultyBox/NormalButton")
+medium_button = NodePath("SettingsBox/DifficultyBox/MediumButton")
+hard_button = NodePath("SettingsBox/DifficultyBox/HardButton")
 
 [node name="SpaceRect" parent="." instance=ExtResource("2_bjx7e")]
 z_index = -2
@@ -388,12 +398,11 @@ bus_name = "Music"
 script = ExtResource("21_b6cxi")
 bobbing_height = 2.0
 
-[node name="HardBox" type="HBoxContainer" parent="SettingsBox"]
+[node name="DifficultyBox" type="HBoxContainer" parent="SettingsBox"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 20
+theme_override_constants/separation = 6
 
-[node name="HardButton" type="TextureButton" parent="SettingsBox/HardBox"]
+[node name="NormalButton" type="TextureButton" parent="SettingsBox/DifficultyBox"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -404,6 +413,51 @@ focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
 focus_next = NodePath("../../ButtonBox/ResetButton")
 focus_previous = NodePath("../../MusicSlider")
 toggle_mode = true
+button_group = SubResource("ButtonGroup_nlhj5")
+texture_normal = ExtResource("46_nay6f")
+texture_pressed = ExtResource("47_56pcc")
+texture_hover = ExtResource("48_gf637")
+texture_disabled = ExtResource("47_56pcc")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/NormalButton"]
+script = ExtResource("26_nshxy")
+
+[node name="MediumButton" type="TextureButton" parent="SettingsBox/DifficultyBox"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../MusicSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
+focus_next = NodePath("../../ButtonBox/ResetButton")
+focus_previous = NodePath("../../MusicSlider")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_nlhj5")
+texture_normal = ExtResource("49_r5vjy")
+texture_pressed = ExtResource("50_2mxrx")
+texture_hover = ExtResource("51_ctphw")
+texture_disabled = ExtResource("50_2mxrx")
+texture_focused = ExtResource("24_n3tcr")
+stretch_mode = 3
+
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/MediumButton"]
+script = ExtResource("26_nshxy")
+
+[node name="HardButton" type="TextureButton" parent="SettingsBox/DifficultyBox"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../MusicSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
+focus_next = NodePath("../../ButtonBox/ResetButton")
+focus_previous = NodePath("../../MusicSlider")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_nlhj5")
 texture_normal = ExtResource("46_vdmvh")
 texture_pressed = ExtResource("47_33r44")
 texture_hover = ExtResource("48_cdqxq")
@@ -411,10 +465,10 @@ texture_disabled = ExtResource("47_33r44")
 texture_focused = ExtResource("24_n3tcr")
 stretch_mode = 3
 
-[node name="KeyFocusComponent" type="Node" parent="SettingsBox/HardBox/HardButton"]
+[node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/HardButton"]
 script = ExtResource("26_nshxy")
 
-[node name="DifficultyLabel" type="Label" parent="SettingsBox/HardBox"]
+[node name="DifficultyLabel" type="Label" parent="SettingsBox/DifficultyBox"]
 custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -432,11 +486,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../HardBox/HardButton")
+focus_neighbor_top = NodePath("../../DifficultyBox/NormalButton")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../FullscreenButton")
 focus_next = NodePath("../FullscreenButton")
-focus_previous = NodePath("../../HardBox/HardButton")
+focus_previous = NodePath("../../DifficultyBox/NormalButton")
 focus_mode = 0
 texture_normal = ExtResource("34_bniu6")
 texture_pressed = ExtResource("35_1x6a1")
@@ -515,6 +569,7 @@ text = "Delete Normal Save?"
 horizontal_alignment = 1
 script = ExtResource("49_0s7t2")
 normal_text = "Delete Normal Save?"
+medium_text = "Delete Medium Save?"
 hard_text = "Delete Hard Save?"
 
 [node name="ButtonBox" type="HBoxContainer" parent="ConfirmCover/ConfirmWindow/DeleteConfirm"]
@@ -591,7 +646,9 @@ script = ExtResource("46_1dsgu")
 [connection signal="focus_entered" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
 [connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
 [connection signal="pressed" from="HideButton" to="HideButton/HoverFadeComponent" method="trigger_hover"]
-[connection signal="toggled" from="SettingsBox/HardBox/HardButton" to="." method="_on_hard_button_toggled"]
+[connection signal="toggled" from="SettingsBox/DifficultyBox/NormalButton" to="." method="_on_normal_button_toggled"]
+[connection signal="toggled" from="SettingsBox/DifficultyBox/MediumButton" to="." method="_on_medium_button_toggled"]
+[connection signal="toggled" from="SettingsBox/DifficultyBox/HardButton" to="." method="_on_hard_button_toggled"]
 [connection signal="pressed" from="SettingsBox/ButtonBox/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="SettingsBox/ButtonBox/FullscreenButton" to="SettingsBox/ButtonBox/FullscreenButton" method="_on_pressed"]
 [connection signal="pressed" from="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]

@@ -7,11 +7,13 @@ signal timeskip_ended()
 signal factory_amount_updated(factory : FactoryInfo)
 signal factory_build_progressed(factory : FactoryInfo, day_progress : int)
 signal materials_updated
-signal hard_mode_toggled
+signal difficulty_changed
 #signal asteroid_collided
 #signal rocket_launched
 
 enum GameState {MENU, TUTORIAL, GAME, END_SURVIVAL, END_DESTRUCTION}
+
+enum Difficulty {NORMAL, MEDIUM, HARD}
 
 enum Materials {
 	STONE,
@@ -87,9 +89,10 @@ const base_max_speed_multiplier : float = 2.0
 var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
-var hard_mode : bool = false
+var difficulty : Difficulty = Difficulty.NORMAL
+const medium_mode_day_length : float = 2.0
 const hard_mode_day_length : float = 0.6
-var hard_mode_speed : float = 1.0
+var realtime_speed_multiplier : float = 1.0
 var paused : bool = false
 
 var game_state : GameState = GameState.MENU
@@ -173,21 +176,19 @@ func setup_game_from_save():
 	lifetime_increases = SaveManager.current_save.lifetime_increases.duplicate()
 	update_predicted_changes()
 
-func activate_hard_mode():
+func set_difficulty(new_difficulty : Difficulty):
 	SaveManager.save_current_game_to_file()
-	SaveManager.difficulty = "H"
+	match(new_difficulty):
+		Difficulty.NORMAL:
+			SaveManager.difficulty = ""
+		Difficulty.MEDIUM:
+			SaveManager.difficulty = "M"
+		Difficulty.HARD:
+			SaveManager.difficulty = "H"
 	SaveManager.update_save_game()
-	hard_mode = true
+	difficulty = new_difficulty
 	setup_game()
-	hard_mode_toggled.emit()
-
-func deactivate_hard_mode():
-	SaveManager.save_current_game_to_file()
-	SaveManager.difficulty = ""
-	SaveManager.update_save_game()
-	hard_mode = false
-	setup_game()
-	hard_mode_toggled.emit()
+	difficulty_changed.emit()
 
 func _physics_process(delta: float) -> void:
 	if game_state == GameState.MENU:
@@ -196,8 +197,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if game_state > GameState.GAME:
 		return
-	if hard_mode:
-		process_hard(delta)
+	if is_realtime():
+		process_realtime(delta)
 		return
 	if timeskip_days <= 0:
 		return
@@ -249,14 +250,19 @@ func process_normal(delta : float):
 		last_day_time = 0.0
 		timeskip_ended.emit()
 
-func process_hard(delta : float):
+func process_realtime(delta : float):
 	if paused:
 		return
 	
 	elapsed_timeskip_time += delta
 	
-	var effective_day_length : float = hard_mode_day_length
-	effective_day_length /= hard_mode_speed
+	var effective_day_length : float
+	if difficulty == Difficulty.MEDIUM:
+		effective_day_length = medium_mode_day_length
+	else:
+		effective_day_length = hard_mode_day_length
+	effective_day_length /= realtime_speed_multiplier
+	
 	while elapsed_timeskip_time - last_day_time >= effective_day_length && days_left > 0:
 		last_day_time += effective_day_length
 		for h in range(int(hours_per_day)):
@@ -361,6 +367,9 @@ func is_timeskipping() -> bool:
 		return true
 	return false
 
+func is_realtime() -> bool:
+	return difficulty >= Difficulty.MEDIUM
+
 func is_material_icon_only(material : Materials):
 	return material as int > GameManager.Materials.size()-1-num_icon_only_materials
 
@@ -440,7 +449,7 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 		
 		# Don't modify change arrays when factories are planned/destroyed, or research is done.
 		# Ensures change arrays only reflect factory production
-		if is_timeskipping() || hard_mode:
+		if is_timeskipping() || is_realtime():
 			if total > 0:
 				prev_day_increases[materials[i]] += total
 			else:

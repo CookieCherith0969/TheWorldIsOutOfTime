@@ -91,6 +91,10 @@ var cancel_button : TextureButton
 const delete_fade_time : float = 2.0
 
 @export
+var normal_button : TextureButton
+@export
+var medium_button : TextureButton
+@export
 var hard_button : TextureButton
 
 func _ready():
@@ -100,10 +104,13 @@ func _ready():
 		menu_box.remove_child(exit_button)
 		exit_button.queue_free()
 	
-	if GameManager.hard_mode:
-		hard_button.set_pressed_no_signal(true)
-	else:
-		hard_button.set_pressed_no_signal(false)
+	match(GameManager.difficulty):
+		GameManager.Difficulty.NORMAL:
+			normal_button.set_pressed_no_signal(true)
+		GameManager.Difficulty.MEDIUM:
+			medium_button.set_pressed_no_signal(true)
+		GameManager.Difficulty.HARD:
+			hard_button.set_pressed_no_signal(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
@@ -349,9 +356,14 @@ func _on_confirm_button_pressed() -> void:
 func _on_cancel_button_pressed() -> void:
 	set_confirm_visible(false)
 
+func _on_normal_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		GameManager.set_difficulty(GameManager.Difficulty.NORMAL)
+
+func _on_medium_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		GameManager.set_difficulty(GameManager.Difficulty.MEDIUM)
 
 func _on_hard_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		GameManager.activate_hard_mode()
-	else:
-		GameManager.deactivate_hard_mode()
+		GameManager.set_difficulty(GameManager.Difficulty.HARD)

@@ -40,7 +40,7 @@ var percent_asterisk : Label
 var time_asterisk : Label
 
 @export
-var hard_label : Label
+var difficulty_label : Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -62,8 +62,8 @@ func _ready() -> void:
 		percent_asterisk.show()
 		time_asterisk.show()
 	
-	if GameManager.hard_mode:
-		hard_label.show()
+	if GameManager.is_realtime():
+		difficulty_label.show()
 	
 	SaveManager.reset_save_game()
 	SaveManager.save_current_game_to_file()

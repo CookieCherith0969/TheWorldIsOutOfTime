@@ -4,18 +4,23 @@ class_name DifficultyLabel
 @export
 var normal_text : String = "Normal"
 @export
+var medium_text : String = "Medium"
+@export
 var hard_text : String = "Hard"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameManager.hard_mode_toggled.connect(_on_hard_mode_toggled)
+	GameManager.difficulty_changed.connect(_on_difficulty_changed)
 	update_text()
 
-func _on_hard_mode_toggled():
+func _on_difficulty_changed():
 	update_text()
 
 func update_text():
-	if GameManager.hard_mode:
-		text = hard_text
-	else:
-		text = normal_text
+	match(GameManager.difficulty):
+		GameManager.Difficulty.NORMAL:
+			text = normal_text
+		GameManager.Difficulty.MEDIUM:
+			text = medium_text
+		GameManager.Difficulty.HARD:
+			text = hard_text

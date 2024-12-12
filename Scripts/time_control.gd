@@ -3,7 +3,7 @@ class_name TimeControl
 
 var selected_exponent : int = 0
 var max_exponent : int = 12
-var max_hard_exponent : int = 8
+var max_realtime_exponent : int = 8
 
 @onready
 var duration_label : Label = $InnerMargin/InnerBox/DurationLabel
@@ -48,25 +48,25 @@ func halve_time():
 		selected_exponent = 0
 	update_buttons()
 	update_label()
-	if GameManager.hard_mode:
-		GameManager.hard_mode_speed = pow(2, selected_exponent)
+	if GameManager.is_realtime():
+		GameManager.realtime_speed_multiplier = pow(2, selected_exponent)
 	UIManager.print_to_code_window("halve_time()")
 
 func double_time():
 	if GameManager.is_timeskipping():
 		return
 	selected_exponent += 1
-	if GameManager.hard_mode:
-		if selected_exponent > max_hard_exponent:
-			selected_exponent = max_hard_exponent
+	if GameManager.is_realtime():
+		if selected_exponent > max_realtime_exponent:
+			selected_exponent = max_realtime_exponent
 	else:
 		if selected_exponent > max_exponent:
 			selected_exponent = max_exponent
 	
 	update_buttons()
 	update_label()
-	if GameManager.hard_mode:
-		GameManager.hard_mode_speed = pow(2, selected_exponent)
+	if GameManager.is_realtime():
+		GameManager.realtime_speed_multiplier = pow(2, selected_exponent)
 	UIManager.print_to_code_window("double_time()")
 
 func _on_timeskip_button_pressed() -> void:
@@ -87,7 +87,7 @@ func update_buttons():
 		double_button.disabled = true
 		timeskip_button.disabled = true
 		return
-	if GameManager.hard_mode:
+	if GameManager.is_realtime():
 		timeskip_button.disabled = true
 	else:
 		timeskip_button.disabled = false
@@ -98,8 +98,8 @@ func update_buttons():
 	else:
 		halve_button.disabled = false
 	
-	if GameManager.hard_mode:
-		if selected_exponent >= max_hard_exponent:
+	if GameManager.is_realtime():
+		if selected_exponent >= max_realtime_exponent:
 			double_button.disabled = true
 		else:
 			double_button.disabled = false
