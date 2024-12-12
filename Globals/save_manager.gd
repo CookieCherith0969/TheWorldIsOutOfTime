@@ -123,7 +123,7 @@ func save_current_game_to_file() -> void:
 	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
 
 func generate_hash(save : SaveGame) -> String:
-	var hash : String = "Hello, those who have decompiled the game! You've found the hash function! :P"
+	var hash : String = "Hello, curious minds! You've found the hash function! :P"
 	
 	for property_name in property_names:
 		#hash += str(save.get(property_name)).sha256_text()
