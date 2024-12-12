@@ -20,17 +20,25 @@ var tooltip_marker : Marker2D = $TooltipMarker
 @onready
 var focus : NinePatchRect = $OuterMargin/Focus
 
+var showing_tooltip : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	icon.texture = GameManager.get_material_icon(represented_material)
 	update_labels()
 	
 	GameManager.materials_updated.connect(on_materials_updated)
+	UIManager.tooltip_shown.connect(_on_tooltip_shown)
 	if hide_gain:
 		gain_label.hide()
 
 func on_materials_updated():
 	update_labels()
+	if showing_tooltip:
+		show_tooltip()
+
+func _on_tooltip_shown():
+	showing_tooltip = false
 
 func update_labels():
 	amount_label.text = UIManager.simplify_number(GameManager.get_material_amount(represented_material))
@@ -70,19 +78,23 @@ func set_empty():
 func _on_mouse_entered() -> void:
 	if empty:
 		return
-	
-	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
+	show_tooltip()
 
 func _on_mouse_exited() -> void:
 	UIManager.hide_tooltip()
+	showing_tooltip = false
 
 func _on_focus_entered() -> void:
 	focus.show()
 	if empty:
 		return
-	
-	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
+	show_tooltip()
 
 func _on_focus_exited() -> void:
 	focus.hide()
 	UIManager.hide_tooltip()
+	showing_tooltip = false
+
+func show_tooltip():
+	UIManager.show_material_tooltip(tooltip_marker.global_position, represented_material)
+	showing_tooltip = true
