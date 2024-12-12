@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The World is Out of Time"
-config/version="1.4.5"
+config/version="1.5.1"
 run/main_scene="res://Scenes/Screens/empty_control.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/image="res://Splash.png"
