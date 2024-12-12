@@ -88,7 +88,8 @@ var max_speed_multiplier : float = base_max_speed_multiplier
 var screensaver_speed_multiplier : int = 4
 
 var hard_mode : bool = false
-const hard_mode_day_length : float = 0.75
+const hard_mode_day_length : float = 0.6
+var hard_mode_speed : float = 1.0
 var paused : bool = false
 
 var game_state : GameState = GameState.MENU
@@ -255,6 +256,7 @@ func process_hard(delta : float):
 	elapsed_timeskip_time += delta
 	
 	var effective_day_length : float = hard_mode_day_length
+	effective_day_length /= hard_mode_speed
 	while elapsed_timeskip_time - last_day_time >= effective_day_length && days_left > 0:
 		last_day_time += effective_day_length
 		for h in range(int(hours_per_day)):
@@ -438,7 +440,7 @@ func add_material_amounts(materials : Array[GameManager.Materials], amounts : Ar
 		
 		# Don't modify change arrays when factories are planned/destroyed, or research is done.
 		# Ensures change arrays only reflect factory production
-		if is_timeskipping():
+		if is_timeskipping() || hard_mode:
 			if total > 0:
 				prev_day_increases[materials[i]] += total
 			else:
@@ -625,13 +627,16 @@ func unplan_factory(factory_index : int) -> bool:
 func unlock_factory(factory_index : int) -> bool:
 	if unlocked_factories[factory_index]:
 		return false
-	UIManager.print_to_code_window("unlock_factory(%s)"%factory_index)
 	
 	var factory : FactoryInfo = factories[factory_index]
+	if !has_material_amounts(factory.research_materials, factory.research_amounts):
+		return false
+	
 	add_material_amounts(factory.research_materials, factory.research_amounts, true)
 	
 	unlocked_factories[factory_index] = true
 	factory_amount_updated.emit(factory)
+	UIManager.print_to_code_window("unlock_factory(%s)"%factory_index)
 	return true
 
 func reset_game():

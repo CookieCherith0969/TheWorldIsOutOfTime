@@ -58,6 +58,8 @@ func update_save_game():
 		reset_save_game()
 	if current_save.planet_orbit_angles.size() > 0:
 		has_planets = true
+	else:
+		has_planets = false
 
 func reset_save_game():
 	current_save = SaveGame.new()
