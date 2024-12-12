@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=73 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -45,6 +45,7 @@
 [ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="37_ieih4"]
 [ext_resource type="Texture2D" uid="uid://d30f8ofddp7gm" path="res://Sprites/Placeholder/PlaceholderSlideGrabberDisabled.png" id="37_pv5e0"]
 [ext_resource type="Texture2D" uid="uid://cnxn358w5568f" path="res://Sprites/Placeholder/PlaceholderSlideGrabberHighlighted.png" id="38_2djdh"]
+[ext_resource type="Script" path="res://Scripts/hover_fade_component.gd" id="39_8o0w4"]
 [ext_resource type="Texture2D" uid="uid://diclbprv1curb" path="res://Sprites/Placeholder/PlaceholderSlideGrabberNormal.png" id="39_pw6tx"]
 [ext_resource type="Texture2D" uid="uid://gcu564pkd7yh" path="res://Sprites/Placeholder/PlaceholderFullscreenNormal.png" id="40_8a75j"]
 [ext_resource type="Script" path="res://Scripts/volume_slider.gd" id="40_d8j5p"]
@@ -290,6 +291,7 @@ flip_h = true
 
 [node name="HoverFadeComponent" parent="ControlBox/SlowButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+script = ExtResource("39_8o0w4")
 fade_color = Color(0, 0, 0, 0)
 
 [node name="KeyFocusComponent" type="Node" parent="ControlBox/SlowButton"]
@@ -305,6 +307,7 @@ texture_focused = ExtResource("19_gdf8v")
 
 [node name="HoverFadeComponent" parent="ControlBox/FastButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+script = ExtResource("39_8o0w4")
 fade_color = Color(0, 0, 0, 0)
 
 [node name="KeyFocusComponent" type="Node" parent="ControlBox/FastButton"]
@@ -331,6 +334,7 @@ texture_focused = ExtResource("19_gdf8v")
 
 [node name="HoverFadeComponent" parent="HideButton" instance=ExtResource("25_tnpjw")]
 layout_mode = 1
+script = ExtResource("39_8o0w4")
 fade_color = Color(0, 0, 0, 0)
 active = false
 
