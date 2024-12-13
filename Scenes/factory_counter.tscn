@@ -120,7 +120,6 @@ texture = ExtResource("6_kivah")
 [node name="FactoryIcon3" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("4_d0ei5")
 
 [node name="FactoryIcon4" parent="IconBox" instance=ExtResource("4_nkejt")]
 layout_mode = 2
