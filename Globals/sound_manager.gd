@@ -23,6 +23,8 @@ var fade_time : float = 0.0
 var fade_progress : float = 1.0
 var music_fade_state : MusicFadeState = MusicFadeState.IDLE
 
+var fade_count : int = 0
+
 var current_track : MusicTracks = MusicTracks.MENU
 
 @export
@@ -139,25 +141,33 @@ func in_out_sine_ease(progress : float):
 
 func fade_in_music(time : float):
 	fade_time = time
-	fade_progress = 0.0
 	music_fade_state = MusicFadeState.FADE_IN
+	#if music_fade_state == MusicFadeState.IDLE:
+	#	fade_progress = 0.0
 
 func fade_out_music(time : float):
 	fade_time = time
-	fade_progress = 1.0
 	music_fade_state = MusicFadeState.FADE_OUT
+	#if music_fade_state == MusicFadeState.IDLE:
+	#	fade_progress = 1.0
 
 func fade_to_track(time : float, to_track : MusicTracks):
-	if to_track == current_track:
-		return
+	#if to_track == current_track:
+	#	return
+	fade_count += 1
+	var fade_id : int = fade_count
 	
 	fade_out_music(time/3)
 	await faded_out
-	music_tracks[current_track].stop()
+	if fade_count <= fade_id:
+		for track in music_tracks:
+			track.stop()
+		#music_tracks[current_track].stop()
 	await get_tree().create_timer(time/3).timeout
-	music_tracks[to_track].play()
-	current_track = to_track
-	fade_in_music(time/3)
+	if fade_count <= fade_id:
+		music_tracks[to_track].play()
+		current_track = to_track
+		fade_in_music(time/3)
 
 func get_menu_music_position() -> float:
 	if OS.has_feature("web"):
