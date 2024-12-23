@@ -42,6 +42,11 @@ func _ready() -> void:
 	GameManager.day_ended.connect(on_day_ended)
 
 func on_day_ended():
+	if GameManager.game_state >= GameManager.GameState.END_SURVIVAL:
+		return
+	if GameManager.game_state < GameManager.GameState.TUTORIAL:
+		return
+	
 	var day_proportion : float = float(GameManager.days_left)/GameManager.starting_days
 	var mid_game_cutoff = late_game_proportion + mid_game_proportion
 	
@@ -155,9 +160,15 @@ func fade_to_track(time : float, to_track : MusicTracks):
 	fade_in_music(time/3)
 
 func get_menu_music_position() -> float:
+	if OS.has_feature("web"):
+		# workaround for broken get_playback_position() on web exports
+		if menu_music.get_playback_position() > 0.00290249427780 && menu_music.get_playback_position() < 0.00290249427782:
+			return 0.00290249427781
+	
 	var time = menu_music.get_playback_position() + AudioServer.get_time_since_last_mix()
 	# Compensate for output latency.
 	time -= AudioServer.get_output_latency()
+	#print(str(menu_music.get_playback_position())+" | "+str(AudioServer.get_time_since_last_mix())+" | "+str(AudioServer.get_output_latency()))
 	return time
 
 func get_menu_music_length() -> float:

@@ -49,7 +49,7 @@ func _ready() -> void:
 		default_save.factory_build_progresses.append(0)
 		default_save.active_factory_amounts.append(factory.start_amount)
 		default_save.planned_factory_amounts.append(0)
-	default_save.hash = generate_hash(default_save)
+	default_save.hash_string = generate_hash(default_save)
 	update_save_game()
 
 func update_save_game():
@@ -75,7 +75,7 @@ func reset_save_game():
 	current_save.active_factory_amounts = default_save.active_factory_amounts.duplicate()
 	current_save.planned_factory_amounts = default_save.planned_factory_amounts.duplicate()
 	
-	current_save.hash = default_save.hash
+	current_save.hash_string = default_save.hash_string
 	hash_valid = true
 	
 	has_planets = false
@@ -101,11 +101,11 @@ func is_valid_save(save : SaveGame) -> bool:
 	if save.save_version != game_version:
 		push_error("Save game has wrong version")
 		return false
-	if !"hash" in save:
+	if !"hash_string" in save:
 		push_error("Save lacks a hash")
 		hash_valid = false
 		#return false
-	if save.hash != generate_hash(save):
+	if save.hash_string != generate_hash(save):
 		push_error("Save game hash mismatch")
 		hash_valid = false
 		#return false
@@ -119,17 +119,17 @@ func save_current_game_to_file() -> void:
 	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
 	current_save = SafeResourceLoader.load(save_path+game_version+difficulty+".tres", "SaveGame").duplicate()
 	if hash_valid:
-		current_save.hash = generate_hash(current_save)
+		current_save.hash_string = generate_hash(current_save)
 	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
 
 func generate_hash(save : SaveGame) -> String:
-	var hash : String = "Hello, curious minds! You've found the hash function! :P"
+	var hash_string : String = "Hello, curious minds! You've found the hash function! :P"
 	
 	for property_name in property_names:
 		#hash += str(save.get(property_name)).sha256_text()
-		hash += str(save.get(property_name))
+		hash_string += str(save.get(property_name))
 	
-	var hashed : String = hash.sha256_text()
+	var hashed : String = hash_string.sha256_text()
 	return hashed
 
 func _notification(what):

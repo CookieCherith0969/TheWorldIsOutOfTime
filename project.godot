@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The World is Out of Time"
-config/version="1.5.1"
+config/version="1.5.2"
 run/main_scene="res://Scenes/Screens/empty_control.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/image="res://Splash.png"
@@ -20,7 +20,7 @@ config/windows_native_icon="res://game_icon.ico"
 
 [autoload]
 
-SettingsManager="*res://Scripts/settings_manager.gd"
+SettingsManager="*res://Globals/settings_manager.gd"
 SoundManager="*res://Globals/sound_manager.tscn"
 GameManager="*res://Globals/game_manager.tscn"
 SaveManager="*res://Globals/save_manager.gd"

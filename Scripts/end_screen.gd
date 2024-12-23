@@ -62,10 +62,10 @@ func _ready() -> void:
 		percent_asterisk.show()
 		time_asterisk.show()
 	
-	if GameManager.is_realtime():
-		difficulty_label.show()
-	else:
-		difficulty_label.hide()
+	#if GameManager.is_realtime():
+	#	difficulty_label.show()
+	#else:
+	#	difficulty_label.hide()
 
 func _process(delta: float) -> void:
 	if !playing:

@@ -189,7 +189,6 @@ func toggle_menu():
 		menu_slider.slide_backward()
 		screen_cover_fader.fade_out(cover_fade_time)
 		SettingsManager.save_settings()
-		GameManager.paused = false
 	
 	await menu_slider.slide_complete
 	if menu_shown:
@@ -197,6 +196,7 @@ func toggle_menu():
 		play_button.grab_focus()
 	else:
 		screen_cover.hide()
+		GameManager.paused = false
 
 func set_menu_disabled(disabled : bool):
 	for child in settings_box.get_children():

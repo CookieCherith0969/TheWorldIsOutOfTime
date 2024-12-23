@@ -97,6 +97,9 @@ var paused : bool = false
 
 var game_state : GameState = GameState.MENU
 
+const save_day_gap : int = 30
+var save_day_counter : int = 0
+
 func factory_sort(a : FactoryInfo, b : FactoryInfo):
 	if a.sort_priority < b.sort_priority:
 		return true
@@ -118,6 +121,8 @@ func _ready() -> void:
 	setup_game()
 
 func setup_game():
+	save_day_counter = 0
+	realtime_speed_multiplier = 1.0
 	if SaveManager.has_planets:
 		setup_game_from_save()
 		return
@@ -667,3 +672,7 @@ func _on_materials_updated() -> void:
 func _on_day_ended() -> void:
 	if game_state == GameState.GAME:
 		SaveManager.current_save.days_left = days_left
+		save_day_counter += 1
+		if save_day_counter >= save_day_gap:
+			save_day_counter = 0
+			SaveManager.save_current_game_to_file.call_deferred()

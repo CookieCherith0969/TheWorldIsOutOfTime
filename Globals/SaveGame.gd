@@ -2,7 +2,7 @@ extends Resource
 class_name SaveGame
 
 @export
-var hash : String
+var hash_string : String
 @export
 var save_version : String
 
