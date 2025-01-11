@@ -40,37 +40,39 @@ func _on_halve_button_pressed() -> void:
 func _on_double_button_pressed() -> void:
 	double_time()
 
-func halve_time():
+func halve_time() -> bool:
 	if GameManager.is_timeskipping():
-		return
+		return false
 	selected_exponent -= 1
 	if selected_exponent < 0:
 		selected_exponent = 0
-		return
+		return false
 	update_buttons()
 	update_label()
 	if GameManager.is_realtime():
 		GameManager.realtime_speed_multiplier = pow(2, selected_exponent)
 	UIManager.print_to_code_window("halve_time()")
+	return true
 
-func double_time():
+func double_time() -> bool:
 	if GameManager.is_timeskipping():
-		return
+		return false
 	selected_exponent += 1
 	if GameManager.is_realtime():
 		if selected_exponent > max_realtime_exponent:
 			selected_exponent = max_realtime_exponent
-			return
+			return false
 	else:
 		if selected_exponent > max_exponent:
 			selected_exponent = max_exponent
-			return
+			return false
 	
 	update_buttons()
 	update_label()
 	if GameManager.is_realtime():
 		GameManager.realtime_speed_multiplier = pow(2, selected_exponent)
 	UIManager.print_to_code_window("double_time()")
+	return true
 
 func _on_timeskip_button_pressed() -> void:
 	var number_of_days : int = pow(2, selected_exponent)
@@ -130,10 +132,12 @@ func _on_gui_input(event: InputEvent) -> void:
 		if !event.pressed:
 			return
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			double_time()
+			if double_time():
+				SoundManager.play_button_down()
 			update_buttons()
 			update_label()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			halve_time()
+			if halve_time():
+				SoundManager.play_button_down()
 			update_buttons()
 			update_label()

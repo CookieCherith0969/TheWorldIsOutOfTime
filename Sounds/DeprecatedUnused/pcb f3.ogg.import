@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cvsckje8ncnm8"
+path="res://.godot/imported/pcb f3.ogg-2b72da6067c58be5721e2e3e9ad23c99.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/pcb f3.ogg"
+dest_files=["res://.godot/imported/pcb f3.ogg-2b72da6067c58be5721e2e3e9ad23c99.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

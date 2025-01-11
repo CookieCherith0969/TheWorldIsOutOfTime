@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cyrxb2h3fe0uy"
+path="res://.godot/imported/machine f1.ogg-16fc6bc2247f2517d99bf520135aef32.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/machine f1.ogg"
+dest_files=["res://.godot/imported/machine f1.ogg-16fc6bc2247f2517d99bf520135aef32.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

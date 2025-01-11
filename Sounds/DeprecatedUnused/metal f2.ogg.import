@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://pa0by5i41w2w"
+path="res://.godot/imported/metal f2.ogg-5d5d1f7923bbad3917f388056531d7c9.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/metal f2.ogg"
+dest_files=["res://.godot/imported/metal f2.ogg-5d5d1f7923bbad3917f388056531d7c9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

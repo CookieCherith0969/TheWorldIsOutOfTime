@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://j48kbuc5aeum"]
+[gd_scene load_steps=21 format=3 uid="uid://j48kbuc5aeum"]
 
 [ext_resource type="Script" path="res://Scripts/time_control.gd" id="1_6fb1j"]
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="2_0rf1v"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="8_u5rks"]
 [ext_resource type="Texture2D" uid="uid://cw5cgymy7oclv" path="res://Sprites/Buttons/time-subtract-button-normal.png" id="8_ykv2u"]
 [ext_resource type="Texture2D" uid="uid://jmsovgotpssy" path="res://Sprites/Buttons/time-subtract-button-pressed.png" id="9_8bfpu"]
+[ext_resource type="PackedScene" uid="uid://0p1eko5kefc1" path="res://Scenes/button_sound_component.tscn" id="9_luok3"]
 [ext_resource type="Texture2D" uid="uid://bn5dt0stxdwti" path="res://Sprites/Buttons/time-subtract-button-hover.png" id="10_yk32h"]
 [ext_resource type="Texture2D" uid="uid://c5dyj6typoo01" path="res://Sprites/Buttons/time-subtract-button-disabled.png" id="11_62xaa"]
 [ext_resource type="Texture2D" uid="uid://chv7rs2abbgak" path="res://Sprites/Buttons/time-subtract-button-focus.png" id="12_m25io"]
@@ -62,6 +63,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/HalveButton"]
 script = ExtResource("8_u5rks")
 
+[node name="ButtonSoundComponent" parent="InnerMargin/InnerBox/HalveButton" instance=ExtResource("9_luok3")]
+
 [node name="DurationLabel" type="Label" parent="InnerMargin/InnerBox"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -88,6 +91,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/DoubleButton"]
 script = ExtResource("8_u5rks")
 
+[node name="ButtonSoundComponent" parent="InnerMargin/InnerBox/DoubleButton" instance=ExtResource("9_luok3")]
+
 [node name="TimeskipButton" type="TextureButton" parent="InnerMargin/InnerBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -101,6 +106,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="InnerMargin/InnerBox/TimeskipButton"]
 script = ExtResource("8_u5rks")
+
+[node name="ButtonSoundComponent" parent="InnerMargin/InnerBox/TimeskipButton" instance=ExtResource("9_luok3")]
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="InnerMargin/InnerBox/HalveButton" to="." method="_on_halve_button_pressed"]

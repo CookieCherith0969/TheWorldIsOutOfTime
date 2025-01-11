@@ -57,24 +57,35 @@ func populate_costs(materials : Array[GameManager.Materials], amounts : Array[in
 	add_icons_from_material_amounts(materials, amounts)
 
 func populate_rates(rate_material : GameManager.Materials):
-	var increase_format : String = "%s/d"
-	var decrease_format : String = "%s/d"
-	var change_format : String = "%s/d"
+	var increase_format : String = "%s/%s"
+	var decrease_format : String = "%s/%s"
+	var change_format : String = "%s/%s"
 	
-	var increase : int = GameManager.get_prev_day_increase(rate_material)
-	var decrease : int = GameManager.get_prev_day_decrease(rate_material)
-	var change : int = GameManager.get_prev_day_change(rate_material)
+	var real_increase : int = GameManager.get_prev_day_increase(rate_material)
+	var real_decrease : int = GameManager.get_prev_day_decrease(rate_material)
+	var real_change : int = GameManager.get_prev_day_change(rate_material)
 	
-	if increase > 0:
-		increase_format = "+%s/d"
-	if decrease > 0:
-		decrease_format = "+%s/d"
-	if change > 0:
-		change_format = "+%s/d"
+	var predicted_increase : int = GameManager.get_predicted_increase(rate_material)
+	var predicted_decrease : int = GameManager.get_predicted_decrease(rate_material)
+	var predicted_change : int = GameManager.get_predicted_change(rate_material)
 	
-	add_icon_amount(increase_icon, increase, increase_format)
-	add_icon_amount(decrease_icon, decrease, decrease_format)
-	add_icon_amount(change_icon, change, change_format)
+	if predicted_increase >= 0:
+		increase_format = "%s/+%s"
+	if predicted_decrease >= 0:
+		decrease_format = "%s/+%s"
+	if predicted_change >= 0:
+		change_format = "%s/+%s"
+	
+	if real_increase >= 0:
+		increase_format = "+"+increase_format
+	if real_decrease >= 0:
+		decrease_format = "+"+decrease_format
+	if real_change >= 0:
+		change_format = "+"+change_format
+	
+	add_icon_string(increase_icon, increase_format % [real_increase, predicted_increase])
+	add_icon_string(decrease_icon, decrease_format % [real_decrease, predicted_decrease])
+	add_icon_string(change_icon, change_format % [real_change, predicted_change])
 
 func add_build_header():
 	add_header_icon(build_icon)
@@ -116,6 +127,15 @@ func add_icon_amount(icon : Texture, amount : int, format_string : String = "") 
 		new_icon.set_amount(amount)
 	else:
 		new_icon.set_amount_formatted(amount, format_string)
+	
+	return new_icon
+
+func add_icon_string(icon : Texture, string : String) -> TooltipIconAmount:
+	var new_icon : TooltipIconAmount = icon_amount_scene.instantiate()
+	
+	icon_list.add_child(new_icon)
+	new_icon.set_icon(icon)
+	new_icon.set_amount_string(string)
 	
 	return new_icon
 

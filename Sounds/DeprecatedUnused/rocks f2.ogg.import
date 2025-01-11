@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mrdstmk2bmkl"
+path="res://.godot/imported/rocks f2.ogg-7d8b5d82b8bff85e0515e9934ea0f6c1.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/rocks f2.ogg"
+dest_files=["res://.godot/imported/rocks f2.ogg-7d8b5d82b8bff85e0515e9934ea0f6c1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

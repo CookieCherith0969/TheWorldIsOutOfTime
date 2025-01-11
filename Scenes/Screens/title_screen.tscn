@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://deeyw2hrbotgb"]
+[gd_scene load_steps=73 format=3 uid="uid://deeyw2hrbotgb"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_84wai"]
 [ext_resource type="PackedScene" uid="uid://cml40s7uhfwfg" path="res://Scenes/space_rect.tscn" id="2_bjx7e"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://cwikb5b2vlxyp" path="res://Sprites/Buttons/settings-button-pressed.png" id="26_tjyli"]
 [ext_resource type="Texture2D" uid="uid://dcwc6kkvlnd58" path="res://Sprites/Buttons/settings-button-hover.png" id="27_ev750"]
 [ext_resource type="Texture2D" uid="uid://cmjichdgtj7fj" path="res://Sprites/Buttons/exit-button-normal.png" id="28_3h5m7"]
+[ext_resource type="PackedScene" uid="uid://0p1eko5kefc1" path="res://Scenes/button_sound_component.tscn" id="28_hgh7r"]
 [ext_resource type="Texture2D" uid="uid://i5xphealgday" path="res://Sprites/Buttons/exit-button-pressed.png" id="29_gjw76"]
 [ext_resource type="Texture2D" uid="uid://vaj20yre1pi5" path="res://Sprites/Buttons/exit-button-hover.png" id="30_51570"]
 [ext_resource type="Texture2D" uid="uid://cyjsmg4ugj1jm" path="res://Sprites/Placeholder/PlaceholderResetNorma.png" id="34_bniu6"]
@@ -141,7 +142,7 @@ slide_target_pos = Vector2(0, -300)
 [node name="SettingsMenuSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("47_dfowj")
 targets = [NodePath("../MenuBox")]
-slide_target_pos = Vector2(0, 50)
+slide_target_pos = Vector2(0, 80)
 
 [node name="SettingsTitleSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("47_dfowj")
@@ -230,6 +231,8 @@ bob_offset = -0.7854
 [node name="KeyFocusComponent" type="Node" parent="MenuBox/PlayButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="MenuBox/PlayButton" instance=ExtResource("28_hgh7r")]
+
 [node name="SettingsButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -247,6 +250,8 @@ bob_offset = -1.5708
 [node name="KeyFocusComponent" type="Node" parent="MenuBox/SettingsButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="MenuBox/SettingsButton" instance=ExtResource("28_hgh7r")]
+
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -263,6 +268,8 @@ bob_offset = -2.3562
 
 [node name="KeyFocusComponent" type="Node" parent="MenuBox/ExitButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="MenuBox/ExitButton" instance=ExtResource("28_hgh7r")]
 
 [node name="ControlBox" type="HBoxContainer" parent="."]
 visible = false
@@ -295,6 +302,8 @@ fade_color = Color(0, 0, 0, 0)
 [node name="KeyFocusComponent" type="Node" parent="ControlBox/SlowButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="ControlBox/SlowButton" instance=ExtResource("28_hgh7r")]
+
 [node name="FastButton" type="TextureButton" parent="ControlBox"]
 layout_mode = 2
 texture_normal = ExtResource("20_hyr5r")
@@ -309,6 +318,8 @@ fade_color = Color(0, 0, 0, 0)
 
 [node name="KeyFocusComponent" type="Node" parent="ControlBox/FastButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="ControlBox/FastButton" instance=ExtResource("28_hgh7r")]
 
 [node name="HideButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -336,6 +347,8 @@ active = false
 
 [node name="KeyFocusComponent" type="Node" parent="HideButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="HideButton" instance=ExtResource("28_hgh7r")]
 
 [node name="SettingsBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -394,6 +407,29 @@ allow_lesser = true
 script = ExtResource("40_d8j5p")
 bus_name = "Music"
 
+[node name="Label3" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.878431, 0.886275, 1)
+theme_override_fonts/font = ExtResource("37_ieih4")
+text = "Effects"
+
+[node name="EffectsSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("37_pv5e0")
+theme_override_icons/grabber_highlight = ExtResource("38_2djdh")
+theme_override_icons/grabber_disabled = ExtResource("39_pw6tx")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mc5sd")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3imni")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4xkkh")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("40_d8j5p")
+bus_name = "Effects"
+
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("21_b6cxi")
 bobbing_height = 2.0
@@ -424,6 +460,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/NormalButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="SettingsBox/DifficultyBox/NormalButton" instance=ExtResource("28_hgh7r")]
+
 [node name="MediumButton" type="TextureButton" parent="SettingsBox/DifficultyBox"]
 layout_direction = 2
 layout_mode = 2
@@ -446,6 +484,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/MediumButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="SettingsBox/DifficultyBox/MediumButton" instance=ExtResource("28_hgh7r")]
+
 [node name="HardButton" type="TextureButton" parent="SettingsBox/DifficultyBox"]
 layout_direction = 2
 layout_mode = 2
@@ -467,6 +507,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/DifficultyBox/HardButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="SettingsBox/DifficultyBox/HardButton" instance=ExtResource("28_hgh7r")]
 
 [node name="DifficultyLabel" type="Label" parent="SettingsBox/DifficultyBox"]
 custom_minimum_size = Vector2(96, 0)
@@ -502,6 +544,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/ButtonBox/ResetButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="SettingsBox/ButtonBox/ResetButton" instance=ExtResource("28_hgh7r")]
+
 [node name="FullscreenButton" type="TextureButton" parent="SettingsBox/ButtonBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -522,6 +566,8 @@ script = ExtResource("46_v4k27")
 
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/ButtonBox/FullscreenButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="SettingsBox/ButtonBox/FullscreenButton" instance=ExtResource("28_hgh7r")]
 
 [node name="ConfirmCover" type="ColorRect" parent="."]
 visible = false
@@ -595,6 +641,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton"]
 script = ExtResource("26_nshxy")
 
+[node name="ButtonSoundComponent" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/ConfirmButton" instance=ExtResource("28_hgh7r")]
+
 [node name="CancelButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -613,6 +661,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton"]
 script = ExtResource("26_nshxy")
+
+[node name="ButtonSoundComponent" parent="ConfirmCover/ConfirmWindow/DeleteConfirm/ButtonBox/CancelButton" instance=ExtResource("28_hgh7r")]
 
 [node name="DeleteFeedback" type="MarginContainer" parent="ConfirmCover/ConfirmWindow"]
 visible = false

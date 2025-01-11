@@ -63,11 +63,15 @@ const days_per_month : Array[int] = [
 
 var material_amounts : Array[int] = []
 
+var starved_materials : Array[bool] = []
+
 var prev_day_changes : Array[int] = []
 var prev_day_increases : Array[int] = []
 var prev_day_decreases : Array[int] = []
 var lifetime_increases : Array[int] = []
 var predicted_changes : Array[int] = []
+var predicted_increases : Array[int] = []
+var predicted_decreases : Array[int] = []
 
 var factories : Array[FactoryInfo] = []
 
@@ -76,6 +80,8 @@ var active_factory_amounts : Array[int] = []
 var planned_factory_amounts : Array[int] = []
 var factory_build_progress : Array[int] = []
 var unlocked_factories : Array[bool] = []
+var starved_factories : Array[bool] = []
+var factory_shortages : Array[Array] = [] #Array[Array[bool]]
 
 var timeskip_days : int = 0
 var elapsed_timeskip_time : float = 0.0
@@ -134,6 +140,8 @@ func setup_game():
 	planned_factory_amounts.clear()
 	factory_build_progress.clear()
 	unlocked_factories.clear()
+	starved_factories.clear()
+	factory_shortages.clear()
 	
 	# Initialise factory amounts to automatically match size of factories array
 	for i in range(factories.size()):
@@ -141,6 +149,13 @@ func setup_game():
 		planned_factory_amounts.append(0)
 		factory_build_progress.append(0)
 		unlocked_factories.append(false)
+		starved_factories.append(false)
+		
+		var shortage_array : Array[bool] = []
+		for input_material in factories[i].input_materials:
+			shortage_array.append(false)
+		factory_shortages.append(shortage_array)
+		
 		
 		if factories[i].research_materials.size() == 0:
 			unlocked_factories[i] = true
@@ -149,20 +164,26 @@ func setup_game():
 			active_factory_amounts[i] = factories[i].start_amount
 	
 	material_amounts.clear()
+	starved_materials.clear()
 	prev_day_changes.clear()
 	prev_day_increases.clear()
 	prev_day_decreases.clear()
 	lifetime_increases.clear()
 	predicted_changes.clear()
+	predicted_increases.clear()
+	predicted_decreases.clear()
 	
 	# Initialise material amounts to automatically match size of materials enum
 	for i in range(Materials.size()):
 		material_amounts.append(0)
+		starved_materials.append(false)
 		prev_day_changes.append(0)
 		prev_day_increases.append(0)
 		prev_day_decreases.append(0)
 		lifetime_increases.append(0)
 		predicted_changes.append(0)
+		predicted_increases.append(0)
+		predicted_decreases.append(0)
 	
 	material_amounts[Materials.STONE] = 200
 	material_amounts[Materials.CONCRETE] = 200
@@ -294,6 +315,8 @@ func launch_rocket():
 
 func update_predicted_changes():
 	predicted_changes.fill(0)
+	predicted_increases.fill(0)
+	predicted_decreases.fill(0)
 	for i in range(factories.size()):
 		var factory : FactoryInfo = factories[i]
 		if factory.output_on_build:
@@ -319,6 +342,10 @@ func add_predicted_material_amounts(materials : Array[GameManager.Materials], am
 		if negate:
 			total = -total
 		predicted_changes[materials[i]] += total
+		if total >= 0:
+			predicted_increases[materials[i]] += total
+		elif total < 0:
+			predicted_decreases[materials[i]] += total
 
 func in_out_sine_ease(progress : float):
 	return -(cos(PI*progress) - 1) / 2
@@ -390,6 +417,12 @@ func get_material_name(material : Materials):
 
 func get_predicted_change(material : Materials):
 	return predicted_changes[material]
+
+func get_predicted_increase(material : Materials):
+	return predicted_increases[material]
+
+func get_predicted_decrease(material : Materials):
+	return predicted_decreases[material]
 
 func get_prev_day_change(material : Materials):
 	return prev_day_changes[material]
@@ -512,6 +545,10 @@ func process_day():
 	prev_day_changes.fill(0)
 	prev_day_increases.fill(0)
 	prev_day_decreases.fill(0)
+	starved_factories.fill(false)
+	starved_materials.fill(false)
+	for i in range(factory_shortages.size()):
+		factory_shortages[i].fill(false)
 	
 	for f in range(factories.size()):
 		if planned_factory_amounts[f] > 0:
@@ -573,6 +610,8 @@ func process_factory(factory_index : int):
 	if factory.output_on_build:
 		return
 	
+	var running_factories = get_running_factory_amount(factory_index)
+	
 	for i in range(factory.input_materials.size()):
 		var material : Materials = factory.input_materials[i]
 		var input_amount : int = factory.inputs_per_day[i]
@@ -581,14 +620,18 @@ func process_factory(factory_index : int):
 			continue
 		
 		var possible_runs : int = material_amounts[material] / input_amount
-		# Return early if any material doesn't meet requirements
-		# as no products can be produced
-		if possible_runs == 0:
-			return
+		if possible_runs < running_factories:
+			factory_shortages[factory_index][i] = true
 		if possible_runs < min_possible_runs:
 			min_possible_runs = possible_runs
 	
-	var running_factories = get_running_factory_amount(factory_index)
+	if factory_shortages[factory_index].has(true):
+		starved_factories[factory_index] = true
+		for output_material in factory.output_materials:
+			starved_materials[output_material] = true
+	# Return early if no products can be produced
+	if min_possible_runs == 0:
+		return
 	var actual_runs : int = min(min_possible_runs, running_factories)
 	
 	add_material_amounts(factory.input_materials, factory.inputs_per_day, true, actual_runs)

@@ -42,7 +42,12 @@ func _on_tooltip_shown():
 
 func update_labels():
 	amount_label.text = UIManager.simplify_number(GameManager.get_material_amount(represented_material))
-	GameManager.get_predicted_change(represented_material)
+	
+	if GameManager.starved_materials[represented_material]:
+		amount_label.add_theme_color_override("font_color", UIManager.palette_red)
+	else:
+		amount_label.add_theme_color_override("font_color", UIManager.palette_black)
+	
 	var prefix : String = ""
 	var change : int = GameManager.get_prev_day_change(represented_material)
 	var prediction : int = GameManager.get_predicted_change(represented_material)

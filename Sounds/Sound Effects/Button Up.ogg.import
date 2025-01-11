@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cjiaf8k6l4oa"
+path="res://.godot/imported/Button Up.ogg-30424a924288728ceb5658b9e5e5d519.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/Button Up.ogg"
+dest_files=["res://.godot/imported/Button Up.ogg-30424a924288728ceb5658b9e5e5d519.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

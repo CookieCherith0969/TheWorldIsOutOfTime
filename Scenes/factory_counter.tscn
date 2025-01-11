@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cvpu5rrhb7ehv"]
+[gd_scene load_steps=36 format=3 uid="uid://cvpu5rrhb7ehv"]
 
 [ext_resource type="Script" path="res://Scripts/factory_counter.gd" id="1_f452t"]
 [ext_resource type="Resource" uid="uid://saqj5krpedy7" path="res://Factories/StoneMine.tres" id="2_7gxrd"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d4lckcjm36v6o" path="res://Sprites/Buttons/minus-prod-button-pressed.png" id="16_7o6du"]
 [ext_resource type="Script" path="res://Scripts/key_focus_component.gd" id="16_jf1oa"]
 [ext_resource type="Texture2D" uid="uid://br0qu116lkakb" path="res://Sprites/Buttons/minus-prod-button-hover.png" id="17_dx8m8"]
+[ext_resource type="PackedScene" uid="uid://0p1eko5kefc1" path="res://Scenes/button_sound_component.tscn" id="17_jhr0m"]
 [ext_resource type="Texture2D" uid="uid://bunidpkfhuk61" path="res://Sprites/Buttons/minus-prod-button-disabled.png" id="18_sioiy"]
 [ext_resource type="Texture2D" uid="uid://bwu8p2mnn4b3e" path="res://Sprites/Buttons/minus-prod-button-focus.png" id="19_ta8fr"]
 [ext_resource type="Texture2D" uid="uid://dmiid8l8odijq" path="res://Sprites/Buttons/lock-button-normal.png" id="20_jjlxd"]
@@ -215,6 +216,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="PlanButton"]
 script = ExtResource("16_jf1oa")
 
+[node name="ButtonSoundComponent" parent="PlanButton" instance=ExtResource("17_jhr0m")]
+
 [node name="UnplanButton" type="TextureButton" parent="."]
 visible = false
 layout_mode = 1
@@ -242,6 +245,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="UnplanButton"]
 script = ExtResource("16_jf1oa")
+
+[node name="ButtonSoundComponent" parent="UnplanButton" instance=ExtResource("17_jhr0m")]
 
 [node name="BuildProgressBar" type="ProgressBar" parent="."]
 visible = false
@@ -306,6 +311,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="LockPanel/UnlockButton"]
 script = ExtResource("16_jf1oa")
+
+[node name="ButtonSoundComponent" parent="LockPanel/UnlockButton" instance=ExtResource("17_jhr0m")]
 
 [node name="SketchSound" type="AudioStreamPlayer" parent="."]
 

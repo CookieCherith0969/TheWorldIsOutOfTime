@@ -22,32 +22,34 @@ func _ready() -> void:
 	populate_factories()
 	update_buttons()
 
-func prev_page(print_to_code : bool = true):
+func prev_page(print_to_code : bool = true) -> bool:
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
 		populate_factories()
 		update_buttons()
-		return
+		return false
 	
 	populate_factories()
 	update_buttons()
 	if print_to_code:
 		UIManager.print_to_code_window("prev_fact_page()")
 	page_changed.emit()
+	return true
 
-func next_page():
+func next_page() -> bool:
 	current_page += 1
 	if current_page >= number_of_pages:
 		current_page = number_of_pages-1
 		populate_factories()
 		update_buttons()
-		return
+		return false
 	
 	populate_factories()
 	update_buttons()
 	UIManager.print_to_code_window("next_fact_page()")
 	page_changed.emit()
+	return true
 
 func populate_factories():
 	for i in range(factory_grid.get_child_count()):
@@ -91,8 +93,10 @@ func _on_gui_input(event: InputEvent) -> void:
 		if !event.pressed:
 			return
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			next_page()
+			if next_page():
+				SoundManager.play_button_down()
 			UIManager.hide_tooltip()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			prev_page()
+			if prev_page():
+				SoundManager.play_button_down()
 			UIManager.hide_tooltip()

@@ -90,6 +90,7 @@ func on_day_ended():
 	if showing_tooltip:
 		show_tooltip()
 	update_buttons()
+	update_nums()
 
 func on_factory_amount_updated(updated_factory : FactoryInfo):
 	if updated_factory == represented_factory:
@@ -223,6 +224,18 @@ func update_buttons():
 	else:
 		unlock_button.disabled = true
 
+func update_nums():
+	for i in range(GameManager.factory_shortages[factory_index].size()):
+		if GameManager.factory_shortages[factory_index][i]:
+			num_box.get_child(i).add_theme_color_override("font_color", UIManager.palette_red)
+		else:
+			num_box.get_child(i).add_theme_color_override("font_color", UIManager.palette_black)
+	
+	if GameManager.starved_factories[factory_index]:
+		num_box.get_child(-1).add_theme_color_override("font_color", UIManager.palette_red)
+	else:
+		num_box.get_child(-1).add_theme_color_override("font_color", UIManager.palette_black)
+
 func _on_plan_button_pressed() -> void:
 	var multiplier : int = 1
 	if Input.is_action_pressed("FactoryTen"):
@@ -349,6 +362,7 @@ func set_rep_factory(new_factory):
 	
 	populate_icons()
 	populate_nums()
+	update_nums()
 	update_amounts()
 	update_progress(GameManager.factory_build_progress[factory_index])
 	
@@ -383,10 +397,12 @@ func _on_gui_input(event: InputEvent) -> void:
 		if empty:
 			return
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			GameManager.plan_factory(factory_index)
+			if GameManager.plan_factory(factory_index):
+				SoundManager.play_button_down()
 			show_tooltip()
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			GameManager.unplan_factory(factory_index)
+			if GameManager.unplan_factory(factory_index):
+				SoundManager.play_button_down()
 			show_tooltip()
 			get_viewport().set_input_as_handled()

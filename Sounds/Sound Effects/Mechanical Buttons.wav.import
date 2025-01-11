@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cji5e8hhkxxuq"
+path="res://.godot/imported/Mechanical Buttons.wav-c354de704349e6357a8175003b07b34d.sample"
+
+[deps]
+
+source_file="res://Sounds/Sound Effects/Mechanical Buttons.wav"
+dest_files=["res://.godot/imported/Mechanical Buttons.wav-c354de704349e6357a8175003b07b34d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

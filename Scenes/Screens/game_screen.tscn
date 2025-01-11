@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://1rb1mnyln0nq"]
+[gd_scene load_steps=49 format=3 uid="uid://1rb1mnyln0nq"]
 
 [ext_resource type="Script" path="res://Scripts/game_screen.gd" id="1_dpfp6"]
 [ext_resource type="PackedScene" uid="uid://cbj8x7k48jrb5" path="res://Scenes/time_label.tscn" id="2_npmaq"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ug7ye1ri5gke" path="res://Scenes/launch_button.tscn" id="31_gp4wh"]
 [ext_resource type="Texture2D" uid="uid://dc0waj3fc7lsu" path="res://Sprites/Buttons/minimize-button-focus.png" id="31_ygalj"]
 [ext_resource type="PackedScene" uid="uid://blqairk0d88el" path="res://Scenes/code_window.tscn" id="32_xgsqe"]
+[ext_resource type="PackedScene" uid="uid://0p1eko5kefc1" path="res://Scenes/button_sound_component.tscn" id="32_y08vt"]
 [ext_resource type="Script" path="res://Scripts/fade_component.gd" id="33_1ir25"]
 [ext_resource type="Texture2D" uid="uid://d30f8ofddp7gm" path="res://Sprites/Placeholder/PlaceholderSlideGrabberDisabled.png" id="35_7ja3b"]
 [ext_resource type="Texture2D" uid="uid://cnxn358w5568f" path="res://Sprites/Placeholder/PlaceholderSlideGrabberHighlighted.png" id="36_68s4k"]
@@ -159,6 +160,8 @@ offset_bottom = 201.0
 [node name="KeyFocusComponent" type="Node" parent="SolarSystemMap"]
 script = ExtResource("45_jbswd")
 
+[node name="ButtonSoundComponent" parent="SolarSystemMap" instance=ExtResource("32_y08vt")]
+
 [node name="MaterialWindow" parent="." instance=ExtResource("24_fqstt")]
 layout_mode = 0
 offset_left = 5.0
@@ -220,6 +223,8 @@ texture_focused = ExtResource("31_ygalj")
 [node name="KeyFocusComponent" type="Node" parent="LargeMap/MinimiseButton"]
 script = ExtResource("45_jbswd")
 
+[node name="ButtonSoundComponent" parent="LargeMap/MinimiseButton" instance=ExtResource("32_y08vt")]
+
 [node name="SpaceRect" parent="LargeMap" instance=ExtResource("22_7g3ue")]
 layout_mode = 0
 offset_left = 2.0
@@ -274,9 +279,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -151.0
-offset_top = -302.0
+offset_top = -382.0
 offset_right = 151.0
-offset_bottom = -94.0
+offset_bottom = -108.0
 grow_horizontal = 2
 theme_override_constants/separation = 15
 
@@ -332,6 +337,31 @@ allow_lesser = true
 script = ExtResource("38_1qgbg")
 bus_name = "Music"
 
+[node name="Label3" type="Label" parent="SettingsBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_i4nyd")
+text = "Effects"
+
+[node name="EffectsSlider" type="HSlider" parent="SettingsBox"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../MasterSlider")
+focus_neighbor_right = NodePath(".")
+focus_previous = NodePath("../MasterSlider")
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("35_7ja3b")
+theme_override_icons/grabber_highlight = ExtResource("36_68s4k")
+theme_override_icons/grabber_disabled = ExtResource("37_l034i")
+theme_override_styles/slider = SubResource("StyleBoxFlat_6fwsw")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_p8oko")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_kf144")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+allow_lesser = true
+script = ExtResource("38_1qgbg")
+bus_name = "Effects"
+
 [node name="FullscreenButton" type="TextureButton" parent="SettingsBox"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")
@@ -348,6 +378,8 @@ script = ExtResource("44_iwao7")
 
 [node name="KeyFocusComponent" type="Node" parent="SettingsBox/FullscreenButton"]
 script = ExtResource("45_jbswd")
+
+[node name="ButtonSoundComponent" parent="SettingsBox/FullscreenButton" instance=ExtResource("32_y08vt")]
 
 [node name="BobbingComponent" type="Node" parent="SettingsBox"]
 script = ExtResource("44_2yefa")
@@ -391,6 +423,8 @@ bob_offset = -0.7854
 [node name="KeyFocusComponent" type="Node" parent="MenuBox/PlayButton"]
 script = ExtResource("45_jbswd")
 
+[node name="ButtonSoundComponent" parent="MenuBox/PlayButton" instance=ExtResource("32_y08vt")]
+
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -414,10 +448,12 @@ bob_offset = -2.3562
 [node name="KeyFocusComponent" type="Node" parent="MenuBox/ExitButton"]
 script = ExtResource("45_jbswd")
 
+[node name="ButtonSoundComponent" parent="MenuBox/ExitButton" instance=ExtResource("32_y08vt")]
+
 [node name="MenuSlider" type="Node" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("55_3nq2p")
 targets = [NodePath("../MenuBox"), NodePath("../SettingsBox"), NodePath("../ConfirmCover/ConfirmWindow")]
-slide_target_pos = Vector2(0, 400)
+slide_target_pos = Vector2(0, 480)
 
 [node name="ConfirmCover" type="ColorRect" parent="."]
 visible = false
@@ -488,6 +524,8 @@ stretch_mode = 3
 [node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/ConfirmButton"]
 script = ExtResource("45_jbswd")
 
+[node name="ButtonSoundComponent" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/ConfirmButton" instance=ExtResource("32_y08vt")]
+
 [node name="CancelButton" type="TextureButton" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -506,6 +544,8 @@ stretch_mode = 3
 
 [node name="KeyFocusComponent" type="Node" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/CancelButton"]
 script = ExtResource("45_jbswd")
+
+[node name="ButtonSoundComponent" parent="ConfirmCover/ConfirmWindow/InnerMargin/ButtonBox/CancelButton" instance=ExtResource("32_y08vt")]
 
 [node name="HashAsterisk" type="Label" parent="."]
 visible = false

@@ -166,6 +166,7 @@ func _input(event: InputEvent) -> void:
 		if GameManager.is_timeskipping():
 			return
 		toggle_menu()
+		SoundManager.play_button_down()
 
 func toggle_menu():
 	if screen_cover_fader.fade_state != FadeComponent.FadeState.IDLE:

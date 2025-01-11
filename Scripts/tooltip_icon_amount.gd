@@ -15,5 +15,8 @@ func set_amount(amount : int):
 func set_amount_formatted(amount : int, format_string : String):
 	amount_label.text = format_string % UIManager.simplify_number(amount)
 
+func set_amount_string(amount_string : String):
+	amount_label.text = amount_string
+
 func set_color(new_color : Color):
 	amount_label.add_theme_color_override("font_color", new_color)

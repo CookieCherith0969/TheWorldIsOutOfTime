@@ -11,6 +11,14 @@ var menu_music : AudioStreamPlayer = $MenuMusic
 
 @export
 var music_tracks : Array[AudioStreamPlayer]
+@export
+var button_down : AudioStreamPlayer
+@export
+var button_up : AudioStreamPlayer
+@export
+var timeskip : AudioStreamPlayer
+
+const button_sound_delay : float = 0.1
 
 @export
 var late_game_proportion : float = 1/3.0
@@ -42,6 +50,20 @@ var prev_day_proportion : float = 1.0
 func _ready() -> void:
 	track_change_time = track_change_base + randf_range(-track_change_variance, track_change_variance)
 	GameManager.day_ended.connect(on_day_ended)
+
+func play_button_down() -> void:
+	button_down.play()
+
+func play_button_up() -> void:
+	button_up.play()
+
+func play_full_button_sound() -> void:
+	button_down.play()
+	await get_tree().create_timer(button_sound_delay).timeout
+	button_up.play()
+
+func play_timeskip() -> void:
+	timeskip.play()
 
 func on_day_ended():
 	if GameManager.game_state >= GameManager.GameState.END_SURVIVAL:

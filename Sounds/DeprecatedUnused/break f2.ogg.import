@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bg3n71xp73l6e"
+path="res://.godot/imported/break f2.ogg-e1332cca2281eacf8fa4066263a570ad.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/break f2.ogg"
+dest_files=["res://.godot/imported/break f2.ogg-e1332cca2281eacf8fa4066263a570ad.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxda8hnrqtlxo"
+path="res://.godot/imported/refined f1.ogg-9c7f0b4ecc33b15ee9891798c72a6613.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/DeprecatedUnused/refined f1.ogg"
+dest_files=["res://.godot/imported/refined f1.ogg-9c7f0b4ecc33b15ee9891798c72a6613.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3622lee72wb6"]
+[gd_scene load_steps=10 format=3 uid="uid://3622lee72wb6"]
 
 [ext_resource type="Script" path="res://Globals/sound_manager.gd" id="1_dbxqp"]
 [ext_resource type="AudioStream" uid="uid://dr32fccddwxil" path="res://Sounds/Music/1menu.ogg" id="2_mbuky"]
@@ -6,15 +6,20 @@
 [ext_resource type="AudioStream" uid="uid://do4328ror1vj1" path="res://Sounds/Music/3early-game.ogg" id="4_70i3m"]
 [ext_resource type="AudioStream" uid="uid://cko3plib2u1mp" path="res://Sounds/Music/4middle-game.ogg" id="5_st12c"]
 [ext_resource type="AudioStream" uid="uid://76payn65uuot" path="res://Sounds/Music/5late-game.ogg" id="6_3olas"]
+[ext_resource type="AudioStream" uid="uid://ccifqslvty6ni" path="res://Sounds/Sound Effects/Button Down.ogg" id="7_liier"]
+[ext_resource type="AudioStream" uid="uid://cjiaf8k6l4oa" path="res://Sounds/Sound Effects/Button Up.ogg" id="8_sbv4a"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_88dud"]
 stream_count = 1
 stream_0/stream = ExtResource("2_mbuky")
 stream_0/volume = 0.0
 
-[node name="SoundManager" type="Node" node_paths=PackedStringArray("music_tracks")]
+[node name="SoundManager" type="Node" node_paths=PackedStringArray("music_tracks", "button_down", "button_up", "timeskip")]
 script = ExtResource("1_dbxqp")
 music_tracks = [NodePath("MenuMusic"), NodePath("Ambience"), NodePath("EarlyMusic"), NodePath("MiddleMusic"), NodePath("LateMusic")]
+button_down = NodePath("ButtonDown")
+button_up = NodePath("ButtonUp")
+timeskip = NodePath("Timeskip")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_88dud")
@@ -47,9 +52,11 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="ButtonDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_liier")
 bus = &"Effects"
 
 [node name="ButtonUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_sbv4a")
 bus = &"Effects"
 
 [node name="Timeskip" type="AudioStreamPlayer" parent="."]
