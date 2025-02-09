@@ -234,6 +234,7 @@ script = ExtResource("26_nshxy")
 [node name="ButtonSoundComponent" parent="MenuBox/PlayButton" instance=ExtResource("28_hgh7r")]
 
 [node name="SettingsButton" type="TextureButton" parent="MenuBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("25_ljxs3")
@@ -253,6 +254,7 @@ script = ExtResource("26_nshxy")
 [node name="ButtonSoundComponent" parent="MenuBox/SettingsButton" instance=ExtResource("28_hgh7r")]
 
 [node name="ExitButton" type="TextureButton" parent="MenuBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("28_3h5m7")
@@ -443,7 +445,7 @@ layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../MusicSlider")
+focus_neighbor_top = NodePath("../../EffectsSlider")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
 focus_next = NodePath("../../ButtonBox/ResetButton")
@@ -472,6 +474,8 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
 focus_next = NodePath("../../ButtonBox/ResetButton")
 focus_previous = NodePath("../../MusicSlider")
+focus_mode = 0
+mouse_filter = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_nlhj5")
 texture_normal = ExtResource("49_r5vjy")
@@ -496,6 +500,8 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../../ButtonBox/ResetButton")
 focus_next = NodePath("../../ButtonBox/ResetButton")
 focus_previous = NodePath("../../MusicSlider")
+focus_mode = 0
+mouse_filter = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_nlhj5")
 texture_normal = ExtResource("46_vdmvh")
@@ -520,17 +526,46 @@ theme_override_font_sizes/font_size = 16
 text = "Normal"
 horizontal_alignment = 1
 script = ExtResource("49_0s7t2")
+normal_text = "Normal"
+
+[node name="ColorRect" type="ColorRect" parent="SettingsBox/DifficultyBox/DifficultyLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -135.0
+offset_top = -12.0
+offset_right = -104.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41598, 0.41598, 0.41598, 0.603922)
+
+[node name="Label" type="Label" parent="SettingsBox/DifficultyBox/DifficultyLabel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("37_ieih4")
+theme_override_font_sizes/font_size = 8
+text = "Realtime modes disabled for Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="ButtonBox" type="HBoxContainer" parent="SettingsBox"]
 layout_mode = 2
 
 [node name="ResetButton" type="TextureButton" parent="SettingsBox/ButtonBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../../DifficultyBox/NormalButton")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../FullscreenButton")
+focus_neighbor_right = NodePath("../FullscreenButton")
+focus_neighbor_bottom = NodePath("../../../MenuBox/SettingsButton")
 focus_next = NodePath("../FullscreenButton")
 focus_previous = NodePath("../../DifficultyBox/NormalButton")
 focus_mode = 0

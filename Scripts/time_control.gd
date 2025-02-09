@@ -2,7 +2,7 @@ extends MarginContainer
 class_name TimeControl
 
 var selected_exponent : int = 0
-var max_exponent : int = 12
+var max_exponent : int = 10
 var max_realtime_exponent : int = 6
 
 @onready

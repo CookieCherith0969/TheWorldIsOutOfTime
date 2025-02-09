@@ -137,8 +137,6 @@ func fade_out_ui():
 
 
 func _on_exit_button_pressed() -> void:
-	SaveManager.reset_save_game()
-	SaveManager.save_current_game_to_file()
 	GameManager.reset_game()
 	
 	UIManager.current_screen_type = UIManager.Screens.TITLE

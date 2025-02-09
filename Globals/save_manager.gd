@@ -82,7 +82,8 @@ func reset_save_game():
 
 # Loads save from file. Returns the default save game if save isn't valid.
 func load_save_game() -> SaveGame:
-	if !ResourceLoader.exists(save_path+game_version+difficulty+".tres", "SaveGame"):
+	return null
+	"""if !ResourceLoader.exists(save_path+game_version+difficulty+".tres", "SaveGame"):
 		push_warning("Save game doesn't exist")
 		return null
 	var loaded_save : SaveGame = SafeResourceLoader.load(save_path+game_version+difficulty+".tres", "SaveGame")
@@ -92,7 +93,7 @@ func load_save_game() -> SaveGame:
 	loaded_save = loaded_save.duplicate(true)
 	if !is_valid_save(loaded_save):
 		return null
-	return loaded_save
+	return loaded_save"""
 
 func is_valid_save(save : SaveGame) -> bool:
 	if !is_instance_valid(save):
@@ -116,11 +117,12 @@ func current_save_has_planets() -> bool:
 	return has_planets
 
 func save_current_game_to_file() -> void:
-	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
+	return
+	"""ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
 	current_save = SafeResourceLoader.load(save_path+game_version+difficulty+".tres", "SaveGame").duplicate()
 	if hash_valid:
 		current_save.hash_string = generate_hash(current_save)
-	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")
+	ResourceSaver.save(current_save.duplicate(), save_path+game_version+difficulty+".tres")"""
 
 func generate_hash(save : SaveGame) -> String:
 	var hash_string : String = "Hello, curious minds! You've found the hash function! :P"

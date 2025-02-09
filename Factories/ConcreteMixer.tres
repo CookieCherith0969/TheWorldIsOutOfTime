@@ -6,7 +6,7 @@
 script = ExtResource("1_p2fdg")
 factory_name = &"Concrete Mixer"
 sort_priority = 20
-start_amount = 1
+start_amount = 3
 output_on_build = false
 input_materials = Array[int]([0, 1])
 inputs_per_day = Array[int]([45, 30])

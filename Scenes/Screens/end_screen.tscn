@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmjpetrwl6i7o"]
+[gd_scene load_steps=17 format=3 uid="uid://dmjpetrwl6i7o"]
 
 [ext_resource type="Texture2D" uid="uid://bygckhp1i41t6" path="res://Sprites/Cutscenes/good-end.png" id="1_rcpy3"]
 [ext_resource type="Script" path="res://Scripts/end_screen.gd" id="2_ex4ru"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="10_it7iu"]
 [ext_resource type="PackedScene" uid="uid://0p1eko5kefc1" path="res://Scenes/button_sound_component.tscn" id="11_fobr1"]
 [ext_resource type="Script" path="res://Scripts/difficulty_label.gd" id="12_rv16c"]
+[ext_resource type="Texture2D" uid="uid://dkvqnmskigbb6" path="res://Sprites/Icons/full-game-qr-code.png" id="16_bkaqj"]
 
 [node name="EndScreen" type="TextureRect" node_paths=PackedStringArray("exit_button", "ui_fader", "prev_frame_rect", "frame_fader", "prev_frame_fader", "ending_name_label", "remainder_counter", "percent_label", "percent_asterisk", "time_asterisk", "difficulty_label")]
 anchors_preset = 15
@@ -34,9 +35,9 @@ ending_name_label = NodePath("UI/EndingNameLabel")
 remainder_counter = NodePath("UI/RemainderCounter")
 percent_label = NodePath("UI/PercentLabel")
 frame_hold_length = 6.0
-rocket_materials = Array[int]([12, 13, 14])
-rocket_amounts = Array[int]([50, 30, 1])
-rocket_weightings = Array[float]([40.0, 40.0, 20.0])
+rocket_materials = Array[int]([8])
+rocket_amounts = Array[int]([20])
+rocket_weightings = Array[float]([100.0])
 percent_asterisk = NodePath("UI/PercentLabel/HashAsterisk")
 time_asterisk = NodePath("UI/RemainderCounter/HashAsterisk")
 difficulty_label = NodePath("UI/DifficultyLabel")
@@ -274,5 +275,80 @@ theme_override_fonts/font = ExtResource("8_208u3")
 theme_override_font_sizes/font_size = 8
 text = "*"
 horizontal_alignment = 2
+
+[node name="FullGameLabel" type="Label" parent="UI"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -239.0
+offset_top = 15.0
+offset_right = -95.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/font = ExtResource("8_208u3")
+theme_override_font_sizes/font_size = 16
+text = "Full Game"
+horizontal_alignment = 1
+
+[node name="BobbingComponent" parent="UI/FullGameLabel" instance=ExtResource("9_btp46")]
+bobbing_height = 4.0
+bob_offset = 3.6652
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/FullGameLabel"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -6.0
+offset_right = 4.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_it7iu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="QRCode" type="TextureRect" parent="UI"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 52.0
+offset_right = -136.0
+offset_bottom = 118.0
+grow_horizontal = 2
+texture = ExtResource("16_bkaqj")
+stretch_mode = 4
+
+[node name="BobbingComponent" parent="UI/QRCode" instance=ExtResource("9_btp46")]
+bobbing_height = 4.0
+bob_offset = 3.1416
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/QRCode"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_it7iu")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]

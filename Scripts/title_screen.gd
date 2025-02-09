@@ -104,6 +104,8 @@ func _ready():
 		menu_box.remove_child(exit_button)
 		exit_button.queue_free()
 	
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
 	GameManager.setup_game()
 	
 	match(GameManager.difficulty):
@@ -152,6 +154,16 @@ func _physics_process(_delta: float) -> void:
 	
 	previous_time = current_time
 	previous_raw_time = raw_time
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ToggleMenu"):
+		settings_hidden = !settings_hidden
+		if settings_hidden:
+			hide_settings()
+			SettingsManager.save_settings()
+		else:
+			show_settings()
+		SoundManager.play_button_down()
 
 func update_clock_hands():
 	var seconds_passed : int = registered_seconds

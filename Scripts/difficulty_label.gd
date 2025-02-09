@@ -2,7 +2,7 @@ extends Label
 class_name DifficultyLabel
 
 @export
-var normal_text : String = "Normal"
+var normal_text : String = "Showcase"
 @export
 var medium_text : String = "Medium"
 @export

@@ -24,13 +24,7 @@ enum Materials {
 	RARE_METALS,
 	PLASTIC,
 	ALLOY,
-	ELECTRONICS,
-	RAW_URANIUM,
-	ENRICHED_URANIUM,
-	FUEL,
 	HULL,
-	COMPUTER,
-	NUCLEAR_BOMB,
 	# Begin Icon Only Materials
 }
 
@@ -42,7 +36,7 @@ var material_icons : Array[Texture] = []
 const hours_per_day : float = 24.0
 const day_length : float = 1.0/10.0
 
-const starting_days : int = 365*9
+const starting_days : int = 365*2
 var days_left : int = starting_days
 
 const days_per_year : int = 365
@@ -304,11 +298,15 @@ func process_realtime(delta : float):
 		collide_asteroid()
 
 func collide_asteroid():
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
 	game_state = GameState.END_DESTRUCTION
 	UIManager.current_screen_type = UIManager.Screens.END
 	UIManager.make_new_screen()
 
 func launch_rocket():
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
 	game_state = GameState.END_SURVIVAL
 	UIManager.current_screen_type = UIManager.Screens.END
 	UIManager.make_new_screen()

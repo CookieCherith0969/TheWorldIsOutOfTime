@@ -21,9 +21,9 @@ var timeskip : AudioStreamPlayer
 const button_sound_delay : float = 0.1
 
 @export
-var late_game_proportion : float = 1/3.0
+var late_game_proportion : float = 1.0/3.0
 @export
-var mid_game_proportion : float = 1/3.0
+var mid_game_proportion : float = 1.0/3.0
 
 const low_db : float = -80.0
 const high_db : float = 0.0

@@ -47,14 +47,14 @@ var tutorial_popup : TutorialPopup
 var tutorial_texts : Array[String] = [
 	"Hello, World.",
 	"An asteroid is heading towards Earth.",
-	"You have 9 years to stop it.",
+	"You have 2 years to stop it.",
 	"You control when time progresses.",
 	"You must launch a rocket to destroy the asteroid. The rocket needs materials.",
 	"This window tracks your stocks and production of each material. Materials are produced by factories.",
 	"This window tracks the built and planned amounts of each factory. Most factories output daily once built.",
 	"The numbers indicate the daily input and output of the factory.",
 	"Factories cost materials to research, and to build.",
-	"Some factories run once upon being built, instead of daily. These factories lack numbers above their inputs.",
+	#"Some factories run once upon being built, instead of daily. These factories lack numbers above their inputs.",
 	"The fate of Earth lies in your hands. Good luck."
 ]
 
@@ -68,7 +68,7 @@ var tutorial_positions : Array[Vector2i] = [
 	Vector2i(400,150),
 	Vector2i(250,170),
 	Vector2i(350,200),
-	Vector2i(250,160),
+	#Vector2i(150,160),
 	Vector2i(250,250),
 ]
 
@@ -82,7 +82,7 @@ var tutorial_targets : Array[Vector2i] = [
 	Vector2i(350,210),
 	Vector2i(305,224),
 	Vector2i(400,300),
-	Vector2i(290,224),
+	#Vector2i(250,400),
 	Vector2i(250,250),
 ]
 
@@ -92,7 +92,7 @@ var tutorial_elements : Array[Control] = []
 var tutorial_index : int = 0
 
 const tutorial_warning_offset : Vector2 = Vector2(4, 12)
-const tutorial_one_time_indexes : Array[int] = [2,4,5,6]
+const tutorial_one_time_indexes : Array[int] = [8]
 
 @export
 var screen_cover : ColorRect
@@ -273,14 +273,14 @@ func show_tutorial_popup(index : int):
 	elif index == 9:
 		UIManager.hide_tooltip()
 		middle_right_factory.showing_tooltip = false
-		factory_window.next_page()
-		for i in tutorial_one_time_indexes:
-			factory_grid.get_child(i).unlock()
-	elif index == 10:
-		for i in tutorial_one_time_indexes:
-			var factory_index : int = factory_window.current_page*factory_window.factories_per_page + i
-			if !GameManager.unlocked_factories[factory_index]:
-				factory_grid.get_child(i).lock()
+		#factory_window.next_page()
+		#for i in tutorial_one_time_indexes:
+		#	factory_grid.get_child(i).unlock()
+	#elif index == 10:
+		#for i in tutorial_one_time_indexes:
+		#	var factory_index : int = factory_window.current_page*factory_window.factories_per_page + i
+		#	if !GameManager.unlocked_factories[factory_index]:
+		#		factory_grid.get_child(i).lock()
 
 func on_factory_page_changed():
 	update_focus_neighbours()
