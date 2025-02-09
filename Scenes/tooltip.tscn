@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dkvs0nyfjxla2" path="res://Sprites/Panels/white-panel-2px-border.png" id="7_mlhkp"]
 [ext_resource type="Texture2D" uid="uid://cmaarwb2xosjp" path="res://Sprites/Placeholder/PlaceholderPlus.png" id="7_xmvpc"]
 [ext_resource type="Texture2D" uid="uid://dhwp1kkhdxuol" path="res://Sprites/Placeholder/PlaceholderMinus.png" id="8_1hhym"]
-[ext_resource type="Texture2D" uid="uid://bxwqp7chkcfap" path="res://Sprites/Placeholder/PlaceholderTooltipArrow.png" id="9_cqldc"]
+[ext_resource type="Texture2D" uid="uid://t3jusl2c8i43" path="res://Sprites/Placeholder/PlaceholderEquals.png" id="10_8xwdu"]
 
 [node name="Tooltip" type="MarginContainer"]
 z_index = 10
@@ -26,7 +26,7 @@ lock_icon = ExtResource("6_7sv3s")
 rocket_icon = ExtResource("7_8lha4")
 increase_icon = ExtResource("7_xmvpc")
 decrease_icon = ExtResource("8_1hhym")
-change_icon = ExtResource("9_cqldc")
+change_icon = ExtResource("10_8xwdu")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2

@@ -50,9 +50,9 @@ var tutorial_texts : Array[String] = [
 	"You have 9 years to stop it.",
 	"You control when time progresses.",
 	"You must launch a rocket to destroy the asteroid. The rocket needs materials.",
-	"This window tracks your stocks and (projected) production of each material. Materials are produced by factories.",
+	"This window tracks your stocks and production of each material. Materials are produced by factories.",
 	"This window tracks the built and planned amounts of each factory. Most factories output daily once built.",
-	"The numbers above the material icons indicate the daily input and output of the factory.",
+	"The numbers indicate the daily input and output of the factory.",
 	"Factories cost materials to research, and to build.",
 	"Some factories run once upon being built, instead of daily. These factories lack numbers above their inputs.",
 	"The fate of Earth lies in your hands. Good luck."
@@ -243,6 +243,8 @@ func end_tutorial():
 	tutorial_popup.hide()
 	screen_cover_fader.fade_out(cover_fade_time)
 	UIManager.hide_tooltip()
+	launch_button.showing_tooltip = false
+	middle_right_factory.showing_tooltip = false
 	for child in tutorial_elements:
 		child.show()
 	await screen_cover_fader.fade_out_finished
@@ -265,10 +267,12 @@ func show_tutorial_popup(index : int):
 		launch_button.show_tooltip()
 	elif index == 5:
 		UIManager.hide_tooltip()
+		launch_button.showing_tooltip = false
 	elif index == 8:
 		middle_right_factory.show_tooltip()
 	elif index == 9:
 		UIManager.hide_tooltip()
+		middle_right_factory.showing_tooltip = false
 		factory_window.next_page()
 		for i in tutorial_one_time_indexes:
 			factory_grid.get_child(i).unlock()
