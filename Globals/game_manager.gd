@@ -304,11 +304,15 @@ func process_realtime(delta : float):
 		collide_asteroid()
 
 func collide_asteroid():
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
 	game_state = GameState.END_DESTRUCTION
 	UIManager.current_screen_type = UIManager.Screens.END
 	UIManager.make_new_screen()
 
 func launch_rocket():
+	SaveManager.reset_save_game()
+	SaveManager.save_current_game_to_file()
 	game_state = GameState.END_SURVIVAL
 	UIManager.current_screen_type = UIManager.Screens.END
 	UIManager.make_new_screen()
