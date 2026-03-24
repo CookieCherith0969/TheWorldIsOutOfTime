@@ -1,0 +1,135 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh44ivq5ovoju"]
+
+[ext_resource type="Texture2D" uid="uid://dku4ojbvsv8pc" path="res://Sprites/Placeholder/PlaceholderSpaceTilePalette.png" id="1_mnqvr"]
+[ext_resource type="Script" path="res://Scripts/space_rect.gd" id="2_08s5w"]
+[ext_resource type="Texture2D" uid="uid://dvgnybiq5hyvd" path="res://Sprites/Panels/gray-panel-2px-border.png" id="3_lwdds"]
+[ext_resource type="FontFile" uid="uid://c0dm4ewi5648q" path="res://Fonts/press_start_2p/PressStart2P.ttf" id="4_btir5"]
+
+[node name="PromoScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 96.0
+offset_bottom = 342.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpaceRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_mnqvr")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("2_08s5w")
+
+[node name="MaterialWindow" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 48.0
+offset_right = 197.0
+offset_bottom = 75.0
+
+[node name="Background" type="NinePatchRect" parent="MaterialWindow"]
+layout_mode = 2
+texture = ExtResource("3_lwdds")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MaterialWindow"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="MaterialWindow/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/normal_font = ExtResource("4_btir5")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "December, 2024"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MaterialWindow2" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 81.0
+offset_right = 137.0
+offset_bottom = 108.0
+
+[node name="Background" type="NinePatchRect" parent="MaterialWindow2"]
+layout_mode = 2
+texture = ExtResource("3_lwdds")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MaterialWindow2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="MaterialWindow2/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/normal_font = ExtResource("4_btir5")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Strategy"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MaterialWindow3" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 114.0
+offset_right = 137.0
+offset_bottom = 141.0
+
+[node name="Background" type="NinePatchRect" parent="MaterialWindow3"]
+layout_mode = 2
+texture = ExtResource("3_lwdds")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MaterialWindow3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="MaterialWindow3/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.0901961, 0.0901961, 0.219608, 1)
+theme_override_fonts/normal_font = ExtResource("4_btir5")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Team of 3"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
